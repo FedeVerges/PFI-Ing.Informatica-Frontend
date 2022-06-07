@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+ 
+@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+// Theme colors
+$primary: #8fe8cc !important;
+$secondary: #545479 !important;
+$success: #42C173 !important;
+$info: #39c0ed !important;
+$warning: #ffa900 !important;
+$danger: #E63946 !important;
+$light: $gray-50 !important;
+$dark: $gray-900 !important;
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark,
+  'white': $white,
+  'black': $black,
+) !important;
+// scss-docs-end theme-colors-map
