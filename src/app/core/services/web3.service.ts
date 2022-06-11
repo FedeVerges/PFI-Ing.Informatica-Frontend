@@ -66,16 +66,24 @@ export class Web3Service {
   // }
 
   private getCertificateContract() {
-      const abi = tokenAbi.abi;
-      const certificateContract = new this.web3.eth.Contract(abi, this.contactAddress);
-      return certificateContract;
+    const abi = tokenAbi.abi;
+    const certificateContract = new this.web3.eth.Contract(abi, this.contactAddress);
+    return certificateContract;
   }
 
   public async getCertificateById(id: number) {
-    return this.certificateContract!.methods.getCertificatesById(id).call() as Promise<any>;
+    return this.certificateContract!.methods.getCertificatesByStudentId(id).call() as Promise<any>;
   }
+
   public async getAmountCertificates() {
     return this.certificateContract!.methods.amountCertificates().call() as Promise<any>;
+  }
+
+  public async createCertificate(profession: any,name: any,studentId: any) {
+    debugger;
+    return this.certificateContract!.methods.createCertificate(profession,name,studentId).send(
+      { from: this.accounts[0], gas:3000000 }
+    ) as Promise<any>;
   }
 
 
