@@ -1,5 +1,39 @@
 <router-outlet></router-outlet>
 <div class="container">
-  <h1>HOLIS Web3</h1>
-  <button type="button" class=" btn btn-primary">Web3</button>
+  <h1>Bienvenidos a la primera aplicacion de titulos con Web3</h1>
+  <div class="row">
+    <div class="col">
+      <mdb-form-control>
+        <input mdbInput type="text" [(ngModel)]="idContract" id="form1" class="form-control" />
+        <label mdbLabel class="form-label" for="form1">Identificador del contrato </label>
+      </mdb-form-control>
+    </div>
+    <div class="col">
+      <button type="button" class=" btn btn-primary" (click)="getCertificateById(idContract)">Actualizar lista
+        Certificados</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button type="button" class=" btn btn-primary" (click)="getAmountCertificates()">Cantidad de certificados</button>
+      <h4>Cantidad de contatos: {{amountCertificates}}</h4> 
+      <div *ngFor="let item of certificates">
+        <p>
+          {{item}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="certificateForm">
+
+      </form>
+    </div>
+  </div>
 </div>
