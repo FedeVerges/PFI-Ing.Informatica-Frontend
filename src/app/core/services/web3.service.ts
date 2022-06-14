@@ -71,7 +71,7 @@ export class Web3Service {
     return certificateContract;
   }
 
-  public async getCertificateById(id: number) {
+  public async getCertificatesByStudentId(id: number) {
     return this.certificateContract!.methods.getCertificatesByStudentId(id).call() as Promise<any>;
   }
 
@@ -79,14 +79,12 @@ export class Web3Service {
     return this.certificateContract!.methods.amountCertificates().call() as Promise<any>;
   }
 
-  public async createCertificate(profession: any,name: any,studentId: any) {
-    debugger;
+  public async createCertificate(profession: string,name: string,studentId: number) {
+    // Hacer el correcto manejo de errores.
     return this.certificateContract!.methods.createCertificate(profession,name,studentId).send(
       { from: this.accounts[0], gas:3000000 }
     ) as Promise<any>;
   }
-
-
 
   // const provider = await this.getWebProvider();
   // const signer = provider.getSigner();
