@@ -18,8 +18,6 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,

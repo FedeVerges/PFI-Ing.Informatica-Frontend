@@ -1,1 +1,47 @@
-<p>new-certificate works!</p>
+<div class="container">
+    <h1>Bienvenidos a la primera aplicacion de titulos con Web3</h1>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class=" btn btn-primary" (click)="getCertificateById(123456789)">Cantidad de certificados</button>
+      </div>
+      <div class="col">
+        <h4>Cantidad de contatos: {{amountCertificates}}</h4>
+      </div>
+      <div class="col">
+        <div *ngFor="let item of certificates">
+          <p>
+            {{item}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form [formGroup]="certificateForm" >
+          <mdb-form-control class="mb-3">
+            <input mdbInput type="text" id="form_name" class="form-control" formControlName="firstName" required />
+            <label mdbLabel class="form-label" for="form_name">Nombre</label>
+          </mdb-form-control>
+  
+          <mdb-form-control class="mb-3">
+            <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastName" required />
+            <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
+          </mdb-form-control>
+  
+          <mdb-form-control class="mb-3">
+            <input mdbInput type="text" id="form_name" class="form-control" formControlName="firstName" required />
+            <label mdbLabel class="form-label" for="form_name">Nombre</label>
+          </mdb-form-control>
+          <button type="button" type="submit" class=" btn btn-primary" (click)="createCertificate()">
+            Crear título universitario
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
