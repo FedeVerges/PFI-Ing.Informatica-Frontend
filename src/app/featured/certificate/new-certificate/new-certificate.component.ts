@@ -13,7 +13,6 @@ export class NewCertificateComponent implements OnInit {
   amountCertificates: number = 0;
   idContract: number = 0;
   certificates: Certificate[] = [];
-  searchStudentId:number = 0;
   certificateSearchResult:any[]=[];
 
   constructor(private web3Service: Web3Service, private fb: FormBuilder) {
@@ -32,25 +31,6 @@ export class NewCertificateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAmountCertificates() {
-    this.web3Service.getAmountCertificates()
-      .then(
-        (result) => {
-          this.amountCertificates = result
-        }
-      )
-  }
-
-  getCertificatesByStudentId(studentId: number) {
-    this.web3Service.getCertificatesByStudentId(studentId)
-      .then(
-        (result) => {
-          debugger;
-          this.certificateSearchResult = result
-        }
-      )
-  }
-
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate
     // Validar correctamente los campos.
@@ -66,7 +46,6 @@ export class NewCertificateComponent implements OnInit {
       }
       this.createCertificate(certificate);
     }
-
   }
 
   createCertificate(certificate: Certificate) {
@@ -87,8 +66,16 @@ export class NewCertificateComponent implements OnInit {
                 },
             }
             this.certificates.push(newCertificate);
-            this.getAmountCertificates();
           }
+        }
+      )
+  }
+
+  getCertificatesById(studentId: number) {
+    this.web3Service.getCertificatesByStudentId(studentId)
+      .then(
+        (result) => {
+          this.certificateSearchResult = result
         }
       )
   }

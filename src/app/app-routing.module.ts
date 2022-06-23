@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'new-certificate',
     loadChildren: () => import('./featured/certificate/certificate.module').then(m => m.CertificateModule)
   },
+  {
+    path: 'validate-certificate',
+    loadChildren: () => import('./featured/validate/validate.module').then(m => m.ValidateModule)
+  },
 
 
   // Siempre al final.

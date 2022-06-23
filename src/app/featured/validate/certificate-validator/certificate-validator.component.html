@@ -1,0 +1,48 @@
+<div class="container mt-3">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <mdb-form-control class="mb-3">
+              <input mdbInput type="text" id="form_name" class="form-control" [(ngModel)]="searchStudentId" required />
+              <label mdbLabel class="form-label" for="form_name">Id estudiante</label>
+            </mdb-form-control>
+          </div>
+          <div class="col">
+            <button type="button" type="submit" class=" btn btn-primary"
+              (click)="getCertificatesByStudentId(searchStudentId)">
+              Buscar
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <h6>Resultados de busqueda </h6>
+          <div class="col" *ngFor="let item of certificateSearchResult">
+            ID: <p>{{item?.id}}</p>
+            Profeción: <p>{{item?.profession}}</p>
+            Nombre: <p>{{item?.studentName}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <h3>Títulos universitarios: {{amountCertificates}}</h3>
+          <ng-container *ngFor="let item of certificates">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    ID: {{item.id}}
+                  </p>
+                  <p>
+                    Nombre: {{item.student?.name}}
+                  </p>
+                  <p>
+                    Id Estudiante: {{item.student?.docNumber}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>

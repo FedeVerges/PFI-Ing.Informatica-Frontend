@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewCertificateComponent } from './new-certificate/new-certificate.component';
+import { CertificateValidatorComponent } from './certificate-validator/certificate-validator.component';
 
 const routes: Routes = [
-  { path: '', component: NewCertificateComponent},
+  { path: '', component: CertificateValidatorComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CertificateRoutingModule { }
+export class ValidateRoutingModule { }
