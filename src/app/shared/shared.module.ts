@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedRoutingModule } from './shared-routing.module';
 import { MdbModule } from './mdb/mdb.module';
 
 
@@ -8,7 +7,6 @@ import { MdbModule } from './mdb/mdb.module';
   declarations: [],
   imports: [
     CommonModule,
-    SharedRoutingModule,
     MdbModule,
   ],
   exports:[

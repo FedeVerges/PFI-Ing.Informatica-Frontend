@@ -1,4 +1,26 @@
-<div class="container text-center">
-  <h1>Bienvenidos a la primera aplicacion de titulos con Web3</h1>
-</div>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" (click)="navBar.toggle()" aria-controls="navBarCertificatesValidator"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a [routerLink]="'home'" class="nav-link" aria-current="page" href="#" routerLinkActive="active">Home</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="'new-certificate'" class="nav-link" href="#">Crear t&iacute;tulo</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="'validate-title'" class="nav-link" href="#">Validar T&iacute;tulo</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+  </header>
 <router-outlet></router-outlet>
