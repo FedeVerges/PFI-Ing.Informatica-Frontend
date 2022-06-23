@@ -42,29 +42,6 @@ export class Web3Service {
     this.certificateContract = this.getCertificateContract();
   }
 
-  // public async getAllImages(): Promise<any[]> {
-  //   const contract = await GalleryService.getContract()
-
-  //   return await contract['retrieveAllImages']()
-  // }
-
-  // public async getImagesByAuthor(): Promise<any[]> {
-  //   const contract = await GalleryService.getContract(true)
-
-  //   return await contract['retrieveImagesByAuthor']()
-  // }
-
-  // public async addImage(title: string, fileUrl: string): Promise<boolean> {
-  //   const contract = await GalleryService.getContract(true)
-  //   const transaction = await contract['store'](
-  //     title,
-  //     fileUrl
-  //   )
-  //   const tx = await transaction.wait()
-
-  //   return tx.status === 1
-  // }
-
   private getCertificateContract() {
     const abi = tokenAbi.abi;
     const certificateContract = new this.web3.eth.Contract(abi, this.contactAddress);
@@ -79,11 +56,12 @@ export class Web3Service {
     return this.certificateContract!.methods.amountCertificates().call() as Promise<any>;
   }
 
-  public async createCertificate(profession: string,name: string,studentId: number) {
+  public async createCertificate(profession: string, name: string, studentId: number) {
     // Hacer el correcto manejo de errores.
-    return this.certificateContract!.methods.createCertificate(profession,name,studentId).send(
-      { from: this.accounts[0], gas:3000000 }
-    ) as Promise<any>;
+    return this.certificateContract!.methods.createCertificate(profession, name, studentId)
+      .send(
+        { from: this.accounts[0], gas: 3000000 }
+      ) as Promise<any>;
   }
 
   // const provider = await this.getWebProvider();
