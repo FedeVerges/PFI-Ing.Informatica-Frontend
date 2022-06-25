@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { 
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
     path: 'home',
     loadChildren: () => import('./featured/home/home.module').then(m => m.HomeModule)
   },
@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'validate-certificate',
     loadChildren: () => import('./featured/validate/validate.module').then(m => m.ValidateModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./featured/login/login.module').then(m => m.LoginModule)
   },
 
 
