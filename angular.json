@@ -75,12 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "validador-titulos:build:production",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "validador-titulos:build:production"
             },
             "development": {
-              "browserTarget": "validador-titulos:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "validador-titulos:build:development"
             }
           },
           "defaultConfiguration": "development"

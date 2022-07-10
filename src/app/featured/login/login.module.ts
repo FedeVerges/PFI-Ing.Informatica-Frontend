@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
     HttpClientModule,
   ],
   providers:[
-    AuthService
+    AuthService,
+    LocalStorageService,
   ]
 })
 export class LoginModule { }

@@ -12,12 +12,13 @@ import { environment } from "src/environments/environment";
     constructor(private http: HttpClient) {}
 
     login(){
+      // todo: Armar Interceptor.
         const httpOptions = {
             headers: new HttpHeaders({
               'Content-Type':  'application/json',
               'Access-Control-Allow-Origin':'*',
             })
           };
-        return this.http.get(environment.serverURL + '/ping',httpOptions);
+        return this.http.post(environment.serverURL + '/login',{},httpOptions);
     }
   }
