@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   contractAddress: '0x179e566Ed62F304Bf009Af75cD8C8DC1E663d879', // Direccion del contrato desplegado.
+  serverURL:'http://localhost:8080',
 };
 
 /*
@@ -15,3 +16,5 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+248970688

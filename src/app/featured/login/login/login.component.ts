@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Certificate } from 'src/app/core/models/certificate';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
 
 @Component({
@@ -8,76 +9,29 @@ import { Web3Service } from 'src/app/core/services/web3.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  certificateForm!: FormGroup;
-  amountCertificates: number = 0;
-  idContract: number = 0;
-  certificates: Certificate[] = [];
-  certificateSearchResult:any[]=[];
+export class LoginComponent {
+  loginForm!: FormGroup;
 
-  constructor(private web3Service: Web3Service, private fb: FormBuilder) {
-    this.certificateForm = this.fb.group({
-      degree: ['', ],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      docNumber: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
-      institution: ['', [Validators.required]],
-      date: ['', ],
+  constructor(private fb: FormBuilder, private authService:AuthService) {
+    this.loginForm = this.fb.group({
+      user: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     })
   }
 
-  get docNumber() { return this.certificateForm.get('docNumber'); }
+  get user() { return this.loginForm.get('user'); }
+  get password() { return this.loginForm.get('password'); }
 
-  ngOnInit(): void {
-  }
-
-  addNewCertificate() {
-    // Crear el certificado atraves de la funcion createCertificate
-    // Validar correctamente los campos.
-    if (this.certificateForm.valid) {
-      let certificate : Certificate = { 
-        student: {
-          degree: {name:this.certificateForm.get('degree')!.value},
-          name: this.certificateForm.get('firstName')!.value,
-          lastName: this.certificateForm.get('lastName')!.value,
-          docNumber: this.certificateForm.get('docNumber')!.value,
-          id: this.certificateForm.get('docNumber')!.value,
-        }
-      }
-      this.createCertificate(certificate);
+  login(){
+    debugger;
+    if(this.loginForm.invalid){
+      this.loginForm.markAllAsTouched();
+    }else{
+      // loggearse.
+      this.authService.login().subscribe(response=>{
+        console.log(response)
+      });
     }
-  }
-
-  createCertificate(certificate: Certificate) {
-    this.web3Service.createCertificate(certificate.student?.degree?.name!, certificate.student?.name!, certificate.student?.id!)
-      .then(
-        (result : any) => {
-          // TODO: Realizar un converter.
-          if(result && result.events && result.transactionHash){
-            console.info(result.transactionHash);
-            console.info(result.events);
-            const returnValues = result.events.CertificateCreated.returnValues;
-            console.info(returnValues.updatedAt);
-            let newCertificate : Certificate = {
-              id: Number(returnValues.id),
-              student:{
-                 name: returnValues.studentName,
-                 docNumber: returnValues.studentId,
-                },
-            }
-            this.certificates.push(newCertificate);
-          }
-        }
-      )
-  }
-
-  getCertificatesById(studentId: number) {
-    this.web3Service.getCertificatesByStudentId(studentId)
-      .then(
-        (result) => {
-          this.certificateSearchResult = result
-        }
-      )
   }
 
 }

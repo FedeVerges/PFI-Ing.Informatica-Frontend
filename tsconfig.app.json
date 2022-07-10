@@ -3,9 +3,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "paths": {
-      "@models": ["src/app/core/models/*"],
-    },
     "types": []
   },
   "files": [

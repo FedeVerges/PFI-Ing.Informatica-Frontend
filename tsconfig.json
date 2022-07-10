@@ -9,7 +9,6 @@
       "http": ["./node_modules/stream-http"],
       "https": ["./node_modules/https-browserify"],
       "os": ["./node_modules/os-browserify"],
-      "process": ["./node_modules/process/browser"],
     },
     "resolveJsonModule": true,
     "baseUrl": "./",
@@ -35,9 +34,13 @@
     ],
   },
   "angularCompilerOptions": {
+    "types" : ["node"],
+    "allowSyntheticDefaultImports": true,
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "noImplicitAny": false,
+    "strictTemplates": true,
+    "strictNullChecks": false
   }
 }
