@@ -6,7 +6,8 @@ import { NewCertificateComponent } from './new-certificate/new-certificate.compo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Web3Service } from 'src/app/core/services/web3.service';
-import { BrowserModule } from '@angular/platform-browser';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 @NgModule({
   declarations: [
     NewCertificateComponent
@@ -17,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     SharedModule,
     CertificateRoutingModule,
+    MdbFormsModule,
   ],
   providers: [Web3Service],
 })

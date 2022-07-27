@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
     SharedModule,
     LoginRoutingModule,
     HttpClientModule,
+    MdbFormsModule,
   ],
   providers:[
     AuthService,

@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'new-certificate',
     loadChildren: () => import('./featured/certificate/certificate.module').then(m => m.CertificateModule),
-    canActivate:[AuthGuard],
+    // canActivate:[AuthGuard],
   },
   {
     path: 'validate-certificate',

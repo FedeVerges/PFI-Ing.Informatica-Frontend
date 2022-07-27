@@ -5,6 +5,7 @@ import { ValidateRoutingModule } from './validate-routing.module';
 import { CertificateValidatorComponent } from './certificate-validator/certificate-validator.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ValidateRoutingModule,
-    SharedModule
+    SharedModule,
+    MdbFormsModule,
   ]
 })
 export class ValidateModule { }

@@ -58,10 +58,10 @@ export class Web3Service {
 
   public async createCertificate(profession: string, name: string, studentId: number) {
     // Hacer el correcto manejo de errores.
-    return this.certificateContract!.methods.createCertificate(profession, name, studentId)
-      .send(
-        { from: this.accounts[0], gas: 3000000 }
-      ) as Promise<any>;
+    const transaction = this.certificateContract!.methods.createCertificate(profession, name, studentId);
+    const senderWalletAddress = this.accounts[0];
+    const gas = await transaction.estimateGas({ from: senderWalletAddress });
+    return transaction.send({ from: senderWalletAddress, gas: gas }) as Promise<any>;
   }
 
   // const provider = await this.getWebProvider();

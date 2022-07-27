@@ -3,7 +3,7 @@
     <div class="col">
       <div class="card text-center w-70 m-auto">
         <h3>Ingresa los datos de tu título</h3>
-        <form autocomplete="true" [formGroup]="certificateForm" (ngSubmit)="addNewCertificate()">
+        <form autocomplete="true" [formGroup]="certificateForm">
           <div class="card-body"> 
             <div class="row">
               <div class="col">
@@ -33,16 +33,38 @@
               </div>
             </div>
             <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="degree" required />
-              <label mdbLabel class="form-label" for="form_name">Carrera</label>
+              <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeName" required />
+              <label mdbLabel class="form-label" for="form_name">Nombre del t&iacute;tulo</label>
             </mdb-form-control>
+
+            <mdb-form-control class="mb-3">
+              <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeType" required />
+              <label mdbLabel class="form-label" for="form_name">Tipo de t&iacute;tulo</label>
+            </mdb-form-control>
+
             <mdb-form-control class="mb-3">
               <input mdbInput type="text" id="form_name" class="form-control" formControlName="institution" required />
               <label mdbLabel class="form-label" for="form_name">Instituci&oacute;n</label>
             </mdb-form-control>
+            
+            <mdb-form-control class="mb-3">
+              <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber" required />
+              <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
+            </mdb-form-control>
+            
+            <mdb-form-control class="mb-3">
+              <input mdbInput type="text" id="form_name" class="form-control" formControlName="volumeNumber" required />
+              <label mdbLabel class="form-label" for="form_name">N° Tomo</label>
+            </mdb-form-control>
+          
+            <mdb-form-control class="mb-3">
+              <input mdbInput type="text" id="form_name" class="form-control" formControlName="recordNumber" required />
+              <label mdbLabel class="form-label" for="form_name">N° Acta</label>
+            </mdb-form-control>
           </div>
+
           <div class="card-footer">
-            <button type="button" type="submit" class=" btn btn-primary">
+            <button type="button" type="submit" class=" btn btn-primary" (click)="addNewCertificate()">
               Crear título universitario
             </button>
           </div>
