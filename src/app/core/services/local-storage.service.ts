@@ -16,7 +16,11 @@ export class LocalStorageService {
   }
 
   getUser() {
-    return localStorage.getItem('currentUser');
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      return JSON.parse(userJson);
+    }
+    return userJson ? JSON.parse(userJson) : userJson;
   }
 
   setUser(user: any) {

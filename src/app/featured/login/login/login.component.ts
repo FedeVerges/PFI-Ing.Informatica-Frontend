@@ -31,7 +31,6 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      // loggearse.
       this.authService.login()
         .subscribe((response: any) => {
           if (response?.token) {
