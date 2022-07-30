@@ -8,6 +8,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Web3Service } from 'src/app/core/services/web3.service';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { AuthService } from 'src/app/core/services/auth.service';
 @NgModule({
   declarations: [
     NewCertificateComponent
@@ -20,6 +21,6 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
     CertificateRoutingModule,
     MdbFormsModule,
   ],
-  providers: [Web3Service],
+  providers: [Web3Service, AuthService],
 })
 export class CertificateModule { }

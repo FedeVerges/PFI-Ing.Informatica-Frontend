@@ -24,7 +24,11 @@ export class LocalStorageService {
   }
 
   setUser(user: any) {
-    localStorage.setItem('currentUser', user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  logout() {
+    localStorage.clear();
   }
 
 

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Certificate } from 'src/app/core/models/certificate';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { Web3Service } from 'src/app/core/services/web3.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +14,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
+    private userService: UserService,
     private router: Router) {
     this.loginForm = this.fb.group({
       user: ['', [Validators.required]],
@@ -31,14 +29,24 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      this.authService.login()
-        .subscribe((response: any) => {
-          if (response?.token) {
-            this.localStorageService.setToken(response.token);
-            this.router.navigate(['/home']);
-          }
-        });
+      const userName = this.user?.value;
+      const password = this.password?.value
+      if (userName && password) {
+        // Realizar controles.
+        this.userService.login(userName, password)
+          .subscribe((response) => {
+            if (response?.token) {
+              const userData = {
+                userName: response.user.name,
+                id: response.user.userId,
+                email: response.user.email,
+              }
+              this.authService.login(response.token, userData);
+              debugger;
+              this.router.navigateByUrl('new-certificate');
+            }
+          });
+      }
     }
   }
-
 }

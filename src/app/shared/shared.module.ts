@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { AuthService } from '../core/services/auth.service';
 
 
 @NgModule({

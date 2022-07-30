@@ -25,7 +25,6 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     MdbFormsModule,
   ],
   providers:[
-    AuthService,
     LocalStorageService,
   ]
 })

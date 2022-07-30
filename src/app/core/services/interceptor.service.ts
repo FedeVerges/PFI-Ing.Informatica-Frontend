@@ -8,14 +8,8 @@ import { LocalStorageService } from "./local-storage.service";
     providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService, private localStorageService: LocalStorageService) {
-
-    }
+    constructor(private authService: AuthService, private localStorageService: LocalStorageService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        if (!this.authService.isLoggedIn()) {
-            return next.handle(req);
-        }
         let request = req;
         const token = this.localStorageService.getToken();
         if (!token) {
@@ -51,44 +45,3 @@ export class AuthInterceptor implements HttpInterceptor {
         return req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }
 }
-const AUTHORIZATION = 'Authorization';
-/* 
-@Injectable({
-  providedIn: 'root'
-})
-export class PlanPagosInterceptorService implements HttpInterceptor {
-
-  constructor(
-    private tokenService: TokenService,
-    private authService: AuthService
-  ) { }
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    if (!this.tokenService.isLogged()) {
-      return next.handle(req);
-    }
-    let intReq = req;
-    const token = this.tokenService.getToken();
-
-    intReq = this.addToken(req, token);
-    return next.handle(intReq)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) {
-        const dto: JwtDTO = new JwtDTO(this.tokenService.getToken());
-        return this.authService.refresh(dto).pipe(concatMap((data: any) => {
-          this.tokenService.setToken(data.token);
-          intReq = this.addToken(req, data.token);
-          return next.handle(intReq);
-        }));
-      } else {
-        // this.tokenService.logOut();
-        return throwError(err);
-      }
-    }));
-  }
-
-
-}
- */

@@ -5,13 +5,9 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'home',
-    loadChildren: () => import('./featured/home/home.module').then(m => m.HomeModule)
-  },
-  {
     path: 'new-certificate',
     loadChildren: () => import('./featured/certificate/certificate.module').then(m => m.CertificateModule),
-    // canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'validate-certificate',
@@ -22,9 +18,8 @@ const routes: Routes = [
     loadChildren: () => import('./featured/login/login.module').then(m => m.LoginModule),
   },
 
-
   // Siempre al final.
-  { path: '*', redirectTo: 'home', pathMatch: 'full' },
+  { path: '*', redirectTo: 'login', pathMatch: 'full' },
 
 ];
 

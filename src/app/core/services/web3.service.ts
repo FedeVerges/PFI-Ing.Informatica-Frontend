@@ -29,17 +29,17 @@ export class Web3Service {
   public accountsObservable = new Subject<string[]>();
 
   constructor() {
-    // URL de la conexion.
-    this.web3 = new Web3(URL_GANACHE);
-    this.web3.setProvider(new Web3.providers.HttpProvider(URL_GANACHE));
+    // // URL de la conexion.
+    // this.web3 = new Web3(URL_GANACHE);
+    // this.web3.setProvider(new Web3.providers.HttpProvider(URL_GANACHE));
 
-    console.log(this.web3);
-    this.web3.eth.getAccounts().then(
-      (result: string[]) => {
-        this.accounts = result;
-      }
-    );
-    this.certificateContract = this.getCertificateContract();
+    // console.log(this.web3);
+    // this.web3.eth.getAccounts().then(
+    //   (result: string[]) => {
+    //     this.accounts = result;
+    //   }
+    // );
+    // this.certificateContract = this.getCertificateContract();
   }
 
   private getCertificateContract() {

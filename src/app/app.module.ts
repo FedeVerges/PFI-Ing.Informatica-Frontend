@@ -8,10 +8,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './core/guards/auth.guard';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/services/interceptor.service';
+import { AuthService } from './core/services/auth.service';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { UserService } from './core/services/user.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,8 +27,14 @@ import { AuthGuard } from './core/guards/auth.guard';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    CoreModule,
+    HttpClientModule,
   ],
-  providers:[AuthGuard],
+  providers: [
+    AuthService,
+    LocalStorageService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,58 +1,63 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { environment } from "src/environments/environment";
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  // Todo:Armar Dto de user.
-  private _userLogged: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  // private _userLogged$ = this._userLogged.asObservable();
-
-  public get userLogged(): BehaviorSubject<any> {
-    return this._userLogged;
+  private _isLoginSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
+  public get isLoginSubject(): BehaviorSubject<boolean> {
+    return this._isLoginSubject
   }
 
-  public setUser(newUser: any) {
-    this.userLogged.next(newUser);
+  // todo: agregar observable para manejar los roles y permisos.
+
+  constructor(private localStorageService: LocalStorageService) { 
+    this.setLogged(this.hasToken());
   }
 
-  // getCurrentUser(): Observable<any> {
-  //   return this._userLogged$;
-  // }
-  constructor(private http: HttpClient,
-    private localStorage: LocalStorageService
-  ) { }
-
-
-  login() {
-    // todo: Armar Interceptor.
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      })
-    };
-    return this.http.post(environment.serverURL + '/login', {}, httpOptions);
+  /**
+   *  Login the user then tell all the subscribers about the new status
+   */
+  login(token: string, userData: any): void {
+    debugger;
+    this.localStorageService.setToken(token);
+    this.localStorageService.setUser(userData);
+    this.setLogged(true);
   }
 
-  isLoggedIn(): boolean {
-    const token = this.localStorage.getToken();
-    if (!token) {
-      this.logout();
-      return false;
-    } else {
-      return this._userLogged.value !== null;
-    }
+  /**
+   * Log out the user then tell all the subscribers about the new status
+   */
+  logout(): void {
+    debugger
+    this.localStorageService.logout();
+    this.setLogged(false);
   }
 
-  logout() {
-    this._userLogged.next(null);
-    localStorage.clear();
+  /**
+   * if we have token the user is loggedIn
+   * @returns {boolean}
+   */
+  private hasToken(): boolean {
+    debugger;
+    const token = this.localStorageService.getToken();
+    return token !== null;
   }
+
+  /**
+   *
+   * @returns {Observable<T>}
+   */
+  isLoggedIn(): Observable<boolean> {
+    debugger;
+    return this.isLoginSubject.asObservable();
+  }
+
+  setLogged(value:boolean){
+    this._isLoginSubject.next(value);
+  }
+
 }

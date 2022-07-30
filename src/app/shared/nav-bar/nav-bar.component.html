@@ -1,15 +1,13 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" (click)="navBar.toggle()" aria-controls="navBarCertificatesValidator"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" (click)="navBar.toggle()" aria-controls="navBarCertificatesValidator"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
+      <ng-container *ngIf="isLoggedIn; else userActions">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item active">
-            <a [routerLink]="'home'" class="nav-link" aria-current="page" href="#" routerLinkActive="active">Home</a>
-          </li>
           <li class="nav-item">
             <a [routerLink]="'new-certificate'" class="nav-link" href="#">Crear t&iacute;tulo</a>
           </li>
@@ -17,7 +15,25 @@
             <a [routerLink]="'validate-certificate'" class="nav-link" href="#">Validar T&iacute;tulo</a>
           </li>
         </ul>
-      </div>
+        <div class="d-flex align-items-center">
+          <button type="button" class="btn btn-link px-3 me-2" (click)="logout()">
+            Salir
+          </button>
+        </div>
+      </ng-container>
     </div>
-  </nav>
-  <!-- Navbar -->
+  </div>
+</nav>
+<!-- Navbar -->
+<ng-template #userActions>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a [routerLink]="'validate-certificate'" class="nav-link" href="#">Validar T&iacute;tulo</a>
+    </li>
+  </ul>
+  <div class="d-flex align-items-center">
+    <a [routerLink]="'/login'" class="btn btn-primary px-3 me-2">
+      Iniciar Sesi&oacute;n
+    </a>
+  </div>
+</ng-template>
