@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let request = req;
         const token = this.localStorageService.getToken();
-        if (!token) {
+        if (token) {
             request = this.addToken(req, token!);
         } else {
             this.authService.logout();
