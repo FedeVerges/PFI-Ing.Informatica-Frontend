@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Certificate } from 'src/app/core/models/certificate';
+import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
 
 @Component({
@@ -14,28 +15,26 @@ export class CertificateValidatorComponent implements OnInit {
   certificateSearchResult:any[]=[];
   certificates: Certificate[] = [];
 
-  constructor(private web3Service: Web3Service,) { }
+  constructor(private certificateService: CertificateService) { }
 
   ngOnInit(): void {
   }
 
 
-  getAmountCertificates() {
-    this.web3Service.getAmountCertificates()
-      .then(
-        (result) => {
-          this.amountCertificates = result
-        }
-      )
-  }
+  // getAmountCertificates() {
+  //   this.web3Service.getAmountCertificates()
+  //     .then(
+  //       (result) => {
+  //         this.amountCertificates = result
+  //       }
+  //     )
+  // }
 
   getCertificatesByStudentId(studentId: number) {
-    this.web3Service.getCertificatesByStudentId(studentId)
-      .then(
-        (result) => {
-          this.certificateSearchResult = result
-        }
-      )
+    this.certificateService.getCertificatesByStudentId(studentId)
+    .subscribe( (result) => {
+      this.certificateSearchResult = result
+    })
   }
 
 
