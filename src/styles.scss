@@ -30,3 +30,6 @@ $theme-colors: (
   'black': $black,
 ) !important;
 // scss-docs-end theme-colors-map
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
