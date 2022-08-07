@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { CertificateDto } from "../models/dto/certificateDto";
+import { TransactionDto } from "../models/dto/transactionDto";
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,10 @@ export class CertificateService {
 
     getAllCertificates() {
         return this.http.get<CertificateDto>(environment.serverURL + `/certificate/all`);
+    }
+
+    getCertificatesByStudentId(studentId: number) {
+        return this.http.get<CertificateDto[]>(environment.serverURL + `/certificate/docNumber/${studentId}`);
     }
 
     getAllInstitutions() {
@@ -25,7 +30,7 @@ export class CertificateService {
 
     }
     createNewCertificate(certificate: CertificateDto) {
-        return this.http.post<CertificateDto>(environment.serverURL + `/certificate/new`, certificate);
+        return this.http.post<TransactionDto>(environment.serverURL + `/certificate/new`, certificate);
     }
 
 
