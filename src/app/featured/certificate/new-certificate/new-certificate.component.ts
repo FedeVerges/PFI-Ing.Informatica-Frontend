@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Certificate, CertificateDto } from 'src/app/core/models/certificate';
+import { Certificate } from 'src/app/core/models/certificate';
+import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
+import { StudentDto } from 'src/app/core/models/dto/studentDto';
+import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
 
 @Component({
@@ -15,7 +18,7 @@ export class NewCertificateComponent implements OnInit {
   certificates: Certificate[] = [];
   certificateSearchResult: any[] = [];
 
-  constructor(private web3Service: Web3Service, private fb: FormBuilder) {
+  constructor(private web3Service: Web3Service, private fb: FormBuilder, private certificateService: CertificateService) {
     this.certificateForm = this.fb.group({
 
       firstName: ['', [Validators.required]],
@@ -42,13 +45,15 @@ export class NewCertificateComponent implements OnInit {
     if (this.certificateForm.valid) {
       let certificate: CertificateDto = {
         degreeName: this.certificateForm.get('degreeName')!.value,
-        degreeType: this.certificateForm.get('degreeType')!.value,
+        certificateTypeId: this.certificateForm.get('degreeType')!.value,
         student: {
           name: this.certificateForm.get('firstName')!.value,
-          lastName: this.certificateForm.get('lastName')!.value,
-          documentNumber: this.certificateForm.get('docNumber')!.value,
-        },
-        institution: this.certificateForm.get('institution')!.value,
+          lastname: this.certificateForm.get('lastName')!.value,
+          docNumber: this.certificateForm.get('docNumber')!.value
+        } as StudentDto,
+        institutionId: this.certificateForm.get('institution')!.value,
+        recordNumber: this.certificateForm.get('recordNumber')!.value,
+        volumeNumber: this.certificateForm.get('volumeNumber')!.value,
         waferNumber: this.certificateForm.get('waferNumber')!.value
       }
       this.createCertificate(certificate);
@@ -57,28 +62,29 @@ export class NewCertificateComponent implements OnInit {
     }
   }
 
-  createCertificate(certificate: Certificate) {
-    this.web3Service.createCertificate(certificate.student?.degree?.name!, certificate.student?.name!, certificate.student?.id!)
-      .then(
-        (result: any) => {
-          debugger
-          // TODO: Realizar un converter.
-          if (result && result.events && result.transactionHash) {
-            console.info(result.transactionHash);
-            console.info(result.events);
-            const returnValues = result.events.CertificateCreated.returnValues;
-            console.info(returnValues.updatedAt);
-            let newCertificate: Certificate = {
-              id: Number(returnValues.id),
-              student: {
-                name: returnValues.studentName,
-                docNumber: returnValues.studentId,
-              },
-            }
-            this.certificates.push(newCertificate);
-          }
-        }
-      )
+  createCertificate(certificate: CertificateDto) {
+    this.certificateService.createNewCertificate(certificate)
+    .subscribe((T))
+      // .then(
+      //   (result: any) => {
+      //     debugger
+      //     // TODO: Realizar un converter.
+      //     if (result && result.events && result.transactionHash) {
+      //       console.info(result.transactionHash);
+      //       console.info(result.events);
+      //       const returnValues = result.events.CertificateCreated.returnValues;
+      //       console.info(returnValues.updatedAt);
+      //       let newCertificate: Certificate = {
+      //         id: Number(returnValues.id),
+      //         student: {
+      //           name: returnValues.studentName,
+      //           docNumber: returnValues.studentId,
+      //         },
+      //       }
+      //       this.certificates.push(newCertificate);
+      //     }
+      //   }
+      // )
   }
 
   getCertificatesById(studentId: number) {
