@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TokenDto } from '../models/dto/tokenDto';
+import { UserDto } from '../models/dto/userDto';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,7 +17,7 @@ export class UserService {
       user: user,
       password: password
     }
-    return this.http.post<{ token: string, user: { name: string, userId: string, email: string } }>(environment.serverURL + '/login', body);
+    return this.http.post<TokenDto<UserDto>>(environment.serverURL + '/login', body);
   }
 
 }
