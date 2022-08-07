@@ -37,12 +37,11 @@ export class LoginComponent {
           .subscribe((response) => {
             if (response?.token) {
               const userData = {
-                userName: response.user.name,
-                id: response.user.userId,
-                email: response.user.email,
+                userName: response?.content.name,
+                id: response?.content.id,
+                email: response?.content.email,
               }
               this.authService.login(response.token, userData);
-              debugger;
               this.router.navigateByUrl('new-certificate');
             }
           });
