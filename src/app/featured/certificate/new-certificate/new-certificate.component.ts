@@ -3,8 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
+import { TransactionDto } from 'src/app/core/models/dto/transactionDto';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-certificate',
@@ -18,7 +20,10 @@ export class NewCertificateComponent implements OnInit {
   certificates: Certificate[] = [];
   certificateSearchResult: any[] = [];
 
-  constructor(private web3Service: Web3Service, private fb: FormBuilder, private certificateService: CertificateService) {
+  constructor(private web3Service: Web3Service,
+    private fb: FormBuilder,
+    private certificateService: CertificateService,
+    private _snackBar: MatSnackBar) {
     this.certificateForm = this.fb.group({
 
       firstName: ['', [Validators.required]],
@@ -64,27 +69,33 @@ export class NewCertificateComponent implements OnInit {
 
   createCertificate(certificate: CertificateDto) {
     this.certificateService.createNewCertificate(certificate)
-    .subscribe((T))
-      // .then(
-      //   (result: any) => {
-      //     debugger
-      //     // TODO: Realizar un converter.
-      //     if (result && result.events && result.transactionHash) {
-      //       console.info(result.transactionHash);
-      //       console.info(result.events);
-      //       const returnValues = result.events.CertificateCreated.returnValues;
-      //       console.info(returnValues.updatedAt);
-      //       let newCertificate: Certificate = {
-      //         id: Number(returnValues.id),
-      //         student: {
-      //           name: returnValues.studentName,
-      //           docNumber: returnValues.studentId,
-      //         },
-      //       }
-      //       this.certificates.push(newCertificate);
-      //     }
-      //   }
-      // )
+      .subscribe((transactionData: TransactionDto) => {
+        if (transactionData && transactionData.receipt) {
+          this._snackBar.open("Su certificado ha sido creado con exito.", undefined, {
+            duration: 1
+          } as MatSnackBarConfig)
+        }
+      })
+    // .then(
+    //   (result: any) => {
+    //     debugger
+    //     // TODO: Realizar un converter.
+    //     if (result && result.events && result.transactionHash) {
+    //       console.info(result.transactionHash);
+    //       console.info(result.events);
+    //       const returnValues = result.events.CertificateCreated.returnValues;
+    //       console.info(returnValues.updatedAt);
+    //       let newCertificate: Certificate = {
+    //         id: Number(returnValues.id),
+    //         student: {
+    //           name: returnValues.studentName,
+    //           docNumber: returnValues.studentId,
+    //         },
+    //       }
+    //       this.certificates.push(newCertificate);
+    //     }
+    //   }
+    // )
   }
 
   getCertificatesById(studentId: number) {
