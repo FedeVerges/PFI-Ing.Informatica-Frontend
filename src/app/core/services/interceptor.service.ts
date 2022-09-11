@@ -21,21 +21,20 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(request)
             .pipe(
                 catchError((err: HttpErrorResponse) => {
+                  debugger
                     if (err.status === 401) {
                         this.authService.logout();
                         return next.handle(req);
                     } else if (err.status === 409) {
                         return throwError(() => {
-                            const message = JSON.parse(err.message) || '';
+                            const message = err.error|| '';
                             const error: any = new Error(`${message}`);
                             error.timestamp = Date.now();
                             return error;
                         });
                     } else {
                         return throwError(() => {
-                            const error: any = new Error(`Ocurrió un problema.`);
-                            error.timestamp = Date.now();
-                            return error;
+                            return err;
                         });
                     }
                 })

@@ -29,7 +29,7 @@ export class CertificateValidatorComponent implements OnInit {
   //       }
   //     )
   // }
-
+ 
   getCertificatesByStudentId(studentId: number) {
     this.certificateService.getCertificatesByStudentId(studentId)
     .subscribe( (result) => {

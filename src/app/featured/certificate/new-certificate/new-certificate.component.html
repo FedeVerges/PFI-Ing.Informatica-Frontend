@@ -2,67 +2,192 @@
   <div class="row">
     <div class="col">
       <div class="card text-center w-70 m-auto">
-        <h3>Ingresa los datos de tu título</h3>
-        <form autocomplete="true" [formGroup]="certificateForm">
-          <div class="card-body"> 
+        <h3>Cargar nuevo Titulo Universitario</h3>
+        <form autocomplete="true" [formGroup]="studentForm">
+          <div class="card-header">
+            <h4>Datos del estudiante</h4>
+          </div>
+          <div class="card-body">
             <div class="row">
-              <div class="col">
+              <div class="col-sm-6 col-md-4">
                 <mdb-form-control class="mb-3">
-                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="firstName"
-                    required />
+                  <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
+                         [ngModelOptions]="{standalone: true}"/>
+                  <label mdbLabel class="form-label" for="search_dni">Numero de documento</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-sm-6 col-md-2">
+                <button type="button" type="submit" class="btn btn-primary"
+                        (click)="getStudentByDni()">Buscar
+                </button>
+              </div>
+            </div>
+            <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+              <div class="row">
+                <div class="col-6">
+                  <h5 class="text-start">Estudiantes encontrados:</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="list-group list-group-light">
+                    <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
+                            *ngFor="let student of studentList"
+                            aria-current="true" mdbRipple (click)="selectStudent(student)">
+                      {{student.person.fullname}} - {{student.degreeProgramName}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required/>
                   <label mdbLabel class="form-label" for="form_name">Nombre</label>
                 </mdb-form-control>
               </div>
-              <div class="col">
+              <div class="col-xs-12 col-md-6">
                 <mdb-form-control class="mb-3">
-                  <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastName"
-                    required />
+                  <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
+                         required/>
                   <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
                 </mdb-form-control>
               </div>
             </div>
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" maxlength="8" class="form-control" formControlName="docNumber"
-                required />
-              <label mdbLabel class="form-label" for="form_name">N° Documento</label>
-            </mdb-form-control>
-            <div *ngIf="docNumber && docNumber.invalid && (docNumber.dirty || docNumber.touched)"
-              class="alert alert-danger">
-              <div *ngIf="docNumber && docNumber.errors?.['required']">
-                El documento es requerido.
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                         formControlName="documentType" required/>
+                  <label mdbLabel class="form-label" for="form_name">Tipo de documento</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                         formControlName="docNumber" required/>
+                  <label mdbLabel class="form-label" for="form_name">N° Documento</label>
+                </mdb-form-control>
               </div>
             </div>
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeName" required />
-              <label mdbLabel class="form-label" for="form_name">Nombre del t&iacute;tulo</label>
-            </mdb-form-control>
-
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeType" required />
-              <label mdbLabel class="form-label" for="form_name">Tipo de t&iacute;tulo</label>
-            </mdb-form-control>
-
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="institution" required />
-              <label mdbLabel class="form-label" for="form_name">Instituci&oacute;n</label>
-            </mdb-form-control>
-            
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber" required />
-              <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
-            </mdb-form-control>
-            
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="volumeNumber" required />
-              <label mdbLabel class="form-label" for="form_name">N° Tomo</label>
-            </mdb-form-control>
-          
-            <mdb-form-control class="mb-3">
-              <input mdbInput type="text" id="form_name" class="form-control" formControlName="recordNumber" required />
-              <label mdbLabel class="form-label" for="form_name">N° Acta</label>
-            </mdb-form-control>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                         formControlName="genderIdentity"/>
+                  <label mdbLabel class="form-label" for="form_name">Ley de g&eacute;nero</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" maxlength="8" class="form-control" formControlName="sex"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Sexo</label>
+                </mdb-form-control>
+              </div>
+            </div>
           </div>
+        </form>
+        <form autocomplete="true" [formGroup]="certificateForm">
+          <div class="card-header">
+            <h4>Datos Academicos</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="universityName"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Instituci&oacute;n</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="academicUnit"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Unidad Acad&eacute;mica</label>
+                </mdb-form-control>
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeProgramName"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Carrera</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control"
+                         formControlName="degreeProgramCurriculum" required/>
+                  <label mdbLabel class="form-label" for="form_name">Plan de estudios</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control"
+                         formControlName="degreeProgramOrdinance" required/>
+                  <label mdbLabel class="form-label" for="form_name">N°Ordenanza Ministerial del plan</label>
+                </mdb-form-control>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeName"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Nombre del t&iacute;tulo</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeType"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">Tipo de t&iacute;tulo</label>
+                </mdb-form-control>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control"
+                         formControlName="ministerialOrdninance" required/>
+                  <label mdbLabel class="form-label" for="form_name">N° Ordenanza del t&iacute;tulo</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
+                </mdb-form-control>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="volumeNumber"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">N° Tomo</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control" formControlName="recordNumber"
+                         required/>
+                  <label mdbLabel class="form-label" for="form_name">N° Acta</label>
+                </mdb-form-control>
+              </div>
+            </div>
+          </div>
           <div class="card-footer">
             <button type="button" type="submit" class=" btn btn-primary" (click)="addNewCertificate()">
               Crear título universitario
