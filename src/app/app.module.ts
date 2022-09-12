@@ -14,6 +14,7 @@ import { AuthInterceptor } from './core/services/interceptor.service';
 import { AuthService } from './core/services/auth.service';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { UserService } from './core/services/user.service';
+import { WebsocketService } from './core/services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserService } from './core/services/user.service';
     AuthService,
     LocalStorageService,
     UserService,
+    WebsocketService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

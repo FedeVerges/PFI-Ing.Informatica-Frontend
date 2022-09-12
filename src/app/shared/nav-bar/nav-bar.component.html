@@ -12,10 +12,15 @@
             <a [routerLink]="'new-certificate'" class="nav-link" href="#">Crear t&iacute;tulo</a>
           </li>
           <li class="nav-item">
-            <a [routerLink]="'validate-certificate'" class="nav-link" href="#">Validar T&iacute;tulo</a>
+            <a [routerLink]="'validate-certificate'" class="nav-link" href="#">Buscar T&iacute;tulos</a>
           </li>
         </ul>
         <div class="d-flex align-items-center">
+          <ng-container *ngIf="netwotkStatus | async as status">
+
+            <span class="badge bg-danger" *ngIf="!status?.connected"> No conectado</span>
+            <span class="badge bg-success" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+          </ng-container>
           <button type="button" class="btn btn-link px-3 me-2" (click)="logout()">
             Salir
           </button>

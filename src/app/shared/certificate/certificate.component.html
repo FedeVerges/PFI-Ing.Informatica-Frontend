@@ -1,1 +1,18 @@
-<p>certificate works!</p>
+<div class="container">
+  <div class="row-cols-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-flex-end justify-content-between">
+          <h5 class="card-title">{{certificate?.degreeName}}</h5>
+          <p class="text-muted">{{certificate?.createdAt}}</p>
+        </div>
+        <p class="card-subtitle mb-2 text-muted">{{certificate?.student?.person?.fullname }}
+          {{certificate?.student?.person?.docNumber}}</p>
+        <p>{{certificate?.degreeType}}</p>
+        <p>{{certificate?.student?.universityName}}</p>
+        <p>{{certificate?.student?.academicUnit}}</p>
+        <p>{{certificate?.degreeType}}</p>
+      </div>
+    </div>
+  </div>
+</div>
