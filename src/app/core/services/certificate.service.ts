@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
+import { BlockchainTransactionDto } from "../models/dto/blockchainTransactionDto";
 import { CertificateDto } from "../models/dto/certificateDto";
 import { TransactionDto } from "../models/dto/transactionDto";
 
@@ -16,7 +17,7 @@ export class CertificateService {
     }
 
     getCertificatesByStudentId(studentId: number) {
-        return this.http.get<CertificateDto[]>(environment.serverURL + `/certificate/docNumber/${studentId}`);
+        return this.http.get<BlockchainTransactionDto[]>(environment.serverURL + `/certificate/docNumber/${studentId}`);
     }
 
     getAllInstitutions() {

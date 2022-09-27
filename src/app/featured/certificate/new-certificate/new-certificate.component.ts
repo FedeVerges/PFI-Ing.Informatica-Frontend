@@ -64,6 +64,7 @@ export class NewCertificateComponent implements OnInit {
     if (this.studentForm.valid) {
       if (this.certificateForm.valid) {
         if (this.studentSelected) {
+          this.studentSelected.person.documentType = this.studentForm.get('documentType')?.value || 'DNI'
           let certificate: CertificateDto = {
             student: this.studentSelected,
             degreeType: this.certificateForm.get('degreeType')!.value,
@@ -114,7 +115,7 @@ export class NewCertificateComponent implements OnInit {
             if (students && students.length > 0) {
               this.studentList = students;
               if (students.length === 1) {
-                this.studentSelected = students[0];
+                this.selectStudent(students[0])
               }
             } else {
               this._snackBar.open("No se encontró al estudiante en el sistema", undefined, {
@@ -137,7 +138,7 @@ export class NewCertificateComponent implements OnInit {
       name: student.person.name,
       lastname: student.person.lastname,
       docNumber: student.person.docNumber,
-      documentType: student.person.documentType,
+      documentType: student.person.documentType || 'DNI',
       sex: student.person.sex,
       genderIdentity: student.person.genderIdentity,
     });

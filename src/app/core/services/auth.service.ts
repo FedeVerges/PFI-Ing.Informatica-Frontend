@@ -1,30 +1,37 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
+import { RoleDto } from "../models/dto/roleDto";
+import { UserDto } from "../models/dto/userDto";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _isLoginSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _user: BehaviorSubject<UserDto | null> = new BehaviorSubject<UserDto | null>(null);
+  private _role: BehaviorSubject<RoleDto | null> = new BehaviorSubject<RoleDto | null>(null);
   
-  public get isLoginSubject(): BehaviorSubject<boolean> {
-    return this._isLoginSubject
+  
+  public get currentUser(): BehaviorSubject<UserDto | null> {
+    return this._user
   }
 
   // todo: agregar observable para manejar los roles y permisos.
 
   constructor(private localStorageService: LocalStorageService) { 
-    this.setLogged(this.hasToken());
+    this.setCurrentUser(this.hasToken());
+    this._role.next(this.hasRole());
   }
 
   /**
    *  Login the user then tell all the subscribers about the new status
    */
-  login(token: string, userData: any): void {
+  login(token: string, userData: UserDto, role:RoleDto): void {
     this.localStorageService.setToken(token);
     this.localStorageService.setUser(userData);
-    this.setLogged(true);
+    this.localStorageService.setRole(role);
+    this.setCurrentUser(userData);
+    this.role.next(role);
   }
 
   /**
@@ -32,28 +39,52 @@ export class AuthService {
    */
   logout(): void {
     this.localStorageService.logout();
-    this.setLogged(false);
+    this.setCurrentUser(null);
   }
 
   /**
-   * if we have token the user is loggedIn
-   * @returns {boolean}
+   * if we have token the user is loggedIn.
+   * @returns {UserDto}
    */
-  private hasToken(): boolean {
+  private hasToken(): UserDto | null {
     const token = this.localStorageService.getToken();
-    return token !== null;
+    const user = this.localStorageService.getUser();
+
+    return token !== null ? user : null;
+  }
+  /**
+   * if we have token the user is loggedIn.
+   * @returns {RoleDto}
+   */
+  private hasRole(): RoleDto | null {
+    const token = this.localStorageService.getToken();
+    const role = this.localStorageService.getRole();
+
+    return token !== null ? role : null;
   }
 
   /**
    *
    * @returns {Observable<T>}
    */
-  isLoggedIn(): Observable<boolean> {
-    return this.isLoginSubject.asObservable();
+  getCurrentUser(): Observable<UserDto | null> {
+    return this._user.asObservable();
   }
 
-  setLogged(value:boolean){
-    this._isLoginSubject.next(value);
+  setCurrentUser(value: UserDto | null) {
+    this._user.next(value);
+  }
+
+
+  getRole(): Observable<RoleDto | null> {
+    return this._role.asObservable();
+  }
+
+  public get role(): BehaviorSubject<RoleDto | null> {
+    return this._role;
+  }
+  public set role(value: BehaviorSubject<RoleDto | null>) {
+    this._role = value;
   }
 
 }

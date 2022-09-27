@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDto } from 'src/app/core/models/dto/userDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -35,13 +36,14 @@ export class LoginComponent {
         // Realizar controles.
         this.userService.login(userName, password)
           .subscribe((response) => {
-            if (response?.token) {
-              const userData = {
-                userName: response?.content.name,
+            if (response?.token && response.role) {
+              const userData: UserDto = {
+                name: response?.content.name,
                 id: response?.content.id,
                 email: response?.content.email,
               }
-              this.authService.login(response.token, userData);
+              this.authService.login(response.token, userData, response.role);
+              // todo: dependiendo del rol, va a una pantalla o a otra.
               this.router.navigateByUrl('new-certificate');
             }
           });

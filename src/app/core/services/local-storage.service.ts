@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { RoleDto } from '../models/dto/roleDto';
+import { UserDto } from '../models/dto/userDto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class LocalStorageService {
     localStorage.setItem('token', tokenValue);
   }
 
-  getUser() {
+  getUser(): UserDto {
     const userJson = localStorage.getItem('currentUser');
     if (userJson) {
       return JSON.parse(userJson);
@@ -23,13 +25,24 @@ export class LocalStorageService {
     return userJson ? JSON.parse(userJson) : userJson;
   }
 
-  setUser(user: any) {
+  setUser(user: UserDto) {
     localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+  
+  getRole(): RoleDto {
+    const role = localStorage.getItem('role');
+    if (role) {
+      return JSON.parse(role);
+    }
+    return role ? JSON.parse(role) : role;
+  }
+
+  setRole(role: RoleDto) {
+    localStorage.setItem('role', JSON.stringify(role));
   }
 
   logout() {
     localStorage.clear();
   }
-
 
 }

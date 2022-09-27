@@ -1,9 +1,10 @@
+import { TransactionReceipt } from 'web3-core';
+import { BlockchainTransactionDto } from './blockchainTransactionDto';
 import { CertificateDto } from './certificateDto';
-import {BlockchainTransactionDto} from "./blockchainTransactionDto";
 
 
 export interface TransactionDto {
     receipt: BlockchainTransactionDto;
-    certificate:CertificateDto;
-    status:string;
+    certificate: CertificateDto;
+    status: string;
 }

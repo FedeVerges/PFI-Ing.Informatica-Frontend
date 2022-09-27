@@ -15,7 +15,8 @@
   </div>
   <div class="row-cols-3">
     <ng-container *ngFor="let item of certificateSearchResult">
-      <app-certificate [certificate]="item"></app-certificate>
+      <app-certificate [certificate]="item.ceritificate"></app-certificate>
+      <p>{{item.transactionHash}}</p>
     </ng-container>
   </div>
 </div>

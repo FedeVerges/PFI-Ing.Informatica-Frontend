@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { NetworkStatusDto } from 'src/app/core/models/dto/notificationDto';
+import { RoleDto } from 'src/app/core/models/dto/roleDto';
+import { UserDto } from 'src/app/core/models/dto/userDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { WebsocketService } from 'src/app/core/services/websocket.service';
 
@@ -11,12 +13,14 @@ import { WebsocketService } from 'src/app/core/services/websocket.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  isLoggedIn: Observable<boolean>;
+  user$: Observable<UserDto | null>;
   netwotkStatus: Observable<NetworkStatusDto>;
+  role$: Observable<RoleDto | null>; 
 
   constructor(private authService: AuthService, private router: Router, private websocketService: WebsocketService) {
-    this.isLoggedIn = authService.isLoggedIn()
+    this.user$ = authService.getCurrentUser();
     this.netwotkStatus = websocketService.currentStatus$;
+    this.role$ = authService.getRole();
   }
 
   ngOnInit(): void {

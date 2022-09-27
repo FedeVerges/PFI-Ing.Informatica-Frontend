@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Certificate } from 'src/app/core/models/certificate';
+import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
@@ -13,7 +14,7 @@ export class CertificateValidatorComponent implements OnInit {
 
   searchStudentId: number = 0;
   amountCertificates: number = 0;
-  certificateSearchResult: CertificateDto[] = [];
+  certificateSearchResult: BlockchainTransactionDto[] = [];
   certificates: Certificate[] = [];
 
   constructor(private certificateService: CertificateService) { }
