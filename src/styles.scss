@@ -3,33 +3,98 @@
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
- 
+
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+@import 'variables.scss';
+
 
 // Theme colors
-$primary: #8fe8cc !important;
-$secondary: #545479 !important;
-$success: #42C173 !important;
-$info: #39c0ed !important;
-$warning: #ffa900 !important;
-$danger: #E63946 !important;
-$light: $gray-50 !important;
-$dark: $gray-900 !important;
+.primary {
+  color: $primary !important;
+}
 
-// scss-docs-start theme-colors-map
-$theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'success': $success,
-  'info': $info,
-  'warning': $warning,
-  'danger': $danger,
-  'light': $light,
-  'dark': $dark,
-  'white': $white,
-  'black': $black,
-) !important;
-// scss-docs-end theme-colors-map
+.secondary {
+  color: $secondary !important;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.success {
+  color: #42C173 !important;
+}
+
+.info {
+  color: #39c0ed !important;
+}
+
+.warning {
+  color: #ffa900 !important;
+}
+
+.danger {
+  color: #E63946 !important;
+}
+
+.light {
+  color: $light !important;
+}
+
+.dark {
+  color: $dark !important;
+}
+
+
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.bg-secondary {
+  background-color: $secondary !important;
+}
+
+.bg-success {
+  background-color: $success !important;
+}
+
+.bg-info {
+  background-color: $info !important;
+}
+
+.bg-warning {
+  background-color: $warning !important;
+}
+
+.bg-danger {
+  background-color: $danger !important;
+}
+
+.bg-light {
+  background-color: $light !important;
+}
+
+.bg-dark {
+  background-color: $dark !important;
+}
+
+// // scss-docs-start theme-colors-map
+// $theme-colors: (
+//   'primary': $primary,
+//   'secondary': $secondary,
+//   'success': $success,
+//   'info': $info,
+//   'warning': $warning,
+//   'danger': $danger,
+//   'light': $light,
+//   'dark': $dark,
+//   'white': $white,
+//   'black': $black,
+// ) !important;
+// // scss-docs-end theme-colors-map
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

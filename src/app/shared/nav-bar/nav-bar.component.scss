@@ -1,0 +1,16 @@
+@import "../../../variables.scss";
+
+.logo {
+    border-width: 0.125rem;
+    border-style: solid;
+    border-radius: 0.4rem;
+}
+
+.logo-text {
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.nav-link {
+    color: $secondary !important;
+}

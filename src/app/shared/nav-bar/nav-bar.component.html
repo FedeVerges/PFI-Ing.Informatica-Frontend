@@ -1,14 +1,20 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" (click)="navBar.toggle()" aria-controls="navBarCertificatesValidator"
       aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
+    <div class="d-flex align-items-end p-2 pe-3">
+      <a href="#">
+        <img src="../../../assets/img/icons8-chain-58.png" alt="" width="32" height="32">
+      </a>
+      <span class="logo-text px-2 secondary">UNSL CERT</span>
+    </div>
     <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
       <ng-container *ngIf="user$| async as user; else userActions">
         <ng-container *ngIf="role$ | async; let role">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item" *ngIf="role.name ==='ADMIN'">
               <a [routerLink]="'new-certificate'" class="nav-link" href="#">Crear t&iacute;tulo</a>
             </li>
@@ -16,27 +22,24 @@
               <a [routerLink]="'validate-certificate'" class="nav-link" href="#">Buscar T&iacute;tulos</a>
             </li>
           </ul>
-        
+
           <div class="d-flex align-items-center">
             <ng-container *ngIf="netwotkStatus | async as status">
-              <span class="badge bg-danger" *ngIf="!status?.connected"> No conectado</span>
-              <span class="badge bg-success" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+              <span class="badge bg-secondary" *ngIf="!status?.connected"> No conectado</span>
+              <span class="badge bg-info" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
             </ng-container>
-            
+
             <!-- Light -->
             <div mdbDropdown class="btn-group shadow-0 mx-3">
-              <button
-                type="button"
-                class="btn btn-light btn-lg dropdown-toggle"
-                mdbDropdownToggle
+              <button type="button" class="btn btn-light btn-lg dropdown-toggle" mdbDropdownToggle
                 aria-expanded="false">
-                  <span class="me-4"> <strong>{{user.name}}</strong></span>
-                  <span class="badge bg-primary" *ngIf="role.name ==='ADMIN'">Admin</span>
+                <span class="me-4"> <strong>{{user.name}}</strong></span>
+                <span class="badge bg-secondary" *ngIf="role.name ==='ADMIN'">Admin</span>
               </button>
               <ul mdbDropdownMenu class="dropdown-menu">
                 <li><a class="dropdown-item"><i class="fas fa-user-graduate me-3"></i>Perfil</a></li>
                 <li><a class="dropdown-item" (click)="logout()">
-                  <i class="fas fa-sign-out-alt me-3"></i>Salir</a></li>
+                    <i class="fas fa-sign-out-alt me-3"></i>Salir</a></li>
               </ul>
             </div>
           </div>

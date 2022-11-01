@@ -36,6 +36,7 @@ import { WebsocketService } from './core/services/websocket.service';
     LocalStorageService,
     UserService,
     WebsocketService,
+    AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

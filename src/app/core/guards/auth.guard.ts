@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
             .getCurrentUser()
             .pipe(
                 map(userLogged => {
-                    if (!userLogged || !userLogged.id || !userLogged.role) {
+                    if (!userLogged || !userLogged.id) {
                         this.router.navigate(['/login']);
                         return false;
                     } else {
@@ -22,12 +22,4 @@ export class AuthGuard implements CanActivate {
                 })
             )
     }
-
-
-    // if (this.authService.isLoggedIn()) {
-    //     return true
-    // } else {
-    //     this.router.navigate(['/login']);
-    //     return false;
-    // }
 }
