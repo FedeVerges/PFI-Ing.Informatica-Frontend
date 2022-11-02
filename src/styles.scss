@@ -74,6 +74,38 @@
   background-color: $dark !important;
 }
 
+.btn-primary {
+  background-color: $primary !important;
+}
+
+.btn-secondary {
+  background-color: $secondary !important;
+}
+
+.btn-success {
+  background-color: $success !important;
+}
+
+.btn-info {
+  background-color: $info !important;
+}
+
+.btn-warning {
+  background-color: $warning !important;
+}
+
+.btn-danger {
+  background-color: $danger !important;
+}
+
+.btn-light {
+  background-color: $light !important;
+}
+
+.btn-dark {
+  background-color: $dark !important;
+}
+
 // // scss-docs-start theme-colors-map
 // $theme-colors: (
 //   'primary': $primary,

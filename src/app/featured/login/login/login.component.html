@@ -1,12 +1,17 @@
-<div class="container mt-3">
+<div class="container pt-5">
     <div class="row">
       <div class="col">
-        <div class="card text-center w-70 m-auto">
+        <div class="card text-center w-50 m-auto">
           <form autocomplete="true" [formGroup]="loginForm">
-            <div class="card-header">
+            <!-- <div class="card-header">
               <h1>Sistema Validador de t&iacute;tulos</h1>
-            </div>
+            </div> -->
             <div class="card-body">
+              <div class="row text-center">
+                <div class="col pb-4">
+                  <h3>Bienvenido al sistema validador de titulos de UNSL</h3>
+                </div>
+              </div>
               <div class="row justify-content-center">
                 <mdb-form-control class="mb-3 w-50">
                   <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="user"
@@ -24,7 +29,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <button type="button" type="submit" class=" btn btn-primary" (click)="login()">
+              <button type="button" type="submit" class=" btn btn-secondary" (click)="login()">
                 Ingresar
               </button>
             </div>
