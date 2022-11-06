@@ -105,21 +105,23 @@
 .btn-dark {
   background-color: $dark !important;
 }
+.card-title{
+  font-weight: 200;
+}
 
-// // scss-docs-start theme-colors-map
-// $theme-colors: (
-//   'primary': $primary,
-//   'secondary': $secondary,
-//   'success': $success,
-//   'info': $info,
-//   'warning': $warning,
-//   'danger': $danger,
-//   'light': $light,
-//   'dark': $dark,
-//   'white': $white,
-//   'black': $black,
-// ) !important;
-// // scss-docs-end theme-colors-map
+.form-control {
+  border-color: $secondary;
+  color: $secondary;
+}
+
+.form-control:focus {
+  border-color: $secondary;
+  color: $secondary;
+}
+
+.card{
+  background-color: aliceblue;
+}
 
 html,
 body {

@@ -1,2 +1,7 @@
+<div class="overlay" *ngIf="loading$ | async">
+  <div class="spinner-grow spinner-position light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 <app-nav-bar></app-nav-bar>
 <router-outlet></router-outlet>

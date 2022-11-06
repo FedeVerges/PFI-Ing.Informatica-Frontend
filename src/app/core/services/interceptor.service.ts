@@ -1,17 +1,22 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError, catchError } from "rxjs";
+import { debug } from "console";
+import { Observable, throwError, catchError, tap, delay } from "rxjs";
 import { AuthService } from "./auth.service";
+import { LoadingService } from "./loading.service";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService, private localStorageService: LocalStorageService) { }
+    constructor(private authService: AuthService,
+        private localStorageService: LocalStorageService,
+        private loadingService: LoadingService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let request = req;
         const token = this.localStorageService.getToken();
+        this.loadingService.enableShowSpinner();
         if (token) {
             request = this.addToken(req, token!);
         } else {
@@ -20,20 +25,23 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return next.handle(request)
             .pipe(
+                tap((_) => this.loadingService.disableShowSpinner()),
                 catchError((err: HttpErrorResponse) => {
+                    this.loadingService.disableShowSpinner();
                     if (err.status === 401) {
                         this.authService.logout();
                         return next.handle(req);
                     } else if (err.status === 409) {
                         return throwError(() => {
-                            const message = err.error|| '';
+                            const message = err.error || '';
                             const error: any = new Error(`${message}`);
                             error.timestamp = Date.now();
                             return error;
                         });
                     } else {
                         return throwError(() => {
-                            return err;
+                            const error: any = new Error('Ocurrió un error inesperado');
+                            return error;
                         });
                     }
                 })

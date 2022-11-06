@@ -8,6 +8,8 @@ import { StudentSerivce } from "../../../core/services/student.serivce";
 import { CertificateDto } from "../../../core/models/dto/certificateDto";
 import { StudentDto } from "../../../core/models/dto/studentDto";
 import { TransactionDto } from "../../../core/models/dto/transactionDto";
+import { Student } from 'src/app/core/models/student';
+import { PersonDto } from 'src/app/core/models/dto/personDto';
 
 @Component({
   selector: 'app-new-certificate',
@@ -15,6 +17,7 @@ import { TransactionDto } from "../../../core/models/dto/transactionDto";
   styleUrls: ['./new-certificate.component.scss']
 })
 export class NewCertificateComponent implements OnInit {
+
   certificateForm!: FormGroup;
   studentForm!: FormGroup
   amountCertificates: number = 0;
@@ -59,13 +62,15 @@ export class NewCertificateComponent implements OnInit {
   }
 
   addNewCertificate() {
+    debugger;
     // Crear el certificado atraves de la funcion createCertificate
     // Validar correctamente los campos.
     if (this.studentForm.valid) {
       if (this.certificateForm.valid) {
+        let certificate: CertificateDto;
         if (this.studentSelected) {
           this.studentSelected.person.documentType = this.studentForm.get('documentType')?.value || 'DNI'
-          let certificate: CertificateDto = {
+          certificate = {
             student: this.studentSelected,
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
@@ -74,8 +79,35 @@ export class NewCertificateComponent implements OnInit {
             volumeNumber: this.certificateForm.get('volumeNumber')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
           }
-          this.createCertificate(certificate);
+        } else {
+          const person: PersonDto = {
+            id: 0,
+            name: this.studentForm.get('name')!.value,
+            lastname: this.studentForm.get('lastname')!.value,
+            docNumber: this.studentForm.get('docNumber')!.value,
+            documentType: this.studentForm.get('documentType')!.value,
+            sex: this.studentForm.get('sex')!.value
+          }
+          const student: StudentDto = {
+            id: 0,
+            person: person,
+            universityName: this.certificateForm.get('universityName')!.value,
+            academicUnit: this.certificateForm.get('academicUnit')!.value,
+            degreeProgramName: this.certificateForm.get('degreeProgramName')!.value,
+            degreeProgramCurriculum: this.certificateForm.get('degreeProgramCurriculum')!.value,
+            degreeProgramOrdinance: this.certificateForm.get('degreeProgramOrdinance')!.value
+          };
+          certificate = {
+            student: student,
+            degreeType: this.certificateForm.get('degreeType')!.value,
+            degreeName: this.certificateForm.get('degreeName')!.value,
+            ministerialOrdinance: this.certificateForm.get('ministerialOrdninance')!.value,
+            recordNumber: this.certificateForm.get('recordNumber')!.value,
+            volumeNumber: this.certificateForm.get('volumeNumber')!.value,
+            waferNumber: this.certificateForm.get('waferNumber')!.value
+          }
         }
+        this.createCertificate(certificate);
       } else {
         this.certificateForm.markAllAsTouched();
         this._snackBar.open("Verifique los datos del certificado.", 'Cerrar');
@@ -149,5 +181,10 @@ export class NewCertificateComponent implements OnInit {
       degreeProgramCurriculum: student.degreeProgramCurriculum,
       degreeProgramOrdinance: student.degreeProgramOrdinance,
     })
+  }
+
+  clearForm() {
+    this.certificateForm.reset();
+    this.studentForm.reset();
   }
 }
