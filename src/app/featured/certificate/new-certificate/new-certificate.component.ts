@@ -4,7 +4,7 @@ import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { StudentSerivce } from "../../../core/services/student.serivce";
+import { StudentSerivce } from "../../../core/services/student.service";
 import { CertificateDto } from "../../../core/models/dto/certificateDto";
 import { StudentDto } from "../../../core/models/dto/studentDto";
 import { TransactionDto } from "../../../core/models/dto/transactionDto";
@@ -123,7 +123,7 @@ export class NewCertificateComponent implements OnInit {
       .subscribe((transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
           this._snackBar.open("Su certificado ha sido creado con exito.", undefined, {
-            duration: 1
+            duration: 1000
           } as MatSnackBarConfig)
         }
       })

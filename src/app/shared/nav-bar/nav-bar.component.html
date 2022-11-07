@@ -22,14 +22,14 @@
               </a>
               <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li>
-                  <a class="dropdown-item" href="'new-student'">Nuevo Estudiante</a>
+                  <a class="dropdown-item" [routerLink]="'student'">Nuevo Estudiante</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="student-search">Buscar</a>
+                  <a class="dropdown-item" [routerLink]="'student/search'">Buscar</a>
                 </li>
               </ul>
             </li>
-            
+
             <li class="nav-item">
               <a [routerLink]="'new-certificate'" class="nav-link" href="#">Crear t&iacute;tulo</a>
             </li>
