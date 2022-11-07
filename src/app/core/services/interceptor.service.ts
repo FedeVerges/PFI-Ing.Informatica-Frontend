@@ -1,7 +1,6 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { debug } from "console";
-import { Observable, throwError, catchError, tap, delay } from "rxjs";
+import { Observable, throwError, catchError, map } from "rxjs";
 import { AuthService } from "./auth.service";
 import { LoadingService } from "./loading.service";
 import { LocalStorageService } from "./local-storage.service";
@@ -16,16 +15,22 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let request = req;
         const token = this.localStorageService.getToken();
-        this.loadingService.enableShowSpinner();
         if (token) {
             request = this.addToken(req, token!);
         } else {
             this.authService.logout();
             return next.handle(req);
         }
+        debugger;
+        this.loadingService.enableShowSpinner();
         return next.handle(request)
             .pipe(
-                tap((_) => this.loadingService.disableShowSpinner()),
+                map((evt) => {
+                    if (evt instanceof HttpResponse) {
+                        this.loadingService.disableShowSpinner()
+                    }
+                    return evt;
+                }),
                 catchError((err: HttpErrorResponse) => {
                     this.loadingService.disableShowSpinner();
                     if (err.status === 401) {

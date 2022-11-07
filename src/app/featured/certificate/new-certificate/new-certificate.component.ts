@@ -148,6 +148,8 @@ export class NewCertificateComponent implements OnInit {
               this.studentList = students;
               if (students.length === 1) {
                 this.selectStudent(students[0])
+              }else{
+                this.studentSelected = undefined;
               }
             } else {
               this._snackBar.open("No se encontró al estudiante en el sistema", undefined, {

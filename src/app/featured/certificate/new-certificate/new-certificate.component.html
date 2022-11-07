@@ -15,26 +15,27 @@
           </button>
         </div>
       </div>
+      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+        <div class="row">
+          <div class="col-6">
+            <h5 class="text-start">Estudiantes encontrados:</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="list-group list-group-light">
+              <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
+                *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
+                {{student.person.fullname}} - {{student.degreeProgramName}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <form autocomplete="true" [formGroup]="studentForm">
         <div class="container">
           <h4 class="text-start mt-2 card-title">Datos del estudiante</h4>
-          <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
-            <div class="row">
-              <div class="col-6">
-                <h5 class="text-start">Estudiantes encontrados:</h5>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <div class="list-group list-group-light">
-                  <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
-                    *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
-                    {{student.person.fullname}} - {{student.degreeProgramName}}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
