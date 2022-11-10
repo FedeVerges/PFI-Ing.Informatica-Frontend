@@ -70,7 +70,6 @@ export class NewStudentComponent implements OnInit {
   createStudent(student: StudentDto) {
     this.studentSerivce.createStudent(student)
       .subscribe(studentCreated => {
-        debugger
         this._snackBar.open(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
           duration: 1000
         } as MatSnackBarConfig)

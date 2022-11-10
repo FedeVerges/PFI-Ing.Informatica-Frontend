@@ -21,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
             this.authService.logout();
             return next.handle(req);
         }
-        debugger;
         this.loadingService.enableShowSpinner();
         return next.handle(request)
             .pipe(
