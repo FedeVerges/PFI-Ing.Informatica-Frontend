@@ -1,18 +1,14 @@
 <div class="container">
-  <div class="row-cols-3">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-flex-end justify-content-between">
-          <h5 class="card-title">{{certificate?.degreeName}}</h5>
-          <p class="text-muted">{{certificate?.createdAt}}</p>
-        </div>
-        <p class="card-subtitle mb-2 text-muted">{{certificate?.student?.person?.fullname }}
-          {{certificate?.student?.person?.docNumber}}</p>
-        <p>{{certificate?.degreeType}}</p>
-        <p>{{certificate?.student?.universityName}}</p>
-        <p>{{certificate?.student?.academicUnit}}</p>
-        <p>{{certificate?.degreeType}}</p>
-      </div>
+  <div class="card">
+    <span class="p-3 text-muted">{{transaction?.certificate?.createdAt}}</span>
+    <div class="card-body pt-1">
+      <h5 class="certificate-title">{{transaction?.certificate?.degreeName}}</h5>
+      <p class="card-subtitle mb-2 text-muted">{{transaction?.certificate?.student?.person?.fullname}} -
+        {{transaction?.certificate?.student?.person?.docNumber}}</p>
+      <p><strong>Tipo de carrera: </strong>{{transaction?.certificate?.degreeType}}</p>
+      <p><strong>Universidad: </strong>{{transaction?.certificate?.student?.universityName}}</p>
+      <p><strong>Unidad Ac&aacute;demica: </strong>{{transaction?.certificate?.student?.academicUnit}}</p>
+      <a class="link" [href]="transaction?.etherscanLink">{{transaction?.etherscanLink}}</a>
     </div>
   </div>
 </div>

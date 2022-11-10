@@ -14,24 +14,17 @@
       </button>
     </div>
   </div>
-  <div class="row-cols-3">
-    <ng-container *ngFor="let item of certificateSearchResult">
-      <app-certificate [certificate]="item.ceritificate"></app-certificate>
-      <p>{{item.transactionHash}}</p>
-    </ng-container>
-  </div>
 
   <div class="row">
-    <div class="col-3">
-      <div class="card ">
-        <div class="card-body">
-          <p class="h5 f2-bold">Ingeniero en informática</p>
-          <p>Dato 1:123123</p>
-          <p>Dato 2: hola 1234</p>
-          <p>Dato 3: 1235</p>
-          <p>Dato 4:asdjakshd1123123</p>
-        </div>
-      </div>
-    </div>  
+    <div class="col-4">
+      <app-certificate></app-certificate>
+    </div>
   </div>
+  <!-- <div class="row row-cols-3">
+    <ng-container *ngFor="let item of certificateSearchResult">
+      <div class="col">
+        <app-certificate [transaction]="item"></app-certificate>
+      </div>
+    </ng-container>
+  </div> -->
 </div>
