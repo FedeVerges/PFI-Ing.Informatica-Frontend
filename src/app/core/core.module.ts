@@ -5,13 +5,15 @@ import { CoreRoutingModule } from './core-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/interceptor.service';
 import { AuthService } from './services/auth.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    MatSnackBarModule,
   ],
 })
 export class CoreModule { }

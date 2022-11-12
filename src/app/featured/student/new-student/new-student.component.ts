@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBarConfig } from '@angular/material/snack-bar';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { StudentSerivce } from 'src/app/core/services/student.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class NewStudentComponent implements OnInit {
   showFormNewStudent = false;
 
   constructor(private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
+    private alertService: AlertService,
     private studentSerivce: StudentSerivce) {
 
     this.studentForm = this.fb.group({
@@ -63,16 +64,16 @@ export class NewStudentComponent implements OnInit {
       }
     } else {
       this.studentForm.markAllAsTouched();
-      this._snackBar.open("Verifique los datos del estudiante.", 'Cerrar');
+      this.alertService.showErrorMessage("Verifique los datos del estudiante.");
     }
   }
 
   createStudent(student: StudentDto) {
     this.studentSerivce.createStudent(student)
       .subscribe(studentCreated => {
-        this._snackBar.open(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
+        this.alertService.showAlert(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
           duration: 1000
-        } as MatSnackBarConfig)
+        } as MatSnackBarConfig);
       })
   }
 

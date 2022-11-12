@@ -22,7 +22,6 @@ import {MdbRippleModule} from "mdb-angular-ui-kit/ripple";
     SharedModule,
     CertificateRoutingModule,
     MdbFormsModule,
-    MatSnackBarModule,
     MdbRippleModule,
   ],
   providers: [Web3Service, AuthService],

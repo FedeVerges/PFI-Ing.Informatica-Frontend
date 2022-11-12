@@ -21,7 +21,6 @@ import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
     FormsModule,
     ReactiveFormsModule,
     MdbFormsModule,
-    MatSnackBarModule,
     MdbRippleModule,
   ]
 })

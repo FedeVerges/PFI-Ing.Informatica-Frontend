@@ -3,13 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { StudentSerivce } from "../../../core/services/student.service";
 import { CertificateDto } from "../../../core/models/dto/certificateDto";
 import { StudentDto } from "../../../core/models/dto/studentDto";
 import { TransactionDto } from "../../../core/models/dto/transactionDto";
-import { Student } from 'src/app/core/models/student';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-new-certificate',
@@ -32,7 +31,7 @@ export class NewCertificateComponent implements OnInit {
   constructor(private web3Service: Web3Service,
     private fb: FormBuilder,
     private certificateService: CertificateService,
-    private _snackBar: MatSnackBar,
+    private alertService: AlertService,
     private studentSerivce: StudentSerivce) {
 
     this.studentForm = this.fb.group({
@@ -62,7 +61,6 @@ export class NewCertificateComponent implements OnInit {
   }
 
   addNewCertificate() {
-    debugger;
     // Crear el certificado atraves de la funcion createCertificate
     // Validar correctamente los campos.
     if (this.studentForm.valid) {
@@ -110,23 +108,27 @@ export class NewCertificateComponent implements OnInit {
         this.createCertificate(certificate);
       } else {
         this.certificateForm.markAllAsTouched();
-        this._snackBar.open("Verifique los datos del certificado.", 'Cerrar');
+        this.alertService.showErrorMessage("Verifique los datos del certificado.");
       }
     } else {
       this.studentForm.markAllAsTouched();
-      this._snackBar.open("Verifique los datos del estudiante.", 'Cerrar');
+      this.alertService.showErrorMessage("Verifique los datos del estudiante.");
     }
   }
 
   createCertificate(certificate: CertificateDto) {
-    this.certificateService.createNewCertificate(certificate)
-      .subscribe((transactionData: TransactionDto) => {
-        if (transactionData && transactionData.receipt) {
-          this._snackBar.open("Su certificado ha sido creado con exito.", undefined, {
-            duration: 1000
-          } as MatSnackBarConfig)
+    this.certificateService.createNewCertificate(certificate).subscribe(
+      {
+        next: (transactionData: TransactionDto) => {
+          if (transactionData && transactionData.receipt) {
+            this.alertService.showAlert("Su certificado ha sido creado con exito.");
+          }
+        },
+        error: error => {
+          this.alertService.showErrorMessage(error);
         }
-      })
+      }
+    )
   }
 
   getCertificatesById(studentId: number) {
@@ -148,19 +150,15 @@ export class NewCertificateComponent implements OnInit {
               this.studentList = students;
               if (students.length === 1) {
                 this.selectStudent(students[0])
-              }else{
+              } else {
                 this.studentSelected = undefined;
               }
             } else {
-              this._snackBar.open("No se encontró al estudiante en el sistema", undefined, {
-                duration: 1000
-              } as MatSnackBarConfig)
+              this.alertService.showErrorMessage("No se encontró al estudiante en el sistema");
             }
           },
           error: error => {
-            this._snackBar.open(error, undefined, {
-              duration: 1000
-            } as MatSnackBarConfig)
+            this.alertService.showErrorMessage(error);
           }
         })
     }

@@ -1,1 +1,37 @@
-<p>student-search works!</p>
+<div class="container mt-2">
+  <div class="row">
+    <div class="col">
+      <h3 class="card-title">Crear Nuevo Titulo Universitario</h3>
+      <div class="row mt-2">
+        <div class="col-sm-6 col-md-4">
+          <mdb-form-control class="mb-3">
+            <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
+              [ngModelOptions]="{standalone: true}" />
+            <label mdbLabel class="form-label" for="search_dni">Numero de documento</label>
+          </mdb-form-control>
+        </div>
+        <div class="col-sm-6 col-md-2">
+          <button type="button" type="submit" class="btn btn-secondary" (click)="getStudentByDni()">Buscar
+          </button>
+        </div>
+      </div>
+      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+        <div class="row">
+          <div class="col-6">
+            <h5 class="text-start">Estudiantes encontrados:</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="list-group list-group-light">
+              <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
+                *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="studentSelected = student">
+                {{student.person.fullname}} - {{student.degreeProgramName}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
