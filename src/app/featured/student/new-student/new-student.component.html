@@ -24,7 +24,8 @@
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <div class="mb-3">
-                <select class="form-select" aria-label="Document type select" id="documentTypeSelect" formControlName="documentType" required>
+                <select class="form-select" aria-label="Document type select" id="documentTypeSelect"
+                  formControlName="documentType" required>
                   <option selected value="">Tipo de documento</option>
                   <option value="DNI">DNI</option>
                   <option value="LE">LE</option>
@@ -42,15 +43,13 @@
 
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <div class="form-check">
-                  <input mdbCheckbox class="form-check-input" type="checkbox" value="false"
-                    formControlName="genderIdentity" id="flexCheckDefault" />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Ley de genero
-                  </label>
-                </div>
-              </mdb-form-control>
+              <div class="form-check mb-3">
+                <input mdbCheckbox class="form-check-input" type="checkbox" value="false"
+                  formControlName="genderIdentity" id="flexCheckDefault" />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Ley de genero
+                </label>
+              </div>
             </div>
             <div class="col-xs-12 col-md-6">
               <div class="mb-3">
@@ -64,46 +63,59 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="universityName"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">Instituci&oacute;n</label>
-              </mdb-form-control>
+          <ng-container *ngIf="unversityData | async as unverisities">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="mb-3">
+                  <select class="form-select" aria-label="university Name Select" id="universityNameSelect"
+                    formControlName="university" required (change)="changeUniversity()">
+                    <option selected value="">Elija la instituci&oacute;n</option>
+                    <ng-container *ngFor="let university of unverisities">
+                      <option [ngValue]="university">{{university.name}}</option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="mb-3">
+                  <select class="form-select" aria-label="Academic Unit Select" id="academicUnitNameSelect"
+                    formControlName="academicUnit" required (change)="changeAcademicUnit()">
+                    <option selected value="">Elija unidad acad&eacute;mica</option>
+                    <ng-container *ngFor="let academicUnit of academicUnits">
+                      <option [ngValue]="academicUnit">{{academicUnit.name}}</option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="academicUnit"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">Unidad Acad&eacute;mica</label>
-              </mdb-form-control>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeProgramName"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">Carrera</label>
-              </mdb-form-control>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <select class="form-select mb-3" aria-label="Degree Program NameSelect" id="degreeProgramNameSelect"
+                  formControlName="degreeProgramName" required>
+                  <option selected value="">Elija una carrera</option>
+                  <ng-container *ngFor="let career of careers">
+                    <option [ngValue]="career">{{career.name}}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control"
+                    formControlName="degreeProgramCurriculum" required />
+                  <label mdbLabel class="form-label" for="form_name">Plan de estudios</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="text" id="form_name" class="form-control"
+                    formControlName="degreeProgramOrdinance" required />
+                  <label mdbLabel class="form-label" for="form_name">N°Ordenanza Ministerial del plan</label>
+                </mdb-form-control>
+              </div>
             </div>
-            <div class="col-xs-12 col-md-3">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control"
-                  formControlName="degreeProgramCurriculum" required />
-                <label mdbLabel class="form-label" for="form_name">Plan de estudios</label>
-              </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-3">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeProgramOrdinance"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">N°Ordenanza Ministerial del plan</label>
-              </mdb-form-control>
-            </div>
-          </div>
+
+          </ng-container>
 
           <div class="row">
             <div class="col text-end">

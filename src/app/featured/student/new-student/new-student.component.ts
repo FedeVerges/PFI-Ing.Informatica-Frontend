@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs/internal/Observable';
+import { AcademicUnit } from 'src/app/core/models/academicUnit';
+import { Career } from 'src/app/core/models/career';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
+import { University } from 'src/app/core/models/university';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { StudentSerivce } from 'src/app/core/services/student.service';
 
@@ -15,11 +19,15 @@ export class NewStudentComponent implements OnInit {
   studentForm!: FormGroup
   personDocNumber: number | undefined;
   showFormNewStudent = false;
+  unversityData?: Observable<University[]>;
+
+  academicUnits: AcademicUnit[] = [];
+
+  careers: Career[] = [];
 
   constructor(private fb: FormBuilder,
     private alertService: AlertService,
     private studentSerivce: StudentSerivce) {
-
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -27,7 +35,7 @@ export class NewStudentComponent implements OnInit {
       documentType: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       genderIdentity: [false,],
-      universityName: ['', [Validators.required]],
+      university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
@@ -35,7 +43,18 @@ export class NewStudentComponent implements OnInit {
     });
   }
 
+  get university() {
+    return this.studentForm.get('university');
+  }
+  get academicUnit() {
+    return this.studentForm.get('academicUnit');
+  }
+  get degreeProgramName() {
+    return this.studentForm.get('degreeProgramName');
+  }
+
   ngOnInit(): void {
+    this.unversityData = this.studentSerivce.getUniversityCarrerData();
   }
 
   addNewCertificate() {
@@ -54,7 +73,7 @@ export class NewStudentComponent implements OnInit {
         const student: StudentDto = {
           id: 0,
           person: person,
-          universityName: this.studentForm.get('universityName')!.value,
+          universityName: this.university?.value?.name || '',
           academicUnit: this.studentForm.get('academicUnit')!.value,
           degreeProgramName: this.studentForm.get('degreeProgramName')!.value,
           degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!.value,
@@ -85,7 +104,7 @@ export class NewStudentComponent implements OnInit {
       documentType: student.person.documentType || 'DNI',
       sex: student.person.sex,
       genderIdentity: student.person.genderIdentity,
-      universityName: student.universityName,
+      university: student.universityName,
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
@@ -96,5 +115,26 @@ export class NewStudentComponent implements OnInit {
   clearForm() {
     this.studentForm.reset();
   }
+
+  changeUniversity() {
+    const unversitySelected = this.university?.value as University;
+    if (unversitySelected) {
+      this.academicUnits = unversitySelected?.academicUnits;
+      this.careers = [];
+    } else {
+      this.academicUnits = [];
+      this.careers = [];
+    }
+  }
+
+  changeAcademicUnit() {
+    const academicUnitSelected = this.academicUnit?.value as AcademicUnit;
+    if (academicUnitSelected) {
+      this.careers = academicUnitSelected?.careers;
+    } else {
+      this.careers = [];
+    }
+  }
+
 
 }
