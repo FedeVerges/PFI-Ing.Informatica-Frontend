@@ -89,10 +89,12 @@ export class NewStudentComponent implements OnInit {
 
   createStudent(student: StudentDto) {
     this.studentSerivce.createStudent(student)
-      .subscribe(studentCreated => {
-        this.alertService.showAlert(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
-          duration: 1000
-        } as MatSnackBarConfig);
+      .subscribe({
+        next: studentCreated => {
+          this.alertService.showAlert(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
+            duration: 1000
+          } as MatSnackBarConfig);
+        }, error: (e) => { this.alertService.showErrorMessage(e); }
       })
   }
 

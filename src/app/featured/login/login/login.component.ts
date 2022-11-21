@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserDto } from 'src/app/core/models/dto/userDto';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -16,6 +17,7 @@ export class LoginComponent {
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
+    private alertService: AlertService,
     private router: Router) {
     this.loginForm = this.fb.group({
       user: ['', [Validators.required]],
@@ -35,17 +37,20 @@ export class LoginComponent {
       if (userName && password) {
         // Realizar controles.
         this.userService.login(userName, password)
-          .subscribe((response) => {
-            if (response?.token && response.role) {
-              const userData: UserDto = {
-                name: response?.content.name,
-                id: response?.content.id,
-                email: response?.content.email,
+          .subscribe({
+            next: (response) => {
+              if (response?.token && response.role) {
+                const userData: UserDto = {
+                  name: response?.content.name,
+                  id: response?.content.id,
+                  email: response?.content.email,
+                }
+                this.authService.login(response.token, userData, response.role);
+                // todo: dependiendo del rol, va a una pantalla o a otra.
+                this.router.navigateByUrl('new-certificate');
               }
-              this.authService.login(response.token, userData, response.role);
-              // todo: dependiendo del rol, va a una pantalla o a otra.
-              this.router.navigateByUrl('new-certificate');
-            }
+            },
+            error: (e) => this.alertService.showErrorMessage(e)
           });
       }
     }
