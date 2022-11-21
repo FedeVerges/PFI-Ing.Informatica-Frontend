@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
     ReactiveFormsModule,
     MdbFormsModule,
     MdbRippleModule,
+    SharedModule,
   ]
 })
 export class StudentModule { }

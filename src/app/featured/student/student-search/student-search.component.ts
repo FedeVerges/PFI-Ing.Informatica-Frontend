@@ -15,6 +15,8 @@ export class StudentSearchComponent implements OnInit {
   studentList: StudentDto[] = [];
   studentSelected: StudentDto | undefined;
 
+  unversitiesCarrers: any[] = [];
+
   constructor(
     private alertService: AlertService,
     private studentSerivce: StudentSerivce) { }
@@ -44,5 +46,4 @@ export class StudentSearchComponent implements OnInit {
         })
     }
   }
-
 }

@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-import {CertificateComponent} from "./certificate/certificate.component";
+import { CertificateComponent } from "./certificate/certificate.component";
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { StudentComponent } from './student/student.component';
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    CertificateComponent
+    CertificateComponent,
+    StudentComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
   ],
   exports: [
     NavBarComponent,
-    CertificateComponent
+    CertificateComponent,
+    StudentComponent
   ]
 })
 export class SharedModule { }
