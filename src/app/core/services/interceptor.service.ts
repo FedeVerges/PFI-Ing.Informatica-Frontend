@@ -44,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         });
                     } else {
                         return throwError(() => {
-                            const error: any = new Error('Ocurrió un error inesperado');
+                            const error: any = new Error('Ocurrió un error inesperado. Contacte con el administrador.');
                             return error;
                         });
                     }
