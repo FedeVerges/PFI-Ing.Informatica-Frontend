@@ -58,8 +58,6 @@ export class NewStudentComponent implements OnInit {
   }
 
   addNewCertificate() {
-    // Crear el certificado atraves de la funcion createCertificate
-    // Validar correctamente los campos.
     if (this.studentForm.valid) {
       if (this.studentForm.valid) {
         const person: PersonDto = {
@@ -74,8 +72,8 @@ export class NewStudentComponent implements OnInit {
           id: 0,
           person: person,
           universityName: this.university?.value?.name || '',
-          academicUnit: this.studentForm.get('academicUnit')!.value,
-          degreeProgramName: this.studentForm.get('degreeProgramName')!.value,
+          academicUnit: this.academicUnit?.value?.name || '',
+          degreeProgramName: this.degreeProgramName?.value?.name || '',
           degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!.value,
           degreeProgramOrdinance: this.studentForm.get('degreeProgramOrdinance')!.value
         };
@@ -92,7 +90,7 @@ export class NewStudentComponent implements OnInit {
       .subscribe({
         next: studentCreated => {
           this.alertService.showAlert(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}!`, undefined, {
-            duration: 1000
+            duration: 2000
           } as MatSnackBarConfig);
         }, error: (e) => { this.alertService.showErrorMessage(e); }
       })
@@ -115,7 +113,19 @@ export class NewStudentComponent implements OnInit {
   }
 
   clearForm() {
-    this.studentForm.reset();
+    this.studentForm.setValue({
+      name: '',
+      lastname: '',
+      docNumber: '',
+      documentType: '',
+      sex: '',
+      genderIdentity: '',
+      university: '',
+      academicUnit: '',
+      degreeProgramName: '',
+      degreeProgramCurriculum: '',
+      degreeProgramOrdinance: '',
+    })
   }
 
   changeUniversity() {

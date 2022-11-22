@@ -23,7 +23,6 @@ export class CertificateValidatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   // getAmountCertificates() {
   //   this.web3Service.getAmountCertificates()
   //     .then(
