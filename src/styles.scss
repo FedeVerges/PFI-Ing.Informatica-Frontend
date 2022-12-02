@@ -5,6 +5,7 @@
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
 
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+@import'~animate.css/animate.min';
 @import 'variables.scss';
 
 
@@ -105,7 +106,8 @@
 .btn-dark {
   background-color: $dark !important;
 }
-.card-title{
+
+.card-title {
   font-weight: 200;
 }
 
@@ -119,7 +121,7 @@
   color: $secondary;
 }
 
-.card{
+.card {
   background-color: aliceblue;
 }
 

@@ -1,7 +1,7 @@
 <div class="container mt-2">
   <div class="row">
     <div class="col">
-      <h3 class="card-title">Crear Nuevo Titulo Universitario</h3>
+      <h3 class="card-title">Buscar Estudiante</h3>
       <div class="row mt-2">
         <div class="col-sm-6 col-md-4">
           <mdb-form-control class="mb-3">
@@ -34,9 +34,46 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="studentSelected else emptyData">
     <div class="col">
-      <app-student></app-student>
+      <div class="container" *ngIf="!showTitle">
+        <div class="row">
+          <div class="col animate__animated animate__fadeIn">
+            <app-student [student]="studentSelected"></app-student>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col text-end">
+            <button type="button " type="submit" class="btn" (click)="getTitles(studentSelected)">
+              Ver titulos
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container animate__animated animate__fadeIn" *ngIf="showTitle && (studentTitles$ | async) as titles">
+        <ng-container *ngIf="titles && titles.length > 0 else emptyData"></ng-container>
+        <div class="row" *ngFor="let item of titles">
+          <div class="col">
+            componente de lsita de titulos.
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col text-end">
+            <button type="button " type="submit" class="btn" (click)="showTitle = false;">
+              Atr&aacute;s
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<ng-template #emptyData>
+  <div class="row">
+    <div class="col">
+      <h3>No hay datos...</h3>
+    </div>
+  </div>
+</ng-template>

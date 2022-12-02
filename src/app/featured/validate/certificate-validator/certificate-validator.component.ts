@@ -33,7 +33,7 @@ export class CertificateValidatorComponent implements OnInit {
   // }
 
   getCertificatesByStudentId(studentId: number) {
-    this.certificateService.getCertificatesByStudentId(studentId)
+    this.certificateService.getCertificatesByStudentId(String(studentId))
       .subscribe({
         next: (result) => {
           this.certificateSearchResult = result

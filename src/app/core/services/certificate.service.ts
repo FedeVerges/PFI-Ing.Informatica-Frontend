@@ -16,7 +16,7 @@ export class CertificateService {
         return this.http.get<CertificateDto>(environment.serverURL + `/certificate/all`);
     }
 
-    getCertificatesByStudentId(studentId: number) {
+    getCertificatesByStudentId(studentId: string) {
         return this.http.get<BlockchainTransactionDto[]>(environment.serverURL + `/certificate/docNumber/${studentId}`);
     }
 

@@ -1,10 +1,13 @@
-<div class="container">
-  <div class="card">
-    <div class="card-body">
-      <p>{{student.person.fullname}} - {{student.person.docNumber}}</p>
-      <p>{{student.person.sex}}</p>
-      <p>{{student.universityName}}</p>
-      <p>{{student.academicUnit}}</p>
+<div class="card" *ngIf="student">
+  <div class="card-body">
+    <div class="text-center">
+      <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size">
     </div>
+    <h2 class="text-center">{{student.person.fullname}}</h2>
+    <h4 class="text-center">{{student.universityName}}</h4>
+    <p><strong>DNI : </strong>{{student.person.docNumber}} - {{student.person.sex}}</p>
+    <p><strong>N° de estudiante : </strong> {{student.person.docNumber}}</p>
+    <p><strong>Unidad Acad&eacute;mica: </strong>{{student.academicUnit}}</p>
+    <p><strong>Carrera: </strong>{{student.degreeProgramName}}</p>
   </div>
 </div>

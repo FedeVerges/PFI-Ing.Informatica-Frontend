@@ -6,6 +6,7 @@ import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { CertificateComponent } from "./certificate/certificate.component";
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import { StudentComponent } from './student/student.component';
+import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { StudentComponent } from './student/student.component';
     CommonModule,
     RouterModule,
     MdbCollapseModule,
-    MdbDropdownModule
+    MdbDropdownModule,
+    MdbAccordionModule,
   ],
   exports: [
     NavBarComponent,

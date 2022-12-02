@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 
 @Component({
@@ -8,26 +8,16 @@ import { StudentDto } from 'src/app/core/models/dto/studentDto';
 })
 export class StudentComponent implements OnInit {
 
-  student: StudentDto = {
-    id: 0,
-    academicUnit: "Facultad de Ciencias Fisico Matematicas y Naturales",
-    degreeProgramCurriculum: "12-09",
-    degreeProgramName: "Ingenieria en informatica",
-    degreeProgramOrdinance: "12-10",
-    universityName: "Universidad Nacional de San Luis",
-    person: {
-      docNumber: "12312312",
-      id: 0,
-      lastname: "Verges",
-      name: "Federico",
-      fullname: "Federico Verges",
-      sex: "Masculino",
-      genderIdentity: null,
-    }
-  }
+  @Input() student?: StudentDto;
+  @Output() showTitlesEmiter: EventEmitter<boolean> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showTitles() {
+    this.showTitlesEmiter.emit();
   }
 
 }
