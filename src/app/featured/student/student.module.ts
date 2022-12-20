@@ -10,12 +10,8 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    NewStudentComponent,
-    StudentSearchComponent
-  ],
+  declarations: [NewStudentComponent, StudentSearchComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
@@ -23,7 +19,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     MdbFormsModule,
     MdbRippleModule,
-    SharedModule,
+    SharedModule
   ]
 })
-export class StudentModule { }
+export class StudentModule {}

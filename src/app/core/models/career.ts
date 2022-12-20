@@ -1,3 +1,3 @@
-export interface Career{
-    name: string;
+export interface Career {
+  name: string;
 }

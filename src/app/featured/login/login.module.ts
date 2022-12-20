@@ -10,11 +10,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
-
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,10 +19,8 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     SharedModule,
     LoginRoutingModule,
     HttpClientModule,
-    MdbFormsModule,
+    MdbFormsModule
   ],
-  providers:[
-    LocalStorageService,
-  ]
+  providers: [LocalStorageService]
 })
-export class LoginModule { }
+export class LoginModule {}

@@ -1,6 +1,6 @@
-import { AcademicUnit } from "./academicUnit";
+import { AcademicUnit } from './academicUnit';
 
 export interface University {
-    name: string;
-    academicUnits: Array<AcademicUnit>;
+  name: string;
+  academicUnits: Array<AcademicUnit>;
 }

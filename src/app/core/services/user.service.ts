@@ -9,15 +9,16 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(user: string, password: string) {
     const body = {
       user: user,
       password: password
-    }
-    return this.http.post<TokenDto<UserDto>>(environment.serverURL + '/login', body);
+    };
+    return this.http.post<TokenDto<UserDto>>(
+      environment.serverURL + '/login',
+      body
+    );
   }
-
 }

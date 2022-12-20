@@ -7,17 +7,14 @@ import { StudentDto } from 'src/app/core/models/dto/studentDto';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
-
   @Input() student?: StudentDto;
   @Output() showTitlesEmiter: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   showTitles() {
     this.showTitlesEmiter.emit();
   }
-
 }

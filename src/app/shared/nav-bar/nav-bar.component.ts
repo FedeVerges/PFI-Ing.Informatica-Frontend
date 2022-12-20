@@ -15,20 +15,22 @@ import { WebsocketService } from 'src/app/core/services/websocket.service';
 export class NavBarComponent implements OnInit {
   user$: Observable<UserDto | null>;
   netwotkStatus: Observable<NetworkStatusDto>;
-  role$: Observable<RoleDto | null>; 
+  role$: Observable<RoleDto | null>;
 
-  constructor(private authService: AuthService, private router: Router, private websocketService: WebsocketService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private websocketService: WebsocketService
+  ) {
     this.user$ = authService.getCurrentUser();
     this.netwotkStatus = websocketService.currentStatus$;
     this.role$ = authService.getRole();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
 }

@@ -6,8 +6,7 @@ import { UserDto } from '../models/dto/userDto';
   providedIn: 'root'
 })
 export class LocalStorageService {
-
-  constructor() { }
+  constructor() {}
 
   getToken() {
     return localStorage.getItem('token');
@@ -28,7 +27,7 @@ export class LocalStorageService {
   setUser(user: UserDto) {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
-  
+
   getRole(): RoleDto {
     const role = localStorage.getItem('role');
     if (role) {
@@ -44,5 +43,4 @@ export class LocalStorageService {
   logout() {
     localStorage.clear();
   }
-
 }

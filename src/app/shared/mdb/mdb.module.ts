@@ -17,8 +17,6 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -37,7 +35,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,
-    MdbValidationModule,
+    MdbValidationModule
   ],
   exports: [
     MdbAccordionModule,
@@ -54,7 +52,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,
-    MdbValidationModule,
+    MdbValidationModule
   ]
 })
-export class MdbModule { }
+export class MdbModule {}

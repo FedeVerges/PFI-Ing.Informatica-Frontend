@@ -21,22 +21,21 @@ export class WebsocketService {
     this._currentStatus$ = new BehaviorSubject<NetworkStatusDto>({
       blockchainName: '',
       networkId: -1,
-      connected: false,
+      connected: false
     });
     this.currentStatus$ = this._currentStatus$.asObservable();
     this.myWebSocket.asObservable().subscribe({
       next: (message: NetworkStatusDto) => this.setStatus(message),
-      error: error => { }
+      error: (error) => {}
     });
     this.sendMessage();
   }
 
   sendMessage() {
-    this.myWebSocket.next({} as NetworkStatusDto)
+    this.myWebSocket.next({} as NetworkStatusDto);
   }
 
   setStatus(newStatus: NetworkStatusDto) {
     this._currentStatus$.next(newStatus);
   }
-
 }

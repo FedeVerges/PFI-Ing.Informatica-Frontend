@@ -9,12 +9,10 @@ import { Web3Service } from 'src/app/core/services/web3.service';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MdbRippleModule} from "mdb-angular-ui-kit/ripple";
+import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 
 @NgModule({
-  declarations: [
-    NewCertificateComponent
-  ],
+  declarations: [NewCertificateComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,8 +20,8 @@ import {MdbRippleModule} from "mdb-angular-ui-kit/ripple";
     SharedModule,
     CertificateRoutingModule,
     MdbFormsModule,
-    MdbRippleModule,
+    MdbRippleModule
   ],
-  providers: [Web3Service, AuthService],
+  providers: [Web3Service, AuthService]
 })
-export class CertificateModule { }
+export class CertificateModule {}

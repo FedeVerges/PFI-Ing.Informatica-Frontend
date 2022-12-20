@@ -1,9 +1,9 @@
-import { Degree } from "./degree";
+import { Degree } from './degree';
 
 export interface Student {
-    name?: string;
-    lastName?: string;
-    docNumber?: string;
-    degree?: Degree;
-    id?: number;
+  name?: string;
+  lastName?: string;
+  docNumber?: string;
+  degree?: Degree;
+  id?: number;
 }

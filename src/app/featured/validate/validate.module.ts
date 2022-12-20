@@ -7,17 +7,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
-
 @NgModule({
-  declarations: [
-    CertificateValidatorComponent
-  ],
+  declarations: [CertificateValidatorComponent],
   imports: [
     CommonModule,
     FormsModule,
     ValidateRoutingModule,
     SharedModule,
-    MdbFormsModule,
+    MdbFormsModule
   ]
 })
-export class ValidateModule { }
+export class ValidateModule {}

@@ -1,6 +1,6 @@
-import { Career } from "./career";
+import { Career } from './career';
 
 export interface AcademicUnit {
-    name: string;
-    careers: Array<Career>;
+  name: string;
+  careers: Array<Career>;
 }

@@ -90,7 +90,7 @@
             </div>
 
             <div class="row">
-              <div class="col-xs-12 col-md-6">
+              <div class="col-xs-12 col-md-3">
                 <select class="form-select mb-3" aria-label="Degree Program NameSelect" id="degreeProgramNameSelect"
                   formControlName="degreeProgramName" required>
                   <option selected value="">Elija una carrera</option>
@@ -108,21 +108,30 @@
               </div>
               <div class="col-xs-12 col-md-3">
                 <mdb-form-control class="mb-3">
-                  <input mdbInput type="text" id="form_name" class="form-control"
+                  <input mdbInput type="number" id="form_name" class="form-control" min="0"
                     formControlName="degreeProgramOrdinance" required />
-                  <label mdbLabel class="form-label" for="form_name">N°Ordenanza Ministerial del plan</label>
+                  <label mdbLabel class="form-label" for="form_name">Ordenanza Cons. directivo</label>
+                </mdb-form-control>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <mdb-form-control class="mb-3">
+                  <input mdbInput type="number" id="form_name" class="form-control" min="0"
+                    formControlName="degreeProgramOrdinance" required />
+                  <label mdbLabel class="form-label" for="form_name">Ordenanza Cons. superior</label>
                 </mdb-form-control>
               </div>
             </div>
 
           </ng-container>
 
-          <div class="row">
-            <div class="col text-end">
-              <button type="button" type="submit" class="btn btn-light mx-2" (click)="clearForm()">
+          <div class="row text-center">
+            <div class="col p-1">
+              <button type="button" type="submit" class="btn btn-block btn-light" (click)="clearForm()">
                 Limpiar
               </button>
-              <button type="button" type="submit" class="btn btn-secondary" (click)="addNewCertificate()">
+            </div>
+            <div class="col p-1">
+              <button type="button" type="submit" class="btn btn-block btn-secondary" (click)="addNewStudent()">
                 Crear estudiante
               </button>
             </div>

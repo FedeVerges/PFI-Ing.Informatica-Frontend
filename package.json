@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/router": "~13.3.0",
     "@fortawesome/fontawesome-free": "^6.0.0",
     "@truffle/contract": "^4.5.14",
+    "animate.css": "^4.1.1",
     "browser": "^0.2.6",
     "mdb-angular-ui-kit": "^2.2.0",
     "path": "^0.12.7",
@@ -50,6 +52,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "os-browserify": "^0.3.0",
+    "prettier": "^2.8.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "typescript": "~4.6.2"

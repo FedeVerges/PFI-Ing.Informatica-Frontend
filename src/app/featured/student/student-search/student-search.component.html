@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="studentSelected else emptyData">
+  <div class="row" *ngIf="studentSelected">
     <div class="col">
       <div class="container" *ngIf="!showTitle">
         <div class="row">
@@ -50,21 +50,29 @@
           </div>
         </div>
       </div>
-      <div class="container animate__animated animate__fadeIn" *ngIf="showTitle && (studentTitles$ | async) as titles">
-        <ng-container *ngIf="titles && titles.length > 0 else emptyData"></ng-container>
-        <div class="row" *ngFor="let item of titles">
-          <div class="col">
-            componente de lsita de titulos.
-          </div>
+      <ng-container *ngIf="showTitle">
+        <div class="animate__animated animate__fadeIn" *ngIf="(studentTitles$ | async) as titles">
+          <ng-container *ngIf="titles && titles.length > 0 else emptyData">
+            <div class="card">
+              <div class="card-body">
+                <h3>T&iacute;tulos</h3>
+                <div class="row row-cols-3" *ngFor="let item of titles">
+                  <div class="col">
+                    <app-certificate [transaction]="item"></app-certificate>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
         <div class="row mt-2">
           <div class="col text-end">
             <button type="button " type="submit" class="btn" (click)="showTitle = false;">
-              Atr&aacute;s
+              Datos del estudiante
             </button>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>
@@ -73,7 +81,13 @@
 <ng-template #emptyData>
   <div class="row">
     <div class="col">
-      <h3>No hay datos...</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>No hay datos...</h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

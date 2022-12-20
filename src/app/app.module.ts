@@ -20,9 +20,7 @@ import { AlertService } from './core/services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -32,7 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     SharedModule,
     CoreModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
@@ -42,7 +40,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AuthGuard,
     LoadingService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

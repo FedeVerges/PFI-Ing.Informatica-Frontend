@@ -6,11 +6,11 @@ import { StudentSearchComponent } from './student-search/student-search.componen
 const routes: Routes = [
   { path: '', redirectTo: 'new', pathMatch: 'full' },
   { path: 'new', component: NewStudentComponent },
-  { path: 'search', component: StudentSearchComponent },
+  { path: 'search', component: StudentSearchComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class StudentRoutingModule { }
+export class StudentRoutingModule {}

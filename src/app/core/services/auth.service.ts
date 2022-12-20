@@ -1,24 +1,25 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { RoleDto } from "../models/dto/roleDto";
-import { UserDto } from "../models/dto/userDto";
-import { LocalStorageService } from "./local-storage.service";
+import { RoleDto } from '../models/dto/roleDto';
+import { UserDto } from '../models/dto/userDto';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _user: BehaviorSubject<UserDto | null> = new BehaviorSubject<UserDto | null>(null);
-  private _role: BehaviorSubject<RoleDto | null> = new BehaviorSubject<RoleDto | null>(null);
-  
-  
+  private _user: BehaviorSubject<UserDto | null> =
+    new BehaviorSubject<UserDto | null>(null);
+  private _role: BehaviorSubject<RoleDto | null> =
+    new BehaviorSubject<RoleDto | null>(null);
+
   public get currentUser(): BehaviorSubject<UserDto | null> {
-    return this._user
+    return this._user;
   }
 
   // todo: agregar observable para manejar los roles y permisos.
 
-  constructor(private localStorageService: LocalStorageService) { 
+  constructor(private localStorageService: LocalStorageService) {
     this.setCurrentUser(this.hasToken());
     this._role.next(this.hasRole());
   }
@@ -26,7 +27,7 @@ export class AuthService {
   /**
    *  Login the user then tell all the subscribers about the new status
    */
-  login(token: string, userData: UserDto, role:RoleDto): void {
+  login(token: string, userData: UserDto, role: RoleDto): void {
     this.localStorageService.setToken(token);
     this.localStorageService.setUser(userData);
     this.localStorageService.setRole(role);
@@ -75,7 +76,6 @@ export class AuthService {
     this._user.next(value);
   }
 
-
   getRole(): Observable<RoleDto | null> {
     return this._role.asObservable();
   }
@@ -86,5 +86,4 @@ export class AuthService {
   public set role(value: BehaviorSubject<RoleDto | null>) {
     this._role = value;
   }
-
 }

@@ -16,7 +16,7 @@ import { StudentSerivce } from 'src/app/core/services/student.service';
   styleUrls: ['./new-student.component.scss']
 })
 export class NewStudentComponent implements OnInit {
-  studentForm!: FormGroup
+  studentForm!: FormGroup;
   personDocNumber: number | undefined;
   showFormNewStudent = false;
   unversityData?: Observable<University[]>;
@@ -25,21 +25,26 @@ export class NewStudentComponent implements OnInit {
 
   careers: Career[] = [];
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private alertService: AlertService,
-    private studentSerivce: StudentSerivce) {
+    private studentSerivce: StudentSerivce
+  ) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
       documentType: ['', [Validators.required]],
+      registrationNumber: ['', [Validators.required]],
       sex: ['', [Validators.required]],
-      genderIdentity: [false,],
+      genderIdentity: [false],
       university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
-      degreeProgramOrdinance: ['', [Validators.required]],
+      ministerialOrdinance: ['', [Validators.required]],
+      superiorCouncilOrdinance: ['', [Validators.required]],
+      directiveCouncilOrdinance: ['', [Validators.required]]
     });
   }
 
@@ -57,7 +62,7 @@ export class NewStudentComponent implements OnInit {
     this.unversityData = this.studentSerivce.getUniversityCarrerData();
   }
 
-  addNewCertificate() {
+  addNewStudent() {
     if (this.studentForm.valid) {
       if (this.studentForm.valid) {
         const person: PersonDto = {
@@ -65,35 +70,47 @@ export class NewStudentComponent implements OnInit {
           name: this.studentForm.get('name')!.value,
           lastname: this.studentForm.get('lastname')!.value,
           docNumber: this.studentForm.get('docNumber')!.value,
-          documentType: this.studentForm.get('documentType')!.value,
           sex: this.studentForm.get('sex')!.value
-        }
+        };
         const student: StudentDto = {
           id: 0,
           person: person,
           universityName: this.university?.value?.name || '',
           academicUnit: this.academicUnit?.value?.name || '',
           degreeProgramName: this.degreeProgramName?.value?.name || '',
-          degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!.value,
-          degreeProgramOrdinance: this.studentForm.get('degreeProgramOrdinance')!.value
+          degreeProgramCurriculum: this.studentForm.get(
+            'degreeProgramCurriculum'
+          )!.value,
+          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!
+            .value,
+          blockchainId: 0,
+          registrationNumber: 0,
+          superiorCouncilOrdinance: '',
+          directiveCouncilOrdinance: ''
         };
-        this.createStudent(student)
+        this.createStudent(student);
       }
     } else {
       this.studentForm.markAllAsTouched();
-      this.alertService.showErrorMessage("Verifique los datos del estudiante.");
+      this.alertService.showErrorMessage('Verifique los datos del estudiante.');
     }
   }
 
   createStudent(student: StudentDto) {
-    this.studentSerivce.createStudent(student)
-      .subscribe({
-        next: studentCreated => {
-          this.alertService.showAlert(`El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}! `, undefined, {
+    this.studentSerivce.createStudent(student).subscribe({
+      next: (studentCreated) => {
+        this.alertService.showAlert(
+          `El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}! `,
+          undefined,
+          {
             duration: 2000
-          } as MatSnackBarConfig);
-        }, error: (e) => { this.alertService.showErrorMessage(e); }
-      })
+          } as MatSnackBarConfig
+        );
+      },
+      error: (e) => {
+        this.alertService.showErrorMessage(e);
+      }
+    });
   }
 
   setStudentData(student: StudentDto) {
@@ -101,14 +118,12 @@ export class NewStudentComponent implements OnInit {
       name: student.person.name,
       lastname: student.person.lastname,
       docNumber: student.person.docNumber,
-      documentType: student.person.documentType || 'DNI',
       sex: student.person.sex,
-      genderIdentity: student.person.genderIdentity,
       university: student.universityName,
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
-      degreeProgramOrdinance: student.degreeProgramOrdinance,
+      degreeProgramOrdinance: student.ministerialOrdinance
     });
   }
 
@@ -124,8 +139,8 @@ export class NewStudentComponent implements OnInit {
       academicUnit: '',
       degreeProgramName: '',
       degreeProgramCurriculum: '',
-      degreeProgramOrdinance: '',
-    })
+      degreeProgramOrdinance: ''
+    });
   }
 
   changeUniversity() {
@@ -147,6 +162,4 @@ export class NewStudentComponent implements OnInit {
       this.careers = [];
     }
   }
-
-
 }

@@ -32,7 +32,6 @@ export class Web3Service {
     // // URL de la conexion.
     // this.web3 = new Web3(URL_GANACHE);
     // this.web3.setProvider(new Web3.providers.HttpProvider(URL_GANACHE));
-
     // console.log(this.web3);
     // this.web3.eth.getAccounts().then(
     //   (result: string[]) => {
@@ -44,24 +43,40 @@ export class Web3Service {
 
   private getCertificateContract() {
     const abi = tokenAbi.abi;
-    const certificateContract = new this.web3.eth.Contract(abi, this.contactAddress);
+    const certificateContract = new this.web3.eth.Contract(
+      abi,
+      this.contactAddress
+    );
     return certificateContract;
   }
 
   public async getCertificatesByStudentId(id: number) {
-    return this.certificateContract!.methods.getCertificatesByStudentId(id).call() as Promise<any>;
+    return this.certificateContract!.methods.getCertificatesByStudentId(
+      id
+    ).call() as Promise<any>;
   }
 
   public async getAmountCertificates() {
     return this.certificateContract!.methods.amountCertificates().call() as Promise<any>;
   }
 
-  public async createCertificate(profession: string, name: string, studentId: number) {
+  public async createCertificate(
+    profession: string,
+    name: string,
+    studentId: number
+  ) {
     // Hacer el correcto manejo de errores.
-    const transaction = this.certificateContract!.methods.createCertificate(profession, name, studentId);
+    const transaction = this.certificateContract!.methods.createCertificate(
+      profession,
+      name,
+      studentId
+    );
     const senderWalletAddress = this.accounts[0];
     const gas = await transaction.estimateGas({ from: senderWalletAddress });
-    return transaction.send({ from: senderWalletAddress, gas: gas }) as Promise<any>;
+    return transaction.send({
+      from: senderWalletAddress,
+      gas: gas
+    }) as Promise<any>;
   }
 
   // const provider = await this.getWebProvider();
@@ -73,5 +88,4 @@ export class Web3Service {
   //   Gallery.abi,
   //   bySigner ? signer : provider,
   // )
-
 }

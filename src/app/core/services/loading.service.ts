@@ -25,7 +25,7 @@ export class LoadingService {
     }
   }
 
-  constructor() { }
+  constructor() {}
 
   enableShowSpinner() {
     this.addSpinners();
@@ -40,6 +40,4 @@ export class LoadingService {
       this.loading.next(false);
     }
   }
-
 }
-

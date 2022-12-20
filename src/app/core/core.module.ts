@@ -7,13 +7,8 @@ import { AuthInterceptor } from './services/interceptor.service';
 import { AuthService } from './services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    CoreRoutingModule,
-    MatSnackBarModule,
-  ],
+  imports: [CommonModule, CoreRoutingModule, MatSnackBarModule]
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
-import { StudentSerivce } from "../../../core/services/student.service";
-import { CertificateDto } from "../../../core/models/dto/certificateDto";
-import { StudentDto } from "../../../core/models/dto/studentDto";
-import { TransactionDto } from "../../../core/models/dto/transactionDto";
+import { StudentSerivce } from '../../../core/services/student.service';
+import { CertificateDto } from '../../../core/models/dto/certificateDto';
+import { StudentDto } from '../../../core/models/dto/studentDto';
+import { TransactionDto } from '../../../core/models/dto/transactionDto';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 
@@ -16,9 +16,8 @@ import { AlertService } from 'src/app/core/services/alert.service';
   styleUrls: ['./new-certificate.component.scss']
 })
 export class NewCertificateComponent implements OnInit {
-
   certificateForm!: FormGroup;
-  studentForm!: FormGroup
+  studentForm!: FormGroup;
   amountCertificates: number = 0;
   idContract: number = 0;
   certificates: Certificate[] = [];
@@ -28,19 +27,20 @@ export class NewCertificateComponent implements OnInit {
   studentList: StudentDto[] = [];
   studentSelected: StudentDto | undefined;
 
-  constructor(private web3Service: Web3Service,
+  constructor(
+    private web3Service: Web3Service,
     private fb: FormBuilder,
     private certificateService: CertificateService,
     private alertService: AlertService,
-    private studentSerivce: StudentSerivce) {
-
+    private studentSerivce: StudentSerivce
+  ) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
       documentType: ['', [Validators.required]],
       sex: ['', [Validators.required]],
-      genderIdentity: ['',],
+      genderIdentity: ['']
     });
     this.certificateForm = this.fb.group({
       universityName: ['', [Validators.required]],
@@ -53,12 +53,11 @@ export class NewCertificateComponent implements OnInit {
       ministerialOrdninance: ['', [Validators.required]],
       waferNumber: ['', [Validators.required]],
       volumeNumber: ['', [Validators.required]],
-      recordNumber: ['', [Validators.required]],
-    })
+      recordNumber: ['', [Validators.required]]
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate
@@ -67,16 +66,19 @@ export class NewCertificateComponent implements OnInit {
       if (this.certificateForm.valid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
-          this.studentSelected.person.documentType = this.studentForm.get('documentType')?.value || 'DNI'
+          this.studentSelected.person.documentType =
+            this.studentForm.get('documentType')?.value || 'DNI';
           certificate = {
             student: this.studentSelected,
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
-            ministerialOrdinance: this.certificateForm.get('ministerialOrdninance')!.value,
+            ministerialOrdinance: this.certificateForm.get(
+              'ministerialOrdninance'
+            )!.value,
             recordNumber: this.certificateForm.get('recordNumber')!.value,
             volumeNumber: this.certificateForm.get('volumeNumber')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
-          }
+          };
         } else {
           const person: PersonDto = {
             id: 0,
@@ -85,82 +87,89 @@ export class NewCertificateComponent implements OnInit {
             docNumber: this.studentForm.get('docNumber')!.value,
             documentType: this.studentForm.get('documentType')!.value,
             sex: this.studentForm.get('sex')!.value
-          }
+          };
           const student: StudentDto = {
             id: 0,
             person: person,
             universityName: this.certificateForm.get('universityName')!.value,
             academicUnit: this.certificateForm.get('academicUnit')!.value,
-            degreeProgramName: this.certificateForm.get('degreeProgramName')!.value,
-            degreeProgramCurriculum: this.certificateForm.get('degreeProgramCurriculum')!.value,
-            degreeProgramOrdinance: this.certificateForm.get('degreeProgramOrdinance')!.value
+            degreeProgramName:
+              this.certificateForm.get('degreeProgramName')!.value,
+            degreeProgramCurriculum: this.certificateForm.get(
+              'degreeProgramCurriculum'
+            )!.value,
+            degreeProgramOrdinance: this.certificateForm.get(
+              'degreeProgramOrdinance'
+            )!.value
           };
           certificate = {
             student: student,
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
-            ministerialOrdinance: this.certificateForm.get('ministerialOrdninance')!.value,
+            ministerialOrdinance: this.certificateForm.get(
+              'ministerialOrdninance'
+            )!.value,
             recordNumber: this.certificateForm.get('recordNumber')!.value,
             volumeNumber: this.certificateForm.get('volumeNumber')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
-          }
+          };
         }
         this.createCertificate(certificate);
       } else {
         this.certificateForm.markAllAsTouched();
-        this.alertService.showErrorMessage("Verifique los datos del certificado.");
+        this.alertService.showErrorMessage(
+          'Verifique los datos del certificado.'
+        );
       }
     } else {
       this.studentForm.markAllAsTouched();
-      this.alertService.showErrorMessage("Verifique los datos del estudiante.");
+      this.alertService.showErrorMessage('Verifique los datos del estudiante.');
     }
   }
 
   createCertificate(certificate: CertificateDto) {
-    this.certificateService.createNewCertificate(certificate).subscribe(
-      {
-        next: (transactionData: TransactionDto) => {
-          if (transactionData && transactionData.receipt) {
-            this.alertService.showAlert("Su certificado ha sido creado con exito.");
-          }
-        },
-        error: error => {
-          this.alertService.showErrorMessage(error);
+    this.certificateService.createNewCertificate(certificate).subscribe({
+      next: (transactionData: TransactionDto) => {
+        if (transactionData && transactionData.receipt) {
+          this.alertService.showAlert(
+            'Su certificado ha sido creado con exito.'
+          );
         }
+      },
+      error: (error) => {
+        this.alertService.showErrorMessage(error);
       }
-    )
+    });
   }
 
   getCertificatesById(studentId: number) {
-    this.web3Service.getCertificatesByStudentId(studentId)
-      .then(
-        (result) => {
-          this.certificateSearchResult = result
-        }
-      )
+    this.web3Service.getCertificatesByStudentId(studentId).then((result) => {
+      this.certificateSearchResult = result;
+    });
   }
 
   getStudentByDni() {
     if (this.personDocNumber) {
-      this.studentSerivce.getStudentByDni(this.personDocNumber)
-        .subscribe({
-          next: (students: StudentDto[]) => {
-            // Mostrar lista de estudiantes.
-            if (students && students.length > 0) {
-              this.studentList = students;
-              if (students.length === 1) {
-                this.selectStudent(students[0])
-              } else {
-                this.studentSelected = undefined;
-              }
+      this.studentSerivce.getStudentByDni(this.personDocNumber).subscribe({
+        next: (students: StudentDto[]) => {
+          // Mostrar lista de estudiantes.
+          if (students && students.length > 0) {
+            this.studentList = students;
+            if (students.length === 1) {
+              this.selectStudent(students[0]);
             } else {
-              this.alertService.showErrorMessage("No se encontró al estudiante en el sistema");
+              this.studentSelected = undefined;
             }
-          },
-          error: error => {
-            this.alertService.showErrorMessage(error);
+          } else {
+            this.alertService.showErrorMessage(
+              'No se encontró al estudiante en el sistema'
+            );
           }
-        })
+        },
+        error: (error) => {
+          this.alertService.showErrorMessage(error);
+        }
+      });
     }
   }
 
@@ -172,15 +181,15 @@ export class NewCertificateComponent implements OnInit {
       docNumber: student.person.docNumber,
       documentType: student.person.documentType || 'DNI',
       sex: student.person.sex,
-      genderIdentity: student.person.genderIdentity,
+      genderIdentity: student.person.genderIdentity
     });
     this.certificateForm.patchValue({
       universityName: student.universityName,
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
-      degreeProgramOrdinance: student.degreeProgramOrdinance,
-    })
+      degreeProgramOrdinance: student.degreeProgramOrdinance
+    });
   }
 
   clearForm() {

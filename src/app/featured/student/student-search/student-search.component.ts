@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, delay, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
@@ -24,57 +25,45 @@ export class StudentSearchComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private studentSerivce: StudentSerivce,
-    private certificateService: CertificateService) {
-  }
+    private certificateService: CertificateService
+  ) {}
 
-  ngOnInit(): void {
-    this.studentSelected = {
-      id: 0,
-      academicUnit: "Facultad de Ciencias Fisico Matematicas y Naturales",
-      degreeProgramCurriculum: "12-09",
-      degreeProgramName: "Ingenieria en informatica",
-      degreeProgramOrdinance: "12-10",
-      universityName: "Universidad Nacional de San Luis",
-      person: {
-        docNumber: "12312312",
-        id: 0,
-        lastname: "Verges",
-        name: "Federico",
-        fullname: "Federico Verges",
-        sex: "Masculino",
-        genderIdentity: null,
-      }
-    }
-  }
+  ngOnInit(): void {}
 
   getStudentByDni() {
     if (this.personDocNumber) {
-      this.studentSerivce.getStudentByDni(this.personDocNumber)
-        .subscribe({
-          next: (students: StudentDto[]) => {
-            // Mostrar lista de estudiantes.
-            if (students && students.length > 0) {
-              this.studentList = students;
-              if (students.length === 1) {
-                this.studentSelected = students[0];
-              } else {
-                this.studentSelected = undefined;
-              }
+      this.studentSerivce.getStudentByDni(this.personDocNumber).subscribe({
+        next: (students: StudentDto[]) => {
+          // Mostrar lista de estudiantes.
+          if (students && students.length > 0) {
+            this.studentList = students;
+            if (students.length === 1) {
+              this.studentSelected = students[0];
             } else {
-              this.alertService.showErrorMessage("No se encontró al estudiante en el sistema");
+              this.studentSelected = undefined;
             }
-          },
-          error: error => {
-            this.alertService.showErrorMessage(error);
+          } else {
+            this.alertService.showErrorMessage(
+              'No se encontró al estudiante en el sistema'
+            );
           }
-        })
+        },
+        error: (error) => {
+          this.alertService.showErrorMessage(error);
+        }
+      });
     }
   }
 
-  getTitles(student:StudentDto) {
-    debugger
+  getTitles(student: StudentDto) {
     this.showTitle = true;
-    this.studentTitles$ = this.certificateService.getCertificatesByStudentId(student.person.docNumber)
+    this.studentTitles$ = this.certificateService
+      .getCertificatesByStudentId(student.person.docNumber)
+      .pipe(
+        catchError((error) => {
+          this.alertService.showErrorMessage(String(error));
+          return throwError(() => error);
+        })
+      );
   }
-
 }
