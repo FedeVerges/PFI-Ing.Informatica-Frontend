@@ -25,24 +25,18 @@ export class NewStudentComponent implements OnInit {
 
   careers: Career[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private alertService: AlertService,
-    private studentSerivce: StudentSerivce
-  ) {
+  constructor(private fb: FormBuilder, private alertService: AlertService, private studentSerivce: StudentSerivce) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
-      documentType: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
       sex: ['', [Validators.required]],
-      genderIdentity: [false],
       university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
-      ministerialOrdinance: ['', [Validators.required]],
+      ministerialOrdinance: [''],
       superiorCouncilOrdinance: ['', [Validators.required]],
       directiveCouncilOrdinance: ['', [Validators.required]]
     });
@@ -78,20 +72,17 @@ export class NewStudentComponent implements OnInit {
           universityName: this.university?.value?.name || '',
           academicUnit: this.academicUnit?.value?.name || '',
           degreeProgramName: this.degreeProgramName?.value?.name || '',
-          degreeProgramCurriculum: this.studentForm.get(
-            'degreeProgramCurriculum'
-          )!.value,
-          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!
-            .value,
+          degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!.value,
+          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!.value,
           blockchainId: 0,
-          registrationNumber: 0,
-          superiorCouncilOrdinance: '',
-          directiveCouncilOrdinance: ''
+          registrationNumber: this.studentForm.get('registrationNumber')!.value,
+          superiorCouncilOrdinance: this.studentForm.get('superiorCouncilOrdinance')!.value,
+          directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value
         };
         this.createStudent(student);
       }
     } else {
-      this.studentForm.markAllAsTouched();
+      this.studentForm.markAsDirty();
       this.alertService.showErrorMessage('Verifique los datos del estudiante.');
     }
   }

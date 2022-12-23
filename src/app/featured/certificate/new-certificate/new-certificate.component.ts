@@ -4,11 +4,11 @@ import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
 import { StudentSerivce } from '../../../core/services/student.service';
-import { CertificateDto } from '../../../core/models/dto/certificateDto';
 import { StudentDto } from '../../../core/models/dto/studentDto';
 import { TransactionDto } from '../../../core/models/dto/transactionDto';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
 
 @Component({
   selector: 'app-new-certificate',
@@ -40,7 +40,11 @@ export class NewCertificateComponent implements OnInit {
       docNumber: ['', [Validators.required]],
       documentType: ['', [Validators.required]],
       sex: ['', [Validators.required]],
-      genderIdentity: ['']
+      registrationNumber: ['', [Validators.required]],
+      degreeProgramCurriculum: ['', [Validators.required]],
+      superiorCouncilOrdinance: ['', [Validators.required]],
+      directiveCouncilOrdinance: ['', [Validators.required]],
+      ministerialOrdinance: ['', [Validators.required]]
     });
     this.certificateForm = this.fb.group({
       universityName: ['', [Validators.required]],
@@ -50,10 +54,7 @@ export class NewCertificateComponent implements OnInit {
       degreeProgramOrdinance: ['', [Validators.required]],
       degreeType: ['', [Validators.required]],
       degreeName: ['', [Validators.required]],
-      ministerialOrdninance: ['', [Validators.required]],
       waferNumber: ['', [Validators.required]],
-      volumeNumber: ['', [Validators.required]],
-      recordNumber: ['', [Validators.required]]
     });
   }
 
@@ -66,17 +67,10 @@ export class NewCertificateComponent implements OnInit {
       if (this.certificateForm.valid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
-          this.studentSelected.person.documentType =
-            this.studentForm.get('documentType')?.value || 'DNI';
           certificate = {
             student: this.studentSelected,
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
-            ministerialOrdinance: this.certificateForm.get(
-              'ministerialOrdninance'
-            )!.value,
-            recordNumber: this.certificateForm.get('recordNumber')!.value,
-            volumeNumber: this.certificateForm.get('volumeNumber')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
           };
         } else {
@@ -85,7 +79,6 @@ export class NewCertificateComponent implements OnInit {
             name: this.studentForm.get('name')!.value,
             lastname: this.studentForm.get('lastname')!.value,
             docNumber: this.studentForm.get('docNumber')!.value,
-            documentType: this.studentForm.get('documentType')!.value,
             sex: this.studentForm.get('sex')!.value
           };
           const student: StudentDto = {
@@ -93,33 +86,25 @@ export class NewCertificateComponent implements OnInit {
             person: person,
             universityName: this.certificateForm.get('universityName')!.value,
             academicUnit: this.certificateForm.get('academicUnit')!.value,
-            degreeProgramName:
-              this.certificateForm.get('degreeProgramName')!.value,
-            degreeProgramCurriculum: this.certificateForm.get(
-              'degreeProgramCurriculum'
-            )!.value,
-            degreeProgramOrdinance: this.certificateForm.get(
-              'degreeProgramOrdinance'
-            )!.value
+            degreeProgramName: this.certificateForm.get('degreeProgramName')!.value,
+            degreeProgramCurriculum: this.certificateForm.get('degreeProgramCurriculum')!.value,
+            ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!.value,
+            blockchainId: 0,
+            registrationNumber: this.studentForm.get('registrationNumber')!.value,
+            superiorCouncilOrdinance: this.studentForm.get('superiorCouncilOrdinance')!.value,
+            directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value, 
           };
           certificate = {
             student: student,
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
-            ministerialOrdinance: this.certificateForm.get(
-              'ministerialOrdninance'
-            )!.value,
-            recordNumber: this.certificateForm.get('recordNumber')!.value,
-            volumeNumber: this.certificateForm.get('volumeNumber')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
           };
         }
         this.createCertificate(certificate);
       } else {
         this.certificateForm.markAllAsTouched();
-        this.alertService.showErrorMessage(
-          'Verifique los datos del certificado.'
-        );
+        this.alertService.showErrorMessage('Verifique los datos del certificado.');
       }
     } else {
       this.studentForm.markAllAsTouched();
@@ -131,9 +116,7 @@ export class NewCertificateComponent implements OnInit {
     this.certificateService.createNewCertificate(certificate).subscribe({
       next: (transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
-          this.alertService.showAlert(
-            'Su certificado ha sido creado con exito.'
-          );
+          this.alertService.showAlert('Su certificado ha sido creado con exito.');
         }
       },
       error: (error) => {
@@ -161,9 +144,7 @@ export class NewCertificateComponent implements OnInit {
               this.studentSelected = undefined;
             }
           } else {
-            this.alertService.showErrorMessage(
-              'No se encontró al estudiante en el sistema'
-            );
+            this.alertService.showErrorMessage('No se encontró al estudiante en el sistema');
           }
         },
         error: (error) => {
@@ -179,16 +160,14 @@ export class NewCertificateComponent implements OnInit {
       name: student.person.name,
       lastname: student.person.lastname,
       docNumber: student.person.docNumber,
-      documentType: student.person.documentType || 'DNI',
-      sex: student.person.sex,
-      genderIdentity: student.person.genderIdentity
+      sex: student.person.sex
     });
     this.certificateForm.patchValue({
       universityName: student.universityName,
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
-      degreeProgramOrdinance: student.degreeProgramOrdinance
+      ministerialOrdinance: student.ministerialOrdinance
     });
   }
 
