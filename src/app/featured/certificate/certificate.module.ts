@@ -10,9 +10,10 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { MyCertificatesComponent } from './my-certificates/my-certificates.component';
 
 @NgModule({
-  declarations: [NewCertificateComponent],
+  declarations: [NewCertificateComponent, MyCertificatesComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -52,7 +52,7 @@ export class LoginComponent {
               };
               this.authService.login(response.token, userData, response.role);
               // todo: dependiendo del rol, va a una pantalla o a otra.
-              this.router.navigateByUrl('new-certificate');
+              this.router.navigateByUrl('validate');
             }
           },
           error: (e) => this.alertService.showErrorMessage(e)

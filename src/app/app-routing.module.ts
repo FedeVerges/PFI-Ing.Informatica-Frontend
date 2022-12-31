@@ -5,7 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'new-certificate',
+    path: 'certificate',
     loadChildren: () =>
       import('./featured/certificate/certificate.module').then(
         (m) => m.CertificateModule
@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'validate-certificate',
+    path: 'validate',
     loadChildren: () =>
       import('./featured/validate/validate.module').then(
         (m) => m.ValidateModule
