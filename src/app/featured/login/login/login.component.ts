@@ -48,7 +48,8 @@ export class LoginComponent {
               const userData: UserDto = {
                 name: response?.content.name,
                 id: response?.content.id,
-                email: response?.content.email
+                email: response?.content.email,
+                person: response?.content.person,
               };
               this.authService.login(response.token, userData, response.role);
               // todo: dependiendo del rol, va a una pantalla o a otra.
