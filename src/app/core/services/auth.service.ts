@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RoleDto } from '../models/dto/roleDto';
+import { StudentDto } from '../models/dto/studentDto';
 import { UserDto } from '../models/dto/userDto';
 import { LocalStorageService } from './local-storage.service';
 
@@ -8,20 +9,59 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private _user: BehaviorSubject<UserDto | null> =
-    new BehaviorSubject<UserDto | null>(null);
-  private _role: BehaviorSubject<RoleDto | null> =
-    new BehaviorSubject<RoleDto | null>(null);
+  private _user: BehaviorSubject<UserDto | null> = new BehaviorSubject<UserDto | null>(null);
+  private _role: BehaviorSubject<RoleDto | null> = new BehaviorSubject<RoleDto | null>(null);
+  private _studentSelected: BehaviorSubject<StudentDto | null> = new BehaviorSubject<StudentDto | null>(null);
 
-  public get currentUser(): BehaviorSubject<UserDto | null> {
+  get studentSelected(): BehaviorSubject<StudentDto | null> {
+    return this._studentSelected;
+  }
+  set studentSelected(value: BehaviorSubject<StudentDto | null>) {
+    this._studentSelected = value;
+  }
+
+  getStudentSelected(): Observable<StudentDto | null> {
+    return this._studentSelected.asObservable();
+  }
+
+  setStudentSelected(value: StudentDto | null) {
+    this.studentSelected.next(value);
+  }
+
+  get user(): BehaviorSubject<UserDto | null> {
     return this._user;
+  }
+
+  get role(): BehaviorSubject<RoleDto | null> {
+    return this._role;
+  }
+  set role(value: BehaviorSubject<RoleDto | null>) {
+    this._role = value;
+  }
+
+  getCurrentUser(): Observable<UserDto | null> {
+    return this._user.asObservable();
+  }
+
+  setCurrentUser(value: UserDto | null) {
+    this.user.next(value);
+  }
+
+  getRole(): Observable<RoleDto | null> {
+    return this._role.asObservable();
+  }
+
+  setRole(value: RoleDto | null) {
+    this.role.next(value);
   }
 
   // todo: agregar observable para manejar los roles y permisos.
 
   constructor(private localStorageService: LocalStorageService) {
     this.setCurrentUser(this.hasToken());
-    this._role.next(this.hasRole());
+    this.setRole(this.hasRole());
+    // No hay estudiante seleccionado.
+    this.setStudentSelected(null);
   }
 
   /**
@@ -62,28 +102,5 @@ export class AuthService {
     const role = this.localStorageService.getRole();
 
     return token !== null ? role : null;
-  }
-
-  /**
-   *
-   * @returns {Observable<T>}
-   */
-  getCurrentUser(): Observable<UserDto | null> {
-    return this._user.asObservable();
-  }
-
-  setCurrentUser(value: UserDto | null) {
-    this._user.next(value);
-  }
-
-  getRole(): Observable<RoleDto | null> {
-    return this._role.asObservable();
-  }
-
-  public get role(): BehaviorSubject<RoleDto | null> {
-    return this._role;
-  }
-  public set role(value: BehaviorSubject<RoleDto | null>) {
-    this._role = value;
   }
 }

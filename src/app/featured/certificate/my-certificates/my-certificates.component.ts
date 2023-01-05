@@ -8,10 +8,13 @@ import { Web3Service } from 'src/app/core/services/web3.service';
 })
 export class MyCertificatesComponent implements OnInit {
 
+  // Debo tener un Estudiante en memoria para sacar los ids.
+
   constructor(private web3Service:Web3Service) { }
 
   ngOnInit(): void {
   // Pedir los titutlos al back.
+  this.web3Service.getCertificatesByStudentId(1);
   // this.web3Service.getCertificatesByStudentId().subscribe((response) =>{});
   
 

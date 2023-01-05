@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserDto } from 'src/app/core/models/dto/userDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  user$: Observable<UserDto | null>;
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +23,7 @@ export class LoginComponent {
     private alertService: AlertService,
     private router: Router
   ) {
+    this.user$ = authService.getCurrentUser();
     this.loginForm = this.fb.group({
       user: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -49,7 +52,7 @@ export class LoginComponent {
                 name: response?.content.name,
                 id: response?.content.id,
                 email: response?.content.email,
-                person: response?.content.person,
+                person: response?.content.person
               };
               this.authService.login(response.token, userData, response.role);
               // todo: dependiendo del rol, va a una pantalla o a otra.
