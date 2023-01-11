@@ -58,8 +58,10 @@
                   <span><strong>{{user.person?.fullname | uppercase}}</strong></span>
                 </div>
                 <div class="row" *ngIf="netwotkStatus | async as status">
-                  <span class="badge bg-secondary" *ngIf="!status?.connected"> No conectado</span>
-                  <span class="badge bg-info" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+                  <div class="col">
+                    <span class="badge bg-secondary" *ngIf="!status?.connected"> No conectado</span>
+                    <span class="badge bg-info" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+                  </div>
                 </div>
                 <div class="row p-2 ">
                   <div class="col">

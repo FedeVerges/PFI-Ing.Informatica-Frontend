@@ -44,10 +44,11 @@ export class NavBarComponent implements OnDestroy {
 
   initSubsciptionSelectStudent() {
     this.subscription = this.authService.getCurrentUser().subscribe((user) => {
+      this.user = user;
       if (user) {
-        this.user = user;
         if (user.person?.students && user.person?.students.length > 0) {
           this.student = user.person?.students[0];
+          this.authService.setStudentSelected(this.student);
         }
       }
     });

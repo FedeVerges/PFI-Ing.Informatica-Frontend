@@ -13,30 +13,12 @@ export class AuthService {
   private _role: BehaviorSubject<RoleDto | null> = new BehaviorSubject<RoleDto | null>(null);
   private _studentSelected: BehaviorSubject<StudentDto | null> = new BehaviorSubject<StudentDto | null>(null);
 
-  get studentSelected(): BehaviorSubject<StudentDto | null> {
-    return this._studentSelected;
-  }
-  set studentSelected(value: BehaviorSubject<StudentDto | null>) {
-    this._studentSelected = value;
-  }
-
   getStudentSelected(): Observable<StudentDto | null> {
     return this._studentSelected.asObservable();
   }
 
   setStudentSelected(value: StudentDto | null) {
-    this.studentSelected.next(value);
-  }
-
-  get user(): BehaviorSubject<UserDto | null> {
-    return this._user;
-  }
-
-  get role(): BehaviorSubject<RoleDto | null> {
-    return this._role;
-  }
-  set role(value: BehaviorSubject<RoleDto | null>) {
-    this._role = value;
+    this._studentSelected.next(value);
   }
 
   getCurrentUser(): Observable<UserDto | null> {
@@ -44,7 +26,7 @@ export class AuthService {
   }
 
   setCurrentUser(value: UserDto | null) {
-    this.user.next(value);
+    this._user.next(value);
   }
 
   getRole(): Observable<RoleDto | null> {
@@ -52,7 +34,7 @@ export class AuthService {
   }
 
   setRole(value: RoleDto | null) {
-    this.role.next(value);
+    this._role.next(value);
   }
 
   // todo: agregar observable para manejar los roles y permisos.
@@ -65,8 +47,6 @@ export class AuthService {
     if (user?.person?.students) {
       this.setStudentSelected(user.person?.students[0]);
     }
-
-    this.setStudentSelected(null);
   }
 
   /**
@@ -77,7 +57,7 @@ export class AuthService {
     this.localStorageService.setUser(userData);
     this.localStorageService.setRole(role);
     this.setCurrentUser(userData);
-    this.role.next(role);
+    this.setRole(role);
   }
 
   /**
@@ -86,6 +66,9 @@ export class AuthService {
   logout(): void {
     this.localStorageService.logout();
     this.setCurrentUser(null);
+    this.setRole(null);
+    this.setStudentSelected(null);
+    
   }
 
   /**

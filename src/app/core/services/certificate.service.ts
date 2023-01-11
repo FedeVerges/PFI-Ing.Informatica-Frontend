@@ -31,7 +31,6 @@ export class CertificateService {
 
   getAllInstitutions() {}
   getCertificateTypes() {}
-
   getAllDegrees() {}
 
   createNewCertificate(certificate: CertificateDto) {

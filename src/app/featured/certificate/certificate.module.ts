@@ -23,6 +23,6 @@ import { MyCertificatesComponent } from './my-certificates/my-certificates.compo
     MdbFormsModule,
     MdbRippleModule
   ],
-  providers: [Web3Service, AuthService]
+  providers: [Web3Service]
 })
 export class CertificateModule {}
