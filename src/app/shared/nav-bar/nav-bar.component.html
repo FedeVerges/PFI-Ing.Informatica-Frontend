@@ -12,7 +12,7 @@
       <span class="logo-text px-2 secondary">UNSL CERT</span>
     </div>
     <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
-      <ng-container *ngIf="user$| async as user; else userActions">
+      <ng-container *ngIf="user; else userActions">
         <ng-container *ngIf="role$ | async; let role">
           <div class="col-8">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -47,26 +47,27 @@
             </ul>
           </div>
           <div class="col-4 text-end">
+            <span class="badge bg-secondary mx-3 " *ngIf="role.name ==='ADMIN'">Admin</span>
             <div mdbDropdown class="btn-group shadow-0">
-              <button type="button" class="btn btn-light btn-lg dropdown-toggle"
-                mdbDropdownToggle aria-expanded="false" 
+              <button type="button" class="btn btn-floating" mdbDropdownToggle aria-expanded="false"
                 data-mdb-display="static">
-                <span class="me-4"><strong>{{user.name}}</strong></span>
-                <span class="badge bg-secondary" *ngIf="role.name ==='ADMIN'">Admin</span>
+                <img src="../../../assets/img/avatar/avatar.png" alt="student avatar" class="img-fluid">
               </button>
               <div mdbDropdownMenu class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start">
+                <div class="row text-center mb-2">
+                  <span><strong>{{user.person?.fullname | uppercase}}</strong></span>
+                </div>
                 <div class="row" *ngIf="netwotkStatus | async as status">
                   <span class="badge bg-secondary" *ngIf="!status?.connected"> No conectado</span>
                   <span class="badge bg-info" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
                 </div>
                 <div class="row p-2 ">
                   <div class="col">
-                    <select class="form-select" aria-label="gender select" id="sexSelect" formControlName="sex"
-                      required>
-                      <option selected value="">Elija el sexo</option>
-                      <option value="Masculino">Masculino</option>
-                      <option value="Femenino">Femenino</option>
-                      <option value="Otro">Otro</option>
+                    <select class="form-select" [(ngModel)]="student" aria-label="gender select"
+                      (change)="selectStudent()" required>
+                      <ng-container *ngFor="let student of user?.person?.students">
+                        <option [value]="student">{{student.degreeProgramName}}</option>
+                      </ng-container>
                     </select>
                   </div>
                 </div>

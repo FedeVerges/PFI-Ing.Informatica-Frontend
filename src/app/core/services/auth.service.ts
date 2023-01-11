@@ -58,9 +58,14 @@ export class AuthService {
   // todo: agregar observable para manejar los roles y permisos.
 
   constructor(private localStorageService: LocalStorageService) {
-    this.setCurrentUser(this.hasToken());
+    const user = this.hasToken();
+    this.setCurrentUser(user);
     this.setRole(this.hasRole());
     // No hay estudiante seleccionado.
+    if (user?.person?.students) {
+      this.setStudentSelected(user.person?.students[0]);
+    }
+
     this.setStudentSelected(null);
   }
 

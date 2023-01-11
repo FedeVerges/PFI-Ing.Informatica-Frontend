@@ -7,6 +7,7 @@ import { CertificateComponent } from './certificate/certificate.component';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import { StudentComponent } from './student/student.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [NavBarComponent, CertificateComponent, StudentComponent],
@@ -14,6 +15,8 @@ import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
     CommonModule,
     RouterModule,
     MdbCollapseModule,
+    FormsModule,
+    ReactiveFormsModule,
     MdbDropdownModule,
     MdbAccordionModule
   ],
