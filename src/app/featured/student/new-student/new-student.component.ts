@@ -27,7 +27,7 @@ export class NewStudentComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private alertService: AlertService, private studentSerivce: StudentSerivce) {
     this.studentForm = this.fb.group({
-      name: ['', [Validators.required]],
+    name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],

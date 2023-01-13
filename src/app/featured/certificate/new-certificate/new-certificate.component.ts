@@ -38,23 +38,20 @@ export class NewCertificateComponent implements OnInit {
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
-      documentType: ['', [Validators.required]],
-      sex: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
-      degreeProgramCurriculum: ['', [Validators.required]],
-      superiorCouncilOrdinance: ['', [Validators.required]],
-      directiveCouncilOrdinance: ['', [Validators.required]],
-      ministerialOrdinance: ['', [Validators.required]]
-    });
-    this.certificateForm = this.fb.group({
-      universityName: ['', [Validators.required]],
+      sex: ['', [Validators.required]],
+      university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
-      degreeProgramOrdinance: ['', [Validators.required]],
+      ministerialOrdinance: [''],
+      superiorCouncilOrdinance: ['', [Validators.required]],
+      directiveCouncilOrdinance: ['', [Validators.required]]
+    });
+    this.certificateForm = this.fb.group({
       degreeType: ['', [Validators.required]],
       degreeName: ['', [Validators.required]],
-      waferNumber: ['', [Validators.required]],
+      waferNumber: ['', [Validators.required]]
     });
   }
 
@@ -67,8 +64,11 @@ export class NewCertificateComponent implements OnInit {
       if (this.certificateForm.valid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
+          this.studentSelected.ministerialOrdinance = '1';
           certificate = {
             student: this.studentSelected,
+            dateCreated: String(new Date().getTime()),
+            dateModified: '0',
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
@@ -88,14 +88,16 @@ export class NewCertificateComponent implements OnInit {
             academicUnit: this.certificateForm.get('academicUnit')!.value,
             degreeProgramName: this.certificateForm.get('degreeProgramName')!.value,
             degreeProgramCurriculum: this.certificateForm.get('degreeProgramCurriculum')!.value,
-            ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!.value,
+            ministerialOrdinance: '1',
             blockchainId: 0,
             registrationNumber: this.studentForm.get('registrationNumber')!.value,
             superiorCouncilOrdinance: this.studentForm.get('superiorCouncilOrdinance')!.value,
-            directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value, 
+            directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value
           };
           certificate = {
             student: student,
+            dateCreated: String(new Date().getTime()),
+            dateModified: '0',
             degreeType: this.certificateForm.get('degreeType')!.value,
             degreeName: this.certificateForm.get('degreeName')!.value,
             waferNumber: this.certificateForm.get('waferNumber')!.value
@@ -160,14 +162,15 @@ export class NewCertificateComponent implements OnInit {
       name: student.person.name,
       lastname: student.person.lastname,
       docNumber: student.person.docNumber,
-      sex: student.person.sex
-    });
-    this.certificateForm.patchValue({
-      universityName: student.universityName,
+      sex: student.person.sex,
+      registrationNumber: student.registrationNumber,
+      university: student.universityName,
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
-      ministerialOrdinance: student.ministerialOrdinance
+      ministerialOrdinance: student.ministerialOrdinance,
+      superiorCouncilOrdinance: student.superiorCouncilOrdinance,
+      directiveCouncilOrdinance: student.directiveCouncilOrdinance
     });
   }
 
