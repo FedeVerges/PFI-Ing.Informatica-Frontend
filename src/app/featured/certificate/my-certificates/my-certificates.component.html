@@ -1,1 +1,7 @@
-<p>my-certificates works!</p>
+<div class="container">
+  <div class="row" *ngFor="let transaction of transactions">
+    <div class="col">
+      <app-certificate [transaction]="transaction"></app-certificate>
+    </div>
+  </div>
+</div>

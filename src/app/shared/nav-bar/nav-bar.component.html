@@ -59,8 +59,8 @@
                 </div>
                 <div class="row" *ngIf="netwotkStatus | async as status">
                   <div class="col">
-                    <span class="badge bg-secondary" *ngIf="!status?.connected"> No conectado</span>
-                    <span class="badge bg-info" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+                    <span class="badge bg-secondary w-100 font-title" *ngIf="!status?.connected"> No conectado</span>
+                    <span class="badge bg-success w-100 font-title" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
                   </div>
                 </div>
                 <div class="row p-2 ">
