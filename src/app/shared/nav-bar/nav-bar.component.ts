@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { NetworkStatusDto } from 'src/app/core/models/dto/notificationDto';
+import { NetworkStatusDto } from 'src/app/core/models/dto/networkStatusDto';
 import { RoleDto } from 'src/app/core/models/dto/roleDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { UserDto } from 'src/app/core/models/dto/userDto';
