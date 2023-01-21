@@ -4,11 +4,8 @@
   "configurations": [
     {
       "name": "ng serve",
-      "type": "pwa-chrome",
-      "request": "launch",
-      "runtimeVersion": "18.3", // If i need to run node 4.8.7
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/",
     },
     {
       "name": "ng test",
