@@ -21,10 +21,13 @@ export class WebsocketService {
       networkId: -1,
       connected: false
     });
+    // this.showTransactionNotification({
+    //   transactionHash: '1',
+    //   type: NOTIFICATION_TYPES.TRANSACTION
+    // });
     this.currentStatus$ = this._currentStatus$.asObservable();
     this.myWebSocket.asObservable().subscribe({
       next: (message) => {
-        debugger;
         switch (message.type) {
           case NOTIFICATION_TYPES.STATUS:
             if (message.networkId) {
@@ -60,6 +63,6 @@ export class WebsocketService {
 
   showTransactionNotification(message: NotificationDto) {
     const textMessage = `La transaccion ${message.transactionHash} ha sido exitosa`;
-    this.alertService.showAlert(textMessage);
+    this.alertService.showAlert(textMessage, 'Aceptar', { duration: undefined });
   }
 }

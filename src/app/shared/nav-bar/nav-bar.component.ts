@@ -15,23 +15,25 @@ import { WebsocketService } from 'src/app/core/services/websocket.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnDestroy {
-  // user$: Observable<UserDto | null>;
   user: UserDto | null = null;
   netwotkStatus: Observable<NetworkStatusDto>;
   role$: Observable<RoleDto | null>;
   student: StudentDto | null = null;
   subscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private websocketService: WebsocketService) {
-    // this.user$ = authService.getCurrentUser();
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private websocketService: WebsocketService
+  ) {
     this.netwotkStatus = websocketService.currentStatus$;
     this.role$ = authService.getRole();
-    // this.subscription = authService.getStudentSelected().subscribe((x) => this.initStudentSelected);
     this.initSubsciptionSelectStudent();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
   /**
    * Cuando el usuario elije un perfil de estudiante, este debe ser global para toda la app.
    * Los titulos se cargan a partir del estudiante

@@ -7,8 +7,8 @@ import {
   MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
 
-const horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-const verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+const horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+const verticalPosition: MatSnackBarVerticalPosition = 'top';
 const duration = 1500;
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,8 @@ export class AlertService {
   private DEFAULT_CONFIG: MatSnackBarConfig = {
     duration: duration,
     horizontalPosition: horizontalPosition,
-    verticalPosition: verticalPosition
+    verticalPosition: verticalPosition,
+    panelClass: ['green-snackbar']
   };
 
   constructor(private _snackBar: MatSnackBar) {}
@@ -26,8 +27,15 @@ export class AlertService {
     return this._snackBar.open(message, actions, this.DEFAULT_CONFIG);
   }
 
-  showAlert(message: string, actions?: string, config?: MatSnackBarConfig): void {
-    this._snackBar.open(message, actions, config || this.DEFAULT_CONFIG);
+  showAlert(
+    message: string,
+    actions?: string,
+    config?: MatSnackBarConfig
+  ): void {
+    this._snackBar.open(message, actions, {
+      ...this.DEFAULT_CONFIG,
+      ...config
+    });
   }
 
   showErrorMessage(message: string) {

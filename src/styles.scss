@@ -125,6 +125,18 @@
   background-color: aliceblue;
 }
 
+.green-snackbar {
+  background-color: $light;
+  color: $secondary;
+  margin-top: 4.5rem !important;
+}
+
+.green-snackbar button {
+  border: none;
+  color: $secondary;
+}
+
+
 html,
 body {
   height: 100%;

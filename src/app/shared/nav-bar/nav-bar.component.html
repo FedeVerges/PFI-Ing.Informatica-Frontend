@@ -46,42 +46,53 @@
               </ng-container>
             </ul>
           </div>
+
+          <!-- Opciones de la derecha. -->
           <div class="col-4 text-end">
-            <span class="badge bg-secondary mx-3 " *ngIf="role.name ==='ADMIN'">Admin</span>
-            <div mdbDropdown class="btn-group shadow-0">
-              <button type="button" class="btn btn-floating" mdbDropdownToggle aria-expanded="false"
-                data-mdb-display="static">
-                <img src="../../../assets/img/avatar/avatar.png" alt="student avatar" class="img-fluid">
-              </button>
-              <div mdbDropdownMenu class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start">
-                <div class="row text-center mb-2">
-                  <span><strong>{{user.person?.fullname | uppercase}}</strong></span>
-                </div>
-                <div class="row" *ngIf="netwotkStatus | async as status">
-                  <div class="col">
-                    <span class="badge bg-secondary w-100 font-title" *ngIf="!status?.connected"> No conectado</span>
-                    <span class="badge bg-success w-100 font-title" *ngIf="status?.connected"> Conectado - Network:{{status.networkId}}</span>
+            <div class="d-flex justify-content-end align-items-center">
+              <span class="badge bg-secondary" *ngIf="role.name ==='ADMIN'">Admin</span>
+              <div class="fs-4 mx-3">
+                <a class="secondary" [routerLink]="'transactions'" role="button">
+                  <i class="far fa-clock"></i>
+                </a>
+              </div>
+              <div mdbDropdown class="btn-group shadow-0">
+                <button type="button" class="btn btn-floating" mdbDropdownToggle aria-expanded="false"
+                  data-mdb-display="static">
+                  <img src="../../../assets/img/avatar/avatar.png" alt="student avatar" class="img-fluid">
+                </button>
+                <div mdbDropdownMenu class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start">
+                  <div class="row text-center mb-2">
+                    <span><strong>{{user.person?.fullname | uppercase}}</strong>
+                    </span>
                   </div>
-                </div>
-                <div class="row p-2 ">
-                  <div class="col">
-                    <select class="form-select" [(ngModel)]="student" aria-label="gender select"
-                      (change)="selectStudent()" required>
-                      <ng-container *ngFor="let student of user?.person?.students">
-                        <option [value]="student">{{student.degreeProgramName}}</option>
-                      </ng-container>
-                    </select>
+                  <div class="row" *ngIf="netwotkStatus | async as status">
+                    <div class="col">
+                      <span class="badge bg-danger w-100 font-title" *ngIf="!status?.connected"> No conectado</span>
+                      <span class="badge bg-success w-100 font-title" *ngIf="status?.connected"> Conectado -
+                        Network:{{status.networkId}}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <a class="dropdown-item"><i class="fas fa-user-graduate me-3"></i>Perfil</a>
+                  <div class="row p-2 ">
+                    <div class="col">
+                      <select class="form-select" [(ngModel)]="student" aria-label="gender select"
+                        (change)="selectStudent()" required>
+                        <ng-container *ngFor="let student of user?.person?.students">
+                          <option [value]="student">{{student.degreeProgramName}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <a class="dropdown-item" (click)="logout()">
-                      <i class="fas fa-sign-out-alt me-3"></i>Salir</a>
+                  <div class="row">
+                    <div class="col">
+                      <a class="dropdown-item"><i class="fas fa-user-graduate me-3"></i>Perfil</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a class="dropdown-item" (click)="logout()">
+                        <i class="fas fa-sign-out-alt me-3"></i>Salir</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -92,6 +103,7 @@
     </div>
   </div>
 </nav>
+
 <!-- Navbar -->
 <ng-template #userActions>
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
