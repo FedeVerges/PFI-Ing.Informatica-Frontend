@@ -1,0 +1,42 @@
+<div class="container mt-3 table-responsive">
+  <table class="table align-middle mb-0 bg-white">
+    <caption>
+      Listado de transacciones
+    </caption>
+    <thead class="bg-light text-center">
+      <tr>
+        <th>Estudiante</th>
+        <th>Fecha</th>
+        <th>Txn Hash</th>
+        <th>Estado</th>
+        <th>Certificado</th>
+        <th>Gas utilizado</th>
+        <th>Acci&oacute;n</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let tx of transactionList">
+        <td>
+          <div>
+            <p class="fw-bold mb-1">{{tx.certificate?.student?.person?.fullname}}</p>
+            <p class="text-muted mb-0">{{tx.certificate?.student?.degreeProgramName}}</p>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{tx.certificate?.dateCreated}}</p>
+        </td>
+        <td>
+          <span class="badge badge-success rounded-pill d-inline">{{tx.status}}</span>
+        </td>
+        <td>{{tx.transactionHash | slice:0:15}} ...</td>
+        <td>{{tx.certificateBlockchainId}}</td>
+        <td>{{tx.gasUsed}}</td>
+        <td>
+          <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark">
+            Detalle
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

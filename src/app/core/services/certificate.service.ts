@@ -33,6 +33,12 @@ export class CertificateService {
   getCertificateTypes() {}
   getAllDegrees() {}
 
+  getAllTransactions() {
+    return this.http.get<BlockchainTransactionDto[]>(
+      environment.serverURL + `/transaction/all`
+    );
+  }
+
   createNewCertificate(certificate: CertificateDto) {
     return this.http.post<TransactionDto>(
       environment.serverURL + `/certificate/new`,
