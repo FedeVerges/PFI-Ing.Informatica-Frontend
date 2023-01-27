@@ -14,12 +14,6 @@
       </button>
     </div>
   </div>
-
-  <div class="row">
-    <!-- <div class="col-4">
-      <app-certificate ></app-certificate>
-    </div> -->
-  </div>
   <div class="row row-cols-3" *ngIf="certificateSearchResult">
     <div class="col">
       <app-certificate [transaction]="certificateSearchResult"></app-certificate>

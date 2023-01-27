@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { webSocket } from 'rxjs/webSocket';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { BlockchainTransactionDto } from '../models/dto/blockchainTransactionDto';
 import { NetworkStatusDto } from '../models/dto/networkStatusDto';
 import { NotificationDto } from '../models/dto/notificationDto';
@@ -10,8 +10,8 @@ import { AlertService } from './alert.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
-  myWebSocket = webSocket<NotificationDto>('ws://localhost:9090');
+export class WebsocketService implements OnDestroy {
+  myWebSocket!: WebSocketSubject<NotificationDto>;
   private _currentStatus$: BehaviorSubject<NetworkStatusDto>;
   currentStatus$: Observable<NetworkStatusDto>;
 
@@ -21,12 +21,9 @@ export class WebsocketService {
       networkId: -1,
       connected: false
     });
-    // this.showTransactionNotification({
-    //   transactionHash: '1',
-    //   type: NOTIFICATION_TYPES.TRANSACTION
-    // });
+    this.connect();
     this.currentStatus$ = this._currentStatus$.asObservable();
-    this.myWebSocket.asObservable().subscribe({
+    this.myWebSocket!.asObservable().subscribe({
       next: (message) => {
         switch (message.type) {
           case NOTIFICATION_TYPES.STATUS:
@@ -50,7 +47,9 @@ export class WebsocketService {
         console.error(error);
       }
     });
-    this.sendMessage();
+  }
+  ngOnDestroy(): void {
+    this.close();
   }
 
   sendMessage() {
@@ -63,6 +62,20 @@ export class WebsocketService {
 
   showTransactionNotification(message: NotificationDto) {
     const textMessage = `La transaccion ${message.transactionHash} ha sido exitosa`;
-    this.alertService.showAlert(textMessage, 'Aceptar', { duration: undefined });
+    this.alertService.showAlert(textMessage, 'Aceptar', {
+      duration: undefined
+    });
+  }
+
+  connect() {
+    if (!this.myWebSocket || this.myWebSocket.closed) {
+      this.myWebSocket = webSocket<NotificationDto>('ws://localhost:9090');
+      // this.sendMessage();
+    }
+  }
+
+  close() {
+    // this.myWebSocket.closed();
+    this.myWebSocket.complete();
   }
 }

@@ -58,7 +58,7 @@ export class TransactionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllTransactions();
+    // this.getAllTransactions();
   }
 
   getAllTransactions() {
