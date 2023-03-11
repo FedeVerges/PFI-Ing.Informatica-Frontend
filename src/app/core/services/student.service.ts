@@ -8,7 +8,7 @@ import { University } from '../models/university';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentSerivce {
+export class StudentService {
   constructor(private http: HttpClient) {}
 
   getStudentByDni(docNumber: number) {

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { TokenDto } from '../models/dto/tokenDto';
 import { UserDto } from '../models/dto/userDto';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

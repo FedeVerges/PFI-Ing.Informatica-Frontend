@@ -7,8 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Web3Service } from 'src/app/core/services/web3.service';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { MyCertificatesComponent } from './my-certificates/my-certificates.component';
 

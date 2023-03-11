@@ -9,14 +9,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { CoreModule } from './core/core.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './core/services/interceptor.service';
 import { AuthService } from './core/services/auth.service';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { UserService } from './core/services/user.service';
 import { WebsocketService } from './core/services/websocket.service';
 import { LoadingService } from './core/services/loading.service';
 import { AlertService } from './core/services/alert.service';
+import { StudentService } from './core/services/student.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,11 +24,10 @@ import { AlertService } from './core/services/alert.service';
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    CoreModule,
-    HttpClientModule
   ],
   providers: [
     AuthService,
@@ -39,7 +37,7 @@ import { AlertService } from './core/services/alert.service';
     AuthGuard,
     LoadingService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    StudentService
   ],
   bootstrap: [AppComponent]
 })

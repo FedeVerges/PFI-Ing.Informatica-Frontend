@@ -68,7 +68,6 @@ export class AuthService {
     this.setCurrentUser(null);
     this.setRole(null);
     this.setStudentSelected(null);
-    
   }
 
   /**

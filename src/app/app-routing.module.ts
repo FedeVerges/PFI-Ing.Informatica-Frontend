@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'student/search', pathMatch: 'full' },
   {
     path: 'certificate',
     loadChildren: () =>
@@ -34,9 +34,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./featured/transactions/transactions.module').then(
         (m) => m.TransactionsModule
-      )
+      ),
+      canActivate: [AuthGuard]
   },
-
   // Siempre al final.
   { path: '*', redirectTo: 'login', pathMatch: 'full' }
 ];
