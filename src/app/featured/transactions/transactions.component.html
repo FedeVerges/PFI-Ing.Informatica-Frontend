@@ -25,10 +25,10 @@
         <td>
           <p class="fw-normal mb-1">{{tx.certificate?.dateCreated}}</p>
         </td>
+        <td>{{tx.transactionHash | slice:0:15}} ...</td>
         <td>
           <span class="badge badge-success rounded-pill d-inline">{{tx.status}}</span>
         </td>
-        <td>{{tx.transactionHash | slice:0:15}} ...</td>
         <td>{{tx.certificateBlockchainId}}</td>
         <td>{{tx.gasUsed}}</td>
         <td>

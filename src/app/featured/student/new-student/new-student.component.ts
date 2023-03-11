@@ -8,7 +8,7 @@ import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { University } from 'src/app/core/models/university';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { StudentSerivce } from 'src/app/core/services/student.service';
+import { StudentService } from 'src/app/core/services/student.service';
 
 @Component({
   selector: 'app-new-student',
@@ -25,7 +25,7 @@ export class NewStudentComponent implements OnInit {
 
   careers: Career[] = [];
 
-  constructor(private fb: FormBuilder, private alertService: AlertService, private studentSerivce: StudentSerivce) {
+  constructor(private fb: FormBuilder, private alertService: AlertService, private studentSerivce: StudentService) {
     this.studentForm = this.fb.group({
     name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],

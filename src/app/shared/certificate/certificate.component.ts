@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
+import { RoleDto } from 'src/app/core/models/dto/roleDto';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-certificate',
@@ -46,7 +49,10 @@ export class CertificateComponent implements OnInit {
   //   gasUsed: 608876,
   // }
 
-  constructor() {}
+  constructor(private authService: AuthService) {
+    this.role$ = this.authService.getRole();
+  }
+  role$: Observable<RoleDto | null>;
 
   ngOnInit(): void {}
 

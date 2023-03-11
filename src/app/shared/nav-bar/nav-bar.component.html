@@ -8,8 +8,8 @@
     <div class="d-flex align-items-end p-2 pe-3">
       <a href="#">
         <img src="../../../assets/img/icons8-chain-58.png" alt="" width="32" height="32">
+        <span class="logo-text px-2 secondary" [routerLink]="'student/search'">UNSL CERT</span>
       </a>
-      <span class="logo-text px-2 secondary">UNSL CERT</span>
     </div>
     <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
       <ng-container *ngIf="user; else userActions">
@@ -17,31 +17,22 @@
           <div class="col-8">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a [routerLink]="'validate'" class="nav-link" routerLinkActive="active-link" href="#">Buscar T&iacute;tulos</a>
+                <a [routerLink]="'validate'" class="nav-link" routerLinkActive="active-link" href="#">Buscar
+                  T&iacute;tulos</a>
               </li>
               <ng-container *ngIf="role.name ==='ADMIN'">
-                <!--MENU Estudiantes -->
-                <li mdbDropdown class="nav-item dropdown" routerLinkActive="active-link">
-                  <a class="nav-link" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle
-                    aria-expanded="false">Estudiantes
-                  </a>
-                  <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li>
-                      <a class="dropdown-item" [routerLink]="'student'">Nuevo Estudiante</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" [routerLink]="'student/search'">Buscar</a>
-                    </li>
-                  </ul>
+                <li>
+                  <a class="dropdown-item" [routerLink]="'student'">Nuevo Estudiante</a>
                 </li>
-
                 <li class="nav-item">
-                  <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear t&iacute;tulo</a>
+                  <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear
+                    t&iacute;tulo</a>
                 </li>
               </ng-container>
               <ng-container *ngIf="role.name ==='STUDENT'">
                 <li class="nav-item">
-                  <a [routerLink]="'certificate/my-certificates'" routerLinkActive="active-link" class="nav-link" href="#">Mis t&iacute;tulos</a>
+                  <a [routerLink]="'certificate/my-certificates'" routerLinkActive="active-link" class="nav-link"
+                    href="#">Mis t&iacute;tulos</a>
                 </li>
               </ng-container>
             </ul>
@@ -78,9 +69,9 @@
                   <div class="row p-2 ">
                     <div class="col">
                       <select class="form-select" [(ngModel)]="student" aria-label="gender select"
-                        (change)="selectStudent()" required>
-                        <ng-container *ngFor="let student of user?.person?.students">
-                          <option [value]="student">{{student.degreeProgramName}}</option>
+                        (ngModelChange)="selectStudent()" required>
+                        <ng-container *ngFor="let st of user?.person?.students">
+                          <option [ngValue]="st">{{st.degreeProgramName}}</option>
                         </ng-container>
                       </select>
                     </div>
@@ -108,11 +99,8 @@
 
 <!-- Navbar -->
 <ng-template #userActions>
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item">
-      <a [routerLink]="'validate'" routerLinkActive="active-link" class="nav-link" href="#">Validar T&iacute;tulo</a>
-    </li>
-  </ul>
+  <div class="navbar-nav me-auto mb-2 mb-lg-0">
+  </div>
   <div class="d-flex align-items-center">
     <a [routerLink]="'/login'" routerLinkActive="active-link" class="btn btn-secondary px-3 me-2">
       Iniciar Sesi&oacute;n

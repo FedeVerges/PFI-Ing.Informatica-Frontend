@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Certificate } from 'src/app/core/models/certificate';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { Web3Service } from 'src/app/core/services/web3.service';
-import { StudentSerivce } from '../../../core/services/student.service';
+import { StudentService } from '../../../core/services/student.service';
 import { StudentDto } from '../../../core/models/dto/studentDto';
 import { TransactionDto } from '../../../core/models/dto/transactionDto';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
@@ -32,7 +32,7 @@ export class NewCertificateComponent implements OnInit {
     private fb: FormBuilder,
     private certificateService: CertificateService,
     private alertService: AlertService,
-    private studentSerivce: StudentSerivce
+    private studentSerivce: StudentService
   ) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],

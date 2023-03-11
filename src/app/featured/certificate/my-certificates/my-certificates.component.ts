@@ -17,7 +17,10 @@ export class MyCertificatesComponent implements OnInit {
   subscription!: Subscription;
   transactions: BlockchainTransactionDto[] = [];
 
-  constructor(private certificateService: CertificateService, private authService: AuthService) {
+  constructor(
+    private certificateService: CertificateService,
+    private authService: AuthService
+  ) {
     this.initSubsciptionSelectStudent();
   }
   ngOnDestroy(): void {
@@ -30,8 +33,14 @@ export class MyCertificatesComponent implements OnInit {
       .pipe(
         tap((st) => (this.student = st)),
         filter((st) => st !== null),
-        switchMap((st) => this.certificateService.getCertificatesByStudentId(String(st?.blockchainId))),
-        tap((b) => (this.transactions = b))
+        switchMap((st) =>
+          this.certificateService.getCertificatesByStudentId(
+            String(st?.blockchainId)
+          )
+        ),
+        tap((b) => {
+          this.transactions = b;
+        })
       )
       .subscribe();
   }

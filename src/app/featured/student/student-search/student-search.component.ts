@@ -5,7 +5,7 @@ import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTran
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { CertificateService } from 'src/app/core/services/certificate.service';
-import { StudentSerivce } from 'src/app/core/services/student.service';
+import { StudentService } from 'src/app/core/services/student.service';
 
 @Component({
   selector: 'app-student-search',
@@ -24,7 +24,7 @@ export class StudentSearchComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private studentSerivce: StudentSerivce,
+    private studentSerivce: StudentService,
     private certificateService: CertificateService
   ) {}
 
@@ -49,7 +49,9 @@ export class StudentSearchComponent implements OnInit {
           }
         },
         error: (error) => {
-          this.alertService.showErrorMessage(error);
+          this.alertService.showErrorMessage(
+            error?.message || 'ocurrió un error al solicitar estudiante'
+          );
         }
       });
     }
@@ -58,7 +60,7 @@ export class StudentSearchComponent implements OnInit {
   getTitles(student: StudentDto) {
     this.showTitle = true;
     this.studentTitles$ = this.certificateService
-      .getCertificatesByStudentId(student.person.docNumber)
+      .getCertificatesByStudentId(String(student.blockchainId))
       .pipe(
         catchError((error) => {
           this.alertService.showErrorMessage(String(error));
