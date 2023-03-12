@@ -20,13 +20,9 @@
 }
 
 .active-link {
-    background-color: $secondary;
-    color: $light !important;
-    border-radius: 0.3rem;
+    border-bottom: #545479 2px solid;
 }
 
 .active-link>a {
-    background-color: $secondary;
-    color: $light !important;
-    border-radius: 0.3rem;
+    border-bottom: #545479 2px solid;
 }

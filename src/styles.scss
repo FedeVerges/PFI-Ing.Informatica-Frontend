@@ -9,6 +9,12 @@
 @import 'variables.scss';
 
 
+@font-face {
+  font-family: 'MyFont';
+  src: url('./assets/fonts/Darker_Grotesque/DarkerGrotesque-Medium.ttf');
+}
+
+
 // Theme colors
 .primary {
   color: $primary !important;
@@ -144,5 +150,6 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "MyFont", Roboto, "Helvetica Neue", sans-serif;
+  background-image: url('assets/img/cool-background.png');
 }

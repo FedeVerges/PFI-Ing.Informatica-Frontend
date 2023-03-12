@@ -21,8 +21,8 @@
                   T&iacute;tulos</a>
               </li>
               <ng-container *ngIf="role.name ==='ADMIN'">
-                <li>
-                  <a class="dropdown-item" [routerLink]="'student'">Nuevo Estudiante</a>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Nuevo Estudiante</a>
                 </li>
                 <li class="nav-item">
                   <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear
