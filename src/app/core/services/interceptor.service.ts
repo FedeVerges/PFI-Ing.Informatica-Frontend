@@ -27,13 +27,10 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let request = req;
     const token = this.localStorageService.getToken();
+    this.loadingService.enableShowSpinner();
     if (token) {
       request = this.addToken(req, token!);
-    } else {
-      this.authService.logout();
-      return next.handle(req);
     }
-    this.loadingService.enableShowSpinner();
     return next.handle(request).pipe(
       map((evt) => {
         if (evt instanceof HttpResponse) {
