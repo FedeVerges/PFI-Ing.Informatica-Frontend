@@ -20,7 +20,7 @@ export class StudentSearchComponent implements OnInit {
 
   unversitiesCarrers: any[] = [];
   showTitle = false;
-  studentTitles$?: Observable<BlockchainTransactionDto[]>;
+  studentTitles?: BlockchainTransactionDto[];
 
   constructor(
     private alertService: AlertService,
@@ -59,13 +59,19 @@ export class StudentSearchComponent implements OnInit {
 
   getTitles(student: StudentDto) {
     this.showTitle = true;
-    this.studentTitles$ = this.certificateService
+    this.certificateService
       .getCertificatesByStudentId(String(student.blockchainId))
       .pipe(
         catchError((error) => {
           this.alertService.showErrorMessage(String(error));
           return throwError(() => error);
         })
-      );
+      )
+      .subscribe((certificates) => (this.studentTitles = certificates || []));
+  }
+
+  selectStudent(student: StudentDto) {
+    this.studentSelected = student;
+    this.getTitles(student);
   }
 }

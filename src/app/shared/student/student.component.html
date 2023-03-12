@@ -1,13 +1,80 @@
 <div class="card" *ngIf="student">
   <div class="card-body">
-    <div class="text-center">
-      <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div class="text-center">
+            <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size">
+            <h4 class="text-center">{{student.person.fullname}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <p><strong>N° de estudiante </strong> {{student.blockchainId}}</p>
+          <p><strong>DNI </strong>{{student.person.docNumber}} - {{student.person.sex}}</p>
+          <p><strong>{{student.universityName}}</strong></p>
+          <p><strong>Registro : </strong> {{student.registrationNumber}}</p>
+          <p><strong>Unidad Acad&eacute;mica: </strong>{{student.academicUnit}}</p>
+          <p><strong>Carrera: </strong>{{student.degreeProgramName}}</p>
+        </div>
+        <div class="col-8">
+          <div class="container mt-3 table-responsive" *ngIf="!!certifications && certifications.length > 0; else emptyData">
+            <table class="table align-middle mb-0 bg-white">
+              <caption>
+                Certificaciones
+              </caption>
+              <thead class="bg-light text-center">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Fecha</th>
+                  <th>a&ntilde;o</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <!-- <tr *ngFor="let tx of transactionList">
+                  <td>
+                    <div>
+                      <p class="fw-bold mb-1">{{tx.certificate?.student?.person?.fullname}}</p>
+                      <p class="text-muted mb-0">{{tx.certificate?.student?.degreeProgramName}}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="fw-normal mb-1">{{tx.certificate?.dateCreated}}</p>
+                  </td>
+                  <td>{{tx.transactionHash | slice:0:15}} ...</td>
+                  <td>
+                    <span class="badge badge-success rounded-pill d-inline">{{tx.status}}</span>
+                  </td>
+                  <td>{{tx.certificateBlockchainId}}</td>
+                  <td>{{tx.gasUsed}}</td>
+                  <td>
+                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark">
+                      Detalle
+                    </button>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <h2 class="text-center">{{student.person.fullname}}</h2>
-    <h4 class="text-center">{{student.universityName}}</h4>
-    <p><strong>DNI : </strong>{{student.person.docNumber}} - {{student.person.sex}}</p>
-    <p><strong>N° de estudiante : </strong> {{student.person.docNumber}}</p>
-    <p><strong>Unidad Acad&eacute;mica: </strong>{{student.academicUnit}}</p>
-    <p><strong>Carrera: </strong>{{student.degreeProgramName}}</p>
   </div>
 </div>
+
+
+<ng-template #emptyData>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h5>No hay certificaciones para este estudiante</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

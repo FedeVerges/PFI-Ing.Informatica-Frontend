@@ -23,34 +23,29 @@
         <div class="row">
           <div class="col-6">
             <div class="list-group list-group-light">
-              <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
-                *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="studentSelected = student">
-                {{student.person.fullname}} - {{student.degreeProgramName}}
-              </button>
+              <ng-container *ngFor="let student of studentList">
+                <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
+                  aria-current="true" mdbRipple (click)="selectStudent(student)">
+                  {{student.person.fullname}} - {{student.degreeProgramName}}
+                </button>
+              </ng-container>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="studentSelected">
+  <div class="row" *ngIf="studentSelected && !!studentTitles">
     <div class="col">
-      <div class="container" *ngIf="!showTitle">
+      <div class="container mt-3">
         <div class="row">
           <div class="col animate__animated animate__fadeIn">
-            <app-student [student]="studentSelected"></app-student>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col text-end">
-            <button type="button " type="submit" class="btn" (click)="getTitles(studentSelected)">
-              Ver titulos
-            </button>
+            <app-student [student]="studentSelected" [certifications]="studentTitles"></app-student>
           </div>
         </div>
       </div>
-      <ng-container *ngIf="showTitle">
-        <div class="animate__animated animate__fadeIn" *ngIf="(studentTitles$ | async) as titles">
+      <!-- <ng-container *ngIf="showTitle">
+        <div class="animate__animated animate__fadeIn" *ngIf="">
           <ng-container *ngIf="titles && titles.length > 0 else emptyData">
             <div class="card">
               <div class="card-body">
@@ -71,7 +66,7 @@
             </button>
           </div>
         </div>
-      </ng-container>
+      </ng-container> -->
     </div>
   </div>
 </div>

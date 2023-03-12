@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 
 @Component({
@@ -8,13 +9,9 @@ import { StudentDto } from 'src/app/core/models/dto/studentDto';
 })
 export class StudentComponent implements OnInit {
   @Input() student?: StudentDto;
-  @Output() showTitlesEmiter: EventEmitter<boolean> = new EventEmitter();
+  @Input() certifications: BlockchainTransactionDto[] = [];
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  showTitles() {
-    this.showTitlesEmiter.emit();
-  }
 }
