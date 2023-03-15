@@ -39,6 +39,7 @@ export class StudentSearchComponent implements OnInit {
             this.studentList = students;
             if (students.length === 1) {
               this.studentSelected = students[0];
+              this.getTitles(this.studentSelected);
             } else {
               this.studentSelected = undefined;
             }
@@ -57,6 +58,7 @@ export class StudentSearchComponent implements OnInit {
     }
   }
 
+  // todo: Terminar tabla de certificaciones.
   getTitles(student: StudentDto) {
     this.showTitle = true;
     this.certificateService

@@ -11,11 +11,11 @@
           </mdb-form-control>
         </div>
         <div class="col-sm-6 col-md-2">
-          <button type="button" type="submit" class="btn btn-secondary" (click)="getStudentByDni()">Buscar
+          <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary" (click)="getStudentByDni()">Buscar
           </button>
         </div>
       </div>
-      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0  !studentSelected">
+      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
         <div class="row">
           <div class="col-6">
             <h5 class="text-start">Estudiantes encontrados:</h5>
@@ -33,19 +33,19 @@
         </div>
       </div>
 
-      <form autocomplete="true" [formGroup]="studentForm">
+      <form autocomplete="true" [formGroup]="studentForm" *ngIf="studentSelected">
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required />
+                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required/>
                 <label mdbLabel class="form-label" for="form_name">Nombre</label>
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
                 <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
-                  required />
+                  required/>
                 <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
               </mdb-form-control>
             </div>
@@ -125,7 +125,7 @@
           </div>
         </div>
       </form>
-      <form autocomplete="true" [formGroup]="certificateForm">
+      <form autocomplete="true" [formGroup]="certificateForm" *ngIf="studentSelected">
         <div class="container">
           <h4 class="text-start mt-2 card-title">Datos del certificado</h4>
           <div class="row">

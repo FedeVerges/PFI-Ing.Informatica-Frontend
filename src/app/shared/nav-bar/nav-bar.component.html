@@ -5,10 +5,12 @@
       aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-    <div class="d-flex align-items-end p-2 pe-3">
-      <a href="#">
-        <img src="../../../assets/img/icons8-chain-58.png" alt="" width="32" height="32">
-        <span class="logo-text px-2 secondary" [routerLink]="'student/search'">UNSL CERT</span>
+    <div class="d-flex align-items-end pe-3">
+      <a href="#" [routerLink]="'student/search'">
+        <div class="d-flex align-items-center">
+          <img src="../../../assets/img/icons8-chain-58.png" alt="" width="40" height="40">
+          <span class="logo-text px-2 secondary">UNSL CERT</span>
+        </div>
       </a>
     </div>
     <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">

@@ -12,7 +12,7 @@ import { Web3Service } from 'src/app/core/services/web3.service';
   styleUrls: ['./certificate-validator.component.scss']
 })
 export class CertificateValidatorComponent implements OnInit {
-  certificateId: number = 0;
+  certificateId?: number;
   amountCertificates: number = 0;
   certificateSearchResult?: BlockchainTransactionDto;
   certificates: Certificate[] = [];
@@ -24,14 +24,18 @@ export class CertificateValidatorComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCertificatesByStudentId(id: number) {
-    this.certificateService.getCertificatesById(String(id)).subscribe({
-      next: (result) => {
-        this.certificateSearchResult = result;
-      },
-      error: (e) => {
-        this.alertService.showErrorMessage(e);
-      }
-    });
+  getCertificatesByStudentId(id?: number) {
+    if (id) {
+      this.certificateService.getCertificatesById(String(id)).subscribe({
+        next: (result) => {
+          this.certificateSearchResult = result;
+        },
+        error: (e) => {
+          this.alertService.showErrorMessage(e);
+        }
+      });
+    } else {
+      throw new Error('Id nulo');
+    }
   }
 }

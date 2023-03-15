@@ -60,8 +60,9 @@ export class NewCertificateComponent implements OnInit {
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate
     // Validar correctamente los campos.
-    if (this.studentForm.valid) {
-      if (this.certificateForm.valid) {
+    debugger
+    if (!this.studentForm.invalid) {
+      if (!this.certificateForm.invalid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
           this.studentSelected.ministerialOrdinance = '1';
@@ -172,6 +173,7 @@ export class NewCertificateComponent implements OnInit {
       superiorCouncilOrdinance: student.superiorCouncilOrdinance,
       directiveCouncilOrdinance: student.directiveCouncilOrdinance
     });
+    this.studentForm.disable()
   }
 
   clearForm() {
