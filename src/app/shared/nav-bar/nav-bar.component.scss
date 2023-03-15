@@ -1,5 +1,9 @@
 @import "../../../variables.scss";
 
+.navbar{
+  font-size: 20px !important;
+}
+
 .logo {
     border-width: 0.125rem;
     border-style: solid;
@@ -8,7 +12,7 @@
 
 .logo-text {
     font-weight: 100;
-    font-size: 20px;
+    font-size: 28px;
 }
 
 .nav-link {

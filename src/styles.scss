@@ -128,7 +128,7 @@
 }
 
 .card {
-  background-color: aliceblue;
+  background-color: white;
 }
 
 .green-snackbar {
@@ -142,6 +142,10 @@
   color: $secondary;
 }
 
+.form-outline { 
+  background: white;
+}
+
 
 html,
 body {
@@ -152,4 +156,10 @@ body {
   margin: 0;
   font-family: "MyFont", Roboto, "Helvetica Neue", sans-serif;
   background-image: url('assets/img/cool-background.png');
+  font-size: 18px !important;
+}
+
+.btn{
+  font-size: 1rem;
+  line-height: 1.1;
 }
