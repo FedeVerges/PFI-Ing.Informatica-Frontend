@@ -8,9 +8,20 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import { StudentComponent } from './student/student.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CertificateDetailComponent } from './certificate-detail/certificate-detail.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CertificateDialogComponent } from './certificate-dialog/certificate-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [NavBarComponent, CertificateComponent, StudentComponent],
+  declarations: [
+    NavBarComponent,
+    CertificateComponent,
+    StudentComponent,
+    CertificateDetailComponent,
+    CertificateDialogComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,8 +29,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MdbDropdownModule,
-    MdbAccordionModule
+    MdbAccordionModule,
+    QRCodeModule,
+    MatDialogModule,
+    MatButtonModule
   ],
-  exports: [NavBarComponent, CertificateComponent, StudentComponent]
+  exports: [
+    NavBarComponent,
+    CertificateComponent,
+    StudentComponent,
+    CertificateDetailComponent,
+    CertificateDialogComponent
+  ]
 })
 export class SharedModule {}

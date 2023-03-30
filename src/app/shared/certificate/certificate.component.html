@@ -9,13 +9,14 @@
       <p><strong>Universidad: </strong>{{transaction?.certificate?.student?.universityName}}</p>
       <p><strong>Unidad Ac&aacute;demica: </strong>{{transaction?.certificate?.student?.academicUnit}}</p>
       <a class="link" [href]="transaction?.etherscanLink">{{transaction?.etherscanLink}}</a>
-      <div class="row" *ngIf="(role$ | async)?.name  === 'ADMIN'">
+      <div class="row" >
         <div class="col">
-          <button type="button" type="submit" class="btn btn-secondary"> Ver m&aacute;s
+          <button type="button" type="submit" class="btn btn-secondary"
+            (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
           </button>
           <!-- Todo: implementar modal de detalle con DANGER ZONE para eliminar. -->
         </div>
-        <div class="col">
+        <div class="col" *ngIf="(role$ | async)?.name  === 'ADMIN'">
           <button type="button" type="submit" class="btn btn-danger"> Eliminar
           </button>
         </div>

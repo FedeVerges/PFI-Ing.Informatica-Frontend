@@ -16,6 +16,7 @@ import { WebsocketService } from './core/services/websocket.service';
 import { LoadingService } from './core/services/loading.service';
 import { AlertService } from './core/services/alert.service';
 import { StudentService } from './core/services/student.service';
+import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,8 @@ import { StudentService } from './core/services/student.service';
     AuthGuard,
     LoadingService,
     AlertService,
-    StudentService
+    StudentService,
+    MdbModalService
   ],
   bootstrap: [AppComponent]
 })

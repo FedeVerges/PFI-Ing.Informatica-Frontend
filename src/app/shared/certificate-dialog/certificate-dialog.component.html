@@ -1,0 +1,50 @@
+ <ng-container *ngIf="data">
+   <mat-dialog-content>
+     <h2 class="bg-primary p-1 rounded-1">Certificado N° {{data.certificateBlockchainId}}</h2>
+     <div class="container">
+       <p> <strong> Graduado: </strong> {{data.certificate?.student?.person?.fullname}} -
+         {{data.certificate?.student?.person?.docNumber}} </p>
+
+       <p> <strong>N° Registro: </strong>{{data.certificate?.student?.registrationNumber}} </p>
+
+       <p> <strong>Instituci&oacute;n: </strong> {{data.certificate?.student?.person?.fullname}} </p>
+
+       <p> <strong>Unidad acad&eacute;mica: </strong> {{data.certificate?.student?.academicUnit}}</p>
+
+       <p> <strong>Carrera: </strong> {{data.certificate?.student?.degreeProgramName}}</p>
+
+       <p> <strong>Plan de estudios: </strong> {{data.certificate?.student?.degreeProgramCurriculum}}</p>
+
+       <p> <strong>Numero de oblea: </strong> {{data.certificate?.waferNumber}}</p>
+
+       <p><strong>N° Ordenanza Consejo Superior: </strong> {{data.certificate?.student?.superiorCouncilOrdinance}}</p>
+
+       <p><strong>N° Ordenanza Consejo Directivo: </strong> {{data.certificate?.student?.directiveCouncilOrdinance}}</p>
+
+       <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}}</p>
+     </div>
+     <h3 class="bg-primary p-1 rounded-1">Datos de certificaci&oacute;n</h3>
+     <div class="container">
+       <p><strong>Fecha de registraci&oacute;n: </strong>{{data.certificate?.dateCreated}}</p>
+       <p>&Eacute;ste certificado se encuentra registrado traves un contrato inteligente en la red de Ethereum.</p>
+
+       <p><strong>Estado del certificado: </strong>
+         {{data?.certificate?.status === 'active' ? 'ACTIVO' : 'DADO DE BAJA'}}
+       </p>
+
+
+       <p><strong>Transacci&oacute;n: </strong> {{data.transactionHash}}</p>
+
+       <p>Puede verificar el estado de la transacci&oacute;n a traves del siguiente link:
+         <a class="link" [href]="data.etherscanLink">{{data?.etherscanLink}}</a>
+       </p>
+
+       <p><strong>Numero de bloque: </strong> {{data.blockHash}}</p>
+
+       <p><strong>Costos de certificaci&oacute;n (WEI): </strong> {{data.gasUsed}} WEI</p>
+     </div>
+   </mat-dialog-content>
+   <mat-dialog-actions align="end">
+     <button mat-button mat-dialog-close>Cerrar</button>
+   </mat-dialog-actions>
+ </ng-container>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -54,7 +55,8 @@ export class TransactionsComponent implements OnInit {
 
   constructor(
     private certificateService: CertificateService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +74,13 @@ export class TransactionsComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  goDetail(id: number) {
+    if (id) {
+      this.router.navigateByUrl(`certificate/${id}`);
+    } else {
+      throw new Error('Id certificado nulo.');
+    }
   }
 }

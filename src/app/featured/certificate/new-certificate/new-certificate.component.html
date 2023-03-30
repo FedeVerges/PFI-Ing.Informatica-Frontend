@@ -7,18 +7,19 @@
           <mdb-form-control class="mb-3">
             <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
               [ngModelOptions]="{standalone: true}" />
-            <label mdbLabel class="form-label" for="search_dni">Numero de documento</label>
+            <label mdbLabel class="form-label" for="search_dni">N&uacute;mero de documento</label>
           </mdb-form-control>
         </div>
         <div class="col-sm-6 col-md-2">
-          <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary" (click)="getStudentByDni()">Buscar
+          <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
+            (click)="getStudentByDni()">Buscar
           </button>
         </div>
       </div>
       <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
         <div class="row">
           <div class="col-6">
-            <h5 class="text-start">Estudiantes encontrados:</h5>
+            <h5 class="text-start">Graduados encontrados:</h5>
           </div>
         </div>
         <div class="row">
@@ -38,14 +39,14 @@
           <div class="row">
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required/>
+                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required />
                 <label mdbLabel class="form-label" for="form_name">Nombre</label>
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
                 <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
-                  required/>
+                  required />
                 <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
               </mdb-form-control>
             </div>
@@ -79,8 +80,7 @@
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="university"
-                  required />
+                <input mdbInput type="text" id="form_name" class="form-control" formControlName="university" required />
                 <label mdbLabel class="form-label" for="form_name">Universidad</label>
               </mdb-form-control>
             </div>
@@ -152,7 +152,7 @@
               </mdb-form-control>
             </div>
           </div>
-          
+
           <div class="row">
             <div class="col text-end">
               <button type="button" type="submit" class="btn btn-light mx-2" (click)="clearForm()">

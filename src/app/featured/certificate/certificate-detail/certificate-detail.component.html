@@ -1,0 +1,22 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-12 col-lg-8" *ngIf="certificate; else emptyData">
+      <app-certificate-detail [certificate]="certificate"></app-certificate-detail>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #emptyData>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h5>El certificado es invalido.</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

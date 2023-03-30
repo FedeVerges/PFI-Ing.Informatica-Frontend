@@ -5,12 +5,12 @@
     </caption>
     <thead class="bg-light text-center">
       <tr>
-        <th>Estudiante</th>
+        <th>Graduado</th>
         <th>Fecha</th>
         <th>Txn Hash</th>
-        <th>Estado</th>
         <th>Certificado</th>
         <th>Gas utilizado</th>
+        <th>Estado</th>
         <th>Acci&oacute;n</th>
       </tr>
     </thead>
@@ -18,22 +18,23 @@
       <tr *ngFor="let tx of transactionList">
         <td>
           <div>
-            <p class="fw-bold mb-1">{{tx.certificate?.student?.person?.fullname}}</p>
-            <p class="text-muted mb-0">{{tx.certificate?.student?.degreeProgramName}}</p>
+            <p class="mb-1"><strong> {{tx.certificate?.student?.person?.fullname}}</strong></p>
+            <p class="mb-0">{{tx.certificate?.student?.degreeProgramName}}</p>
           </div>
         </td>
         <td>
-          <p class="fw-normal mb-1">{{tx.certificate?.dateCreated}}</p>
+          <p class="fw-normal mb-1">{{tx.dateCreated}}</p>
         </td>
-        <td>{{tx.transactionHash | slice:0:15}} ...</td>
+        <td>{{tx.transactionHash}}</td>
+        <td>{{tx.certificateBlockchainId}}</td>
+        <td>{{tx.gasUsed}} WEI</td>
         <td>
           <span class="badge badge-success rounded-pill d-inline">{{tx.status}}</span>
         </td>
-        <td>{{tx.certificateBlockchainId}}</td>
-        <td>{{tx.gasUsed}}</td>
         <td>
-          <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark">
-            Detalle
+          <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark"
+            (click)="goDetail(tx.certificateBlockchainId!)">
+            Ver m&aacute;s
           </button>
         </td>
       </tr>

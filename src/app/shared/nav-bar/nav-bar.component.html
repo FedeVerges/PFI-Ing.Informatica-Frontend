@@ -9,7 +9,7 @@
       <a href="#" [routerLink]="'student/search'">
         <div class="d-flex align-items-center">
           <img src="../../../assets/img/icons8-chain-58.png" alt="" width="40" height="40">
-          <span class="logo-text px-2 secondary">UNSL CERT</span>
+          <span class="logo-text px-2 dark">UNSL CERT</span>
         </div>
       </a>
     </div>
@@ -24,7 +24,7 @@
               </li>
               <ng-container *ngIf="role.name ==='ADMIN'">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Nuevo Estudiante</a>
+                  <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Nuevo Graduado</a>
                 </li>
                 <li class="nav-item">
                   <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear

@@ -43,6 +43,7 @@ export class AuthService {
     const user = this.hasToken();
     this.setCurrentUser(user);
     this.setRole(this.hasRole());
+    
     // No hay estudiante seleccionado.
     if (user?.person?.students) {
       this.setStudentSelected(user.person?.students[0]);

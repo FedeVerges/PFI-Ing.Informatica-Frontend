@@ -14,6 +14,12 @@
   src: url('./assets/fonts/Darker_Grotesque/DarkerGrotesque-Medium.ttf');
 }
 
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/Darker_Grotesque/DarkerGrotesque-ExtraBold.ttf");
+  font-weight: bold;
+}
+
 
 // Theme colors
 .primary {

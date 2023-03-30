@@ -147,7 +147,7 @@ export class NewCertificateComponent implements OnInit {
               this.studentSelected = undefined;
             }
           } else {
-            this.alertService.showErrorMessage('No se encontró al estudiante en el sistema');
+            this.alertService.showErrorMessage('No se encontró al graduado en el sistema');
           }
         },
         error: (error) => {
