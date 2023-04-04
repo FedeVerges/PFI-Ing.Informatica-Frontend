@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
+import { CertificateDialogComponent } from '../certificate-dialog/certificate-dialog.component';
 
 @Component({
   selector: 'app-student',
@@ -12,13 +14,16 @@ export class StudentComponent implements OnInit {
   @Input() student?: StudentDto;
   @Input() certifications: BlockchainTransactionDto[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
-  goDetail(id: number) {
-    if (id) {
-      this.router.navigateByUrl(`certificate/${id}`);
+  goDetail(transaction: BlockchainTransactionDto) {
+    if (transaction) {
+      this.dialog.open(CertificateDialogComponent, {
+        data: transaction,
+        autoFocus: false
+      });
     } else {
       throw new Error('Id certificado nulo.');
     }

@@ -68,8 +68,41 @@ export class CertificateComponent {
     if (id && this.transaction) {
       this.dialog.open(CertificateDialogComponent, {
         data: this.transaction,
-        autoFocus:false,
+        autoFocus: false
       });
     }
+  }
+
+  exportPdf(id?: number) {
+    if (id && this.transaction) {
+      this.certificateService.getPdf(id).subscribe((res: any) => {
+        this.downloadPdf(res.document, res.name);
+      });
+    }
+  }
+
+  downloadPdf(base64: string, docName: string) {
+    const byteArray = new Uint8Array(
+      atob(base64)
+        .split('')
+        .map((char) => char.charCodeAt(0))
+    );
+    const file = new Blob([byteArray], { type: 'application/pdf' });
+    const fileURL = URL.createObjectURL(file);
+    let pdfName = docName || 'report.pdf';
+    //window.open(fileURL);
+
+    // Construct the 'a' element
+    let link = document.createElement('a');
+    link.download = pdfName;
+    link.target = '_blank';
+
+    // Construct the URI
+    link.href = fileURL;
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup the DOM
+    document.body.removeChild(link);
   }
 }

@@ -1,5 +1,30 @@
-<div class="container">
-  <div class="card">
+<div class="card">
+  <span class="p-3">{{transaction?.certificate?.dateCreated}}</span>
+  <div class="card-body pt-1">
+    <div class="row">
+      <div class="col-2 text-center">
+        <i class="fas fa-award fa-4x"></i>
+      </div>
+      <div class="col-10">
+        <h2 class="certificate-title">{{transaction?.certificate?.degreeName}}</h2>
+        <p>certificado #{{transaction?.certificateBlockchainId}}</p>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <button type="button" type="submit" class="btn btn-secondary"
+          (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
+        </button>
+      </div>
+      <div class="col-3">
+        <button type="button" type="submit" class="btn btn-secondary"
+          (click)="exportPdf(transaction?.certificateBlockchainId)"> Exportar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="card">
     <span class="p-3 text-muted">{{transaction?.certificate?.dateCreated}}</span>
     <div class="card-body pt-1">
       <h5 class="certificate-title">{{transaction?.certificate?.degreeName}}</h5>
@@ -9,12 +34,12 @@
       <p><strong>Universidad: </strong>{{transaction?.certificate?.student?.universityName}}</p>
       <p><strong>Unidad Ac&aacute;demica: </strong>{{transaction?.certificate?.student?.academicUnit}}</p>
       <a class="link" [href]="transaction?.etherscanLink">{{transaction?.etherscanLink}}</a>
-      <div class="row" >
+
+      <div class="row">
         <div class="col">
           <button type="button" type="submit" class="btn btn-secondary"
             (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
           </button>
-          <!-- Todo: implementar modal de detalle con DANGER ZONE para eliminar. -->
         </div>
         <div class="col" *ngIf="(role$ | async)?.name  === 'ADMIN'">
           <button type="button" type="submit" class="btn btn-danger"> Eliminar
@@ -22,5 +47,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->

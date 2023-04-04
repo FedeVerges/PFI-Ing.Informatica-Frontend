@@ -33,6 +33,10 @@ export class CertificateService {
   getCertificateTypes() {}
   getAllDegrees() {}
 
+  getPdf(id: number) {
+    return this.http.get(environment.serverURL + `/pdf/certificate/${id}`);
+  }
+
   getAllTransactions() {
     return this.http.get<BlockchainTransactionDto[]>(
       environment.serverURL + `/transaction/all`

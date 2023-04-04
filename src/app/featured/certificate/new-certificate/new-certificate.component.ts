@@ -60,7 +60,6 @@ export class NewCertificateComponent implements OnInit {
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate
     // Validar correctamente los campos.
-    debugger
     if (!this.studentForm.invalid) {
       if (!this.certificateForm.invalid) {
         let certificate: CertificateDto;
@@ -87,13 +86,21 @@ export class NewCertificateComponent implements OnInit {
             person: person,
             universityName: this.certificateForm.get('universityName')!.value,
             academicUnit: this.certificateForm.get('academicUnit')!.value,
-            degreeProgramName: this.certificateForm.get('degreeProgramName')!.value,
-            degreeProgramCurriculum: this.certificateForm.get('degreeProgramCurriculum')!.value,
+            degreeProgramName:
+              this.certificateForm.get('degreeProgramName')!.value,
+            degreeProgramCurriculum: this.certificateForm.get(
+              'degreeProgramCurriculum'
+            )!.value,
             ministerialOrdinance: '1',
             blockchainId: 0,
-            registrationNumber: this.studentForm.get('registrationNumber')!.value,
-            superiorCouncilOrdinance: this.studentForm.get('superiorCouncilOrdinance')!.value,
-            directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value
+            registrationNumber:
+              this.studentForm.get('registrationNumber')!.value,
+            superiorCouncilOrdinance: this.studentForm.get(
+              'superiorCouncilOrdinance'
+            )!.value,
+            directiveCouncilOrdinance: this.studentForm.get(
+              'directiveCouncilOrdinance'
+            )!.value
           };
           certificate = {
             student: student,
@@ -107,7 +114,9 @@ export class NewCertificateComponent implements OnInit {
         this.createCertificate(certificate);
       } else {
         this.certificateForm.markAllAsTouched();
-        this.alertService.showErrorMessage('Verifique los datos del certificado.');
+        this.alertService.showErrorMessage(
+          'Verifique los datos del certificado.'
+        );
       }
     } else {
       this.studentForm.markAllAsTouched();
@@ -119,7 +128,9 @@ export class NewCertificateComponent implements OnInit {
     this.certificateService.createNewCertificate(certificate).subscribe({
       next: (transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
-          this.alertService.showAlert('Su certificado ha sido creado con exito.');
+          this.alertService.showAlert(
+            'Su certificado ha sido creado con exito.'
+          );
         }
       },
       error: (error) => {
@@ -147,7 +158,9 @@ export class NewCertificateComponent implements OnInit {
               this.studentSelected = undefined;
             }
           } else {
-            this.alertService.showErrorMessage('No se encontró al graduado en el sistema');
+            this.alertService.showErrorMessage(
+              'No se encontró al graduado en el sistema'
+            );
           }
         },
         error: (error) => {
@@ -173,7 +186,7 @@ export class NewCertificateComponent implements OnInit {
       superiorCouncilOrdinance: student.superiorCouncilOrdinance,
       directiveCouncilOrdinance: student.directiveCouncilOrdinance
     });
-    this.studentForm.disable()
+    this.studentForm.disable();
   }
 
   clearForm() {
