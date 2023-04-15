@@ -1,7 +1,8 @@
  <ng-container *ngIf="data">
    <mat-dialog-content>
-     <h2 class="bg-primary p-1 rounded-1">Certificado N° {{data.certificateBlockchainId}}</h2>
+     <h2 class="primary">Certificado N° {{data.certificateBlockchainId}}</h2>
      <div class="container">
+       <p><strong>Fecha de registraci&oacute;n: </strong>{{data.certificate?.dateCreated}}</p>
        <p> <strong> Graduado: </strong> {{data.certificate?.student?.person?.fullname}} -
          {{data.certificate?.student?.person?.docNumber}} </p>
 
@@ -15,42 +16,66 @@
 
        <p> <strong>Plan de estudios: </strong> {{data.certificate?.student?.degreeProgramCurriculum}}</p>
 
-       <p> <strong>Numero de oblea: </strong> {{data.certificate?.waferNumber}}</p>
+       <p> <strong mdbTooltip="Identificador para la impresi&oacute;n del t&iacute;tulo">Numero de oblea: </strong>
+         {{data.certificate?.waferNumber}}</p>
 
-       <p><strong>N° Ordenanza Consejo Superior: </strong> {{data.certificate?.student?.superiorCouncilOrdinance}}</p>
+       <strong>
+         <p class="text-success">&Eacute;ste certificado se encuentra registrado traves un Contrato Inteligente
+           en la red de Ethereum.</p>
+       </strong>
+       <div class="container">
+         <mdb-accordion>
+           <mdb-accordion-item>
+             <ng-template mdbAccordionItemHeader> <strong class="secondary"> Informaci&oacute;n adicional</strong>
+             </ng-template>
+             <ng-template mdbAccordionItemBody>
+               <p>
+                 <strong
+                   mdbTooltip="Identificador del acta firmada por los integrantentes del Consejo Superior de la universidad">
+                   N° Ordenanza Consejo Superior:
+                 </strong> {{data.certificate?.student?.superiorCouncilOrdinance}}
+               </p>
+               <p><strong
+                   mdbTooltip="Identificador del acta firmada por los integrantentes del Consejo Directivo de la universidad">N°
+                   Ordenanza Consejo Directivo: </strong>
+                 {{data.certificate?.student?.directiveCouncilOrdinance}}</p>
 
-       <p><strong>N° Ordenanza Consejo Directivo: </strong> {{data.certificate?.student?.directiveCouncilOrdinance}}</p>
+               <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}}</p>
 
-       <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}}</p>
+               <p><strong>Estado del certificado: </strong>
+                 {{data?.certificate?.status === 'active' ? 'ACTIVO' : 'DADO DE BAJA'}}
+               </p>
+               <p><strong>Transacci&oacute;n: </strong> {{data.transactionHash}}</p>
+
+               <div class="container">
+                 <span>
+                   <p class="text-muted m-1">
+                     Puede verificar el estado de la transacci&oacute;n a traves del siguiente
+                     link:
+                   </p>
+                   <a class="link" [href]="data.etherscanLink">{{data?.etherscanLink}}</a>
+                 </span>
+
+               </div>
+
+               <p><strong>Numero de bloque: </strong> {{data.blockHash}}</p>
+
+               <p><strong>Costos de certificaci&oacute;n (WEI): </strong> {{data.gasUsed}} WEI</p>
+
+             </ng-template>
+           </mdb-accordion-item>
+         </mdb-accordion>
+       </div>
      </div>
-     <h5 class="bg-primary p-1 rounded-1">Datos de certificaci&oacute;n</h5>
-     <div class="container">
-       <p class="text-success">&Eacute;ste certificado se encuentra registrado traves un <strong> Contrato Inteligente
-           en la red de Ethereum.</strong></p>
-       <p><strong>Fecha de registraci&oacute;n: </strong>{{data.certificate?.dateCreated}}</p>
-
-       <p><strong>Estado del certificado: </strong>
-         {{data?.certificate?.status === 'active' ? 'ACTIVO' : 'DADO DE BAJA'}}
-       </p>
-
-       <p><strong>Transacci&oacute;n: </strong> {{data.transactionHash}}</p>
-
-       <p>Puede verificar el estado de la transacci&oacute;n a traves del siguiente link:
-         <a class="link" [href]="data.etherscanLink">{{data?.etherscanLink}}</a>
-       </p>
-
-       <p><strong>Numero de bloque: </strong> {{data.blockHash}}</p>
-
-       <p><strong>Costos de certificaci&oacute;n (WEI): </strong> {{data.gasUsed}} WEI</p>
-     </div>
-
+     <!-- Solo si es administrativo -->
      <div class="container">
        <hr class="text-danger">
-       <p class="text-danger"> En caso de que lo desees puedes dar de baja esta certificaci&oacute;n, esta acci&oacute;n har&aacute; que
+       <p class="text-danger"> En caso de que lo desees puedes dar de baja esta certificaci&oacute;n, esta acci&oacute;n
+         har&aacute; que
          &eacute;ste certificado no sea visible en las busquedas y nadie podr&aacute; volver a encontrarlo. </p>
        <p class="text-danger">&Eacute;sta acci&oacute;n es permanente y no se puede deshacer.</p>
        <button type="button" type="submit" class="btn btn-danger"> Eliminar
-     </button>
+       </button>
      </div>
    </mat-dialog-content>
    <mat-dialog-actions align="end">

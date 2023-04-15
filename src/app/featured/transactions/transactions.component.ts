@@ -76,9 +76,9 @@ export class TransactionsComponent implements OnInit {
       .subscribe();
   }
 
-  goDetail(id: number) {
-    if (id) {
-      this.router.navigateByUrl(`certificate/${id}`);
+  goDetail(transaction: BlockchainTransactionDto) {
+    if (transaction) {
+      window.open(transaction.etherscanLink, '_blank');
     } else {
       throw new Error('Id certificado nulo.');
     }

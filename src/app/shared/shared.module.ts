@@ -13,6 +13,9 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CertificateDialogComponent } from './certificate-dialog/certificate-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
+import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
+import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
     CertificateComponent,
     StudentComponent,
     CertificateDetailComponent,
-    CertificateDialogComponent
+    CertificateDialogComponent,
+    TransactionDetailComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,8 @@ import { MatButtonModule } from '@angular/material/button';
     MdbAccordionModule,
     QRCodeModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MdbTooltipModule
   ],
   exports: [
     NavBarComponent,

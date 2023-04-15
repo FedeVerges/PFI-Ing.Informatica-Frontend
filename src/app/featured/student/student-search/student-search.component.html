@@ -6,7 +6,8 @@
         <div class="col-sm-6 col-md-6">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="N&uacute;mero de documento"
-              [(ngModel)]="personDocNumber" [ngModelOptions]="{standalone: true}" aria-describedby="button-addon2" />
+              [(ngModel)]="personDocNumber" (keyup.enter)="getStudentByDni()" [ngModelOptions]="{standalone: true}"
+              aria-describedby="button-addon2" />
             <button class="btn btn-secondary" type="button" id="button-addon2" mdbRipple rippleColor="danger"
               (click)="getStudentByDni()">
               Buscar
