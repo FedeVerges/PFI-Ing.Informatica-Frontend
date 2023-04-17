@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'validate',
+    path: 'validate/:certificate',
     loadChildren: () =>
       import('./featured/validate/validate.module').then(
         (m) => m.ValidateModule
@@ -35,7 +35,7 @@ const routes: Routes = [
       import('./featured/transactions/transactions.module').then(
         (m) => m.TransactionsModule
       ),
-      canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   // Siempre al final.
   { path: '*', redirectTo: 'login', pathMatch: 'full' }

@@ -19,10 +19,6 @@
       carrera <strong> {{certificate.certificate?.student?.degreeProgramName}}</strong>
       de la instituci&oacute;n
       <strong>{{certificate.certificate?.student?.universityName}}</strong>. </h4>
-    <h4 class="my-2 text-muted">
-      Se le considera plenamente capaz de realizar todas las tareas respectivas a la actividad de
-      <strong>{{certificate.certificate?.degreeName}}</strong>
-    </h4>
 
     <h5 class="my-4">
       Certificado: {{certificate.certificate?.dateCreated}}
@@ -32,9 +28,9 @@
       Puede consultar la misma a traves de <a [href]="certificate.etherscanLink">{{certificate.etherscanLink}}</a>
     </p>
 
-    <div class="text-center">
+    <!-- <div class="text-center">
       <qrcode [qrdata]="'Holis'" [width]="180" [errorCorrectionLevel]="'M'"></qrcode>
-    </div>
+    </div> -->
 
     <div class="d-flex justify-content-center mt-3">
       <div class="d-flex align-items-center">
