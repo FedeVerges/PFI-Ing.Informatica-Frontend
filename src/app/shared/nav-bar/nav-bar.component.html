@@ -6,7 +6,8 @@
       <i class="fas fa-bars"></i>
     </button>
     <div class="d-flex align-items-end pe-3">
-      <a href="#" [routerLink]="'student/search'">
+      <!-- <a href="#" [routerLink]="'student/search'"> -->
+      <a href="#">
         <div class="d-flex align-items-center">
           <img src="../../../assets/img/icons8-chain-58.png" alt="" width="40" height="40">
           <span class="logo-text px-2 dark">UNSL CERT</span>
@@ -16,18 +17,14 @@
     <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse" id="navBarCertificatesValidator">
       <ng-container *ngIf="user; else userActions">
         <ng-container *ngIf="role$ | async; let role">
-          <div class="col-8">
+          <div class="col-4">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a [routerLink]="'validate'" class="nav-link" routerLinkActive="active-link" href="#">Buscar
-                  T&iacute;tulos</a>
-              </li>
               <ng-container *ngIf="role.name ==='ADMIN'">
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Nuevo Graduado</a>
                 </li>
                 <li class="nav-item">
-                  <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear
+                  <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Nuevo
                     t&iacute;tulo</a>
                 </li>
               </ng-container>
@@ -37,11 +34,19 @@
                     href="#">Mis t&iacute;tulos</a>
                 </li>
               </ng-container>
+              <!-- TODO: agregar una barra en medio para buscar titulos. -->
+              <li class="nav-item">
+                <a [routerLink]="'certificate/search'" class="nav-link" routerLinkActive="active-link" href="#">Buscar
+                  T&iacute;tulos</a>
+              </li>
             </ul>
+          </div>
+          <div class="col-lg-6 col-xl-4">
+            <app-student-search></app-student-search>
           </div>
 
           <!-- Opciones de la derecha. -->
-          <div class="col-4 text-end">
+          <div class="col-2 col-md-2 col-xl-4 text-end">
             <div class="d-flex justify-content-end align-items-center">
               <ng-container *ngIf="role.name ==='ADMIN'">
                 <span class="badge bg-secondary">Admin</span>

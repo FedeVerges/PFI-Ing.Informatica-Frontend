@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
+import { StudentSearchComponent } from '../featured/student/student-search/student-search.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
     StudentComponent,
     CertificateDetailComponent,
     CertificateDialogComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    StudentSearchComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
     CertificateComponent,
     StudentComponent,
     CertificateDetailComponent,
-    CertificateDialogComponent
+    CertificateDialogComponent,
+    StudentSearchComponent
   ]
 })
 export class SharedModule {}

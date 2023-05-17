@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { RoleDto } from 'src/app/core/models/dto/roleDto';
+import { UserDto } from 'src/app/core/models/dto/userDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CertificateService } from 'src/app/core/services/certificate.service';
 import { CertificateDialogComponent } from '../certificate-dialog/certificate-dialog.component';
@@ -59,10 +60,10 @@ export class CertificateComponent {
     private certificateService: CertificateService
   ) {
     this.role$ = this.authService.getRole();
+    this.user$ = this.authService.getCurrentUser();
   }
   role$: Observable<RoleDto | null>;
-
-  createEtherscanLink() {}
+  user$: Observable<UserDto | null>;
 
   goDetail(id?: number) {
     if (id && this.transaction) {

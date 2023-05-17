@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'student/search', pathMatch: 'full' },
+  { path: '', redirectTo: 'student/new', pathMatch: 'full' },
   {
     path: 'certificate',
     loadChildren: () =>

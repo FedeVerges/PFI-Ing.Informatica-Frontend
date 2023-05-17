@@ -1,0 +1,67 @@
+<div class="container-fluid my-3" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+  <div class="row">
+    <div class="col-6">
+      <h5 class="text-start">Graduados encontrados:</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="list-group list-group-light">
+        <ng-container *ngFor="let student of studentList">
+          <button type="button" class="list-group-item list-group-item-action btn my-2 text-start" aria-current="true"
+            mdbRipple (click)="selectStudent(student)">
+            {{student.person.fullname}} - {{student.degreeProgramName}}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="studentSelected && !!studentTitles">
+  <div class="col">
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col animate__animated animate__fadeIn">
+          <app-student [student]="studentSelected" [certifications]="studentTitles"></app-student>
+        </div>
+      </div>
+    </div>
+    <!-- <ng-container *ngIf="showTitle">
+        <div class="animate__animated animate__fadeIn" *ngIf="">
+          <ng-container *ngIf="titles && titles.length > 0 else emptyData">
+            <div class="card">
+              <div class="card-body">
+                <h3>T&iacute;tulos</h3>
+                <div class="row row-cols-3" *ngFor="let item of titles">
+                  <div class="col">
+                    <app-certificate [transaction]="item"></app-certificate>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="row mt-2">
+          <div class="col text-end">
+            <button type="button " type="submit" class="btn" (click)="showTitle = false;">
+              Datos del estudiante
+            </button>
+          </div>
+        </div>
+      </ng-container> -->
+  </div>
+</div>
+
+<ng-template #emptyData>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>No hay datos...</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

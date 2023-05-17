@@ -8,9 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 
 @NgModule({
-  declarations: [NewStudentComponent, StudentSearchComponent],
+  declarations: [NewStudentComponent, StudentDetailComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

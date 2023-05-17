@@ -56,7 +56,7 @@ export class LoginComponent {
               };
               this.authService.login(response.token, userData, response.role);
               // todo: dependiendo del rol, va a una pantalla o a otra.
-              this.router.navigateByUrl('student/search');
+              this.router.navigateByUrl('student/new');
             }
           },
           error: (e) => this.alertService.showErrorMessage(e)

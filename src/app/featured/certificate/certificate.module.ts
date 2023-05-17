@@ -10,11 +10,15 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { MyCertificatesComponent } from './my-certificates/my-certificates.component';
 import { CertificateDetailComponentWrapper } from './certificate-detail/certificate-detail.component';
-import { QRCodeModule } from 'angularx-qrcode';
-import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { CertificateSearchComponent } from './certificate-search/certificate-search.component';
 
 @NgModule({
-  declarations: [NewCertificateComponent, MyCertificatesComponent, CertificateDetailComponentWrapper],
+  declarations: [
+    NewCertificateComponent,
+    MyCertificatesComponent,
+    CertificateDetailComponentWrapper,
+    CertificateSearchComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -23,7 +27,7 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
     CertificateRoutingModule,
     MdbFormsModule,
     MdbRippleModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [Web3Service]
 })

@@ -1,40 +1,40 @@
 <div class="container pt-5">
-    <div class="row">
-      <div class="col">
-        <div class="card text-center w-50 m-auto">
-          <form autocomplete="true" [formGroup]="loginForm">
-            <!-- <div class="card-header">
+  <div class="row">
+    <div class="col">
+      <div class="card text-center w-50 m-auto">
+        <form autocomplete="true" [formGroup]="loginForm">
+          <!-- <div class="card-header">
               <h1>Sistema Validador de t&iacute;tulos</h1>
             </div> -->
-            <div class="card-body">
-              <div class="row text-center">
-                <div class="col pb-5">
-                  <span class="h1 card-title">Bienvenido !! </span>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <mdb-form-control class="mb-3 w-50">
-                  <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="user"
-                    required />
-                  <label mdbLabel class="form-label" for="form_lastName">Usuario</label>
-                </mdb-form-control>
-              </div>
-              <div class="row justify-content-center">
-                <mdb-form-control class="mb-3 w-50">
-                  <input mdbInput type="password" id="form_lastName" class="form-control" formControlName="password"
-                    required />
-                  <label mdbLabel class="form-label" for="form_lastName">Contrase&ntilde;a</label>
-                </mdb-form-control>
-                <!-- todo: Agregar manejo de errores -->
+          <div class="card-body">
+            <div class="d-flex justify-content-center m-4">
+              <div class="d-flex align-items-center">
+                <img src="../../../assets/img/icons8-chain-58.png" alt="" width="60" height="60">
+                <span class="logo-text px-2 dark">UNSL CERT</span>
               </div>
             </div>
-            <div class="card-footer">
-              <button type="button" type="submit" class=" btn btn-secondary" (click)="login()">
-                Ingresar
-              </button>
+            <div class="row justify-content-center">
+              <mdb-form-control class="mb-3 w-50">
+                <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="user" required />
+                <label mdbLabel class="form-label" for="form_lastName">Usuario</label>
+              </mdb-form-control>
             </div>
-          </form>
-        </div>
+            <div class="row justify-content-center">
+              <mdb-form-control class="mb-3 w-50">
+                <input mdbInput type="password" id="form_lastName" class="form-control" formControlName="password"
+                  required />
+                <label mdbLabel class="form-label" for="form_lastName">Contrase&ntilde;a</label>
+              </mdb-form-control>
+              <!-- todo: Agregar manejo de errores -->
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" type="submit" class=" btn btn-secondary" (click)="login()">
+              Ingresar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>

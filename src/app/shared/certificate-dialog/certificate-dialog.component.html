@@ -8,7 +8,7 @@
 
        <p> <strong>N° Registro: </strong>{{data.certificate?.student?.registrationNumber}} </p>
 
-       <p> <strong>Instituci&oacute;n: </strong> {{data.certificate?.student?.person?.fullname}} </p>
+       <p> <strong>Instituci&oacute;n: </strong> {{data.certificate?.student?.universityName}} </p>
 
        <p> <strong>Unidad acad&eacute;mica: </strong> {{data.certificate?.student?.academicUnit}}</p>
 
@@ -40,17 +40,17 @@
                    Ordenanza Consejo Directivo: </strong>
                  {{data.certificate?.student?.directiveCouncilOrdinance}}</p>
 
-               <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}}</p>
+               <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}} </p>
 
                <p><strong>Estado del certificado: </strong>
-                 {{data?.certificate?.status === 'active' ? 'ACTIVO' : 'DADO DE BAJA'}}
+                 {{data?.certificate?.status === 'ACT' ? 'ACTIVO' : 'DADO DE BAJA'}}
                </p>
                <p><strong>Transacci&oacute;n: </strong> {{data.transactionHash}}</p>
 
                <div class="container">
                  <span>
                    <p class="text-muted m-1">
-                     Puede verificar el estado de la transacci&oacute;n a traves del siguiente
+                     Puede validar el estado de la transacci&oacute;n a traves del siguiente
                      link:
                    </p>
                    <a class="link" [href]="data.etherscanLink">{{data?.etherscanLink}}</a>
@@ -68,10 +68,9 @@
        </div>
      </div>
      <!-- Solo si es administrativo -->
-     <div class="container">
+     <div class="container" *ngIf="(role$ | async)?.name ==='ADMIN'">
        <hr class="text-danger">
-       <p class="text-danger"> En caso de que lo desees puedes dar de baja esta certificaci&oacute;n, esta acci&oacute;n
-         har&aacute; que
+       <p class="text-danger"> &Eacute;sta acci&oacute;n har&aacute; que
          &eacute;ste certificado no sea visible en las busquedas y nadie podr&aacute; volver a encontrarlo. </p>
        <p class="text-danger">&Eacute;sta acci&oacute;n es permanente y no se puede deshacer.</p>
        <button type="button" type="submit" class="btn btn-danger"> Eliminar

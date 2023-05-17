@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, delay, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
@@ -15,65 +16,13 @@ import { StudentService } from 'src/app/core/services/student.service';
 export class StudentSearchComponent implements OnInit {
   personDocNumber: number | undefined;
 
-  studentList: StudentDto[] = [];
-  studentSelected: StudentDto | undefined;
-
-  unversitiesCarrers: any[] = [];
-  showTitle = false;
-  studentTitles?: BlockchainTransactionDto[];
-
-  constructor(
-    private alertService: AlertService,
-    private studentSerivce: StudentService,
-    private certificateService: CertificateService
-  ) {}
+  constructor(private alertService: AlertService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  getStudentByDni() {
+  searchStudentByDni() {
     if (this.personDocNumber) {
-      this.studentSerivce.getStudentByDni(this.personDocNumber).subscribe({
-        next: (students: StudentDto[]) => {
-          // Mostrar lista de estudiantes.
-          if (students && students.length > 0) {
-            this.studentList = students;
-            if (students.length === 1) {
-              this.studentSelected = students[0];
-              this.getTitles(this.studentSelected);
-            } else {
-              this.studentSelected = undefined;
-            }
-          } else {
-            this.alertService.showErrorMessage(
-              'No se encontró al estudiante en el sistema'
-            );
-          }
-        },
-        error: (error) => {
-          this.alertService.showErrorMessage(
-            error?.message || 'ocurrió un error al solicitar estudiante'
-          );
-        }
-      });
+      this.router.navigateByUrl(`/student/search/${this.personDocNumber}`);
     }
-  }
-
-  // todo: Terminar tabla de certificaciones.
-  getTitles(student: StudentDto) {
-    this.showTitle = true;
-    this.certificateService
-      .getCertificatesByStudentId(String(student.blockchainId))
-      .pipe(
-        catchError((error) => {
-          this.alertService.showErrorMessage(String(error));
-          return throwError(() => error);
-        })
-      )
-      .subscribe((certificates) => (this.studentTitles = certificates || []));
-  }
-
-  selectStudent(student: StudentDto) {
-    this.studentSelected = student;
-    this.getTitles(student);
   }
 }

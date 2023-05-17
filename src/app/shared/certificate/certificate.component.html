@@ -16,7 +16,8 @@
           (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
         </button>
       </div>
-      <div class="col-3">
+      <div class="col-3"
+        *ngIf="(user$|async)?.person?.docNumber === transaction?.certificate?.student?.person?.docNumber && (role$|async)?.name === 'STUDENT' ">
         <button type="button" type="submit" class="btn btn-secondary"
           (click)="exportPdf(transaction?.certificateBlockchainId)"> Exportar
         </button>
@@ -24,27 +25,3 @@
     </div>
   </div>
 </div>
-<!-- <div class="card">
-    <span class="p-3 text-muted">{{transaction?.certificate?.dateCreated}}</span>
-    <div class="card-body pt-1">
-      <h5 class="certificate-title">{{transaction?.certificate?.degreeName}}</h5>
-      <p class="card-subtitle mb-2 text-muted">{{transaction?.certificate?.student?.person?.fullname}} -
-        {{transaction?.certificate?.student?.person?.docNumber}}</p>
-      <p><strong>Tipo de carrera: </strong>{{transaction?.certificate?.degreeType}}</p>
-      <p><strong>Universidad: </strong>{{transaction?.certificate?.student?.universityName}}</p>
-      <p><strong>Unidad Ac&aacute;demica: </strong>{{transaction?.certificate?.student?.academicUnit}}</p>
-      <a class="link" [href]="transaction?.etherscanLink">{{transaction?.etherscanLink}}</a>
-
-      <div class="row">
-        <div class="col">
-          <button type="button" type="submit" class="btn btn-secondary"
-            (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
-          </button>
-        </div>
-        <div class="col" *ngIf="(role$ | async)?.name  === 'ADMIN'">
-          <button type="button" type="submit" class="btn btn-danger"> Eliminar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div> -->
