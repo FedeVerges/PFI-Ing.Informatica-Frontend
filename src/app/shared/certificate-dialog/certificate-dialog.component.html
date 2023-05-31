@@ -68,12 +68,13 @@
        </div>
      </div>
      <!-- Solo si es administrativo -->
-     <div class="container" *ngIf="(role$ | async)?.name ==='ADMIN'">
+     <div class="container" *ngIf="(role$ | async)?.name ==='ADMIN' && data.certificateBlockchainId">
        <hr class="text-danger">
        <p class="text-danger"> &Eacute;sta acci&oacute;n har&aacute; que
          &eacute;ste certificado no sea visible en las busquedas y nadie podr&aacute; volver a encontrarlo. </p>
        <p class="text-danger">&Eacute;sta acci&oacute;n es permanente y no se puede deshacer.</p>
-       <button type="button" type="submit" class="btn btn-danger"> Eliminar
+       <button type="button" type="submit" class="btn btn-danger"
+         (click)="deleteCertficate(data.certificateBlockchainId)"> Eliminar
        </button>
      </div>
    </mat-dialog-content>

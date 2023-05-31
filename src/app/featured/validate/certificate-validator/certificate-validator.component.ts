@@ -12,12 +12,6 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./certificate-validator.component.scss']
 })
 export class CertificateValidatorComponent implements OnInit {
-  certificateId?: number;
-  amountCertificates: number = 0;
-  certificateSearchResult?: BlockchainTransactionDto;
-  certificates: Certificate[] = [];
-  hasResult = true;
-  str?: string;
   certificate?: BlockchainTransactionDto;
 
   constructor(
@@ -26,11 +20,14 @@ export class CertificateValidatorComponent implements OnInit {
     private alertService: AlertService
   ) {
     const param = this.activatedRoute.snapshot.params['certificate'];
-    if (param && param.length > 50) {
+    if (param && param.length > 30) {
       const encodedWord = CryptoJS.enc.Base64.parse(param);
-      this.str = CryptoJS.enc.Utf8.stringify(encodedWord);
-      const certificate = JSON.parse(this.str) as BlockchainTransactionDto;
-      this.getCertificatesByStudentId(certificate);
+      const decodedParams = JSON.parse(
+        CryptoJS.enc.Utf8.stringify(encodedWord)
+      ) as {
+        ceritificateBlockchainId: number;
+      };
+      this.getCertificatesByStudentId(decodedParams.ceritificateBlockchainId);
     } else {
       throw new Error('documento no valido.');
     }
@@ -38,15 +35,13 @@ export class CertificateValidatorComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCertificatesByStudentId(certificate: BlockchainTransactionDto) {
-    if (certificate && certificate.certificateBlockchainId) {
+  getCertificatesByStudentId(certificateId: number) {
+    if (certificateId) {
       this.certificateService
-        .getCertificatesById(String(certificate.certificateBlockchainId))
+        .getCertificatesById(String(certificateId))
         .subscribe({
           next: (result) => {
-            if (this.compareCertificateData(certificate, result)) {
-              this.certificate = result;
-            }
+            this.certificate = result;
           },
           error: (e) => {
             this.alertService.showErrorMessage(e);

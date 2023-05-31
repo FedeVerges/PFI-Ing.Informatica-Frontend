@@ -29,10 +29,6 @@ export class CertificateService {
     );
   }
 
-  getAllInstitutions() {}
-  getCertificateTypes() {}
-  getAllDegrees() {}
-
   getPdf(id: number) {
     return this.http.get(environment.serverURL + `/pdf/certificate/${id}`);
   }
@@ -48,5 +44,9 @@ export class CertificateService {
       environment.serverURL + `/certificate/new`,
       certificate
     );
+  }
+
+  deleteCertificate(id: number) {
+    return this.http.delete<any>(environment.serverURL + `/certificate/${id}`);
   }
 }
