@@ -140,7 +140,7 @@
 .green-snackbar {
   background-color: $light;
   color: $secondary;
-  margin-top: 4.5rem !important;
+  margin-top: 6rem !important;
 }
 
 .green-snackbar button {
@@ -148,7 +148,18 @@
   color: $secondary;
 }
 
-.form-outline { 
+.error-snackbar {
+  background-color: $danger;
+  color: $light;
+  margin-top: 6rem !important;
+}
+
+.error-snackbar button {
+  border: none;
+  color: $light;
+}
+
+.form-outline {
   background: white;
 }
 
@@ -165,7 +176,7 @@ body {
   font-size: 18px !important;
 }
 
-.btn{
+.btn {
   font-size: 1rem;
   line-height: 1.1;
 }
