@@ -1,6 +1,8 @@
 <div class="card">
   <span class="p-3">{{transaction?.certificate?.dateCreated}}</span>
   <div class="card-body pt-1">
+    <ng-container *ngIf="transaction?.certificate?.status === CERTIFICATE_STATUS.ACTIVE; else certificateInactive">
+    </ng-container>
     <div class="row">
       <div class="col-2 text-center">
         <i class="fas fa-award fa-4x"></i>
@@ -25,3 +27,16 @@
     </div>
   </div>
 </div>
+
+<ng-template #certificateInactive>
+  <div class="container">
+    <div class="row">
+      <div class="col text-danger">
+        <p>SU CERTIFICADO SE ENCUENTRA INACTIVO. NO PUEDE SER VISUALIZADO.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+</ng-template>

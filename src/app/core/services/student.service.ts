@@ -43,9 +43,6 @@ export class StudentService {
               },
               {
                 name: 'Ingeniería quimica'
-              },
-              {
-                name: 'Ingeniería en periodismo deportivo'
               }
             ]
           },
@@ -63,9 +60,6 @@ export class StudentService {
               },
               {
                 name: 'Licenciatura en biologia molecular'
-              },
-              {
-                name: 'Licenciatura en psicomotriciadad bacteriana'
               }
             ]
           }
@@ -81,7 +75,7 @@ export class StudentService {
                 name: 'Tecnicatura en desarollo de videojuegos'
               },
               {
-                name: 'Tecnicatura en desarrollo'
+                name: 'Tecnicatura en desarrollo de web'
               },
               {
                 name: 'Tecnicatura superior en refrigeración de materiales de construcción'

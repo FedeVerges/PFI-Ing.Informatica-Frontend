@@ -1,10 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { BlockchainTransactionDto } from '../models/dto/blockchainTransactionDto';
+import { NOTIFICATION_TYPES } from '../enum/notificationTypes';
 import { NetworkStatusDto } from '../models/dto/networkStatusDto';
 import { NotificationDto } from '../models/dto/notificationDto';
-import { NOTIFICATION_TYPES } from '../models/notificationTypes';
 import { AlertService } from './alert.service';
 
 @Injectable({
@@ -37,6 +36,7 @@ export class WebsocketService implements OnDestroy {
             }
             break;
           case NOTIFICATION_TYPES.ERROR:
+            this.showNotification(message.status || 'Error inesperado.');
             break;
 
           default:
@@ -62,6 +62,13 @@ export class WebsocketService implements OnDestroy {
 
   showTransactionNotification(message: NotificationDto) {
     const textMessage = `La transaccion ${message.transactionHash} ha sido exitosa`;
+    this.alertService.showAlert(textMessage, 'Aceptar', {
+      duration: undefined
+    });
+  }
+
+  showNotification(message: string) {
+    const textMessage = message;
     this.alertService.showAlert(textMessage, 'Aceptar', {
       duration: undefined
     });

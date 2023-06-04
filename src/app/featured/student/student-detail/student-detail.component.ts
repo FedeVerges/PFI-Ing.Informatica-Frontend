@@ -27,12 +27,17 @@ export class StudentDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     // Escuchar parametros de ruta y buscar al estudiante.
-    this.personDocNumber = this.activatedRoute.snapshot.params['docNumber'];
-    if (this.personDocNumber && this.personDocNumber > 0) {
-      this.getStudentByDni();
-    } else {
-      throw new Error('Falta parametro de documento');
-    }
+    this.activatedRoute.params.subscribe({
+      next: (params) => {
+        this.personDocNumber = params['docNumber'];
+        if (this.personDocNumber && this.personDocNumber > 0) {
+          this.getStudentByDni();
+        } else {
+          throw new Error('Falta parametro de documento');
+        }
+      },
+      error: (e) => console.error(e)
+    });
   }
   getStudentByDni() {
     if (this.personDocNumber) {

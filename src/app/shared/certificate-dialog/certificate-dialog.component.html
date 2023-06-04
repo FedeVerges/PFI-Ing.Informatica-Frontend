@@ -43,7 +43,7 @@
                <p><strong>Ordenanza Ministerial: </strong> {{data.certificate?.student?.ministerialOrdinance}} </p>
 
                <p><strong>Estado del certificado: </strong>
-                 {{data?.certificate?.status === 'ACT' ? 'ACTIVO' : 'DADO DE BAJA'}}
+                 {{data?.certificate?.status === CERTIFICATE_STATUS.ACTIVE ? 'ACTIVO' : 'DADO DE BAJA'}}
                </p>
                <p><strong>Transacci&oacute;n: </strong> {{data.transactionHash}}</p>
 

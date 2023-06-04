@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CERTIFICATE_STATUS } from 'src/app/core/enum/certificateStatus';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { RoleDto } from 'src/app/core/models/dto/roleDto';
 import { UserDto } from 'src/app/core/models/dto/userDto';
@@ -15,7 +16,10 @@ import { CertificateDialogComponent } from '../certificate-dialog/certificate-di
   styleUrls: ['./certificate.component.scss']
 })
 export class CertificateComponent {
+  public CERTIFICATE_STATUS = CERTIFICATE_STATUS;
+
   @Input() transaction: BlockchainTransactionDto | undefined;
+  @Input() certificateDeleted: boolean = false;
 
   // transaction: BlockchainTransactionDto = {
   //   transactionHash: "0x8722542ea90c26e90d7fb946ae103fbdcbb182945205746ad7ba5133266fabeb",
@@ -67,10 +71,13 @@ export class CertificateComponent {
 
   goDetail(id?: number) {
     if (id && this.transaction) {
-      this.dialog.open(CertificateDialogComponent, {
-        data: this.transaction,
-        autoFocus: false
-      });
+      this.dialog
+        .open(CertificateDialogComponent, {
+          data: this.transaction,
+          autoFocus: false
+        })
+        .afterClosed()
+        .subscribe((res) => {});
     }
   }
 

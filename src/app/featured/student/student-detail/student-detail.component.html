@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="list-group list-group-light">
         <ng-container *ngFor="let student of studentList">
           <button type="button" class="list-group-item list-group-item-action btn my-2 text-start" aria-current="true"
@@ -20,8 +20,14 @@
 <div class="row" *ngIf="studentSelected && !!studentTitles">
   <div class="col">
     <div class="container mt-3">
-      <div class="row">
-        <div class="col animate__animated animate__fadeIn">
+      <div class="row animate__animated animate__fadeIn">
+        <div class="col-1">
+          <button class="navbar-toggler" type="button" (click)="studentSelected=undefined"
+            aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-angle-left"></i>
+          </button>
+        </div>
+        <div class="col-10">
           <app-student [student]="studentSelected" [certifications]="studentTitles"></app-student>
         </div>
       </div>
