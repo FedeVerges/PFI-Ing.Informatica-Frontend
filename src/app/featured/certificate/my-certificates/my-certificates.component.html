@@ -1,7 +1,16 @@
 <div class="container pt-5">
-  <div class="row  row-cols-2 justify-content-center" *ngFor="let transaction of transactions">
+  <div
+    class="row row-cols-2 justify-content-center"
+    *ngFor="let transaction of transactions"
+  >
     <div class="col">
       <app-certificate [transaction]="transaction"></app-certificate>
     </div>
   </div>
+</div>
+<div class="container mt-2">
+  <app-message
+    title="Transaccion enviada con &eacute;xito..."
+    message="asdasdasd"
+  ></app-message>
 </div>

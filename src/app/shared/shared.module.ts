@@ -13,10 +13,10 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CertificateDialogComponent } from './certificate-dialog/certificate-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { StudentSearchComponent } from '../featured/student/student-search/student-search.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { StudentSearchComponent } from '../featured/student/student-search/stude
     CertificateDetailComponent,
     CertificateDialogComponent,
     TransactionDetailComponent,
-    StudentSearchComponent
+    StudentSearchComponent,
+    MessageComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +48,8 @@ import { StudentSearchComponent } from '../featured/student/student-search/stude
     StudentComponent,
     CertificateDetailComponent,
     CertificateDialogComponent,
-    StudentSearchComponent
+    StudentSearchComponent,
+    MessageComponent
   ]
 })
 export class SharedModule {}
