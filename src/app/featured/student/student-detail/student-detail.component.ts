@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -12,13 +12,14 @@ import { StudentService } from 'src/app/core/services/student.service';
   templateUrl: './student-detail.component.html',
   styleUrls: ['./student-detail.component.scss']
 })
-export class StudentDetailComponent implements OnInit {
+export class StudentDetailComponent implements OnInit, OnDestroy {
   studentTitles?: BlockchainTransactionDto[];
 
   studentList: StudentDto[] = [];
   studentSelected: StudentDto | undefined;
   showTitle = false;
   personDocNumber = 0;
+  subscription: Subscription;
 
   constructor(
     private alertService: AlertService,
@@ -27,7 +28,7 @@ export class StudentDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     // Escuchar parametros de ruta y buscar al estudiante.
-    this.activatedRoute.params.subscribe({
+    this.subscription = this.activatedRoute.params.subscribe({
       next: (params) => {
         this.personDocNumber = params['docNumber'];
         if (this.personDocNumber && this.personDocNumber > 0) {
@@ -39,6 +40,11 @@ export class StudentDetailComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getStudentByDni() {
     if (this.personDocNumber) {
       this.studentSerivce.getStudentByDni(this.personDocNumber).subscribe({
@@ -53,14 +59,22 @@ export class StudentDetailComponent implements OnInit {
               this.studentSelected = undefined;
             }
           } else {
-            this.alertService.showErrorMessage(
-              'No se encontró al estudiante en el sistema'
+            this.alertService.showAlert(
+              'No se encontró al estudiante en el sistema',
+              undefined,
+              {
+                panelClass: ['error-snackbar']
+              }
             );
           }
         },
         error: (error) => {
-          this.alertService.showErrorMessage(
-            error?.message || 'ocurrió un error al solicitar estudiante'
+          this.alertService.showAlert(
+            'No se encontró al estudiante en el sistema',
+            undefined,
+            {
+              panelClass: ['error-snackbar']
+            }
           );
         }
       });

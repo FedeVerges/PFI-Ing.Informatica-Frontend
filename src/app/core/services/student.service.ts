@@ -33,16 +33,20 @@ export class StudentService {
             name: 'Facultad de ciencias fisico matemáticas y naturales',
             careers: [
               {
-                name: 'Ingeniería en informática'
+                name: 'Ingeniería en informática',
+                plans: ['26/12']
               },
               {
-                name: 'Ingeniería en electrónica'
+                name: 'Ingeniería en electrónica',
+                plans: ['13/08']
               },
               {
-                name: 'Ingeniería en minas'
+                name: 'Ingeniería en Minas',
+                plans: ['11/08']
               },
               {
-                name: 'Ingeniería quimica'
+                name: 'Ingeniería Quimica',
+                plans: ['13/08']
               }
             ]
           },
@@ -50,35 +54,20 @@ export class StudentService {
             name: 'Facultad de ciencias química bioquímica y farmacia',
             careers: [
               {
-                name: 'Licenciatura en química'
+                name: 'Licenciatura en Química',
+                plans: ['11/19']
               },
               {
-                name: 'Licenciatura en nutrición'
+                name: 'Licenciatura en Nutrición',
+                plans: ['11/09']
               },
               {
-                name: 'Licenciatura en bioquimica'
+                name: 'Licenciatura en Bioquimica',
+                plans: ['11/19']
               },
               {
-                name: 'Licenciatura en biologia molecular'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Universidad La Punta',
-        academicUnits: [
-          {
-            name: 'Ciencias de la computación',
-            careers: [
-              {
-                name: 'Tecnicatura en desarollo de videojuegos'
-              },
-              {
-                name: 'Tecnicatura en desarrollo de web'
-              },
-              {
-                name: 'Tecnicatura superior en refrigeración de materiales de construcción'
+                name: 'Licenciatura en Biologia Molecular',
+                plans: ['11/19']
               }
             ]
           }

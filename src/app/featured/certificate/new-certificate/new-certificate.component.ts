@@ -15,7 +15,7 @@ import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
   templateUrl: './new-certificate.component.html',
   styleUrls: ['./new-certificate.component.scss']
 })
-export class NewCertificateComponent implements OnInit {
+export class NewCertificateComponent {
   certificateForm!: FormGroup;
   studentForm!: FormGroup;
   amountCertificates: number = 0;
@@ -54,8 +54,6 @@ export class NewCertificateComponent implements OnInit {
       waferNumber: ['', [Validators.required]]
     });
   }
-
-  ngOnInit(): void {}
 
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Certificate } from 'src/app/core/models/certificate';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { CertificateService } from 'src/app/core/services/certificate.service';
+import { Subscription } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -11,31 +11,41 @@ import * as CryptoJS from 'crypto-js';
   templateUrl: './certificate-validator.component.html',
   styleUrls: ['./certificate-validator.component.scss']
 })
-export class CertificateValidatorComponent implements OnInit {
+export class CertificateValidatorComponent implements OnInit, OnDestroy {
   certificate?: BlockchainTransactionDto;
+  subscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private certificateService: CertificateService,
     private alertService: AlertService
   ) {
-    const param = this.activatedRoute.snapshot.params['certificate'];
-    if (param && param.length > 30) {
-      const encodedWord = CryptoJS.enc.Base64.parse(param);
-      const decodedParams = JSON.parse(
-        CryptoJS.enc.Utf8.stringify(encodedWord)
-      ) as {
-        ceritificateBlockchainId: number;
-      };
-      this.getCertificatesByStudentId(decodedParams.ceritificateBlockchainId);
-    } else {
-      throw new Error('documento no valido.');
-    }
+    this.subscription = this.activatedRoute.params.subscribe({
+      next: (params) => {
+        const param = params['certificate'];
+        if (param && param.length > 0) {
+          const encodedWord = CryptoJS.enc.Base64.parse(param);
+          const decodedParams = JSON.parse(
+            CryptoJS.enc.Utf8.stringify(encodedWord)
+          ) as {
+            ceritificateBlockchainId: number;
+          };
+          this.getCertificatesById(decodedParams.ceritificateBlockchainId);
+        } else {
+          throw new Error('documento no valido.');
+        }
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {}
 
-  getCertificatesByStudentId(certificateId: number) {
+  getCertificatesById(certificateId: number) {
     if (certificateId) {
       this.certificateService
         .getCertificatesById(String(certificateId))

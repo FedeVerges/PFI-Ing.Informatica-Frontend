@@ -41,7 +41,7 @@ export class AlertService {
   showErrorMessage(message: string) {
     const customConfig = {
       ...this.DEFAULT_CONFIG,
-      duration: undefined,
+      duration: 3000,
       panelClass: ['error-snackbar']
     };
     this._snackBar.open(message, 'Aceptar', customConfig);

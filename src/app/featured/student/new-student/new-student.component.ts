@@ -10,6 +10,54 @@ import { University } from 'src/app/core/models/university';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { StudentService } from 'src/app/core/services/student.service';
 
+const UNSL: University = {
+  name: 'Universidad Nacional de San Luis',
+  academicUnits: [
+    {
+      name: 'Facultad de ciencias fisico matemáticas y naturales',
+      careers: [
+        {
+          name: 'Ingeniería en informática',
+          plans: ['26/12']
+        },
+        {
+          name: 'Ingeniería en electrónica',
+          plans: ['13/08']
+        },
+        {
+          name: 'Ingeniería en Minas',
+          plans: ['11/08']
+        },
+        {
+          name: 'Ingeniería Quimica',
+          plans: ['13/08']
+        }
+      ]
+    },
+    {
+      name: 'Facultad de ciencias química bioquímica y farmacia',
+      careers: [
+        {
+          name: 'Licenciatura en Química',
+          plans: ['11/19']
+        },
+        {
+          name: 'Licenciatura en Nutrición',
+          plans: ['11/09']
+        },
+        {
+          name: 'Licenciatura en Bioquimica',
+          plans: ['11/19']
+        },
+        {
+          name: 'Licenciatura en Biologia Molecular',
+          plans: ['11/19']
+        }
+      ]
+    }
+  ]
+};
+
 @Component({
   selector: 'app-new-student',
   templateUrl: './new-student.component.html',
@@ -19,17 +67,24 @@ export class NewStudentComponent implements OnInit {
   studentForm!: FormGroup;
   personDocNumber: number | undefined;
   showFormNewStudent = false;
-  unversityData?: Observable<University[]>;
+  universities: University[] = [];
 
   academicUnits: AcademicUnit[] = [];
 
   careers: Career[] = [];
 
-  constructor(private fb: FormBuilder, private alertService: AlertService, private studentSerivce: StudentService) {
+  plans: string[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private alertService: AlertService,
+    private studentSerivce: StudentService
+  ) {
     this.studentForm = this.fb.group({
-    name: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       docNumber: ['', [Validators.required]],
+      docType: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       university: ['', [Validators.required]],
@@ -37,8 +92,8 @@ export class NewStudentComponent implements OnInit {
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
       ministerialOrdinance: [''],
-      superiorCouncilOrdinance: ['', [Validators.required]],
-      directiveCouncilOrdinance: ['', [Validators.required]]
+      superiorCouncilOrdinance: ['', []],
+      directiveCouncilOrdinance: ['', []]
     });
   }
 
@@ -53,7 +108,10 @@ export class NewStudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.unversityData = this.studentSerivce.getUniversityCarrerData();
+    this.studentSerivce.getUniversityCarrerData().subscribe((data) => {
+      this.universities = data;
+      this.university?.setValue(this.universities[0]);
+    });
   }
 
   addNewStudent() {
@@ -72,12 +130,19 @@ export class NewStudentComponent implements OnInit {
           universityName: this.university?.value?.name || '',
           academicUnit: this.academicUnit?.value?.name || '',
           degreeProgramName: this.degreeProgramName?.value?.name || '',
-          degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!.value,
-          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!.value,
+          degreeProgramCurriculum: this.studentForm.get(
+            'degreeProgramCurriculum'
+          )!.value,
+          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!
+            .value,
           blockchainId: 0,
           registrationNumber: this.studentForm.get('registrationNumber')!.value,
-          superiorCouncilOrdinance: this.studentForm.get('superiorCouncilOrdinance')!.value,
-          directiveCouncilOrdinance: this.studentForm.get('directiveCouncilOrdinance')!.value
+          superiorCouncilOrdinance: this.studentForm.get(
+            'superiorCouncilOrdinance'
+          )!.value,
+          directiveCouncilOrdinance: this.studentForm.get(
+            'directiveCouncilOrdinance'
+          )!.value
         };
         this.createStudent(student);
       }

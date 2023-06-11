@@ -1,23 +1,41 @@
 <div class="container mt-2">
   <div class="row">
     <div class="col">
-      <h3 class="card-title">Crear Nuevo Titulo Universitario</h3>
+      <h3 class="card-title">Nuevo Titulo</h3>
       <div class="row mt-2">
         <div class="col-sm-6 col-md-4">
           <mdb-form-control class="mb-3">
-            <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
-              (keyup.enter)="getStudentByDni()" [ngModelOptions]="{standalone: true}" />
-            <label mdbLabel class="form-label" for="search_dni">N&uacute;mero de documento</label>
+            <input
+              mdbInput
+              type="text"
+              id="search_dni"
+              class="form-control"
+              [(ngModel)]="personDocNumber"
+              (keyup.enter)="getStudentByDni()"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <label mdbLabel class="form-label" for="search_dni"
+              >N&uacute;mero de documento</label
+            >
           </mdb-form-control>
         </div>
 
         <div class="col-sm-6 col-md-2">
-          <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
-            (click)="getStudentByDni()">Buscar
+          <button
+            type="button"
+            type="submit"
+            [disabled]="!personDocNumber"
+            class="btn btn-secondary"
+            (click)="getStudentByDni()"
+          >
+            Buscar
           </button>
         </div>
       </div>
-      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+      <div
+        class="container-fluid my-2"
+        *ngIf="studentList && studentList.length > 0 && !studentSelected"
+      >
         <div class="row">
           <div class="col-6">
             <h5 class="text-start">Graduados encontrados:</h5>
@@ -26,34 +44,67 @@
         <div class="row">
           <div class="col-6">
             <div class="list-group list-group-light">
-              <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
-                *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
-                {{student.person.fullname}} - {{student.degreeProgramName}}
+              <button
+                type="button"
+                class="list-group-item list-group-item-action btn my-2 text-start"
+                *ngFor="let student of studentList"
+                aria-current="true"
+                mdbRipple
+                (click)="selectStudent(student)"
+              >
+                {{ student.person.fullname }} - {{ student.degreeProgramName }}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <form autocomplete="true" [formGroup]="studentForm" *ngIf="studentSelected">
+      <form
+        autocomplete="true"
+        [formGroup]="studentForm"
+        *ngIf="studentSelected"
+      >
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required />
-                <label mdbLabel class="form-label" for="form_name">Nombre</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="name"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Nombre</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
-                  required />
-                <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_lastName"
+                  class="form-control"
+                  formControlName="lastname"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_lastName"
+                  >Apellido</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-4">
               <div class="mb-3">
-                <select class="form-select" aria-label="gender select" id="sexSelect" formControlName="sex" required>
+                <select
+                  class="form-select"
+                  aria-label="gender select"
+                  id="sexSelect"
+                  formControlName="sex"
+                  required
+                >
                   <option selected value="">Elija el sexo</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
@@ -65,31 +116,66 @@
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
-                  formControlName="docNumber" required />
-                <label mdbLabel class="form-label" for="form_name">N° Documento</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  maxlength="8"
+                  class="form-control"
+                  formControlName="docNumber"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >N° Documento</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
-                  formControlName="registrationNumber" required />
-                <label mdbLabel class="form-label" for="form_name">N° Registro</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  maxlength="8"
+                  class="form-control"
+                  formControlName="registrationNumber"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >N° Registro</label
+                >
               </mdb-form-control>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="university" required />
-                <label mdbLabel class="form-label" for="form_name">Universidad</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="university"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Universidad</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="academicUnit"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">Unidad Acad&eacute;mica</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="academicUnit"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Unidad Acad&eacute;mica</label
+                >
               </mdb-form-control>
             </div>
           </div>
@@ -97,69 +183,140 @@
           <div class="row">
             <div class="col-xs-12 col-md-3">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeProgramName"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">Carrera</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="degreeProgramName"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Carrera</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-3">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control"
-                  formControlName="degreeProgramCurriculum" required />
-                <label mdbLabel class="form-label" for="form_name">Plan de estudios</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="degreeProgramCurriculum"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Plan de estudios</label
+                >
+              </mdb-form-control>
+            </div>
+            <!-- <div class="col-xs-12 col-md-3">
+              <mdb-form-control class="mb-3">
+                <input
+                  mdbInput
+                  type="number"
+                  id="form_name"
+                  class="form-control"
+                  min="0"
+                  formControlName="directiveCouncilOrdinance"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Ordenanza Cons. directivo</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-3">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="number" id="form_name" class="form-control" min="0"
-                  formControlName="directiveCouncilOrdinance" required />
-                <label mdbLabel class="form-label" for="form_name">Ordenanza Cons. directivo</label>
+                <input
+                  mdbInput
+                  type="number"
+                  id="form_name"
+                  class="form-control"
+                  min="0"
+                  formControlName="superiorCouncilOrdinance"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Ordenanza Cons. superior</label
+                >
               </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-3">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="number" id="form_name" class="form-control" min="0"
-                  formControlName="superiorCouncilOrdinance" required />
-                <label mdbLabel class="form-label" for="form_name">Ordenanza Cons. superior</label>
-              </mdb-form-control>
-            </div>
+            </div> -->
           </div>
         </div>
       </form>
-      <form autocomplete="true" [formGroup]="certificateForm" *ngIf="studentSelected">
+      <form
+        autocomplete="true"
+        [formGroup]="certificateForm"
+        *ngIf="studentSelected"
+      >
         <div class="container">
           <h4 class="text-start mt-2 card-title">Datos del certificado</h4>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeName" required />
-                <label mdbLabel class="form-label" for="form_name">Nombre del t&iacute;tulo</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="degreeName"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >Nombre del t&iacute;tulo</label
+                >
               </mdb-form-control>
             </div>
             <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="degreeType" required />
-                <label mdbLabel class="form-label" for="form_name">Tipo de t&iacute;tulo</label>
-              </mdb-form-control>
+              <select
+                class="form-select"
+                id="degreeTypeSelect"
+                formControlName="degreeType"
+                required
+              >
+                <option selected value="">Tipo de titulo</option>
+                <option value="PREGRADO-GRADO">Pregrado - Grado</option>
+                <option value="POSTGRADO">Posgrado</option>
+              </select>
             </div>
           </div>
 
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_name"
+                  class="form-control"
+                  formControlName="waferNumber"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_name"
+                  >N° Oblea</label
+                >
               </mdb-form-control>
             </div>
           </div>
 
           <div class="row">
             <div class="col text-end">
-              <button type="button" type="submit" class="btn btn-light mx-2" (click)="clearForm()">
+              <button
+                type="button"
+                type="submit"
+                class="btn btn-light mx-2"
+                (click)="clearForm()"
+              >
                 Limpiar
               </button>
-              <button type="button" type="submit" class="btn btn-secondary" (click)="addNewCertificate()">
+              <button
+                type="button"
+                type="submit"
+                class="btn btn-secondary"
+                (click)="addNewCertificate()"
+              >
                 Crear título universitario
               </button>
             </div>
@@ -170,8 +327,6 @@
   </div>
 </div>
 
-
-
 <ng-template #certificateCreated>
   <div class="container">
     <div class="row">
@@ -179,7 +334,11 @@
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              <img src="../../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size">
+              <img
+                src="../../../../assets/img/avatar/astronaut.png"
+                alt="student avatar"
+                class="image-custom-size"
+              />
               <h3>Su t&iacute;tulo ha sido creado con &eacute;xito</h3>
             </div>
           </div>
