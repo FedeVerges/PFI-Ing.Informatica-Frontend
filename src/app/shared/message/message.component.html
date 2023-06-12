@@ -1,15 +1,34 @@
-<div class="card">
-  <div class="card-body">
-    <div class="text-center">
-      <img
-        src="../../../assets/img/messages/education.png"
-        alt="student avatar"
-        class="image-custom-size"
-      />
-    </div>
-    <div class="text-center">
-      <h2>{{ title }}</h2>
-      <p>{{ message }}</p>
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body pt-0">
+          <div class="text-center">
+            <img
+              *ngIf="type === messageTypes.TRANSACTION"
+              src="../../../assets/img/messages/message-send-message-mail-svgrepo-com(1).svg"
+              alt="student avatar"
+              class="image-custom-size"
+            /><img
+              *ngIf="type === messageTypes.SUCCESS"
+              src="../../../assets/img/messages/success-svgrepo-com.svg"
+              alt="student avatar"
+              class="image-custom-size"
+            /><img
+              *ngIf="type === messageTypes.ERROR"
+              src="../../../assets/img/messages/error.png"
+              alt="student avatar"
+              class="image-custom-size"
+            />
+          </div>
+
+          <div class="text-center mt-3">
+            <h2>{{ title }}</h2>
+            <p class="text-muted">{{ message }}</p>
+            <ng-content></ng-content>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

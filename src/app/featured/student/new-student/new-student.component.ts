@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { AcademicUnit } from 'src/app/core/models/academicUnit';
 import { Career } from 'src/app/core/models/career';
@@ -75,10 +76,15 @@ export class NewStudentComponent implements OnInit {
 
   plans: string[] = [];
 
+  successMessage: string = '';
+
+  hasError = false;
+
   constructor(
     private fb: FormBuilder,
     private alertService: AlertService,
-    private studentSerivce: StudentService
+    private studentSerivce: StudentService,
+    private router: Router
   ) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -155,13 +161,7 @@ export class NewStudentComponent implements OnInit {
   createStudent(student: StudentDto) {
     this.studentSerivce.createStudent(student).subscribe({
       next: (studentCreated) => {
-        this.alertService.showAlert(
-          `El estudiante ${studentCreated.person.fullname} ha sido creado con éxito con el número: ${studentCreated.id}! `,
-          undefined,
-          {
-            duration: 2000
-          } as MatSnackBarConfig
-        );
+        this.successMessage = `El estudiante ${studentCreated.person.fullname} ha sido creado con éxito`;
       },
       error: (e) => {
         this.alertService.showErrorMessage(e);
@@ -217,5 +217,9 @@ export class NewStudentComponent implements OnInit {
     } else {
       this.careers = [];
     }
+  }
+
+  goToCreateCeritificate() {
+    this.router.navigateByUrl('/certificate/new');
   }
 }

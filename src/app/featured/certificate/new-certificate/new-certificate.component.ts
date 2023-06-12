@@ -9,6 +9,7 @@ import { TransactionDto } from '../../../core/models/dto/transactionDto';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { CertificateDto } from 'src/app/core/models/dto/certificateDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-certificate',
@@ -26,13 +27,18 @@ export class NewCertificateComponent {
   showFormNewStudent = false;
   studentList: StudentDto[] = [];
   studentSelected: StudentDto | undefined;
+  successMessage: string = '';
+
+  hasError = false;
+  detailMessage: string = '';
 
   constructor(
     private web3Service: Web3Service,
     private fb: FormBuilder,
     private certificateService: CertificateService,
     private alertService: AlertService,
-    private studentSerivce: StudentService
+    private studentSerivce: StudentService,
+    private router: Router
   ) {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -126,9 +132,8 @@ export class NewCertificateComponent {
     this.certificateService.createNewCertificate(certificate).subscribe({
       next: (transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
-          this.alertService.showAlert(
-            'Su certificado ha sido creado con exito.'
-          );
+          this.successMessage = `Se ha enviado la transacción exitosamente.`;
+          this.detailMessage = `En unos minutos la transacción 0x5f20a35fe6fa252519b90f6be5c4e508b59c2afacd2bed34dd329af31a39e628 será validada y aprobada por la red.`;
         }
       },
       error: (error) => {
@@ -190,5 +195,9 @@ export class NewCertificateComponent {
   clearForm() {
     this.certificateForm.reset();
     this.studentForm.reset();
+  }
+
+  goToTransactionList() {
+    this.router.navigateByUrl('/transactions');
   }
 }

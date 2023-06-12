@@ -1,5 +1,8 @@
-<div class="container mt-2">
-  <div class="row">
+<div
+  class="container mt-2 animate__animated animate__fadeIn"
+  *ngIf="!hasError; else error"
+>
+  <div class="row" *ngIf="successMessage.length <= 0; else certificateCreated">
     <div class="col">
       <h3 class="card-title">Nuevo Titulo</h3>
       <div class="row mt-2">
@@ -211,38 +214,6 @@
                 >
               </mdb-form-control>
             </div>
-            <!-- <div class="col-xs-12 col-md-3">
-              <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="number"
-                  id="form_name"
-                  class="form-control"
-                  min="0"
-                  formControlName="directiveCouncilOrdinance"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >Ordenanza Cons. directivo</label
-                >
-              </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-3">
-              <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="number"
-                  id="form_name"
-                  class="form-control"
-                  min="0"
-                  formControlName="superiorCouncilOrdinance"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >Ordenanza Cons. superior</label
-                >
-              </mdb-form-control>
-            </div> -->
           </div>
         </div>
       </form>
@@ -328,22 +299,31 @@
 </div>
 
 <ng-template #certificateCreated>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">
-              <img
-                src="../../../../assets/img/avatar/astronaut.png"
-                alt="student avatar"
-                class="image-custom-size"
-              />
-              <h3>Su t&iacute;tulo ha sido creado con &eacute;xito</h3>
-            </div>
-          </div>
-        </div>
+  <div class="container mt-2 animate__animated animate__slideInDown">
+    <app-message
+      [title]="successMessage"
+      [message]="detailMessage"
+      type="TRANSACTION"
+    >
+      <div class="mt-4">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="goToTransactionList()"
+        >
+          Listado de transacciones
+        </button>
       </div>
-    </div>
+    </app-message>
+  </div>
+</ng-template>
+
+<ng-template #error>
+  <div class="container mt-2 animate__animated animate__flipInX">
+    <app-message
+      title="Ha ocurrido un error al intentar cargar los datos"
+      type="ERROR"
+      message="Comuniquese con el administrador."
+    ></app-message>
   </div>
 </ng-template>

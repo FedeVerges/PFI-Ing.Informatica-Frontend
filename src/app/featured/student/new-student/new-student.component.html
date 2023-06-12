@@ -1,5 +1,8 @@
-<div class="container mt-2">
-  <div class="row">
+<div class="container mt-2" *ngIf="!hasError; else error">
+  <div
+    class="row animate__animated animate__fadeIn"
+    *ngIf="successMessage.length <= 0; else success"
+  >
     <div class="col">
       <h3 class="card-title">Nuevo Graduado</h3>
       <form autocomplete="true" [formGroup]="studentForm">
@@ -205,3 +208,36 @@
     </div>
   </div>
 </div>
+
+<ng-template #success>
+  <div class="container mt-2 animate__animated animate__slideInDown">
+    <app-message [title]="successMessage" message="" type="SUCCESS">
+      <div class="mt-4">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="goToCreateCeritificate()"
+        >
+          Crea un nuevo t&iacute;tulo
+        </button>
+      </div>
+    </app-message>
+  </div>
+</ng-template>
+
+<ng-template #error>
+  <div class="container mt-2 animate__animated animate__flipInX">
+    <app-message
+      title="Ha ocurrido un error al intentar cargar los datos"
+      type="ERROR"
+      message="Comuniquese con el administrador. Error:'' "
+    ></app-message>
+  </div>
+</ng-template>
+
+<!-- 
+<button
+          type="button"
+          class="btn btn-block btn-secondary"
+          (click)="goToTransactionsList()"
+        >Ir al listado de transacciones</button> -->
