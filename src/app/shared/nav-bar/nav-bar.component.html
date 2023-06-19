@@ -12,7 +12,6 @@
       <i class="fas fa-bars"></i>
     </button>
     <div class="d-flex align-items-end pe-3">
-      <!-- <a href="#" [routerLink]="'student/search'"> -->
       <a href="#">
         <div class="d-flex align-items-center">
           <img
@@ -119,11 +118,6 @@
                   mdbDropdownMenu
                   class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start"
                 >
-                  <!-- <div class="row text-center mb-2">
-                    <span
-                      ><strong>{{ user.person?.fullname | uppercase }}</strong>
-                    </span>
-                  </div> -->
                   <div class="row" *ngIf="netwotkStatus | async as status">
                     <div class="col">
                       <span

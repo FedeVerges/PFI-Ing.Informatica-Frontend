@@ -1,7 +1,24 @@
 <div class="container pt-5">
-  <div class="row row-cols-2 justify-content-center">
+  <div
+    class="row row-cols-2 justify-content-center"
+    *ngIf="transactions && transactions.length > 0; else emptyData"
+  >
     <div class="col" *ngFor="let transaction of transactions">
       <app-certificate [transaction]="transaction"></app-certificate>
     </div>
   </div>
 </div>
+
+<ng-template #emptyData>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h5>No hay certificaciones para el graduado</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
