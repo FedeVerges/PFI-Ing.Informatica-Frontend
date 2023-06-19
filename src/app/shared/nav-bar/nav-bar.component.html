@@ -97,7 +97,10 @@
                   </a>
                 </div>
               </ng-container>
-              <div mdbDropdown class="btn-group shadow-0">
+              <span class="px-3 fw-bold fs-6">{{
+                user.person?.fullname | uppercase
+              }}</span>
+              <div mdbDropdown>
                 <button
                   type="button"
                   class="btn btn-floating"
@@ -111,15 +114,16 @@
                     class="img-fluid"
                   />
                 </button>
+
                 <div
                   mdbDropdownMenu
                   class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start"
                 >
-                  <div class="row text-center mb-2">
+                  <!-- <div class="row text-center mb-2">
                     <span
                       ><strong>{{ user.person?.fullname | uppercase }}</strong>
                     </span>
-                  </div>
+                  </div> -->
                   <div class="row" *ngIf="netwotkStatus | async as status">
                     <div class="col">
                       <span

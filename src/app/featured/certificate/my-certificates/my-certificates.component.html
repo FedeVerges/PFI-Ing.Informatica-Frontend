@@ -1,9 +1,6 @@
 <div class="container pt-5">
-  <div
-    class="row row-cols-2 justify-content-center"
-    *ngFor="let transaction of transactions"
-  >
-    <div class="col">
+  <div class="row row-cols-2 justify-content-center">
+    <div class="col" *ngFor="let transaction of transactions">
       <app-certificate [transaction]="transaction"></app-certificate>
     </div>
   </div>

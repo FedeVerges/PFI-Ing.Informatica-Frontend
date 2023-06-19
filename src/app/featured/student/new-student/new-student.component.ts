@@ -97,6 +97,7 @@ export class NewStudentComponent implements OnInit {
       academicUnit: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
       degreeProgramCurriculum: ['', [Validators.required]],
+      //todo: agregar grado del titulo.
       ministerialOrdinance: [''],
       superiorCouncilOrdinance: ['', []],
       directiveCouncilOrdinance: ['', []]
@@ -161,7 +162,7 @@ export class NewStudentComponent implements OnInit {
   createStudent(student: StudentDto) {
     this.studentSerivce.createStudent(student).subscribe({
       next: (studentCreated) => {
-        this.successMessage = `El estudiante ${studentCreated.person.fullname} ha sido creado con éxito`;
+        this.successMessage = `Nuevo graduado creado!!`;
       },
       error: (e) => {
         this.alertService.showErrorMessage(e);

@@ -213,13 +213,26 @@
   <div class="container mt-2 animate__animated animate__slideInDown">
     <app-message [title]="successMessage" message="" type="SUCCESS">
       <div class="mt-4">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="goToCreateCeritificate()"
-        >
-          Crea un nuevo t&iacute;tulo
-        </button>
+        <div class="row p-2">
+          <div class="col-4">
+            <button
+              type="button"
+              class="btn btn-secondary btn-block"
+              (click)="successMessage = ''"
+            >
+              Nuevo graduado
+            </button>
+          </div>
+          <div class="col-8">
+            <button
+              type="button"
+              class="btn btn-secondary btn-block"
+              (click)="goToCreateCeritificate()"
+            >
+              Crea un nuevo t&iacute;tulo
+            </button>
+          </div>
+        </div>
       </div>
     </app-message>
   </div>

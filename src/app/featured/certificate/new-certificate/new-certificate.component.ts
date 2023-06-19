@@ -56,7 +56,7 @@ export class NewCertificateComponent {
     });
     this.certificateForm = this.fb.group({
       degreeType: ['', [Validators.required]],
-      degreeName: ['', [Validators.required]],
+      degreeName: [''],
       waferNumber: ['', [Validators.required]]
     });
   }
@@ -68,13 +68,14 @@ export class NewCertificateComponent {
       if (!this.certificateForm.invalid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
+          debugger;
           this.studentSelected.ministerialOrdinance = '1';
           certificate = {
             student: this.studentSelected,
             dateCreated: String(new Date().getTime()),
             dateModified: '0',
             degreeType: this.certificateForm.get('degreeType')!.value,
-            degreeName: this.certificateForm.get('degreeName')!.value,
+            degreeName: this.studentSelected.degreeProgramName,
             waferNumber: this.certificateForm.get('waferNumber')!.value
           };
         } else {
