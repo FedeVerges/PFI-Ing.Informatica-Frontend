@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-8">
       <div class="card">
-        <div class="card-body pt-0">
+        <div class="card-body pt-2">
           <div class="text-center">
             <img
               *ngIf="type === messageTypes.TRANSACTION"
@@ -17,6 +17,11 @@
             /><img
               *ngIf="type === messageTypes.ERROR"
               src="../../../assets/img/messages/error.png"
+              alt="student avatar"
+              class="image-custom-size"
+            /><img
+              *ngIf="type === messageTypes.EMPTY"
+              src="../../../assets/img/messages/file-delete-svgrepo-com.svg"
               alt="student avatar"
               class="image-custom-size"
             />

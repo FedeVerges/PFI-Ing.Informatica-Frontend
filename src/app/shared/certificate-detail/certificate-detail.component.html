@@ -9,28 +9,49 @@
     </div>
   </div>
   <div class="card-body text-center">
-    <h2 class="text-muted mb-4"> {{certificate.certificate?.degreeName}}</h2>
-    <h4 class="my-2 text-muted"> El estudiante <strong> {{certificate.certificate?.student?.person?.fullname}}
-      </strong> ha
-      aprobado
-      todas
-      las materias corresponiendtes al plan <strong> {{certificate.certificate?.student?.degreeProgramCurriculum}}
-      </strong> de la
-      carrera <strong> {{certificate.certificate?.student?.degreeProgramName}}</strong>
+    <h2 class="text-muted mb-4">
+      {{ certificate.certificate?.universityDegree?.degreeProgramName }}
+    </h2>
+    <h4 class="my-2 text-muted">
+      El estudiante
+      <strong>
+        {{ certificate.certificate?.student?.name }}
+        {{ certificate.certificate?.student?.lastname }}
+      </strong>
+      ha aprobado todas las materias corresponiendtes al plan
+      <strong>
+        {{ certificate.certificate?.universityDegree?.degreeProgramCurriculum }}
+      </strong>
+      de la carrera
+      <strong>
+        {{
+          certificate.certificate?.universityDegree?.degreeProgramName
+        }}</strong
+      >
       de la instituci&oacute;n
-      <strong>{{certificate.certificate?.student?.universityName}}</strong>. </h4>
+      <strong>{{
+        certificate.certificate?.universityDegree?.universityName
+      }}</strong
+      >.
+    </h4>
 
-    <h5 class="my-4">
-      Certificado: {{certificate.certificate?.dateCreated}}
-    </h5>
-    <p>&Eacute;ste certificado se encuentra almacenado en la red Etereum a traves de la transaction
-      <strong>{{certificate.transactionHash}}.</strong>
-      Puede consultar la misma a traves de <a [href]="certificate.etherscanLink">{{certificate.etherscanLink}}</a>
+    <h5 class="my-4">Certificado: {{ certificate.certificate?.createdAt }}</h5>
+    <p>
+      &Eacute;ste certificado se encuentra almacenado en la red Etereum a traves
+      de la transaction
+      <strong>{{ certificate.transactionHash }}.</strong>
+      Puede consultar la misma a traves de
+      <a [href]="certificate.etherscanLink">{{ certificate.etherscanLink }}</a>
     </p>
 
     <div class="d-flex justify-content-center mt-3">
       <div class="d-flex align-items-center">
-        <img src="../../../assets/img/icons8-chain-58.png" alt="" width="40" height="40">
+        <img
+          src="../../../assets/img/icons8-chain-58.png"
+          alt=""
+          width="40"
+          height="40"
+        />
         <span class="logo-text px-2 dark">UNSL CERT</span>
       </div>
     </div>

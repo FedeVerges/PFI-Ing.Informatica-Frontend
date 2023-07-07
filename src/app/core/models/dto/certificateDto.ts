@@ -1,5 +1,8 @@
 import { StudentDto } from './studentDto';
-
+/**
+@Deprecated
+ * 
+ */
 export interface CertificateDto {
   id?: number;
   student: StudentDto;

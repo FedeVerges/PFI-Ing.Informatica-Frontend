@@ -1,27 +1,48 @@
 <div class="card">
-  <span class="p-3">{{transaction?.certificate?.dateCreated}}</span>
+  <span class="p-3">{{ transaction?.certificate?.createdAt }}</span>
   <div class="card-body pt-1">
-    <ng-container *ngIf="transaction?.certificate?.status === CERTIFICATE_STATUS.ACTIVE; else certificateInactive">
+    <!-- TODO: mejorar. <ng-container *ngIf="transaction?.certificate?.status === CERTIFICATE_STATUS.ACTIVE; else certificateInactive"> -->
+    <ng-container
+      *ngIf="transaction?.certificate?.active; else certificateInactive"
+    >
     </ng-container>
     <div class="row">
       <div class="col-2 text-center">
         <i class="fas fa-award fa-4x"></i>
       </div>
       <div class="col-10">
-        <h2 class="certificate-title">{{transaction?.certificate?.degreeName}}</h2>
-        <p>certificado #{{transaction?.certificateBlockchainId}}</p>
+        <h2 class="certificate-title">
+          {{ transaction?.certificate?.universityDegree?.degreeProgramName }}
+        </h2>
+        <p>certificado #{{ transaction?.certificateBlockchainId }}</p>
       </div>
     </div>
     <div class="row justify-content-end">
       <div class="col-3">
-        <button type="button" type="submit" class="btn btn-secondary"
-          (click)="goDetail(transaction?.certificateBlockchainId)"> Ver m&aacute;s
+        <button
+          type="button"
+          type="submit"
+          class="btn btn-secondary"
+          (click)="goDetail(transaction?.certificateBlockchainId)"
+        >
+          Ver m&aacute;s
         </button>
       </div>
-      <div class="col-3"
-        *ngIf="(user$|async)?.person?.docNumber === transaction?.certificate?.student?.person?.docNumber && (role$|async)?.name === 'STUDENT' ">
-        <button type="button" type="submit" class="btn btn-secondary"
-          (click)="exportPdf(transaction?.certificateBlockchainId)"> Exportar
+      <div
+        class="col-3"
+        *ngIf="
+          (user$ | async)?.person?.docNumber ===
+            transaction?.certificate?.student?.docNumber &&
+          (role$ | async)?.name === 'STUDENT'
+        "
+      >
+        <button
+          type="button"
+          type="submit"
+          class="btn btn-secondary"
+          (click)="exportPdf(transaction?.certificateBlockchainId)"
+        >
+          Exportar
         </button>
       </div>
     </div>
@@ -36,7 +57,4 @@
       </div>
     </div>
   </div>
-
-
-
 </ng-template>

@@ -1,8 +1,9 @@
-import { CertificateDto } from './certificateDto';
+import { CertificateEth } from './blockchain/certificateEth';
 
 export interface BlockchainTransactionDto {
   transactionHash?: string;
-  certificate?: CertificateDto;
+  studentName: string;
+  certificate?: CertificateEth; // Solo para cuando quiero mostrar toda la info del titulo.
   certificateBlockchainId?: number;
   status?: string;
   blockHash?: string;

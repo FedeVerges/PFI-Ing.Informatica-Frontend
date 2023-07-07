@@ -4,12 +4,13 @@
     <div class="container">
       <p>
         <strong>Fecha de registraci&oacute;n: </strong
-        >{{ data.certificate?.dateCreated }}
+        >{{ data.certificate?.createdAt }}
       </p>
       <p>
         <strong> Graduado: </strong>
-        {{ data.certificate?.student?.person?.fullname }} -
-        {{ data.certificate?.student?.person?.docNumber }}
+        {{ data.certificate?.student?.name }}
+        {{ data.certificate?.student?.lastname }}-
+        {{ data.certificate?.student?.docNumber }}
       </p>
 
       <p>
@@ -19,22 +20,22 @@
 
       <p>
         <strong>Instituci&oacute;n: </strong>
-        {{ data.certificate?.student?.universityName }}
+        {{ data.certificate?.universityDegree?.universityName }}
       </p>
 
       <p>
         <strong>Unidad acad&eacute;mica: </strong>
-        {{ data.certificate?.student?.academicUnit }}
+        {{ data.certificate?.universityDegree?.academicUnit }}
       </p>
 
       <p>
         <strong>Carrera: </strong>
-        {{ data.certificate?.student?.degreeProgramName }}
+        {{ data.certificate?.universityDegree?.degreeProgramName }}
       </p>
 
       <p>
         <strong>Plan de estudios: </strong>
-        {{ data.certificate?.student?.degreeProgramCurriculum }}
+        {{ data.certificate?.universityDegree?.degreeProgramCurriculum }}
       </p>
 
       <p>
@@ -55,12 +56,9 @@
         <strong class="h3 secondary"> Informaci&oacute;n del contrato</strong>
         <div>
           <p>
+            <!-- Todo: Agregar color. -->
             <strong>Estado del certificado: </strong>
-            {{
-              data?.certificate?.status === CERTIFICATE_STATUS.ACTIVE
-                ? 'ACTIVO'
-                : 'DADO DE BAJA'
-            }}
+            {{ data?.certificate?.active ? 'ACTIVO' : 'DADO DE BAJA' }}
           </p>
           <p>
             <strong>Transacci&oacute;n: </strong> {{ data.transactionHash }}
@@ -90,7 +88,11 @@
     <!-- Solo si es administrativo -->
     <div
       class="container"
-      *ngIf="(role$ | async)?.name === 'ADMIN' && data.certificateBlockchainId"
+      *ngIf="
+        (role$ | async)?.name === 'ADMIN' &&
+        data.certificate &&
+        data.certificate.id != null
+      "
     >
       <hr class="text-danger" />
       <p class="text-danger">
@@ -104,7 +106,7 @@
         type="button"
         type="submit"
         class="btn btn-danger"
-        (click)="deleteCertficate(data.certificateBlockchainId)"
+        (click)="deleteCertficate(data.certificate.id)"
       >
         Eliminar
       </button>

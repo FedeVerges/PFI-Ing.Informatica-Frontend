@@ -29,7 +29,11 @@ export class CertificateDetailComponentWrapper implements OnInit {
     if (id) {
       this.certificateService.getCertificatesById(String(id)).subscribe({
         next: (result) => {
-          if (result && result.certificate?.student.blockchainId !== 0)
+          if (
+            result &&
+            result.certificate?.id !== 0 &&
+            result?.certificate?.student?.id !== 0
+          )
             this.certificate = result;
         },
         error: (e) => {

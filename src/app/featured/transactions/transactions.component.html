@@ -1,4 +1,7 @@
-<div class="container mt-3 table-responsive">
+<div
+  class="container mt-3 table-responsive"
+  *ngIf="transactionList && transactionList.length > 0; else empty"
+>
   <table class="table align-middle mb-0 bg-white">
     <caption>
       Listado de transacciones
@@ -18,22 +21,30 @@
       <tr *ngFor="let tx of transactionList">
         <td>
           <div>
-            <p class="mb-1"><strong> {{tx.certificate?.student?.person?.fullname}}</strong></p>
-            <p class="mb-0">{{tx.certificate?.student?.degreeProgramName}}</p>
+            <p class="mb-1">
+              <strong> {{ tx.studentName }}</strong>
+            </p>
           </div>
         </td>
         <td>
-          <p class="fw-normal mb-1">{{tx.dateCreated}}</p>
+          <p class="fw-normal mb-1">{{ tx.dateCreated }}</p>
         </td>
-        <td>{{tx.transactionHash}}</td>
-        <td>{{tx.certificateBlockchainId}}</td>
-        <td>{{tx.gasUsed}} WEI</td>
+        <td>{{ tx.transactionHash }}</td>
+        <td>{{ tx.certificateBlockchainId }}</td>
+        <td>{{ tx.gasUsed }} WEI</td>
         <td>
-          <span class="badge badge-success rounded-pill d-inline">{{tx.status}}</span>
+          <span class="badge badge-success rounded-pill d-inline">{{
+            tx.status
+          }}</span>
         </td>
         <td>
-          <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark"
-            (click)="goDetail(tx!)">
+          <button
+            type="button"
+            class="btn btn-link btn-rounded btn-sm fw-bold"
+            mdbRipple
+            rippleColor="dark"
+            (click)="goDetail(tx!)"
+          >
             Ver m&aacute;s
           </button>
         </td>
@@ -41,3 +52,12 @@
     </tbody>
   </table>
 </div>
+
+<ng-template #empty>
+  <div class="container mt-2 animate__animated animate__flipInX">
+    <app-message
+      title=" No hay transacciones para mostrar... "
+      type="EMPTY"
+    ></app-message>
+  </div>
+</ng-template>

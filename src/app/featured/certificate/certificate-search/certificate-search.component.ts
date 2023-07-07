@@ -23,7 +23,7 @@ export class CertificateSearchComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCertificatesByStudentId(id?: number) {
+  getCertificatesById(id?: number) {
     if (id) {
       this.certificateService.getCertificatesById(String(id)).subscribe({
         next: (result) => {
