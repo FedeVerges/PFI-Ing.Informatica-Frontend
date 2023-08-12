@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'certificate',
     loadChildren: () =>
@@ -11,6 +11,12 @@ const routes: Routes = [
         (m) => m.CertificateModule
       ),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./featured/home/home.module').then((m) => m.HomeModule)
+    // canActivate: [AuthGuard]
   },
   {
     path: 'validate/:certificate',

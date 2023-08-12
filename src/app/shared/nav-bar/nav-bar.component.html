@@ -1,187 +1,200 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <button
-      class="navbar-toggler"
-      type="button"
-      (click)="navBar.toggle()"
-      aria-controls="navBarCertificatesValidator"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="d-flex align-items-end pe-3">
-      <a href="#">
-        <div class="d-flex align-items-center">
-          <img
-            src="../../../assets/img/icons8-chain-58.png"
-            alt=""
-            width="40"
-            height="40"
-          />
-          <span class="logo-text px-2 dark">UNSL CERT</span>
+<nav class="navbar navbar-expand-lg shadow-none">
+  <div class="container p-0">
+    <div class="row w-100 align-items-center">
+      <div class="col-xl-3 col-lg-3 col-12">
+        <!-- LOGO -->
+        <div>
+          <a class="navbar-brand" href="#">
+            <div class="d-flex align-items-center">
+              <!-- <img
+                src="../../../assets/img/icons8-chain-58.png"
+                alt=""
+                width="40"
+                height="40"
+              /> -->
+              <i class="fa-solid fa-link icon-size icon-color"></i>
+              <span class="logo-text px-2 dark">UNSL CERT</span>
+            </div>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            (click)="navBar.toggle()"
+            aria-controls="navBarCertificatesValidator"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
-      </a>
-    </div>
-    <div
-      mdbCollapse
-      #navBar="mdbCollapse"
-      class="collapse navbar-collapse"
-      id="navBarCertificatesValidator"
-    >
-      <ng-container *ngIf="user; else userActions">
-        <ng-container *ngIf="role$ | async; let role">
-          <div class="col-4">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <ng-container *ngIf="role.name === 'ADMIN'">
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    [routerLink]="'student/new'"
-                    routerLinkActive="active-link"
-                    >Nuevo Graduado</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    [routerLink]="'certificate/new'"
-                    routerLinkActive="active-link"
-                    class="nav-link"
-                    href="#"
-                    >Nuevo t&iacute;tulo</a
-                  >
-                </li>
-                <!-- TODO: agregar una barra en medio para buscar titulos. -->
-                <li class="nav-item">
-                  <a
-                    [routerLink]="'certificate/search'"
-                    class="nav-link"
-                    routerLinkActive="active-link"
-                    href="#"
-                    >Buscar T&iacute;tulos</a
-                  >
-                </li>
-              </ng-container>
-              <ng-container *ngIf="role.name === 'STUDENT'">
-                <li class="nav-item">
-                  <a
-                    [routerLink]="'certificate/my-certificates'"
-                    routerLinkActive="active-link"
-                    class="nav-link"
-                    href="#"
-                    >Mis t&iacute;tulos</a
-                  >
-                </li>
-              </ng-container>
-            </ul>
-          </div>
-          <div class="col-lg-6 col-xl-4">
-            <app-student-search></app-student-search>
-          </div>
+        <div></div>
+      </div>
+      <div class="col p-0">
+        <div
+          mdbCollapse
+          #navBar="mdbCollapse"
+          class="collapse navbar-collapse row justify-content-between"
+          id="navBarCertificatesValidator"
+        >
+          <ng-container *ngIf="user; else userActions">
+            <ng-container *ngIf="role$ | async; let role">
+              <div class="col-11">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <ng-container *ngIf="role.name === 'ADMIN'">
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        [routerLink]="'student/new'"
+                        routerLinkActive="active-link"
+                        >Crear Graduado</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        [routerLink]="'certificate/new'"
+                        routerLinkActive="active-link"
+                        class="nav-link"
+                        href="#"
+                        >Crear t&iacute;tulo</a
+                      >
+                    </li>
+                    <!-- TODO: agregar una barra en medio para buscar titulos. -->
+                    <li class="nav-item">
+                      <a
+                        [routerLink]="'certificate/search'"
+                        class="nav-link text-danger"
+                        routerLinkActive="active-link"
+                        href="#"
+                        >Eliminar T&iacute;tulo</a
+                      >
+                    </li>
+                  </ng-container>
+                  <ng-container *ngIf="role.name === 'STUDENT'">
+                    <li class="nav-item">
+                      <a
+                        [routerLink]="'certificate/my-certificates'"
+                        routerLinkActive="active-link"
+                        class="nav-link"
+                        href="#"
+                        >Mis t&iacute;tulos</a
+                      >
+                    </li>
+                  </ng-container>
+                  <ng-container *ngIf="role.name === 'ADMIN'">
+                    <li class="nav-item">
+                      <a
+                        [routerLink]="'transactions'"
+                        routerLinkActive="active-link"
+                        class="nav-link"
+                      >
+                        Historial
+                        <!-- <i class="fas fa-history"></i> -->
+                      </a>
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
 
-          <!-- Opciones de la derecha. -->
-          <div class="col-2 col-md-2 col-xl-4 text-end">
-            <div class="d-flex justify-content-end align-items-center">
-              <ng-container *ngIf="role.name === 'ADMIN'">
-                <span class="badge bg-secondary">Admin</span>
-                <div class="fs-4 mx-3">
-                  <a
-                    class="secondary p-1"
-                    [routerLink]="'transactions'"
-                    routerLinkActive="active-link"
-                    role="button"
-                  >
-                    <i class="fas fa-history"></i>
-                  </a>
-                </div>
-              </ng-container>
-              <span class="px-3 fw-bold fs-6">{{
-                user.person?.fullname | uppercase
-              }}</span>
-              <div mdbDropdown>
-                <button
-                  type="button"
-                  class="btn btn-floating"
-                  mdbDropdownToggle
-                  aria-expanded="false"
-                  data-mdb-display="static"
-                >
-                  <img
-                    src="../../../assets/img/avatar/avatar.png"
-                    alt="student avatar"
-                    class="img-fluid"
-                  />
-                </button>
+              <!-- Opciones de la derecha. -->
+              <div class="col-1">
+                <div class="d-flex justify-content-end align-items-center">
+                  <div mdbDropdown>
+                    <button
+                      type="button"
+                      class="btn btn-floating"
+                      mdbDropdownToggle
+                      aria-expanded="false"
+                      data-mdb-display="static"
+                    >
+                      <img
+                        src="../../../assets/img/avatar/avatar.png"
+                        alt="student avatar"
+                        class="img-fluid"
+                      />
+                    </button>
 
-                <div
-                  mdbDropdownMenu
-                  class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start"
-                >
-                  <div class="row" *ngIf="netwotkStatus | async as status">
-                    <div class="col">
-                      <span
-                        class="badge bg-danger w-100 font-title"
-                        *ngIf="!status?.connected"
-                      >
-                        No conectado</span
-                      >
-                      <span
-                        class="badge bg-success w-100 font-title"
-                        *ngIf="status?.connected"
-                      >
-                        Conectado - Network:{{ status.networkId }}</span
-                      >
-                    </div>
-                  </div>
-                  <div class="row p-2">
-                    <div class="col">
-                      <select
-                        class="form-select"
-                        [(ngModel)]="student"
-                        aria-label="gender select"
-                        (ngModelChange)="selectStudent()"
-                        required
-                      >
-                        <ng-container *ngFor="let st of user?.person?.students">
-                          <option [ngValue]="st">
-                            {{ st.degreeProgramName }}
-                          </option>
-                        </ng-container>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a class="dropdown-item"
-                        ><i class="fas fa-user-graduate me-3"></i>Perfil</a
-                      >
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a class="dropdown-item" (click)="logout()">
-                        <i class="fas fa-sign-out-alt me-3"></i>Salir</a
-                      >
+                    <div
+                      mdbDropdownMenu
+                      class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start border border-2 border-secondary"
+                    >
+                      <div class="p-2">
+                        <span class="p-2 fw-bold">{{
+                          user.person?.fullname | uppercase
+                        }}</span>
+                        <span
+                          class="badge bg-secondary"
+                          *ngIf="role.name === 'ADMIN'"
+                          >Admin</span
+                        >
+                      </div>
+
+                      <div class="row" *ngIf="netwotkStatus | async as status">
+                        <div class="col">
+                          <span
+                            class="badge bg-danger w-100 font-title"
+                            *ngIf="!status?.connected"
+                          >
+                            No conectado</span
+                          >
+                          <span
+                            class="badge bg-success w-100 font-title"
+                            *ngIf="status?.connected"
+                          >
+                            Conectado - Network:{{ status.networkId }}</span
+                          >
+                        </div>
+                      </div>
+                      <div class="row p-2">
+                        <div class="col" *ngIf="role.name === 'STUDENT'">
+                          <select
+                            class="form-select"
+                            [(ngModel)]="student"
+                            aria-label="gender select"
+                            (ngModelChange)="selectStudent()"
+                            required
+                          >
+                            <ng-container
+                              *ngFor="let st of user?.person?.students"
+                            >
+                              <option [ngValue]="st">
+                                {{ st.degreeProgramName }}
+                              </option>
+                            </ng-container>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- <div class="row">
+                        <div class="col">
+                          <a class="dropdown-item"
+                            ><i class="fas fa-user-graduate me-3"></i>Perfil</a
+                          >
+                        </div>
+                      </div> -->
+                      <div class="row">
+                        <div class="col">
+                          <a class="dropdown-item" (click)="logout()">
+                            <i class="fas fa-sign-out-alt me-3"></i>Salir</a
+                          >
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </ng-container>
-      </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 
 <!-- Navbar -->
 <ng-template #userActions>
-  <div class="navbar-nav me-auto mb-2 mb-lg-0">
-    <div>
-      <app-student-search></app-student-search>
-    </div>
-  </div>
+  <!-- <div class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+  </div> -->
   <div class="d-flex align-items-center">
     <a
       [routerLink]="'/login'"

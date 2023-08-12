@@ -11,4 +11,5 @@ export interface BlockchainTransactionDto {
   gasUsed?: number;
   dateCreated?: string;
   dateModified?: string;
+  methodName: string;
 }

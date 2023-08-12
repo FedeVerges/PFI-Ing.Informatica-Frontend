@@ -68,7 +68,6 @@ export class NewCertificateComponent {
       if (!this.certificateForm.invalid) {
         let certificate: CertificateDto;
         if (this.studentSelected) {
-          debugger;
           this.studentSelected.ministerialOrdinance = '1';
           certificate = {
             student: this.studentSelected,

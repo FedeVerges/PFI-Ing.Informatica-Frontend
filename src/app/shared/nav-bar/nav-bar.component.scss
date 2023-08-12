@@ -1,7 +1,7 @@
 @import "../../../variables.scss";
 
-.navbar{
-  font-size: 20px !important;
+.navbar {
+    font-size: 22px !important;
 }
 
 .logo {
@@ -11,12 +11,13 @@
 }
 
 .logo-text {
-    font-weight: 100;
-    font-size: 28px;
+    font-weight: bold;
+    font-size: 34px;
 }
 
 .nav-link {
-    color: $secondary !important;
+    color: $secondary;
+    margin-right: 1rem;
 }
 
 .font-title {
@@ -24,9 +25,18 @@
 }
 
 .active-link {
-    border-bottom: #545479 2px solid;
+    font-weight: bold;
 }
 
 .active-link>a {
-    border-bottom: #545479 2px solid;
+    font-weight: bold;
+}
+
+
+.icon-size {
+    font-size: 54px;
+}
+
+.icon-color {
+    color: $primary;
 }

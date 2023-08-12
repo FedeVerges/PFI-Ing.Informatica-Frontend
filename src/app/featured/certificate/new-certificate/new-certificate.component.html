@@ -4,7 +4,7 @@
 >
   <div class="row" *ngIf="successMessage.length <= 0; else certificateCreated">
     <div class="col">
-      <h3 class="card-title">Nuevo Titulo</h3>
+      <h3 class="card-title">Crear Titulo</h3>
       <div class="row mt-2">
         <div class="col-sm-6 col-md-4">
           <mdb-form-control class="mb-3">
@@ -49,7 +49,7 @@
             <div class="list-group list-group-light">
               <button
                 type="button"
-                class="list-group-item list-group-item-action btn my-2 text-start"
+                class="list-group-item list-group-item-action btn my-2 text-start bg-primary secondary"
                 *ngFor="let student of studentList"
                 aria-current="true"
                 mdbRipple

@@ -10,6 +10,7 @@
       <tr>
         <th>Graduado</th>
         <th>Fecha</th>
+        <th>Tipo</th>
         <th>Txn Hash</th>
         <th>Certificado</th>
         <th>Gas utilizado</th>
@@ -29,13 +30,37 @@
         <td>
           <p class="fw-normal mb-1">{{ tx.dateCreated }}</p>
         </td>
+        <td>
+          <span
+            class="badge badge-success rounded-pill d-inline"
+            *ngIf="tx.methodName === 'CREATE'"
+            >CREADO</span
+          >
+          <span
+            class="badge badge-danger rounded-pill d-inline"
+            *ngIf="tx.methodName === 'DELETE'"
+            >BAJA</span
+          >
+        </td>
         <td>{{ tx.transactionHash }}</td>
         <td>{{ tx.certificateBlockchainId }}</td>
         <td>{{ tx.gasUsed }} WEI</td>
         <td>
-          <span class="badge badge-success rounded-pill d-inline">{{
-            tx.status
-          }}</span>
+          <span
+            class="badge badge-success rounded-pill d-inline"
+            *ngIf="tx.status === types.COMPLETED"
+            >{{ tx.status }}</span
+          >
+          <span
+            class="badge badge-warning rounded-pill d-inline"
+            *ngIf="tx.status === types.PENDING"
+            >{{ tx.status }}</span
+          >
+          <span
+            class="badge badge-danger rounded-pill d-inline"
+            *ngIf="tx.status === types.ERROR"
+            >{{ tx.status }}</span
+          >
         </td>
         <td>
           <button

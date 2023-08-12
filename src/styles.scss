@@ -1,4 +1,17 @@
+@import 'variables.scss';
 /* You can add global styles to this file, and also import other style files */
+$white: #ffffff;
+
+$theme-colors: (
+  "light": $light,
+  "dark": $dark,
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
+  "success": $success,
+  "warning": $warning,
+  "danger": $danger,
+);
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
@@ -6,7 +19,6 @@
 
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 @import'~animate.css/animate.min';
-@import 'variables.scss';
 
 
 @font-face {
@@ -21,117 +33,113 @@
 }
 
 
-// Theme colors
-.primary {
-  color: $primary !important;
-}
+// // Theme colors
+// .primary {
+//   color: $primary !important;
+// }
 
-.secondary {
-  color: $secondary !important;
-}
+// .secondary {
+//   color: $secondary !important;
+// }
 
-.success {
-  color: #42C173 !important;
-}
+// .success {
+//   color: #42C173 !important;
+// }
 
-.info {
-  color: #39c0ed !important;
-}
+// .info {
+//   color: #39c0ed !important;
+// }
 
-.warning {
-  color: #ffa900 !important;
-}
+// .warning {
+//   color: #ffa900 !important;
+// }
 
-.danger {
-  color: #E63946 !important;
-}
+// .danger {
+//   color: #E63946 !important;
+// }
 
-.light {
-  color: $light !important;
-}
+// .light {
+//   color: $light !important;
+// }
 
-.dark {
-  color: $dark !important;
-}
+// .dark {
+//   color: $dark !important;
+// }
 
 
-.bg-primary {
-  background-color: $primary !important;
-}
+// .bg-primary {
+//   background-color: $primary !important;
+// }
 
-.bg-secondary {
-  background-color: $secondary !important;
-}
+// .bg-secondary {
+//   background-color: $secondary !important;
+// }
 
-.bg-success {
-  background-color: $success !important;
-}
+// .bg-success {
+//   background-color: $success !important;
+// }
 
-.bg-info {
-  background-color: $info !important;
-}
+// .bg-info {
+//   background-color: $info !important;
+// }
 
-.bg-warning {
-  background-color: $warning !important;
-}
+// .bg-warning {
+//   background-color: $warning !important;
+// }
 
-.bg-danger {
-  background-color: $danger !important;
-}
+// .bg-danger {
+//   background-color: $danger !important;
+// }
 
-.bg-light {
-  background-color: $light !important;
-}
+// .bg-light {
+//   background-color: $light !important;
+// }
 
-.bg-dark {
-  background-color: $dark !important;
-}
+// .bg-dark {
+//   background-color: $dark !important;
+// }
 
-.btn-primary {
-  background-color: $primary !important;
-}
+// .btn-primary {
+//   background-color: $primary !important;
+// }
 
-.btn-secondary {
-  background-color: $secondary !important;
-}
+// .btn-secondary {
+//   background-color: $secondary !important;
+// }
 
-.btn-success {
-  background-color: $success !important;
-}
+// .btn-success {
+//   background-color: $success !important;
+// }
 
-.btn-info {
-  background-color: $info !important;
-}
+// .btn-info {
+//   background-color: $info !important;
+// }
 
-.btn-warning {
-  background-color: $warning !important;
-}
+// .btn-warning {
+//   background-color: $warning !important;
+// }
 
-.btn-danger {
-  background-color: $danger !important;
-}
+// .btn-danger {
+//   background-color: $danger !important;
+// }
 
-.btn-light {
-  background-color: $light !important;
-}
+// .btn-light {
+//   background-color: $light !important;
+// }
 
-.btn-dark {
-  background-color: $dark !important;
-}
+// .btn-dark {
+//   background-color: $dark !important;
+// }
 
 .card-title {
   font-weight: 200;
 }
 
-.form-control {
-  border-color: $secondary;
-  color: $secondary;
-}
+// .form-control {
+//   border-color: $secondary !important;
+//   color: $secondary !important;
+// }
 
-.form-control:focus {
-  border-color: $secondary;
-  color: $secondary;
-}
 
 .card {
   background-color: white;
@@ -159,9 +167,19 @@
   color: $light;
 }
 
-.form-outline {
-  background: white;
-}
+// .form-outline {
+//   background: white;
+// }
+
+// .form-outline {
+//   border-color: $secondary !important;
+//   color: $secondary !important;
+// }
+
+// .form-outline:focus {
+//   border-color: $secondary !important;
+//   color: $secondary !important;
+// }
 
 
 html,
@@ -172,9 +190,12 @@ body {
 body {
   margin: 0;
   font-family: "MyFont", Roboto, "Helvetica Neue", sans-serif;
-  background-image: url('assets/img/cool-background.png');
+  // background-image: url('assets/img/cool-background.png');
+  background-color: $light;
+  // background: linear-gradient(0deg, rgba(219, 241, 240, 1) 0%, rgba(187, 254, 232, 1) 0%);
   font-size: 18px !important;
 }
+
 
 .btn {
   font-size: 1rem;

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs';
+import { TRANSACTION_TYPES } from 'src/app/core/enum/transactionStatus';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { CertificateService } from 'src/app/core/services/certificate.service';
@@ -52,6 +53,7 @@ export class TransactionsComponent implements OnInit {
   // };
 
   transactionList: BlockchainTransactionDto[] = [];
+  types = TRANSACTION_TYPES;
 
   constructor(
     private certificateService: CertificateService,

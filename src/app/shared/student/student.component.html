@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="container">
       <div class="row">
-        <div class="col-3 p-0">
+        <div class="col-5 p-0">
           <div class="text-center">
             <img
               src="../../../assets/img/avatar/astronaut.png"
@@ -28,15 +28,21 @@
             <p><strong>Carrera: </strong>{{ student.degreeProgramName }}</p>
           </div>
         </div>
-        <div class="col-9 p-0">
+        <div class="col-7 p-0">
           <div
-            class="container mt-3 table-responsive"
+            class="container mt-3"
             *ngIf="
               !!certifications && certifications.length > 0;
               else emptyData
             "
           >
-            <table class="table align-middle mb-0 bg-white">
+            <ng-container *ngFor="let cert of certifications">
+              <div class="row pt-2">
+                <app-certificate [transaction]="cert"></app-certificate>
+              </div>
+            </ng-container>
+
+            <!--  <table class="table align-middle mb-0 bg-white">
               <caption>
                 Certificaciones
               </caption>
@@ -52,7 +58,7 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                <!-- <tr *ngFor="let cert of certifications">
+                <tr *ngFor="let cert of certifications">
                   <td>
                     <p>{{cert.certificate?.d}}</p>
                   </td>
@@ -74,9 +80,15 @@
                       Detalle
                     </button>
                   </td>
-                </tr> -->
+                </tr>
               </tbody>
-            </table>
+            </table> -->
+
+            <div class="card">
+              <div class="card-content">
+                <div class="d-flex"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

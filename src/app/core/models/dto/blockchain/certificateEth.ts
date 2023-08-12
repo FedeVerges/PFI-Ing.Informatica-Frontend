@@ -9,4 +9,7 @@ export interface CertificateEth {
   createdAt: number;
   updatedAt: number;
   active: boolean; // Activo TODO: cambiar por texto.
+  // Solo para front.
+  createdAtDesc?: string;
+  updatedAtDesc?: string;
 }

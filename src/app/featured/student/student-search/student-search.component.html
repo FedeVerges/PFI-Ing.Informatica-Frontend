@@ -1,11 +1,24 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col text-center">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="N&uacute;mero de documento" [(ngModel)]="personDocNumber"
-          (keyup.enter)="searchStudentByDni()" [ngModelOptions]="{standalone: true}" aria-describedby="button-addon2" />
-        <button class="btn btn-secondary" type="button" id="button-addon2" mdbRipple rippleColor="danger"
-          (click)="searchStudentByDni()">
+    <div class="col">
+      <div class="input-group input-group-lg">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="N&uacute;mero de documento"
+          [(ngModel)]="personDocNumber"
+          (keyup.enter)="searchStudentByDni()"
+          [ngModelOptions]="{ standalone: true }"
+          aria-describedby="button-addon2"
+        />
+        <button
+          class="btn btn-secondary"
+          type="button"
+          id="button-addon2"
+          mdbRipple
+          rippleColor="danger"
+          (click)="searchStudentByDni()"
+        >
           Buscar
         </button>
       </div>

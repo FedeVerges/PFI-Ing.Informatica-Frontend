@@ -70,7 +70,6 @@ export class CertificateComponent {
   user$: Observable<UserDto | null>;
 
   goDetail(id?: number) {
-    debugger;
     if (id && this.transaction) {
       this.dialog
         .open(CertificateDialogComponent, {
