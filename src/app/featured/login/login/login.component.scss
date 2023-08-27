@@ -1,8 +1,19 @@
+@import "../../../../variables.scss";
+
 .space {
     white-space: normal;
 }
 
+.icon-size {
+    font-size: 54px;
+}
+
+.icon-color {
+    color: $primary;
+}
+
+
 .logo-text {
-    font-weight: 100;
-    font-size: 42px;
+    font-weight: bold;
+    font-size: 34px;
 }

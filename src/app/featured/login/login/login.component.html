@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="container pt-3">
   <div class="row">
     <div class="col">
       <div class="card text-center w-50 m-auto">
@@ -8,28 +8,49 @@
             </div> -->
           <div class="card-body">
             <div class="d-flex justify-content-center m-4">
-              <div class="d-flex align-items-center">
-                <img src="../../../assets/img/icons8-chain-58.png" alt="" width="60" height="60">
-                <span class="logo-text px-2 dark">UNSL CERT</span>
-              </div>
+              <!-- <img
+                  src="../../../assets/img/icons8-chain-58.png"
+                  alt=""
+                  width="40"
+                  height="40"
+                /> -->
+              <i class="fa-solid fa-link icon-size icon-color"></i>
+              <span class="logo-text px-2 text-primary">UNSL CERT</span>
             </div>
             <div class="row justify-content-center">
               <mdb-form-control class="mb-3 w-50">
-                <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="user" required />
-                <label mdbLabel class="form-label" for="form_lastName">Usuario</label>
+                <input
+                  mdbInput
+                  type="text"
+                  id="form_lastName"
+                  class="form-control"
+                  formControlName="user"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_lastName"
+                  >Usuario</label
+                >
               </mdb-form-control>
             </div>
             <div class="row justify-content-center">
               <mdb-form-control class="mb-3 w-50">
-                <input mdbInput type="password" id="form_lastName" class="form-control" formControlName="password"
-                  required />
-                <label mdbLabel class="form-label" for="form_lastName">Contrase&ntilde;a</label>
+                <input
+                  mdbInput
+                  type="password"
+                  id="form_lastName"
+                  class="form-control"
+                  formControlName="password"
+                  required
+                />
+                <label mdbLabel class="form-label" for="form_lastName"
+                  >Contrase&ntilde;a</label
+                >
               </mdb-form-control>
               <!-- todo: Agregar manejo de errores -->
             </div>
           </div>
           <div class="card-footer">
-            <button type="button" type="submit" class=" btn btn-secondary" (click)="login()">
+            <button type="button" type="submit" class="btn" (click)="login()">
               Ingresar
             </button>
           </div>

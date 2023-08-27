@@ -1,5 +1,5 @@
 <div
-  class="container-fluid my-3"
+  class="container my-3"
   *ngIf="studentList && studentList.length > 0 && !studentSelected"
 >
   <div class="row">
@@ -13,7 +13,7 @@
         <ng-container *ngFor="let student of studentList">
           <button
             type="button"
-            class="list-group-item list-group-item-action btn my-2 text-start bg-primary secondary"
+            class="list-group-item list-group-item-action btn my-2 text-start text-primary"
             aria-current="true"
             mdbRipple
             (click)="selectStudent(student)"
