@@ -1,0 +1,13 @@
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  frontend:
+    build: .
+    ports:
+      - '80:80'
+    volumes:
+      - static_volume:/home/app/front/dist/validador-titulos
+
+volumes:
+  static_volume:
