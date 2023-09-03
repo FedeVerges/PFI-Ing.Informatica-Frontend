@@ -5,6 +5,7 @@ import { NOTIFICATION_TYPES } from '../enum/notificationTypes';
 import { NetworkStatusDto } from '../models/dto/networkStatusDto';
 import { NotificationDto } from '../models/dto/notificationDto';
 import { AlertService } from './alert.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +77,7 @@ export class WebsocketService implements OnDestroy {
 
   connect() {
     if (!this.myWebSocket || this.myWebSocket.closed) {
-      this.myWebSocket = webSocket<NotificationDto>('ws://localhost:9090');
+      this.myWebSocket = webSocket<NotificationDto>(environment.websocketURL);
       // this.sendMessage();
     }
   }
