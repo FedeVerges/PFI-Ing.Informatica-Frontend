@@ -62,6 +62,12 @@ export class CertificateValidatorComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * @deprecated
+   * @param certificateForValidate
+   * @param storedCertificate
+   * @returns
+   */
   compareCertificateData(
     certificateForValidate: BlockchainTransactionDto,
     storedCertificate: BlockchainTransactionDto

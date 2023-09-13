@@ -16,7 +16,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   subscription: Subscription;
 
-  homeRouteName = 'student/new';
+  homeRouteName = '/home';
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -27,9 +27,9 @@ export class LoginComponent {
     this.subscription = authService.getRole().subscribe({
       next: (role) => {
         if (role && role.name) {
-          if (role?.name === 'STUDENT') {
-            this.homeRouteName = 'certificate/my-certificates';
-          }
+          // if (role?.name === 'STUDENT') {
+          //   this.homeRouteName = 'certificate/my-certificates';
+          // }
           this.router.navigateByUrl(this.homeRouteName);
         }
       }

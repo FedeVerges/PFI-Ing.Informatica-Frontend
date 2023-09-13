@@ -1,111 +1,47 @@
 <div class="card" *ngIf="student">
-  <div class="card-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-5 p-0">
-          <div class="text-center">
-            <img
-              src="../../../assets/img/avatar/astronaut.png"
-              alt="student avatar"
-              class="image-custom-size"
-            />
-            <h4 class="text-center">{{ student.person.fullname }}</h4>
-          </div>
-          <div>
-            <p><strong>N° de estudiante </strong> {{ student.blockchainId }}</p>
-            <p>
-              <strong>DNI </strong>{{ student.person.docNumber }} -
-              {{ student.person.sex }}
-            </p>
-            <p>
-              <strong>{{ student.universityName }}</strong>
-            </p>
-            <p><strong>Registro : </strong> {{ student.registrationNumber }}</p>
-            <p>
-              <strong>Unidad Acad&eacute;mica: </strong
-              >{{ student.academicUnit }}
-            </p>
-            <p><strong>Carrera: </strong>{{ student.degreeProgramName }}</p>
-          </div>
+  <div class="card-body ">
+    <div class="row">
+      <div class="col-3">
+        <div class="text-center">
+          <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size" />
+          <h5 class="text-center">{{ student.person.fullname }}</h5>
         </div>
-        <div class="col-7 p-0">
-          <div
-            class="container mt-3"
-            *ngIf="
-              !!certifications && certifications.length > 0;
-              else emptyData
-            "
-          >
-            <ng-container *ngFor="let cert of certifications">
-              <div class="row pt-2">
-                <app-certificate [transaction]="cert"></app-certificate>
-              </div>
-            </ng-container>
-
-            <!--  <table class="table align-middle mb-0 bg-white">
-              <caption>
-                Certificaciones
-              </caption>
-              <thead class="bg-light text-center">
-                <tr>
-                  <th>T&iacute;tulo</th>
-                  <th>Tipo</th>
-                  <th>Fecha</th>
-                  <th>N° oblea</th>
-                  <th>Blockchain ID</th>
-                  <th>Transacci&oacute;n</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody class="text-center">
-                <tr *ngFor="let cert of certifications">
-                  <td>
-                    <p>{{cert.certificate?.d}}</p>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">{{cert.certificate?.degreeType}}</p>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">{{cert.certificate?.dateCreated}}</p>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">{{cert.certificate?.waferNumber}}</p>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">{{cert.certificateBlockchainId}}</p>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark"
-                      (click)="goDetail(cert)">
-                      Detalle
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
-
-            <div class="card">
-              <div class="card-content">
-                <div class="d-flex"></div>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="col">
+        <div class="student-data">
+          <p><strong>N° de estudiante </strong> {{ student.blockchainId }}</p>
+          <p>
+            <strong>DNI </strong>{{ student.person.docNumber }} -
+            {{ student.person.sex }}
+          </p>
+          <p>
+            <strong>{{ student.universityName }}</strong>
+          </p>
+          <p><strong>Registro : </strong> {{ student.registrationNumber }}</p>
+          <p>
+            <strong>Unidad Acad&eacute;mica: </strong>{{ student.academicUnit }}
+          </p>
+          <p><strong>Carrera: </strong>{{ student.degreeProgramName }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #emptyData>
+<div class="div" *ngIf="!!certifications">
   <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <div class="text-center">
-            <h5>No hay certificaciones para el graduado</h5>
+    <div class="col p-0">
+      <div class="container mt-3" *ngIf="
+            certifications.length > 0;
+          ">
+        <h4>T&iacute;tulos</h4>
+
+        <ng-container *ngFor="let cert of certifications">
+          <div class="row">
+            <app-certificate [transaction]="cert"></app-certificate>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
-</ng-template>
+</div>

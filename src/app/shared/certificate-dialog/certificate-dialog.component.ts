@@ -15,6 +15,7 @@ import { CertificateService } from 'src/app/core/services/certificate.service';
 })
 export class CertificateDialogComponent {
   public CERTIFICATE_STATUS = CERTIFICATE_STATUS;
+  hasTransactionData = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: BlockchainTransactionDto,
@@ -24,12 +25,16 @@ export class CertificateDialogComponent {
     private certificateService: CertificateService
   ) {
     this.role$ = this.authService.getRole();
+    this.hasTransactionData = !!data.transactionHash && !!data.blockHash;
   }
+  deleting = false;
 
   deleteCertficate(id: number) {
     // todo: cartel de "Esta seguro de que desea elimiar... "
+    this.deleting = true;
     this.certificateService.deleteCertificate(id).subscribe({
       next: (res) => {
+        this.deleting = false;
         this.dialogRef.close({ deleted: true });
       },
       error: (e) => {

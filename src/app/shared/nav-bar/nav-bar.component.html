@@ -17,79 +17,44 @@
               <span class="logo-text px-2 dark">UNSL CERT</span>
             </div>
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            (click)="navBar.toggle()"
-            aria-controls="navBarCertificatesValidator"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" (click)="navBar.toggle()"
+            aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
           </button>
         </div>
         <div></div>
       </div>
-      <div class="col p-0">
-        <div
-          mdbCollapse
-          #navBar="mdbCollapse"
-          class="collapse navbar-collapse row justify-content-between"
-          id="navBarCertificatesValidator"
-        >
+      <div class="col p-0 justify-content-end">
+        <div mdbCollapse #navBar="mdbCollapse" class="collapse navbar-collapse row justify-content-between"
+          id="navBarCertificatesValidator">
           <ng-container *ngIf="user; else userActions">
             <ng-container *ngIf="role$ | async; let role">
               <div class="col-11">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <ng-container *ngIf="role.name === 'ADMIN'">
                     <li class="nav-item">
-                      <a
-                        class="nav-link"
-                        [routerLink]="'student/new'"
-                        routerLinkActive="active-link"
-                        >Crear Graduado</a
-                      >
+                      <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Crear Graduado</a>
                     </li>
                     <li class="nav-item">
-                      <a
-                        [routerLink]="'certificate/new'"
-                        routerLinkActive="active-link"
-                        class="nav-link"
-                        href="#"
-                        >Crear t&iacute;tulo</a
-                      >
+                      <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear
+                        t&iacute;tulo</a>
                     </li>
                     <!-- TODO: agregar una barra en medio para buscar titulos. -->
-                    <li class="nav-item">
-                      <a
-                        [routerLink]="'certificate/search'"
-                        class="nav-link text-danger"
-                        routerLinkActive="active-link"
-                        href="#"
-                        >Eliminar T&iacute;tulo</a
-                      >
-                    </li>
+                    <!-- <li class="nav-item">
+                      <a [routerLink]="'certificate/search'" class="nav-link" routerLinkActive="active-link"
+                        href="#">Eliminar T&iacute;tulo</a>
+                    </li> -->
                   </ng-container>
                   <ng-container *ngIf="role.name === 'STUDENT'">
                     <li class="nav-item">
-                      <a
-                        [routerLink]="'certificate/my-certificates'"
-                        routerLinkActive="active-link"
-                        class="nav-link"
-                        href="#"
-                        >Mis t&iacute;tulos</a
-                      >
+                      <a [routerLink]="'certificate/my-certificates'" routerLinkActive="active-link" class="nav-link"
+                        href="#">Mis t&iacute;tulos</a>
                     </li>
                   </ng-container>
                   <ng-container *ngIf="role.name === 'ADMIN'">
                     <li class="nav-item">
-                      <a
-                        [routerLink]="'transactions'"
-                        routerLinkActive="active-link"
-                        class="nav-link"
-                      >
+                      <a [routerLink]="'transactions'" routerLinkActive="active-link" class="nav-link">
                         Historial
-                        <!-- <i class="fas fa-history"></i> -->
                       </a>
                     </li>
                   </ng-container>
@@ -100,63 +65,33 @@
               <div class="col-1">
                 <div class="d-flex justify-content-end align-items-center">
                   <div mdbDropdown>
-                    <button
-                      type="button"
-                      class="btn btn-floating"
-                      mdbDropdownToggle
-                      aria-expanded="false"
-                      data-mdb-display="static"
-                    >
-                      <img
-                        src="../../../assets/img/avatar/avatar.png"
-                        alt="student avatar"
-                        class="img-fluid"
-                      />
+                    <button type="button" class="btn btn-floating" mdbDropdownToggle aria-expanded="false"
+                      data-mdb-display="static">
+                      <img src="../../../assets/img/avatar/avatar.png" alt="student avatar" class="img-fluid" />
                     </button>
 
-                    <div
-                      mdbDropdownMenu
-                      class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start border border-2 border-secondary"
-                    >
+                    <div mdbDropdownMenu
+                      class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start border border-2 border-secondary">
                       <div class="p-2">
                         <span class="p-2 fw-bold">{{
                           user.person?.fullname | uppercase
-                        }}</span>
-                        <span
-                          class="badge bg-secondary"
-                          *ngIf="role.name === 'ADMIN'"
-                          >Admin</span
-                        >
+                          }}</span>
+                        <span class="badge bg-secondary" *ngIf="role.name === 'ADMIN'">Admin</span>
                       </div>
 
                       <div class="row" *ngIf="netwotkStatus | async as status">
                         <div class="col">
-                          <span
-                            class="badge bg-danger w-100 font-title"
-                            *ngIf="!status?.connected"
-                          >
-                            No conectado</span
-                          >
-                          <span
-                            class="badge bg-success w-100 font-title"
-                            *ngIf="status?.connected"
-                          >
-                            Conectado - Network:{{ status.networkId }}</span
-                          >
+                          <span class="badge bg-danger w-100 font-title" *ngIf="!status?.connected">
+                            No conectado</span>
+                          <span class="badge bg-success w-100 font-title" *ngIf="status?.connected">
+                            Conectado - Network:{{ status.networkId }}</span>
                         </div>
                       </div>
                       <div class="row p-2">
                         <div class="col" *ngIf="role.name === 'STUDENT'">
-                          <select
-                            class="form-select"
-                            [(ngModel)]="student"
-                            aria-label="gender select"
-                            (ngModelChange)="selectStudent()"
-                            required
-                          >
-                            <ng-container
-                              *ngFor="let st of user?.person?.students"
-                            >
+                          <select class="form-select" [(ngModel)]="student" aria-label="gender select"
+                            (ngModelChange)="selectStudent()" required>
+                            <ng-container *ngFor="let st of user?.person?.students">
                               <option [ngValue]="st">
                                 {{ st.degreeProgramName }}
                               </option>
@@ -174,8 +109,7 @@
                       <div class="row">
                         <div class="col">
                           <a class="dropdown-item" (click)="logout()">
-                            <i class="fas fa-sign-out-alt me-3"></i>Salir</a
-                          >
+                            <i class="fas fa-sign-out-alt me-3"></i>Salir</a>
                         </div>
                       </div>
                     </div>
@@ -195,12 +129,8 @@
   <!-- <div class="navbar-nav me-auto mb-2 mb-lg-0">
     
   </div> -->
-  <div class="d-flex align-items-center">
-    <a
-      [routerLink]="'/login'"
-      routerLinkActive="active-link"
-      class="btn px-3 me-2 text-primary bordered"
-    >
+  <div class="d-flex align-items-center justify-content-end">
+    <a [routerLink]="'/login'" routerLinkActive="active-link" class="btn px-3 me-2 text-primary bordered">
       Iniciar Sesi&oacute;n
     </a>
   </div>

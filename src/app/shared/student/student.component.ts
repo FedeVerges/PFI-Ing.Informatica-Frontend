@@ -12,20 +12,9 @@ import { CertificateDialogComponent } from '../certificate-dialog/certificate-di
 })
 export class StudentComponent implements OnInit {
   @Input() student?: StudentDto;
-  @Input() certifications: BlockchainTransactionDto[] = [];
+  @Input() certifications?: BlockchainTransactionDto[] = [];
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
-
-  goDetail(transaction: BlockchainTransactionDto) {
-    if (transaction) {
-      this.dialog.open(CertificateDialogComponent, {
-        data: transaction,
-        autoFocus: false
-      });
-    } else {
-      throw new Error('Id certificado nulo.');
-    }
-  }
 }

@@ -123,7 +123,6 @@ export class NewCertificateComponent {
         );
       }
     } else {
-      this.studentForm.markAllAsTouched();
       this.alertService.showErrorMessage('Verifique los datos del estudiante.');
     }
   }

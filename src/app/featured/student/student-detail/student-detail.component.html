@@ -1,7 +1,4 @@
-<div
-  class="container my-3"
-  *ngIf="studentList && studentList.length > 0 && !studentSelected"
->
+<div class="container my-3" *ngIf="studentList && studentList.length > 0 && !studentSelected">
   <div class="row">
     <div class="col-6">
       <h5 class="text-start">Graduados encontrados:</h5>
@@ -11,13 +8,8 @@
     <div class="col-4">
       <div class="list-group">
         <ng-container *ngFor="let student of studentList">
-          <button
-            type="button"
-            class="list-group-item list-group-item-action btn my-2 text-start text-primary"
-            aria-current="true"
-            mdbRipple
-            (click)="selectStudent(student)"
-          >
+          <button type="button" class="list-group-item list-group-item-action btn my-2 text-start text-primary"
+            aria-current="true" mdbRipple (click)="selectStudent(student)">
             {{ student.person.fullname }} - {{ student.degreeProgramName }}
           </button>
         </ng-container>
@@ -27,25 +19,33 @@
 </div>
 <div class="row" *ngIf="studentSelected && !!studentTitles">
   <div class="col">
-    <div class="container mt-3">
-      <div class="row animate__animated animate__fadeIn">
+    <div class="container mt-3 animate__animated animate__fadeIn">
+      <div class="row">
         <div class="col-1">
-          <button
-            class="navbar-toggler"
-            type="button"
-            (click)="studentSelected = undefined"
-            aria-controls="navBarCertificatesValidator"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" (click)="studentSelected = undefined"
+            aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-angle-left"></i>
           </button>
         </div>
         <div class="col-10">
-          <app-student
-            [student]="studentSelected"
-            [certifications]="studentTitles"
-          ></app-student>
+          <app-student [student]="studentSelected"></app-student>
+        </div>
+      </div>
+      <div class="div" *ngIf="!!studentTitles">
+        <div class="row">
+          <div class="col p-0">
+            <div class="container mt-3" *ngIf="
+            studentTitles.length > 0;
+                ">
+              <h4>T&iacute;tulos</h4>
+
+              <ng-container *ngFor="let cert of studentTitles">
+                <div class="row">
+                  <app-certificate [transaction]="cert" (delete)="selectStudent(studentSelected)"></app-certificate>
+                </div>
+              </ng-container>
+            </div>
+          </div>
         </div>
       </div>
     </div>

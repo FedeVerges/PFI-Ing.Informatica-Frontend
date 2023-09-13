@@ -89,9 +89,9 @@ export class NewStudentComponent implements OnInit {
     this.studentForm = this.fb.group({
       name: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
-      docNumber: ['', [Validators.required]],
+      docNumber: ['', [Validators.required], Validators.max(8)],
       docType: ['', [Validators.required]],
-      registrationNumber: ['', [Validators.required]],
+      registrationNumber: ['', [Validators.required], Validators.max(10)],
       sex: ['', [Validators.required]],
       university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
@@ -185,6 +185,7 @@ export class NewStudentComponent implements OnInit {
   }
 
   clearForm() {
+    debugger;
     this.studentForm.setValue({
       name: '',
       lastname: '',

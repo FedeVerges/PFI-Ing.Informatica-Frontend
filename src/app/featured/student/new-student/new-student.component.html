@@ -1,52 +1,23 @@
 <div class="container mt-2" *ngIf="!hasError; else error">
-  <div
-    class="row animate__animated animate__fadeIn"
-    *ngIf="successMessage.length <= 0; else success"
-  >
-    <div class="col">
-      <h3 class="card-title">Nuevo Graduado</h3>
+  <div class="row animate__animated animate__fadeIn justify-content-center"
+    *ngIf="successMessage.length <= 0; else success">
+    <div class="col-xs-12 col-lg-8">
       <form autocomplete="true" [formGroup]="studentForm">
         <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-md-4">
+          <div class="p-2">
+            <!-- <h6 class="my-3 fw-bold">Ingresa los datos academicos del estudiante.</h6> -->
+            <div>
               <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_name"
-                  class="form-control"
-                  formControlName="name"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >Nombre</label
-                >
+                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required />
+                <label mdbLabel class="form-label" for="form_name">Nombre</label>
               </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-4">
               <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_lastName"
-                  class="form-control"
-                  formControlName="lastname"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_lastName"
-                  >Apellido</label
-                >
+                <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
+                  required />
+                <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
               </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-4">
               <div class="mb-3">
-                <select
-                  class="form-select"
-                  aria-label="gender select"
-                  id="sexSelect"
-                  formControlName="sex"
-                  required
-                >
+                <select class="form-select" aria-label="gender select" id="sexSelect" formControlName="sex" required>
                   <option selected value="">Elija el sexo</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
@@ -54,93 +25,53 @@
                 </select>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4 col-md-2">
-              <div class="mb-3">
-                <select
-                  class="form-select"
-                  aria-label="doctype select"
-                  id="docType"
-                  formControlName="docType"
-                  required
-                >
-                  <option selected value="">Tipo de documento</option>
-                  <option value="DNI">DNI</option>
-                  <option value="CI">CI</option>
-                  <option value="LC">LC</option>
-                  <option value="Otro">Otro</option>
-                </select>
+            <div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <select class="form-select" aria-label="doctype select" id="docType" formControlName="docType"
+                      required>
+                      <option selected value="">Tipo de documento</option>
+                      <option value="DNI">DNI</option>
+                      <option value="CI">CI</option>
+                      <option value="LC">LC</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <mdb-form-control class="mb-3">
+                    <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                      formControlName="docNumber" required />
+                    <label mdbLabel class="form-label" for="form_name">N° Documento</label>
+                  </mdb-form-control>
+                </div>
               </div>
-            </div>
-            <div class="col-xs-8 col-md-4">
-              <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_name"
-                  maxlength="8"
-                  class="form-control"
-                  formControlName="docNumber"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >N° Documento</label
-                >
-              </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_name"
-                  maxlength="8"
-                  class="form-control"
-                  formControlName="registrationNumber"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >N° Registro</label
-                >
-              </mdb-form-control>
-            </div>
-          </div>
 
-          <ng-container *ngIf="universities.length > 0">
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
+              <mdb-form-control class="mb-3">
+                <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                  formControlName="registrationNumber" required />
+                <label mdbLabel class="form-label" for="form_name">N° Registro</label>
+              </mdb-form-control>
+            </div>
+
+            <ng-container *ngIf="universities.length > 0">
+              <div class="row">
                 <div class="mb-3">
-                  <select
-                    class="form-select"
-                    aria-label="university Name Select"
-                    id="universityNameSelect"
-                    formControlName="university"
-                    required
-                    [disabled]="true"
-                  >
+                  <select class="form-select" aria-label="university Name Select" id="universityNameSelect"
+                    formControlName="university" required [disabled]="true">
                     <option [ngValue]="universities[0]">
                       {{ universities[0].name }}
                     </option>
                   </select>
                 </div>
-              </div>
-              <div class="col-xs-12 col-md-6">
                 <div class="mb-3">
-                  <select
-                    class="form-select"
-                    aria-label="Academic Unit Select"
-                    id="academicUnitNameSelect"
-                    formControlName="academicUnit"
-                    required
-                    (change)="changeAcademicUnit()"
-                  >
+                  <select class="form-select" aria-label="Academic Unit Select" id="academicUnitNameSelect"
+                    formControlName="academicUnit" required (change)="changeAcademicUnit()">
                     <option selected value="">
                       Elija unidad acad&eacute;mica
                     </option>
-                    <ng-container
-                      *ngFor="let academicUnit of universities[0].academicUnits"
-                    >
+                    <ng-container *ngFor="let academicUnit of universities[0].academicUnits">
                       <option [ngValue]="academicUnit">
                         {{ academicUnit.name }}
                       </option>
@@ -148,59 +79,39 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-md-3">
-                <select
-                  class="form-select mb-3"
-                  aria-label="Degree Program NameSelect"
-                  id="degreeProgramNameSelect"
-                  formControlName="degreeProgramName"
-                  required
-                  (change)="this.plans = this.degreeProgramName?.value.plans"
-                >
-                  <option selected value="">Elija una carrera</option>
-                  <ng-container *ngFor="let career of careers">
-                    <option [ngValue]="career">{{ career.name }}</option>
-                  </ng-container>
-                </select>
+              <div class="row">
+                <div class="mb-3">
+                  <select class="form-select" aria-label="Degree Program NameSelect" id="degreeProgramNameSelect"
+                    formControlName="degreeProgramName" required
+                    (change)="this.plans = this.degreeProgramName?.value.plans">
+                    <option selected value="">Elija una carrera</option>
+                    <ng-container *ngFor="let career of careers">
+                      <option [ngValue]="career">{{ career.name }}</option>
+                    </ng-container>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <select class="form-select" aria-label="Degree Program curriculum select"
+                    id="degreeProgramCurriculumSelect" formControlName="degreeProgramCurriculum" required>
+                    <option selected value="">Elija el plan de estudio</option>
+                    <ng-container *ngFor="let plan of plans">
+                      <option [ngValue]="plan">{{ plan }}</option>
+                    </ng-container>
+                  </select>
+                </div>
               </div>
-              <div class="col-xs-12 col-md-3">
-                <select
-                  class="form-select mb-3"
-                  aria-label="Degree Program curriculum select"
-                  id="degreeProgramCurriculumSelect"
-                  formControlName="degreeProgramCurriculum"
-                  required
-                >
-                  <option selected value="">Elija el plan de estudio</option>
-                  <ng-container *ngFor="let plan of plans">
-                    <option [ngValue]="plan">{{ plan }}</option>
-                  </ng-container>
-                </select>
+            </ng-container>
+            <div class="row text-center">
+              <div class="col p-1">
+                <button type="button" type="submit" class="btn btn-block btn-light" (click)="clearForm()">
+                  Limpiar
+                </button>
               </div>
-            </div>
-          </ng-container>
-          <div class="row text-center">
-            <div class="col p-1">
-              <button
-                type="button"
-                type="submit"
-                class="btn btn-block btn-light"
-                (click)="clearForm()"
-              >
-                Limpiar
-              </button>
-            </div>
-            <div class="col p-1">
-              <button
-                type="button"
-                type="submit"
-                class="btn btn-block btn-secondary"
-                (click)="addNewStudent()"
-              >
-                Guardar
-              </button>
+              <div class="col p-1">
+                <button type="button" type="submit" class="btn btn-block btn-secondary" (click)="addNewStudent()">
+                  Guardar
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -215,20 +126,12 @@
       <div class="mt-4">
         <div class="row p-2">
           <div class="col-4">
-            <button
-              type="button"
-              class="btn btn-secondary btn-block"
-              (click)="successMessage = ''"
-            >
+            <button type="button" class="btn btn-secondary btn-block" (click)="successMessage = ''">
               Crear graduado
             </button>
           </div>
           <div class="col-8">
-            <button
-              type="button"
-              class="btn btn-secondary btn-block"
-              (click)="goToCreateCeritificate()"
-            >
+            <button type="button" class="btn btn-secondary btn-block" (click)="goToCreateCeritificate()">
               Crea un nuevo t&iacute;tulo
             </button>
           </div>
@@ -240,11 +143,8 @@
 
 <ng-template #error>
   <div class="container mt-2 animate__animated animate__flipInX">
-    <app-message
-      title="Ha ocurrido un error al intentar cargar los datos"
-      type="ERROR"
-      message="Comuniquese con el administrador. Error:'' "
-    ></app-message>
+    <app-message title="Ha ocurrido un error al intentar cargar los datos" type="ERROR"
+      message="Comuniquese con el administrador. Error:'' "></app-message>
   </div>
 </ng-template>
 

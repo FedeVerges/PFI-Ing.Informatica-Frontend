@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ export class CertificateComponent {
 
   @Input() transaction: BlockchainTransactionDto | undefined;
   @Input() certificateDeleted: boolean = false;
+  @Output() delete = new EventEmitter<boolean>();
 
   // transaction: BlockchainTransactionDto = {
   //   transactionHash: "0x8722542ea90c26e90d7fb946ae103fbdcbb182945205746ad7ba5133266fabeb",
@@ -71,13 +72,18 @@ export class CertificateComponent {
 
   goDetail(id?: number) {
     if (id && this.transaction) {
+      debugger;
       this.dialog
         .open(CertificateDialogComponent, {
           data: this.transaction,
           autoFocus: false
         })
         .afterClosed()
-        .subscribe((res) => {});
+        .subscribe((ret: { deleted: boolean }) => {
+          if (ret.deleted) {
+            this.delete.emit(true);
+          }
+        });
     }
   }
 

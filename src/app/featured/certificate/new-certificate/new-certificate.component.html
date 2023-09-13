@@ -1,44 +1,24 @@
-<div
-  class="container mt-2 animate__animated animate__fadeIn"
-  *ngIf="!hasError; else error"
->
+<div class="container mt-2 animate__animated animate__fadeIn" *ngIf="!hasError; else error">
   <div class="row" *ngIf="successMessage.length <= 0; else certificateCreated">
     <div class="col">
       <h3 class="card-title">Crear Titulo</h3>
       <div class="row mt-2">
         <div class="col-sm-6 col-md-4">
           <mdb-form-control class="mb-3">
-            <input
-              mdbInput
-              type="text"
-              id="search_dni"
-              class="form-control"
-              [(ngModel)]="personDocNumber"
-              (keyup.enter)="getStudentByDni()"
-              [ngModelOptions]="{ standalone: true }"
-            />
-            <label mdbLabel class="form-label" for="search_dni"
-              >N&uacute;mero de documento</label
-            >
+            <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
+              (keyup.enter)="getStudentByDni()" [ngModelOptions]="{ standalone: true }" />
+            <label mdbLabel class="form-label" for="search_dni">N&uacute;mero de documento</label>
           </mdb-form-control>
         </div>
 
         <div class="col-sm-6 col-md-2">
-          <button
-            type="button"
-            type="submit"
-            [disabled]="!personDocNumber"
-            class="btn btn-secondary"
-            (click)="getStudentByDni()"
-          >
+          <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
+            (click)="getStudentByDni()">
             Buscar
           </button>
         </div>
       </div>
-      <div
-        class="container-fluid my-2"
-        *ngIf="studentList && studentList.length > 0 && !studentSelected"
-      >
+      <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
         <div class="row">
           <div class="col-6">
             <h5 class="text-start">Graduados encontrados:</h5>
@@ -47,14 +27,9 @@
         <div class="row">
           <div class="col-6">
             <div class="list-group list-group-light">
-              <button
-                type="button"
+              <button type="button"
                 class="list-group-item list-group-item-action btn my-2 text-start bg-primary secondary"
-                *ngFor="let student of studentList"
-                aria-current="true"
-                mdbRipple
-                (click)="selectStudent(student)"
-              >
+                *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
                 {{ student.person.fullname }} - {{ student.degreeProgramName }}
               </button>
             </div>
@@ -62,7 +37,7 @@
         </div>
       </div>
 
-      <form
+      <!-- <form
         autocomplete="true"
         [formGroup]="studentForm"
         *ngIf="studentSelected"
@@ -216,28 +191,21 @@
             </div>
           </div>
         </div>
-      </form>
-      <form
-        autocomplete="true"
-        [formGroup]="certificateForm"
-        *ngIf="studentSelected"
-      >
+      </form> -->
+
+      <div *ngIf="studentSelected">
+        <app-student [student]="studentSelected"></app-student>
+
+      </div>
+      <form autocomplete="true" [formGroup]="certificateForm" *ngIf="studentSelected">
         <div class="container">
           <h4 class="text-start mt-2 card-title">Datos del certificado</h4>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_name"
-                  class="form-control"
-                  formControlName="waferNumber"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >N° Oblea</label
-                >
+                <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber"
+                  required />
+                <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
               </mdb-form-control>
               <!-- <mdb-form-control class="mb-3">
                 <input
@@ -255,12 +223,7 @@
               </mdb-form-control> -->
             </div>
             <div class="col-xs-12 col-md-6">
-              <select
-                class="form-select"
-                id="degreeTypeSelect"
-                formControlName="degreeType"
-                required
-              >
+              <select class="form-select" id="degreeTypeSelect" formControlName="degreeType" required>
                 <option selected value="">Tipo de titulo</option>
                 <option value="PREGRADO-GRADO">Pregrado - Grado</option>
                 <option value="POSTGRADO">Posgrado</option>
@@ -288,20 +251,8 @@
 
           <div class="row">
             <div class="col text-end">
-              <button
-                type="button"
-                type="submit"
-                class="btn btn-light mx-2"
-                (click)="clearForm()"
-              >
-                Limpiar
-              </button>
-              <button
-                type="button"
-                type="submit"
-                class="btn btn-secondary"
-                (click)="addNewCertificate()"
-              >
+
+              <button type="button" type="submit" class="btn btn-secondary" (click)="addNewCertificate()">
                 Crear título universitario
               </button>
             </div>
@@ -314,17 +265,9 @@
 
 <ng-template #certificateCreated>
   <div class="container mt-2 animate__animated animate__slideInDown">
-    <app-message
-      [title]="successMessage"
-      [message]="detailMessage"
-      type="TRANSACTION"
-    >
+    <app-message [title]="successMessage" [message]="detailMessage" type="TRANSACTION">
       <div class="mt-4">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="goToTransactionList()"
-        >
+        <button type="button" class="btn btn-secondary" (click)="goToTransactionList()">
           Listado de transacciones
         </button>
       </div>
@@ -334,10 +277,7 @@
 
 <ng-template #error>
   <div class="container mt-2 animate__animated animate__flipInX">
-    <app-message
-      title="Ha ocurrido un error al intentar cargar los datos"
-      type="ERROR"
-      message="Comuniquese con el administrador."
-    ></app-message>
+    <app-message title="Ha ocurrido un error al intentar cargar los datos" type="ERROR"
+      message="Comuniquese con el administrador."></app-message>
   </div>
 </ng-template>

@@ -1,10 +1,9 @@
 <ng-container *ngIf="data">
   <mat-dialog-content>
-    <h2 class="secondary">Certificado N° {{ data.certificateBlockchainId }}</h2>
+    <h2 class="secondary">Certificado N° {{ data.certificate?.id }}</h2>
     <div class="container">
       <p>
-        <strong>Fecha de registraci&oacute;n: </strong
-        >{{ data.certificate?.updatedAtDesc }}
+        <strong>Fecha de registraci&oacute;n: </strong>{{ data.certificate?.updatedAtDesc }}
       </p>
       <p>
         <strong> Graduado: </strong>
@@ -14,8 +13,7 @@
       </p>
 
       <p>
-        <strong>N° Registro: </strong
-        >{{ data.certificate?.student?.registrationNumber }}
+        <strong>N° Registro: </strong>{{ data.certificate?.student?.registrationNumber }}
       </p>
 
       <p>
@@ -39,9 +37,7 @@
       </p>
 
       <p>
-        <strong
-          mdbTooltip="Identificador para la impresi&oacute;n del t&iacute;tulo"
-          >Numero de oblea:
+        <strong mdbTooltip="Identificador para la impresi&oacute;n del t&iacute;tulo">Numero de oblea:
         </strong>
         {{ data.certificate?.waferNumber }}
       </p>
@@ -53,47 +49,48 @@
         </p>
       </strong>
       <div class="container card bg-light">
-        <strong class="h3 secondary"> Informaci&oacute;n del contrato</strong>
-        <div>
-          <p>
-            <!-- Todo: Agregar color. -->
-            <strong>Estado del certificado: </strong>
-            {{ data?.certificate?.active ? 'ACTIVO' : 'DADO DE BAJA' }}
-          </p>
-          <p>
-            <strong>Transacci&oacute;n: </strong> {{ data.transactionHash }}
-          </p>
+        <ng-container *ngIf="hasTransactionData;else noTransacionData">
+          <strong class="h3 secondary"> Informaci&oacute;n del contrato</strong>
+          <div>
+            <p>
+              <!-- Todo: Agregar color. -->
+              <strong>Estado del certificado: </strong>
+              {{ data?.certificate?.active ? 'ACTIVO' : 'DADO DE BAJA' }}
+            </p>
+            <p>
+              <strong>Transacci&oacute;n: </strong> {{ data.transactionHash }}
+            </p>
 
-          <div class="">
-            <span>
-              <p class="text-muted m-0">
-                Puede validar el estado de la transacci&oacute;n a traves del
-                siguiente link:
-              </p>
-              <a class="link" [href]="data.etherscanLink">{{
-                data?.etherscanLink
-              }}</a>
-            </span>
+            <div class="">
+              <span>
+                <p class="text-muted m-0">
+                  Puede validar el estado de la transacci&oacute;n a traves del
+                  siguiente link:
+                </p>
+                <a class="link" [href]="data.etherscanLink">{{
+                  data?.etherscanLink
+                  }}</a>
+              </span>
+            </div>
+
+            <p><strong>Numero de bloque: </strong> {{ data.blockHash }}</p>
+
+            <p>
+              <strong>Costos de certificaci&oacute;n (WEI): </strong>
+              {{ data.gasUsed }} WEI
+            </p>
           </div>
 
-          <p><strong>Numero de bloque: </strong> {{ data.blockHash }}</p>
+        </ng-container>
 
-          <p>
-            <strong>Costos de certificaci&oacute;n (WEI): </strong>
-            {{ data.gasUsed }} WEI
-          </p>
-        </div>
       </div>
     </div>
     <!-- Solo si es administrativo -->
-    <div
-      class="container"
-      *ngIf="
+    <div class="container" *ngIf="
         (role$ | async)?.name === 'ADMIN' &&
         data.certificate &&
         data.certificate.id != null
-      "
-    >
+      ">
       <hr class="text-danger" />
       <p class="text-danger">
         &Eacute;sta acci&oacute;n har&aacute; que &eacute;ste certificado no sea
@@ -102,17 +99,25 @@
       <p class="text-danger">
         &Eacute;sta acci&oacute;n es permanente y no se puede deshacer.
       </p>
-      <button
-        type="button"
-        type="submit"
-        class="btn btn-danger"
-        (click)="deleteCertficate(data.certificate.id)"
-      >
+      <button *ngIf="!deleting" type="button" type="submit" class="btn btn-danger"
+        (click)="deleteCertficate(data.certificate.id)">
         Eliminar
       </button>
+      <button *ngIf="deleting" type="button" type="submit" class="btn btn-danger" disabled>
+        <span>Cargando...</span>
+        <div class="spinner-border text-light spinner-border-sm" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </button>
+
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cerrar</button>
   </mat-dialog-actions>
 </ng-container>
+
+
+<ng-template #noTransacionData>
+  <h3>No se han encontrado datos de trazabilidad.</h3>
+</ng-template>

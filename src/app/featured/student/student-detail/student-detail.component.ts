@@ -76,6 +76,7 @@ export class StudentDetailComponent implements OnInit, OnDestroy {
               panelClass: ['error-snackbar']
             }
           );
+          //TODO: agregar location.back();
         }
       });
     }
@@ -84,6 +85,7 @@ export class StudentDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   selectStudent(student: StudentDto) {
+    debugger;
     this.studentSelected = student;
     this.getTitles(student);
   }
