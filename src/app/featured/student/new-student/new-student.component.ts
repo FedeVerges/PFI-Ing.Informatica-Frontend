@@ -87,11 +87,17 @@ export class NewStudentComponent implements OnInit {
     private router: Router
   ) {
     this.studentForm = this.fb.group({
-      name: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      docNumber: ['', [Validators.required], Validators.max(8)],
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      lastname: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      docNumber: [
+        '',
+        [Validators.required, Validators.minLength(7), Validators.maxLength(8)]
+      ],
       docType: ['', [Validators.required]],
-      registrationNumber: ['', [Validators.required], Validators.max(10)],
+      registrationNumber: [
+        '',
+        [Validators.required, Validators.minLength(1), Validators.maxLength(10)]
+      ],
       sex: ['', [Validators.required]],
       university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
@@ -112,6 +118,10 @@ export class NewStudentComponent implements OnInit {
   }
   get degreeProgramName() {
     return this.studentForm.get('degreeProgramName');
+  }
+
+  get name() {
+    return this.studentForm.get('name');
   }
 
   ngOnInit(): void {
@@ -154,7 +164,7 @@ export class NewStudentComponent implements OnInit {
         this.createStudent(student);
       }
     } else {
-      this.studentForm.markAsDirty();
+      this.studentForm.markAllAsTouched();
       this.alertService.showErrorMessage('Verifique los datos del estudiante.');
     }
   }

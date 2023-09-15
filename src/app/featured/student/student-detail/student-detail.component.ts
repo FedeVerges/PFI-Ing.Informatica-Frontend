@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
@@ -12,14 +12,14 @@ import { StudentService } from 'src/app/core/services/student.service';
   templateUrl: './student-detail.component.html',
   styleUrls: ['./student-detail.component.scss']
 })
-export class StudentDetailComponent implements OnInit, OnDestroy {
+export class StudentDetailComponent implements OnInit {
   studentTitles?: BlockchainTransactionDto[];
 
   studentList: StudentDto[] = [];
   studentSelected: StudentDto | undefined;
   showTitle = false;
-  personDocNumber = 0;
-  subscription: Subscription;
+
+  @Input() personDocNumber: number = 0;
 
   constructor(
     private alertService: AlertService,
@@ -27,7 +27,7 @@ export class StudentDetailComponent implements OnInit, OnDestroy {
     private certificateService: CertificateService,
     private activatedRoute: ActivatedRoute
   ) {
-    // Escuchar parametros de ruta y buscar al estudiante.
+    /* // Escuchar parametros de ruta y buscar al estudiante.
     this.subscription = this.activatedRoute.params.subscribe({
       next: (params) => {
         this.personDocNumber = params['docNumber'];
@@ -38,11 +38,7 @@ export class StudentDetailComponent implements OnInit, OnDestroy {
         }
       },
       error: (e) => console.error(e)
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    }); */
   }
 
   getStudentByDni() {
@@ -82,10 +78,11 @@ export class StudentDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getStudentByDni();
+  }
 
   selectStudent(student: StudentDto) {
-    debugger;
     this.studentSelected = student;
     this.getTitles(student);
   }

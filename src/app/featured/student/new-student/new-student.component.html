@@ -8,12 +8,15 @@
             <!-- <h6 class="my-3 fw-bold">Ingresa los datos academicos del estudiante.</h6> -->
             <div>
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="name" required />
+                <input mdbValidate mdbValidate mdbInput type="text" id="form_name" class="form-control"
+                  formControlName="name" required />
                 <label mdbLabel class="form-label" for="form_name">Nombre</label>
+
               </mdb-form-control>
+
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_lastName" class="form-control" formControlName="lastname"
-                  required />
+                <input mdbValidate mdbInput type="text" id="form_lastName" class="form-control"
+                  formControlName="lastname" required />
                 <label mdbLabel class="form-label" for="form_lastName">Apellido</label>
               </mdb-form-control>
               <div class="mb-3">
@@ -41,7 +44,7 @@
                 </div>
                 <div class="col-6">
                   <mdb-form-control class="mb-3">
-                    <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                    <input mdbValidate mdbInput type="text" id="form_name" maxlength="8" class="form-control"
                       formControlName="docNumber" required />
                     <label mdbLabel class="form-label" for="form_name">N° Documento</label>
                   </mdb-form-control>
@@ -49,7 +52,7 @@
               </div>
 
               <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                <input mdbValidate mdbInput type="text" id="form_name" maxlength="8" class="form-control"
                   formControlName="registrationNumber" required />
                 <label mdbLabel class="form-label" for="form_name">N° Registro</label>
               </mdb-form-control>
@@ -101,13 +104,8 @@
                 </div>
               </div>
             </ng-container>
-            <div class="row text-center">
-              <div class="col p-1">
-                <button type="button" type="submit" class="btn btn-block btn-light" (click)="clearForm()">
-                  Limpiar
-                </button>
-              </div>
-              <div class="col p-1">
+            <div class="row justify-content-center">
+              <div class="col col-sm-12 col-md-10">
                 <button type="button" type="submit" class="btn btn-block btn-secondary" (click)="addNewStudent()">
                   Guardar
                 </button>

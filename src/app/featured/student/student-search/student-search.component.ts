@@ -16,13 +16,14 @@ import { StudentService } from 'src/app/core/services/student.service';
 export class StudentSearchComponent implements OnInit {
   personDocNumber: number | undefined;
 
+  enableResults = false;
   constructor(private alertService: AlertService, private router: Router) {}
 
   ngOnInit(): void {}
 
   searchStudentByDni() {
     if (this.personDocNumber) {
-      this.router.navigateByUrl(`/student/search/${this.personDocNumber}`);
+      this.enableResults = true;
     }
   }
 }

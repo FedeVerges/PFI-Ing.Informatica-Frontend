@@ -26,7 +26,6 @@ import { MessageComponent } from './message/message.component';
     CertificateDetailComponent,
     CertificateDialogComponent,
     TransactionDetailComponent,
-    StudentSearchComponent,
     MessageComponent
   ],
   imports: [
@@ -48,7 +47,6 @@ import { MessageComponent } from './message/message.component';
     StudentComponent,
     CertificateDetailComponent,
     CertificateDialogComponent,
-    StudentSearchComponent,
     MessageComponent
   ]
 })
