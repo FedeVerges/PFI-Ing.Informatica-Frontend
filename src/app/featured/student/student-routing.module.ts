@@ -7,12 +7,12 @@ import { StudentSearchComponent } from './student-search/student-search.componen
 
 const routes: Routes = [
   { path: '', redirectTo: 'new', pathMatch: 'full' },
-  { path: 'new', component: NewStudentComponent, canActivate: [AuthGuard] },
-  {
+  { path: 'new', component: NewStudentComponent, canActivate: [AuthGuard] }
+  /*  {
     path: 'search',
     component: StudentSearchComponent,
     canActivate: [AuthGuard]
-  }
+  } */
 ];
 
 @NgModule({

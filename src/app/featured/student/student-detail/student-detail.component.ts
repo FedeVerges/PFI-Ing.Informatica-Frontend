@@ -24,8 +24,7 @@ export class StudentDetailComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private studentSerivce: StudentService,
-    private certificateService: CertificateService,
-    private activatedRoute: ActivatedRoute
+    private certificateService: CertificateService
   ) {
     /* // Escuchar parametros de ruta y buscar al estudiante.
     this.subscription = this.activatedRoute.params.subscribe({
@@ -85,6 +84,8 @@ export class StudentDetailComponent implements OnInit {
   selectStudent(student: StudentDto) {
     this.studentSelected = student;
     this.getTitles(student);
+
+    // TODO: Mostrar mensaje de éxito.
   }
 
   // todo: Terminar tabla de certificaciones.

@@ -12,11 +12,7 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
 @NgModule({
-  declarations: [
-    NewStudentComponent,
-    StudentDetailComponent,
-    StudentSearchComponent
-  ],
+  declarations: [NewStudentComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

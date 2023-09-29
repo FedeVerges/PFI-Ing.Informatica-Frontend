@@ -173,6 +173,7 @@ export class NewStudentComponent implements OnInit {
     this.studentSerivce.createStudent(student).subscribe({
       next: (studentCreated) => {
         this.successMessage = `Nuevo graduado creado!!`;
+        this.studentForm.reset();
       },
       error: (e) => {
         this.alertService.showErrorMessage(e);

@@ -10,7 +10,7 @@ COPY ./ /home/app/front
 # Install all the dependencies
 RUN npm install
 
-RUN npm run build --prod
+RUN npm run build-prod
 
 # Use official nginx image as the base image
 FROM nginx:latest
