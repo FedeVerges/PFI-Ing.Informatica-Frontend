@@ -30,7 +30,7 @@
           <ng-container *ngIf="user; else userActions">
             <ng-container *ngIf="role$ | async; let role">
               <div class="col-11">
-                <ul class="navbar-nav mx-4 mx-lg-0" (click)="navBar.toggle()">
+                <ul class="navbar-nav mx-4 mx-lg-0">
                   <li class="nav-item">
                     <a [routerLink]="'home'" routerLinkActive="active-link" class="nav-link">
                       Buscar t&iacute;tulo

@@ -132,7 +132,7 @@ export class NewCertificateComponent {
       next: (transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
           this.successMessage = `Se ha enviado la transacción exitosamente.`;
-          this.detailMessage = `En unos minutos la transacción 0x5f20a35fe6fa252519b90f6be5c4e508b59c2afacd2bed34dd329af31a39e628 será validada y aprobada por la red.`;
+          this.detailMessage = `En unos minutos la transacción ${transactionData.receipt.transactionHash} será validada y aprobada por la red.`;
         }
       },
       error: (error) => {

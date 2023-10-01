@@ -1,16 +1,87 @@
-<div class="container mt-5 animate__animated animate__fadeIn">
-  <div class="row justify-content-center">
-    <div class="col-md-12 col-lg-8 text-center">
-      <h1 class="text-primary title">Títulos Universitarios de la UNSL</h1>
-      <h3 class="text-secondary px-1">
-        Consult&aacute;r t&iacute;tulos ingresando n&uacute;mero de
-        documento.
-      </h3>
+<ng-container *ngIf="!certificateDeleted; else transactionSended">
+  <div class="container mt-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center animate__animated animate__fadeIn" *ngIf="!currentStudent">
+      <div class="col-md-12 col-lg-8 text-center">
+        <h1 class="text-primary title">Títulos Universitarios de la UNSL</h1>
+        <h3 class="text-secondary px-1">
+          {{title}}
+        </h3>
+      </div>
+    </div>
+    <div class="row my-3 justify-content-center">
+      <div class="col-md-12 col-lg-6">
+        <app-student-search (onSearch)="setStudents($event)"></app-student-search>
+      </div>
+    </div>
+    <div class="container-fluid" *ngIf="students && students.length >0 && !currentStudent">
+      <app-student-detail #detail [studentList]="students" (selectedStudent)="getTitles($event)"></app-student-detail>
+    </div>
+    <div class="row" *ngIf="currentStudent && !!studentTitles">
+      <div class="col">
+        <div class="container mt-3 animate__animated animate__fadeIn">
+          <div class="row">
+            <div class="col-1">
+              <button class="navbar-toggler" type="button" (click)="currentStudent = undefined"
+                aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-angle-left"></i>
+              </button>
+            </div>
+            <div class="col-10">
+              <app-student [student]="currentStudent"></app-student>
+            </div>
+          </div>
+          <div class="div" *ngIf="!!studentTitles && studentTitles.length > 0; else emptyData">
+            <div class="row">
+              <div class="col p-0">
+                <div class="container mt-3" *ngIf="
+                studentTitles.length > 0;
+                    ">
+                  <h4>T&iacute;tulos</h4>
+
+                  <ng-container *ngFor="let cert of studentTitles">
+                    <div class="row">
+                      <app-certificate [transaction]="cert" (delete)="certificateDeleted = true"></app-certificate>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row my-3 justify-content-center">
-    <div class="col-md-12 col-lg-6">
-      <app-student-search></app-student-search>
+
+</ng-container>
+
+
+<ng-template #emptyData>
+  <div class="row mt-3 justify-content-center">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h3>No hay t&iacute;tulos...</h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>
+
+
+<ng-template #transactionSended>
+  <div class="container mt-2 animate__animated animate__slideInDown">
+    <app-message title="Se ha eliminado el certificado"
+      message="En unos minutos la transacción será validada y aprobada por la red." type="TRANSACTION">
+      <div class="mt-4">
+        <button type="button" class="btn btn-secondary" (click)="this.certificateDeleted = false;">
+          Buscar t&iacute;tulos
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="goToTransactionList()">
+          Listado de transacciones
+        </button>
+      </div>
+    </app-message>
+  </div>
+</ng-template>

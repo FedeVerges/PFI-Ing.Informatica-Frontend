@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-12 col-lg-4">
       <div class="list-group">
         <ng-container *ngFor="let student of studentList">
           <button type="button" class="list-group-item list-group-item-action btn my-2 text-start text-primary"
@@ -17,51 +17,3 @@
     </div>
   </div>
 </div>
-<div class="row" *ngIf="studentSelected && !!studentTitles">
-  <div class="col">
-    <div class="container mt-3 animate__animated animate__fadeIn">
-      <div class="row">
-        <div class="col-1">
-          <button class="navbar-toggler" type="button" (click)="studentSelected = undefined"
-            aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-angle-left"></i>
-          </button>
-        </div>
-        <div class="col-10">
-          <app-student [student]="studentSelected"></app-student>
-        </div>
-      </div>
-      <div class="div" *ngIf="!!studentTitles">
-        <div class="row">
-          <div class="col p-0">
-            <div class="container mt-3" *ngIf="
-            studentTitles.length > 0;
-                ">
-              <h4>T&iacute;tulos</h4>
-
-              <ng-container *ngFor="let cert of studentTitles">
-                <div class="row">
-                  <app-certificate [transaction]="cert" (delete)="selectStudent(studentSelected)"></app-certificate>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<ng-template #emptyData>
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <div class="text-center">
-            <h3>No hay datos...</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>

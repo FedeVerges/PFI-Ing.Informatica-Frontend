@@ -81,6 +81,8 @@ export class CertificateComponent {
         .afterClosed()
         .subscribe((ret: { deleted: boolean }) => {
           if (ret.deleted) {
+            // TODO: Agregar cartel de envio de transaccion y que lo mande al listado de transacciones.
+            // Sacar el emitter.
             this.delete.emit(true);
           }
         });
