@@ -8,8 +8,7 @@ export interface CertificateEth {
   waferNumber: string;
   createdAt: number;
   updatedAt: number;
-  active: boolean; // Activo TODO: cambiar por texto.
-  // Solo para front.
+  active: boolean; // Activo
   createdAtDesc?: string;
   updatedAtDesc?: string;
 }
