@@ -25,7 +25,8 @@
 }
 
 .active-link {
-    font-weight: bold;
+    border-bottom: 3px solid #e0e0e0 !important;
+    border-color: $primary !important;
 }
 
 .active-link>a {

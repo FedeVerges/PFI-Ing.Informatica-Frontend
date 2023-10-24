@@ -84,6 +84,17 @@
               </div>
               <div class="row">
                 <div class="mb-3">
+                  <select class="form-select" aria-label="Degree type Select" id="degreeTypeSelect"
+                    formControlName="degreeType" required>
+                    <option selected value="">Tipo de carrera</option>
+                    <option value="PREGRADO">Pregrado</option>
+                    <option value="GRADO">Grado</option>
+                    <option value="POSTGRADO">Posgrado</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3">
                   <select class="form-select" aria-label="Degree Program NameSelect" id="degreeProgramNameSelect"
                     formControlName="degreeProgramName" required
                     (change)="this.plans = this.degreeProgramName?.value.plans">

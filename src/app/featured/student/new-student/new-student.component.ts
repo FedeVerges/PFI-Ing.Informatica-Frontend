@@ -19,18 +19,22 @@ const UNSL: University = {
       careers: [
         {
           name: 'Ingeniería en informática',
+          type: 'GRADO',
           plans: ['26/12']
         },
         {
           name: 'Ingeniería en electrónica',
+          type: 'GRADO',
           plans: ['13/08']
         },
         {
           name: 'Ingeniería en Minas',
+          type: 'GRADO',
           plans: ['11/08']
         },
         {
           name: 'Ingeniería Quimica',
+          type: 'GRADO',
           plans: ['13/08']
         }
       ]
@@ -40,18 +44,22 @@ const UNSL: University = {
       careers: [
         {
           name: 'Licenciatura en Química',
+          type: 'GRADO',
           plans: ['11/19']
         },
         {
           name: 'Licenciatura en Nutrición',
+          type: 'GRADO',
           plans: ['11/09']
         },
         {
           name: 'Licenciatura en Bioquimica',
+          type: 'GRADO',
           plans: ['11/19']
         },
         {
           name: 'Licenciatura en Biologia Molecular',
+          type: 'GRADO',
           plans: ['11/19']
         }
       ]
@@ -101,12 +109,9 @@ export class NewStudentComponent implements OnInit {
       sex: ['', [Validators.required]],
       university: ['', [Validators.required]],
       academicUnit: ['', [Validators.required]],
+      degreeType: ['', [Validators.required]],
       degreeProgramName: ['', [Validators.required]],
-      degreeProgramCurriculum: ['', [Validators.required]],
-      //todo: agregar grado del titulo.
-      ministerialOrdinance: [''],
-      superiorCouncilOrdinance: ['', []],
-      directiveCouncilOrdinance: ['', []]
+      degreeProgramCurriculum: ['', [Validators.required]]
     });
   }
 
@@ -138,6 +143,7 @@ export class NewStudentComponent implements OnInit {
           id: 0,
           name: this.studentForm.get('name')!.value,
           lastname: this.studentForm.get('lastname')!.value,
+          docType: this.studentForm.get('docType')!.value,
           docNumber: this.studentForm.get('docNumber')!.value,
           sex: this.studentForm.get('sex')!.value
         };
@@ -150,16 +156,9 @@ export class NewStudentComponent implements OnInit {
           degreeProgramCurriculum: this.studentForm.get(
             'degreeProgramCurriculum'
           )!.value,
-          ministerialOrdinance: this.studentForm.get('ministerialOrdinance')!
-            .value,
           blockchainId: 0,
           registrationNumber: this.studentForm.get('registrationNumber')!.value,
-          superiorCouncilOrdinance: this.studentForm.get(
-            'superiorCouncilOrdinance'
-          )!.value,
-          directiveCouncilOrdinance: this.studentForm.get(
-            'directiveCouncilOrdinance'
-          )!.value
+          degreeType: this.studentForm.get('degreeType')!.value
         };
         this.createStudent(student);
       }
@@ -191,7 +190,7 @@ export class NewStudentComponent implements OnInit {
       academicUnit: student.academicUnit,
       degreeProgramName: student.degreeProgramName,
       degreeProgramCurriculum: student.degreeProgramCurriculum,
-      degreeProgramOrdinance: student.ministerialOrdinance
+      degreeType: student.degreeType
     });
   }
 

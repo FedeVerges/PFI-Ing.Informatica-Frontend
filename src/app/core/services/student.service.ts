@@ -34,18 +34,22 @@ export class StudentService {
             careers: [
               {
                 name: 'Ingeniería en informática',
+                type: 'GRADO',
                 plans: ['26/12']
               },
               {
                 name: 'Ingeniería en electrónica',
+                type: 'GRADO',
                 plans: ['13/08']
               },
               {
                 name: 'Ingeniería en Minas',
+                type: 'GRADO',
                 plans: ['11/08']
               },
               {
                 name: 'Ingeniería Quimica',
+                type: 'GRADO',
                 plans: ['13/08']
               }
             ]
@@ -55,18 +59,22 @@ export class StudentService {
             careers: [
               {
                 name: 'Licenciatura en Química',
+                type: 'GRADO',
                 plans: ['11/19']
               },
               {
                 name: 'Licenciatura en Nutrición',
+                type: 'GRADO',
                 plans: ['11/09']
               },
               {
                 name: 'Licenciatura en Bioquimica',
+                type: 'GRADO',
                 plans: ['11/19']
               },
               {
                 name: 'Licenciatura en Biologia Molecular',
+                type: 'GRADO',
                 plans: ['11/19']
               }
             ]
