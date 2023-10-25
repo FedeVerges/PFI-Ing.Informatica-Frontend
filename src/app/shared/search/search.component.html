@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-sm-6 col-md-8">
+        <mdb-form-control class="mb-3">
+            <input mdbInput type="number" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
+                (keyup.enter)="getStudentByDni()" [ngModelOptions]="{ standalone: true }" />
+            <label mdbLabel class="form-label" for="search_dni">N&uacute;mero de documento</label>
+        </mdb-form-control>
+    </div>
+
+    <div class="col-sm-3 col-md-2">
+        <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
+            (click)="getStudentByDni()">
+            Buscar
+        </button>
+    </div>
+
+    <div class="col-sm-3 col-md-2">
+        <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
+            (click)="getStudentByDni()">
+            Limpiar
+        </button>
+    </div>
+</div>

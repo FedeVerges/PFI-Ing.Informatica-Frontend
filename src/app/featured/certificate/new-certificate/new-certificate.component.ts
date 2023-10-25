@@ -19,7 +19,6 @@ import { UniversityDegreeEth } from 'src/app/core/models/dto/blockchain/universi
 })
 export class NewCertificateComponent {
   certificateForm!: FormGroup;
-  studentForm!: FormGroup;
   amountCertificates: number = 0;
   idContract: number = 0;
   certificateSearchResult: any[] = [];
@@ -40,20 +39,6 @@ export class NewCertificateComponent {
     private studentSerivce: StudentService,
     private router: Router
   ) {
-    this.studentForm = this.fb.group({
-      name: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      docNumber: ['', [Validators.required]],
-      registrationNumber: ['', [Validators.required]],
-      sex: ['', [Validators.required]],
-      university: ['', [Validators.required]],
-      academicUnit: ['', [Validators.required]],
-      degreeProgramName: ['', [Validators.required]],
-      degreeProgramCurriculum: ['', [Validators.required]],
-      ministerialOrdinance: [''],
-      superiorCouncilOrdinance: ['', [Validators.required]],
-      directiveCouncilOrdinance: ['', [Validators.required]]
-    });
     this.certificateForm = this.fb.group({
       degreeType: ['', [Validators.required]],
       degreeName: [''],
@@ -63,97 +48,41 @@ export class NewCertificateComponent {
 
   addNewCertificate() {
     // Crear el certificado atraves de la funcion createCertificate
-    // Validar correctamente los campos.
-    if (!this.studentForm.invalid) {
-      if (!this.certificateForm.invalid) {
-        let certificate: CertificateEth;
-        if (this.studentSelected) {
-          const student: StudentEth = {
-            docNumber: this.studentSelected.person.docNumber,
-            docType: this.studentSelected.person.docType,
-            name: this.studentSelected.person.name,
-            lastname: this.studentSelected.person.lastname,
-            sex: this.studentSelected.person.sex,
-            registrationNumber: this.studentSelected.registrationNumber,
-            id: this.studentSelected.blockchainId
-          };
-          const degree: UniversityDegreeEth = {
-            academicUnit: this.studentSelected.academicUnit,
-            degreeProgramName: this.studentSelected.degreeProgramName,
-            degreeProgramCurriculum:
-              this.studentSelected.degreeProgramCurriculum,
-            degreeType: this.studentSelected.degreeType,
-            universityName: this.studentSelected.universityName
-          };
-          certificate = {
-            student: student,
-            active: true,
-            universityDegree: degree,
-            createdAt: 0,
-            id: 0,
-            updatedAt: 0,
-            waferNumber: this.certificateForm.get('waferNumber')!.value
-          };
-          // TODO: Ajustar................................................................
-          this.createCertificate(certificate);
-        }
-        /* else {
-          const student: StudentEth = {
-            docType: this.studentSelected.person.docType,
-            registrationNumber: this.studentSelected.registrationNumber,
-            id: 0,
-            name: this.studentForm.get('name')!.value,
-            lastname: this.studentForm.get('lastname')!.value,
-            docNumber: this.studentForm.get('docNumber')!.value,
-            sex: this.studentForm.get('sex')!.value
-          };
-          const person: PersonDto = {
-            id: 0,
-            name: this.studentForm.get('name')!.value,
-            lastname: this.studentForm.get('lastname')!.value,
-            docNumber: this.studentForm.get('docNumber')!.value,
-            sex: this.studentForm.get('sex')!.value
-          };
-          const student: StudentDto = {
-            id: 0,
-            person: person,
-            universityName: this.certificateForm.get('universityName')!.value,
-            academicUnit: this.certificateForm.get('academicUnit')!.value,
-            degreeProgramName:
-              this.certificateForm.get('degreeProgramName')!.value,
-            degreeProgramCurriculum: this.certificateForm.get(
-              'degreeProgramCurriculum'
-            )!.value,
-            ministerialOrdinance: '1',
-            blockchainId: 0,
-            registrationNumber:
-              this.studentForm.get('registrationNumber')!.value,
-            superiorCouncilOrdinance: this.studentForm.get(
-              'superiorCouncilOrdinance'
-            )!.value,
-            directiveCouncilOrdinance: this.studentForm.get(
-              'directiveCouncilOrdinance'
-            )!.value
-          };
-          certificate = {
-            student: student,
-            dateCreated: String(new Date().getTime()),
-            dateModified: '0',
-            degreeType: this.certificateForm.get('degreeType')!.value,
-            degreeName: this.certificateForm.get('degreeName')!.value,
-            waferNumber: this.certificateForm.get('waferNumber')!.value
-          };
-        } 
+    if (!this.certificateForm.invalid) {
+      let certificate: CertificateEth;
+      if (this.studentSelected) {
+        const student: StudentEth = {
+          docNumber: this.studentSelected.person.docNumber,
+          docType: this.studentSelected.person.docType,
+          name: this.studentSelected.person.name,
+          lastname: this.studentSelected.person.lastname,
+          sex: this.studentSelected.person.sex,
+          registrationNumber: this.studentSelected.registrationNumber,
+          id: this.studentSelected.blockchainId
+        };
+        const degree: UniversityDegreeEth = {
+          academicUnit: this.studentSelected.academicUnit,
+          degreeProgramName: this.studentSelected.degreeProgramName,
+          degreeProgramCurriculum: this.studentSelected.degreeProgramCurriculum,
+          degreeType: this.studentSelected.degreeType,
+          universityName: this.studentSelected.universityName
+        };
+        certificate = {
+          student: student,
+          active: true,
+          universityDegree: degree,
+          createdAt: 0,
+          id: 0,
+          updatedAt: 0,
+          waferNumber: this.certificateForm.get('waferNumber')!.value
+        };
         this.createCertificate(certificate);
-        */
-      } else {
-        this.certificateForm.markAllAsTouched();
-        this.alertService.showErrorMessage(
-          'Verifique los datos del certificado.'
-        );
       }
     } else {
-      this.alertService.showErrorMessage('Verifique los datos del estudiante.');
+      this.certificateForm.markAllAsTouched();
+      this.alertService.showErrorMessage(
+        'Verifique los datos del certificado.'
+      );
     }
   }
 
@@ -204,23 +133,10 @@ export class NewCertificateComponent {
 
   selectStudent(student: StudentDto) {
     this.studentSelected = student;
-    this.studentForm.patchValue({
-      name: student.person.name,
-      lastname: student.person.lastname,
-      docNumber: student.person.docNumber,
-      sex: student.person.sex,
-      registrationNumber: student.registrationNumber,
-      university: student.universityName,
-      academicUnit: student.academicUnit,
-      degreeProgramName: student.degreeProgramName,
-      degreeProgramCurriculum: student.degreeProgramCurriculum
-    });
-    this.studentForm.disable();
   }
 
   clearForm() {
     this.certificateForm.reset();
-    this.studentForm.reset();
   }
 
   goToTransactionList() {

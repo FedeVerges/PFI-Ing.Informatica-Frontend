@@ -87,6 +87,8 @@ export class NewStudentComponent implements OnInit {
   successMessage: string = '';
 
   hasError = false;
+  studentList?: StudentDto[];
+  studentSelected?: StudentDto;
 
   constructor(
     private fb: FormBuilder,
@@ -233,5 +235,13 @@ export class NewStudentComponent implements OnInit {
 
   goToCreateCeritificate() {
     this.router.navigateByUrl('/certificate/new');
+  }
+
+  handleSearch($event: StudentDto[]) {
+    this.studentList = $event && $event.length > 0 ? $event : [];
+  }
+
+  selectStudent(student: StudentDto) {
+    this.studentSelected = student;
   }
 }

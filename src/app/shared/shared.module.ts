@@ -17,6 +17,8 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { StudentSearchComponent } from '../featured/student/student-search/student-search.component';
 import { MessageComponent } from './message/message.component';
+import { SearchComponent } from './search/search.component';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { MessageComponent } from './message/message.component';
     CertificateDetailComponent,
     CertificateDialogComponent,
     TransactionDetailComponent,
-    MessageComponent
+    MessageComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { MessageComponent } from './message/message.component';
     QRCodeModule,
     MatDialogModule,
     MatButtonModule,
-    MdbTooltipModule
+    MdbTooltipModule,
+    MdbFormsModule
   ],
   exports: [
     NavBarComponent,
@@ -47,7 +51,8 @@ import { MessageComponent } from './message/message.component';
     StudentComponent,
     CertificateDetailComponent,
     CertificateDialogComponent,
-    MessageComponent
+    MessageComponent,
+    SearchComponent
   ]
 })
 export class SharedModule {}
