@@ -6,6 +6,7 @@ export interface PersonWithStudentsDto {
   lastname: string;
   fullname?: string;
   docNumber: string;
+  docType: string;
   sex: string;
   students: StudentDto[];
 }

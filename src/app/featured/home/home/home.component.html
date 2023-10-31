@@ -10,42 +10,43 @@
     </div>
     <div class="row my-3 justify-content-center">
       <div class="col-md-12 col-lg-6">
-        <app-student-search (onSearch)="setStudents($event)"></app-student-search>
+        <app-search (onSearch)="handleSearch($event)"></app-search>
+        <!-- <app-student-search (onSearch)="setStudents($event)"></app-student-search> -->
       </div>
     </div>
-    <div class="container-fluid" *ngIf="students && students.length >0 && !currentStudent">
-      <app-student-detail #detail [studentList]="students" (selectedStudent)="getTitles($event)"></app-student-detail>
-    </div>
-    <div class="row" *ngIf="currentStudent && !!studentTitles">
-      <div class="col">
-        <div class="container mt-3 animate__animated animate__fadeIn">
-          <div class="row">
-            <div class="col-1">
-              <button class="navbar-toggler" type="button" (click)="currentStudent = undefined"
-                aria-controls="navBarCertificatesValidator" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-angle-left"></i>
-              </button>
-            </div>
-            <div class="col-10">
-              <app-student [student]="currentStudent"></app-student>
-            </div>
+    <div class="container-fluid" *ngIf="persons && persons.length >0 && !currentStudent">
+      <div class="row justify-content-center my-2" *ngFor="let person of persons">
+        <div class="row justify-content-center">
+          <div class="col-md-12 col-lg-8 p-0" *ngIf="person.students && person.students.length >0">
+            <app-student [person]="person" (selectedStudent)="selectPerson(person, $event)"></app-student>
           </div>
-          <div class="div" *ngIf="!!studentTitles && studentTitles.length > 0; else emptyData">
-            <div class="row">
-              <div class="col p-0">
-                <div class="container mt-3" *ngIf="
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" *ngIf="currentStudent && currentPerson">
+      <div class="row justify-content-center my-2">
+        <div class="row justify-content-center">
+          <div class="col-md-12 col-lg-8 p-0">
+            <app-student [person]="currentPerson" [student]="currentStudent" [disableButton]="true"></app-student>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div" *ngIf="!!studentTitles && studentTitles.length > 0; else emptyData">
+      <div class="row">
+        <div class="col p-0">
+          <div class="container mt-1" *ngIf="
                 studentTitles.length > 0;
                     ">
-                  <h4>T&iacute;tulos</h4>
+            <p class="h2">T&iacute;tulos</p>
 
-                  <ng-container *ngFor="let cert of studentTitles">
-                    <div class="row">
-                      <app-certificate [transaction]="cert" (delete)="certificateDeleted = true"></app-certificate>
-                    </div>
-                  </ng-container>
+            <ng-container *ngFor="let cert of studentTitles">
+              <div class="row">
+                <div class="col-6">
+                  <app-certificate [transaction]="cert" (delete)="certificateDeleted = true"></app-certificate>
                 </div>
               </div>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -56,7 +57,7 @@
 
 
 <ng-template #emptyData>
-  <div class="row mt-3 justify-content-center">
+  <div class="row mt-3 justify-content-center" *ngif="currentStudent">
     <div class="col-6">
       <div class="card">
         <div class="card-body">

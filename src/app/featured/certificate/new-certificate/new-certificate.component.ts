@@ -40,8 +40,6 @@ export class NewCertificateComponent {
     private router: Router
   ) {
     this.certificateForm = this.fb.group({
-      degreeType: ['', [Validators.required]],
-      degreeName: [''],
       waferNumber: ['', [Validators.required]]
     });
   }

@@ -17,7 +17,7 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { StudentSearchComponent } from '../featured/student/student-search/student-search.component';
 import { MessageComponent } from './message/message.component';
-import { SearchComponent } from './search/search.component';
+import { PersonSearchComponent } from './search/search.component';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     CertificateDialogComponent,
     TransactionDetailComponent,
     MessageComponent,
-    SearchComponent
+    PersonSearchComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +52,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     CertificateDetailComponent,
     CertificateDialogComponent,
     MessageComponent,
-    SearchComponent
+    PersonSearchComponent
   ]
 })
 export class SharedModule {}

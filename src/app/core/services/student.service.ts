@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StudentDto } from '../models/dto/studentDto';
 import { University } from '../models/university';
+import { PersonWithStudentsDto } from '../models/dto/personWithStudents';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,12 @@ export class StudentService {
   getStudentByDni(docNumber: number) {
     return this.http.get<StudentDto[]>(
       environment.serverURL + `/student/${docNumber}`
+    );
+  }
+
+  getPersonWithStudentsByDni(docNumber: number) {
+    return this.http.get<PersonWithStudentsDto[]>(
+      environment.serverURL + `/person/${docNumber}`
     );
   }
 

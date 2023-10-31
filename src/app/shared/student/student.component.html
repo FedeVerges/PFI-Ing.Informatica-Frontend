@@ -1,27 +1,28 @@
-<div class="card" *ngIf="student">
-  <div class="card-body ">
-    <div class="row">
-      <div class="col-3">
-        <div class="text-center">
-          <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="image-custom-size" />
-          <h5 class="text-center">{{ student.person.fullname }}</h5>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-body pt-0">
+    <div class="row align-items-center">
       <div class="col">
         <div class="student-data">
-          <p><strong>N° de estudiante </strong> {{ student.blockchainId }}</p>
-          <p>
-            <strong>DNI </strong>{{ student.person.docNumber }} -
-            {{ student.person.sex }}
-          </p>
-          <p>
-            <strong>{{ student.universityName }}</strong>
-          </p>
-          <p><strong>Registro : </strong> {{ student.registrationNumber }}</p>
-          <p>
-            <strong>Unidad Acad&eacute;mica: </strong>{{ student.academicUnit }}
-          </p>
-          <p><strong>Carrera: </strong>{{ student.degreeProgramName }}</p>
+
+          <ng-container *ngIf="student && !!student.person; else personData">
+            <p class="h3">{{ student.person.fullname }}</p>
+            <p class="text-primary"><strong>{{ student.degreeProgramName }}</strong></p>
+
+            <p> <strong>
+                {{student.person.docType}} : {{ student.person.docNumber }} -
+                {{ student.person.sex }}
+              </strong>
+            </p>
+            <p><strong>Registro: {{ student.registrationNumber }}</strong> </p>
+            <p><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
+            <p class="h6">{{ student.universityName }}</p>
+            <p class="h6 pt-1">{{ student.academicUnit }}</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="text-center">
+          <img src="../../../assets/img/avatar/astronaut.png" alt="student avatar" class="img-fluid" />
         </div>
       </div>
     </div>
@@ -45,3 +46,40 @@
     </div>
   </div>
 </div>
+
+<ng-template #personData>
+  <ng-container *ngIf="person">
+    <p class="h3">{{ person.fullname }}</p>
+    <p> <strong>
+        {{person.docType}} : {{ person.docNumber }}
+      </strong>
+    </p>
+    <p><strong> {{person.sex }}</strong></p>
+    <ng-container *ngIf="student">
+
+      <p class="text-primary"><strong>{{ student.degreeProgramName }}</strong></p>
+
+      <p><strong>Registro: {{ student.registrationNumber }}</strong> </p>
+      <p><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
+      <p class="h6">{{ student.universityName }}</p>
+      <p class="h6 pt-1">{{ student.academicUnit }}</p>
+
+    </ng-container>
+    <ng-container *ngIf="!student">
+      <ng-container *ngFor="let student of person.students">
+        <div class="" *ngIf="!disableButton">
+          <button type="button" class="btn mb-1 text-start bg-primary secondary btn-block " aria-current="true"
+            mdbRipple (click)="selectStudent(student)">
+            {{ student.degreeProgramName }} -
+            {{student.registrationNumber}}
+          </button>
+        </div>
+        <div class="" *ngIf="disableButton">
+          <p>{{ student.degreeProgramName }} -
+            {{student.registrationNumber}}</p>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+</ng-template>

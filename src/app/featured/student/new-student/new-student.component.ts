@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AcademicUnit } from 'src/app/core/models/academicUnit';
 import { Career } from 'src/app/core/models/career';
 import { PersonDto } from 'src/app/core/models/dto/personDto';
+import { PersonWithStudentsDto } from 'src/app/core/models/dto/personWithStudents';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { University } from 'src/app/core/models/university';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -87,8 +88,8 @@ export class NewStudentComponent implements OnInit {
   successMessage: string = '';
 
   hasError = false;
-  studentList?: StudentDto[];
-  studentSelected?: StudentDto;
+  personList?: PersonWithStudentsDto[];
+  personSelected?: PersonWithStudentsDto;
 
   constructor(
     private fb: FormBuilder,
@@ -139,34 +140,55 @@ export class NewStudentComponent implements OnInit {
   }
 
   addNewStudent() {
-    if (this.studentForm.valid) {
-      if (this.studentForm.valid) {
-        const person: PersonDto = {
-          id: 0,
-          name: this.studentForm.get('name')!.value,
-          lastname: this.studentForm.get('lastname')!.value,
-          docType: this.studentForm.get('docType')!.value,
-          docNumber: this.studentForm.get('docNumber')!.value,
-          sex: this.studentForm.get('sex')!.value
-        };
-        const student: StudentDto = {
-          id: 0,
-          person: person,
-          universityName: this.university?.value?.name || '',
-          academicUnit: this.academicUnit?.value?.name || '',
-          degreeProgramName: this.degreeProgramName?.value?.name || '',
-          degreeProgramCurriculum: this.studentForm.get(
-            'degreeProgramCurriculum'
-          )!.value,
-          blockchainId: 0,
-          registrationNumber: this.studentForm.get('registrationNumber')!.value,
-          degreeType: this.studentForm.get('degreeType')!.value
+    const person: PersonDto = {
+      id: 0,
+      name: this.studentForm.get('name')!.value,
+      lastname: this.studentForm.get('lastname')!.value,
+      docType: this.studentForm.get('docType')!.value,
+      docNumber: this.studentForm.get('docNumber')!.value,
+      sex: this.studentForm.get('sex')!.value
+    };
+    const student: StudentDto = {
+      id: 0,
+      person: person,
+      universityName: this.university?.value?.name || '',
+      academicUnit: this.academicUnit?.value?.name || '',
+      degreeProgramName: this.degreeProgramName?.value?.name || '',
+      degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!
+        .value,
+      blockchainId: 0,
+      registrationNumber: this.studentForm.get('registrationNumber')!.value,
+      degreeType: this.studentForm.get('degreeType')!.value
+    };
+    debugger;
+    // Verificar si el estudiante fue buscado o es nuevo.
+    if (this.personSelected) {
+      if (this.validateStudentsData(this.personSelected.students, student)) {
+        student.person = {
+          docNumber: this.personSelected.docNumber,
+          docType: this.personSelected.docType,
+          lastname: this.personSelected.lastname,
+          name: this.personSelected.name,
+          sex: this.personSelected.sex,
+          fullname: this.personSelected.fullname,
+          id: this.personSelected.id
         };
         this.createStudent(student);
+      } else {
+        this.studentForm.markAllAsTouched();
+        this.alertService.showErrorMessage(
+          'Verifique los datos del estudiante.'
+        );
       }
     } else {
-      this.studentForm.markAllAsTouched();
-      this.alertService.showErrorMessage('Verifique los datos del estudiante.');
+      if (this.studentForm.valid) {
+        this.createStudent(student);
+      } else {
+        this.studentForm.markAllAsTouched();
+        this.alertService.showErrorMessage(
+          'Verifique los datos del estudiante.'
+        );
+      }
     }
   }
 
@@ -174,7 +196,7 @@ export class NewStudentComponent implements OnInit {
     this.studentSerivce.createStudent(student).subscribe({
       next: (studentCreated) => {
         this.successMessage = `Nuevo graduado creado!!`;
-        this.studentForm.reset();
+        this.clearForm();
       },
       error: (e) => {
         this.alertService.showErrorMessage(e);
@@ -182,34 +204,24 @@ export class NewStudentComponent implements OnInit {
     });
   }
 
-  setStudentData(student: StudentDto) {
+  setStudentData(person: PersonWithStudentsDto) {
     this.studentForm.patchValue({
-      name: student.person.name,
-      lastname: student.person.lastname,
-      docNumber: student.person.docNumber,
-      sex: student.person.sex,
-      university: student.universityName,
-      academicUnit: student.academicUnit,
-      degreeProgramName: student.degreeProgramName,
-      degreeProgramCurriculum: student.degreeProgramCurriculum,
-      degreeType: student.degreeType
+      name: person.name,
+      lastname: person.lastname,
+      docNumber: person.docNumber,
+      sex: person.sex,
+      docType: person.docType
     });
   }
 
   clearForm() {
-    debugger;
-    this.studentForm.setValue({
+    this.studentForm.patchValue({
       name: '',
       lastname: '',
       docNumber: '',
-      documentType: '',
+      docType: '',
       sex: '',
-      genderIdentity: '',
-      university: '',
-      academicUnit: '',
-      degreeProgramName: '',
-      degreeProgramCurriculum: '',
-      degreeProgramOrdinance: ''
+      academicUnit: ''
     });
   }
 
@@ -237,11 +249,41 @@ export class NewStudentComponent implements OnInit {
     this.router.navigateByUrl('/certificate/new');
   }
 
-  handleSearch($event: StudentDto[]) {
-    this.studentList = $event && $event.length > 0 ? $event : [];
+  handleSearch($event: PersonWithStudentsDto[]) {
+    this.personList = $event && $event.length > 0 ? $event : [];
+    // Si hay una sola persona
+    if (this.personList.length === 1) {
+      this.selectPerson(this.personList[0]);
+    } else {
+      this.personSelected = undefined;
+    }
   }
 
-  selectStudent(student: StudentDto) {
-    this.studentSelected = student;
+  selectPerson(person: PersonWithStudentsDto) {
+    this.personSelected = person;
+    this.setStudentData(person);
+  }
+
+  handleClean($event: boolean) {
+    debugger;
+    this.personSelected = undefined;
+    this.personList = undefined;
+    this.clearForm();
+  }
+
+  /**
+   * Solo se comparan los datos de la universidad.
+   * @param  students Lista de estudiantes de la persona.
+   * @param st2 Estudiante 2 con el que se van a comparar los datos para no agregar a uno repetido.
+   * @returns
+   */
+  validateStudentsData(students: StudentDto[], st2: StudentDto): boolean {
+    const filtered = students.filter(
+      (st) =>
+        st.registrationNumber === st2.registrationNumber ||
+        (st.degreeProgramName === st2.degreeProgramName &&
+          st.degreeProgramCurriculum === st2.degreeProgramCurriculum)
+    );
+    return filtered.length === 0;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
+import { PersonWithStudentsDto } from 'src/app/core/models/dto/personWithStudents';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -16,7 +17,8 @@ export class HomeComponent implements OnDestroy {
   subscription!: Subscription;
 
   title: string = 'Consultar títulos ingresando número de documento.';
-  students: StudentDto[] = [];
+  persons: PersonWithStudentsDto[] = [];
+  currentPerson?: PersonWithStudentsDto;
   currentStudent?: StudentDto;
 
   studentTitles?: BlockchainTransactionDto[];
@@ -39,13 +41,13 @@ export class HomeComponent implements OnDestroy {
     });
   }
 
-  setStudents(students: StudentDto[]) {
-    this.students = students;
-    this.currentStudent = undefined;
+  selectPerson(person: PersonWithStudentsDto, student: StudentDto) {
+    this.currentStudent = student;
+    this.currentPerson = person;
+    this.getTitles(this.currentStudent);
   }
 
   getTitles(student: StudentDto) {
-    this.currentStudent = student;
     this.certificateService
       .getCertificatesByStudentId(String(student.blockchainId))
       .pipe(
@@ -63,5 +65,9 @@ export class HomeComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  handleSearch($event: PersonWithStudentsDto[]) {
+    this.persons = $event && $event.length > 0 ? $event : [];
   }
 }

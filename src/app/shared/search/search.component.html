@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-sm-6 col-md-8">
         <mdb-form-control class="mb-3">
-            <input mdbInput type="number" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
+            <!-- TODO: Agregar directiva para no escribir numeros -->
+            <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
                 (keyup.enter)="getStudentByDni()" [ngModelOptions]="{ standalone: true }" />
             <label mdbLabel class="form-label" for="search_dni">N&uacute;mero de documento</label>
         </mdb-form-control>
@@ -16,7 +17,7 @@
 
     <div class="col-sm-3 col-md-2">
         <button type="button" type="submit" [disabled]="!personDocNumber" class="btn btn-secondary"
-            (click)="getStudentByDni()">
+            (click)="onClean.emit(true)">
             Limpiar
         </button>
     </div>

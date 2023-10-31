@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { PersonWithStudentsDto } from 'src/app/core/models/dto/personWithStudents';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { StudentService } from 'src/app/core/services/student.service';
@@ -8,10 +9,10 @@ import { StudentService } from 'src/app/core/services/student.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class PersonSearchComponent implements OnInit {
   personDocNumber?: number;
 
-  @Output() onSearch = new EventEmitter<StudentDto[]>();
+  @Output() onSearch = new EventEmitter<PersonWithStudentsDto[]>();
   @Output() onClean = new EventEmitter<boolean>();
 
   constructor(
@@ -23,14 +24,16 @@ export class SearchComponent implements OnInit {
 
   getStudentByDni() {
     if (this.personDocNumber) {
-      this.studentSerivce.getStudentByDni(this.personDocNumber).subscribe({
-        next: (students: StudentDto[]) => {
-          this.onSearch.emit(students);
-        },
-        error: (error) => {
-          this.alertService.showErrorMessage(error);
-        }
-      });
+      this.studentSerivce
+        .getPersonWithStudentsByDni(this.personDocNumber)
+        .subscribe({
+          next: (persons) => {
+            this.onSearch.emit(persons);
+          },
+          error: (error) => {
+            this.alertService.showErrorMessage(error);
+          }
+        });
     }
   }
 }

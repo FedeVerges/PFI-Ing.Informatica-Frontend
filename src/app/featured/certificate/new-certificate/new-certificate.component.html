@@ -1,8 +1,8 @@
 <div class="container mt-2 animate__animated animate__fadeIn" *ngIf="!hasError; else error">
-  <div class="row" *ngIf="successMessage.length <= 0; else certificateCreated">
+  <div class="row justify-content-center" *ngIf="successMessage.length <= 0; else certificateCreated">
     <div class="col">
       <h3 class="card-title">Crear Titulo</h3>
-      <div class="row mt-2">
+      <div class="row">
         <div class="col-sm-6 col-md-4">
           <mdb-form-control class="mb-3">
             <input mdbInput type="text" id="search_dni" class="form-control" [(ngModel)]="personDocNumber"
@@ -19,12 +19,12 @@
         </div>
       </div>
       <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-6">
             <h5 class="text-start">Graduados encontrados:</h5>
           </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-6">
             <div class="list-group list-group-light">
               <button type="button"
@@ -37,57 +37,38 @@
         </div>
       </div>
 
+
       <div *ngIf="studentSelected">
-        <app-student [student]="studentSelected"></app-student>
-      </div>
-      <form autocomplete="true" [formGroup]="certificateForm" *ngIf="studentSelected">
-        <div class="container">
-          <h4 class="text-start mt-2 card-title">Datos del certificado</h4>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <mdb-form-control class="mb-3">
-                <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber"
-                  required />
-                <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
-              </mdb-form-control>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <select class="form-select" id="degreeTypeSelect" formControlName="degreeType" required>
-                <option selected value="">Tipo de titulo</option>
-                <option value="PREGRADO-GRADO">Pregrado - Grado</option>
-                <option value="POSTGRADO">Posgrado</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <!-- <mdb-form-control class="mb-3">
-                <input
-                  mdbInput
-                  type="text"
-                  id="form_name"
-                  class="form-control"
-                  formControlName="waferNumber"
-                  required
-                />
-                <label mdbLabel class="form-label" for="form_name"
-                  >N° Oblea</label
-                >
-              </mdb-form-control> -->
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col text-end">
-
-              <button type="button" type="submit" class="btn btn-secondary" (click)="addNewCertificate()">
-                Crear título universitario
-              </button>
-            </div>
+        <div class="row justify-content-center">
+          <div class="col-md-12 col-lg-8">
+            <app-student [student]="studentSelected"></app-student>
           </div>
         </div>
-      </form>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+          <form autocomplete="true" [formGroup]="certificateForm" *ngIf="studentSelected">
+            <div class="container">
+              <h4 class="text-start mt-2 card-title">Datos del certificado</h4>
+              <div class="row align-items-center">
+                <div class="col-xs-12 col-md-6">
+                  <mdb-form-control>
+                    <input mdbInput type="text" id="form_name" class="form-control" formControlName="waferNumber"
+                      required />
+                    <label mdbLabel class="form-label" for="form_name">N° Oblea</label>
+                  </mdb-form-control>
+                </div>
+                <div class="col text-end">
+
+                  <button type="button" type="submit" class="btn btn-secondary" (click)="addNewCertificate()">
+                    Crear título universitario
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

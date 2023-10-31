@@ -1,11 +1,11 @@
-<div class="container mt-2 animate__animated animate__fadeIn" *ngIf="!hasError; else error">
+<div class="container mt-2 animate__animated animate__fadeIn" *ngIf="successMessage.length <= 0; else success">
   <div class="row justify-content-center">
     <div class="col-md-12 col-lg-8">
       <h4 class="card-title">Buscar estudiante</h4>
-      <app-search (onSearch)="handleSearch($event)"></app-search>
+      <app-search (onSearch)="handleSearch($event)" (onClean)="handleClean($event)"></app-search>
     </div>
   </div>
-  <div class="row justify-content-center my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
+  <div class="row justify-content-center my-2" *ngIf="personList && personList.length > 0 && !personSelected">
     <div class="col-6">
       <h5 class="text-start">Estudiantes encontrados:</h5>
     </div>
@@ -13,8 +13,8 @@
       <div class="col-6">
         <div class="list-group list-group-light">
           <button type="button" class="list-group-item list-group-item-action btn my-2 text-start bg-primary secondary"
-            *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
-            {{ student.person.fullname }} - {{ student.degreeProgramName }}
+            *ngFor="let person of personList" aria-current="true" mdbRipple (click)="selectPerson(person)">
+            {{ person.fullname }} - {{ person.sex }}
           </button>
         </div>
       </div>
@@ -22,18 +22,19 @@
   </div>
 
   <div>
-    <div class="row justify-content-center" *ngIf="studentSelected">
-      <div class="col-xs-12 col-lg-8">
-        <app-student [student]="studentSelected"></app-student>
+    <div class="row justify-content-center" *ngIf="personSelected">
+      <div class="col-md-12 col-lg-6 px-2">
+        <app-student [person]="personSelected"></app-student>
       </div>
 
     </div>
-    <div class="row justify-content-center mt-2" *ngIf="successMessage.length <= 0; else success">
-      <div class="col-xs-12 col-lg-8">
+    <div class="row justify-content-center mt-2">
+      <div class="col-md-12 col-lg-8">
         <form autocomplete="true" [formGroup]="studentForm">
-          <div class="container">
-            <div class="p-2">
-              <ng-container *ngIf="!studentSelected">
+          <div>
+            <div>
+              <ng-container *ngIf="!personSelected">
+
                 <div>
                   <mdb-form-control class="mb-3">
                     <input mdbValidate mdbValidate mdbInput type="text" id="form_name" class="form-control"
@@ -79,13 +80,8 @@
                       </mdb-form-control>
                     </div>
                   </div>
-
-                  <mdb-form-control class="mb-3">
-                    <input mdbValidate mdbInput type="text" id="form_name" maxlength="8" class="form-control"
-                      formControlName="registrationNumber" required />
-                    <label mdbLabel class="form-label" for="form_name">N° Registro</label>
-                  </mdb-form-control>
                 </div>
+
               </ng-container>
 
 
@@ -120,7 +116,7 @@
                       <option selected value="">Tipo de carrera</option>
                       <option value="PREGRADO">Pregrado</option>
                       <option value="GRADO">Grado</option>
-                      <option value="POSTGRADO">Posgrado</option>
+                      <option value="POSGRADO">Posgrado</option>
                     </select>
                   </div>
                 </div>
@@ -145,11 +141,20 @@
                     </select>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col">
+                    <mdb-form-control class="mb-3">
+                      <input mdbValidate mdbInput type="text" id="form_name" maxlength="8" class="form-control"
+                        formControlName="registrationNumber" required />
+                      <label mdbLabel class="form-label" for="form_name">N° Registro</label>
+                    </mdb-form-control>
+                  </div>
+                </div>
               </ng-container>
               <div class="row justify-content-center">
                 <div class="col col-sm-12 col-md-10">
                   <button type="button" type="submit" class="btn btn-block btn-secondary" (click)="addNewStudent()">
-                    Guardar
+                    {{ personSelected ? 'Agregar nueva carrera' :'Guardar'}}
                   </button>
                 </div>
               </div>
