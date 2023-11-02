@@ -11,6 +11,8 @@ import { StudentService } from '../../../core/services/student.service';
 import { CertificateEth } from 'src/app/core/models/dto/blockchain/certificateEth';
 import { StudentEth } from 'src/app/core/models/dto/blockchain/studentEth';
 import { UniversityDegreeEth } from 'src/app/core/models/dto/blockchain/universityDegreeEth';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Component({
   selector: 'app-new-certificate',
@@ -30,6 +32,7 @@ export class NewCertificateComponent {
 
   hasError = false;
   detailMessage: string = '';
+  hasCertificate = false;
 
   constructor(
     private web3Service: Web3Service,
@@ -131,6 +134,7 @@ export class NewCertificateComponent {
 
   selectStudent(student: StudentDto) {
     this.studentSelected = student;
+    this.getTitles(student);
   }
 
   clearForm() {
@@ -139,5 +143,26 @@ export class NewCertificateComponent {
 
   goToTransactionList() {
     this.router.navigateByUrl('/transactions');
+  }
+
+  getTitles(student: StudentDto) {
+    this.certificateService
+      .getCertificatesByStudentId(String(student.blockchainId))
+      .pipe(
+        catchError((error) => {
+          this.alertService.showErrorMessage(String(error));
+          return throwError(() => error);
+        })
+      )
+      .subscribe((certificates) => {
+        this.hasCertificate = certificates.some(
+          (c) =>
+            c.certificate?.student.id == student.blockchainId &&
+            c.certificate.universityDegree.degreeProgramName ===
+              student.degreeProgramName &&
+            c.certificate.universityDegree.degreeProgramCurriculum ===
+              student.degreeProgramCurriculum
+        );
+      });
   }
 }

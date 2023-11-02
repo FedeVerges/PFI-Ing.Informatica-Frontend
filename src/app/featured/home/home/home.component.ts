@@ -69,5 +69,7 @@ export class HomeComponent implements OnDestroy {
 
   handleSearch($event: PersonWithStudentsDto[]) {
     this.persons = $event && $event.length > 0 ? $event : [];
+    this.currentStudent = undefined;
+    this.currentPerson = undefined;
   }
 }
