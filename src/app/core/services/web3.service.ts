@@ -78,14 +78,4 @@ export class Web3Service {
       gas: gas
     }) as Promise<any>;
   }
-
-  // const provider = await this.getWebProvider();
-  // const signer = provider.getSigner();
-  // this.web3.eth.getAccounts().then(console.log);
-
-  // return new this.web3.eth.Contract(
-  //   environment.contractAddress,
-  //   Gallery.abi,
-  //   bySigner ? signer : provider,
-  // )
 }
