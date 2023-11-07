@@ -160,7 +160,6 @@ export class NewStudentComponent implements OnInit {
       registrationNumber: this.studentForm.get('registrationNumber')!.value,
       degreeType: this.studentForm.get('degreeType')!.value
     };
-    debugger;
     // Verificar si el estudiante fue buscado o es nuevo.
     if (this.personSelected) {
       if (this.validateStudentsData(this.personSelected.students, student)) {
@@ -215,14 +214,23 @@ export class NewStudentComponent implements OnInit {
   }
 
   clearForm() {
-    this.studentForm.patchValue({
-      name: '',
-      lastname: '',
-      docNumber: '',
-      docType: '',
-      sex: '',
-      academicUnit: ''
-    });
+    this.studentForm.patchValue(
+      {
+        name: '',
+        lastname: '',
+        docNumber: '',
+        docType: '',
+        sex: '',
+        academicUnit: '',
+        registrationNumber: '',
+        degreeType: '',
+        degreeProgramName: '',
+        degreeProgramCurriculum: ''
+      },
+      {
+        emitEvent: false
+      }
+    );
   }
 
   changeUniversity() {
@@ -251,11 +259,15 @@ export class NewStudentComponent implements OnInit {
 
   handleSearch($event: PersonWithStudentsDto[]) {
     this.personList = $event && $event.length > 0 ? $event : [];
-    // Si hay una sola persona
-    if (this.personList.length === 1) {
-      this.selectPerson(this.personList[0]);
+    if (this.personList.length > 0) {
+      // Si hay una sola persona
+      if (this.personList.length === 1) {
+        this.selectPerson(this.personList[0]);
+      } else {
+        this.personSelected = undefined;
+      }
     } else {
-      this.personSelected = undefined;
+      this.alertService.showErrorMessage('La persona no existe');
     }
   }
 
@@ -265,7 +277,6 @@ export class NewStudentComponent implements OnInit {
   }
 
   handleClean($event: boolean) {
-    debugger;
     this.personSelected = undefined;
     this.personList = undefined;
     this.clearForm();

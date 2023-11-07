@@ -1,60 +1,84 @@
-<div class="card" *ngIf="certificate">
-  <div class="card-header">
-    <div class="container">
-      <div class="row">
-        <div class="col text-center">
-          <h1>T&iacute;tulo universitario</h1>
+<div class="card border border-3 rounded-8 border-primary shadow" *ngIf="certificate">
+  <div class="card-body pb-1">
+    <div class="container-fluid">
+      <div class="row mb-4">
+        <div class="col p-0">
+          <div class="d-flex align-items-center justify-content-center text-primary">
+            <i class="fa-solid fa-link icon-size icon-color"></i>
+            <span class="logo-text px-2 text-primary">UNSL CERT</span>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="card-body text-center">
-    <h2 class="text-muted mb-4">
-      {{ certificate.certificate?.universityDegree?.degreeProgramName }}
-    </h2>
-    <h4 class="my-2 text-muted">
-      El estudiante
-      <strong>
-        {{ certificate.certificate?.student?.name }}
-        {{ certificate.certificate?.student?.lastname }}
-      </strong>
-      ha aprobado todas las materias corresponiendtes al plan
-      <strong>
-        {{ certificate.certificate?.universityDegree?.degreeProgramCurriculum }}
-      </strong>
-      de la carrera
-      <strong>
-        {{
-          certificate.certificate?.universityDegree?.degreeProgramName
-        }}</strong
-      >
-      de la instituci&oacute;n
-      <strong>{{
-        certificate.certificate?.universityDegree?.universityName
-      }}</strong
-      >.
-    </h4>
+      <div class="row text-center">
+        <div class="col p-0">
+          <p>Se certifica que</p>
+          <div class="m-4">
+            <span class="p-2 px-5 background-grey rounded text-primary">
+              <strong>
+                {{certificate.certificate?.student?.name}} {{certificate.certificate?.student?.lastname}} -
+                {{certificate.certificate?.student?.docType}} {{certificate.certificate?.student?.docNumber}}
+              </strong>
+            </span>
+          </div>
+          <p>ha terminado los estudios correspondientes a la carrera</p>
+          <div class="m-4">
+            <span class="p-2 px-5 background-grey rounded text-primary">
+              <strong>
+                {{certificate.certificate?.universityDegree?.degreeProgramName}}
+              </strong>
+            </span>
+          </div>
+          <div class="row justify-content-center mt-2">
+            <div class="col-sm-6 col-5">
+              <p>Tipo de carrera</p>
+              <div class="m-3">
+                <span class="p-2 px-5 background-grey rounded text-primary">
+                  <strong>
+                    {{certificate.certificate?.universityDegree?.degreeType}}
+                  </strong>
+                </span>
+              </div>
+            </div>
+            <div class=" col-sm-6 col-5">
+              <p>Plan de estudios</p>
+              <div class="m-3">
+                <span class="p-2 px-5 background-grey rounded text-primary">
+                  <strong>
+                    {{certificate.certificate?.universityDegree?.degreeProgramCurriculum}}
+                  </strong>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
 
-    <h5 class="my-4">
-      Certificado el d&iacute;a: {{ certificate.certificate?.updatedAtDesc }}
-    </h5>
-    <p>
-      &Eacute;ste certificado se encuentra almacenado en la red Etereum a traves
-      de la transaction
-      <strong>{{ certificate.transactionHash }}.</strong>
-      Puede consultar la misma a traves de
-      <a [href]="certificate.etherscanLink">{{ certificate.etherscanLink }}</a>
-    </p>
-
-    <div class="d-flex justify-content-center mt-3">
-      <div class="d-flex align-items-center">
-        <img
-          src="../../../assets/img/icons8-chain-58.png"
-          alt=""
-          width="40"
-          height="40"
-        />
-        <span class="logo-text px-2 dark">UNSL CERT</span>
+          <div class="p-2 background-grey rounded">
+            <p class="m-0"> <span class="text-success"> Validado y certificado por la red Ethereum <i
+                  class=" fas fa-check-circle text-success"></i></span>
+            </p>
+            <p>Para ver m&aacute;s informaci&oacute;n puede ingresar al siguiente link</p>
+            <a class="text-primary" [href]="certificate.etherscanLink">{{ certificate.etherscanLink }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-8">
+          <p class="mt-4">
+            Certificado el d&iacute;a <strong class="text-primary">
+              {{ certificate.certificate?.updatedAtDesc }}
+            </strong>
+          </p>
+        </div>
+        <div class="col-4 col-lg-2">
+          <p class="mt-4">
+            Blockchain ID <strong class="text-primary">
+              {{ certificate.certificate?.id}}
+            </strong>
+          </p>
+        </div>
       </div>
     </div>
   </div>

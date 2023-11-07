@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PersonWithStudentsDto } from 'src/app/core/models/dto/personWithStudents';
 import { StudentDto } from 'src/app/core/models/dto/studentDto';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -12,6 +12,7 @@ import { StudentService } from 'src/app/core/services/student.service';
 export class PersonSearchComponent implements OnInit {
   personDocNumber?: number;
 
+  @Input() enableClean = false;
   @Output() onSearch = new EventEmitter<PersonWithStudentsDto[]>();
   @Output() onClean = new EventEmitter<boolean>();
 
