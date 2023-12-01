@@ -31,27 +31,27 @@
               <div class="col-11">
                 <ul class="navbar-nav mx-4 mx-lg-0">
                   <li class="nav-item">
-                    <a [routerLink]="'home'" routerLinkActive="active-link" class="nav-link">
+                    <a [routerLink]="'home'" routerLinkActive="active-link" class="nav-link" (click)="navBar.hide()">
                       Buscar t&iacute;tulo
                     </a>
                   </li>
                   <ng-container *ngIf="role.name === 'ADMIN'">
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="navBar.hide()">
                       <a class="nav-link" [routerLink]="'student/new'" routerLinkActive="active-link">Crear Graduado</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="navBar.hide()">
                       <a [routerLink]="'certificate/new'" routerLinkActive="active-link" class="nav-link" href="#">Crear
                         t&iacute;tulo</a>
                     </li>
                   </ng-container>
                   <ng-container *ngIf="role.name === 'STUDENT'">
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="navBar.hide()">
                       <a [routerLink]="'certificate/my-certificates'" routerLinkActive="active-link" class="nav-link"
                         href="#">Mis t&iacute;tulos</a>
                     </li>
                   </ng-container>
                   <ng-container *ngIf="role.name === 'ADMIN'">
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="navBar.hide()">
                       <a [routerLink]="'transactions'" routerLinkActive="active-link" class="nav-link">
                         Historial
                       </a>

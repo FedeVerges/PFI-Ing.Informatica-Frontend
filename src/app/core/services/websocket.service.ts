@@ -64,7 +64,7 @@ export class WebsocketService implements OnDestroy {
   showTransactionNotification(message: NotificationDto) {
     const textMessage = `La transaccion ${message.transactionHash} ha sido exitosa`;
     this.alertService.showAlert(textMessage, 'Aceptar', {
-      duration: undefined
+      duration: 3000
     });
   }
 

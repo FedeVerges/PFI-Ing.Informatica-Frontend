@@ -1,3 +1,6 @@
 .image-custom-size {
-    width: 15rem;
+    width: inherit;
+    object-fit: cover;
+    max-width: 15rem;
+    min-width: 9rem;
 }

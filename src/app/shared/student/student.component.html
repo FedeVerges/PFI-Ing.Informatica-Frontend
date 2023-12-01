@@ -5,8 +5,8 @@
         <div class="student-data">
 
           <ng-container *ngIf="student && !!student.person; else personData">
-            <p class="h3">{{ student.person.fullname }}</p>
-            <p class="text-primary"><strong>{{ student.degreeProgramName }}</strong></p>
+            <p class="h3">{{ student.person.fullname | titlecase}}</p>
+            <p class="text-primary"><strong>{{ student.degreeProgramName | titlecase}}</strong></p>
 
             <p> <strong>
                 {{student.person.docType}} : {{ student.person.docNumber }} -
@@ -14,9 +14,9 @@
               </strong>
             </p>
             <p><strong>Registro: {{ student.registrationNumber }}</strong> </p>
-            <p><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
-            <p class="h6">{{ student.universityName }}</p>
-            <p class="h6 pt-1">{{ student.academicUnit }}</p>
+            <p *ngIf="hasTitles"><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
+            <p class="h6">{{ student.universityName | titlecase }}</p>
+            <p class="h6 pt-1">{{ student.academicUnit | titlecase}}</p>
           </ng-container>
         </div>
       </div>
@@ -60,7 +60,7 @@
       <p class="text-primary"><strong>{{ student.degreeProgramName }}</strong></p>
 
       <p><strong>Registro: {{ student.registrationNumber }}</strong> </p>
-      <p><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
+      <p *ngIf="hasTitles"><strong>Blockchain ID: {{ student.blockchainId }}</strong> </p>
       <p class="h6">{{ student.universityName }}</p>
       <p class="h6 pt-1">{{ student.academicUnit }}</p>
 

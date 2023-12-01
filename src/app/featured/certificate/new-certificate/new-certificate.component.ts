@@ -13,6 +13,7 @@ import { StudentEth } from 'src/app/core/models/dto/blockchain/studentEth';
 import { UniversityDegreeEth } from 'src/app/core/models/dto/blockchain/universityDegreeEth';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { BlockchainTransactionDto } from 'src/app/core/models/dto/blockchainTransactionDto';
 
 @Component({
   selector: 'app-new-certificate',
@@ -33,6 +34,7 @@ export class NewCertificateComponent {
   hasError = false;
   detailMessage: string = '';
   hasCertificate = false;
+  currentCertificate: BlockchainTransactionDto | undefined;
 
   constructor(
     private web3Service: Web3Service,
@@ -91,8 +93,8 @@ export class NewCertificateComponent {
     this.certificateService.createNewCertificate(certificate).subscribe({
       next: (transactionData: TransactionDto) => {
         if (transactionData && transactionData.receipt) {
-          this.successMessage = `Se ha enviado la transacción exitosamente.`;
-          this.detailMessage = `En unos minutos la transacción ${transactionData.receipt.transactionHash} será validada y aprobada por la red.`;
+          this.successMessage = `Se ha enviado la transacción a la red Ethereum!`;
+          this.detailMessage = `En unos minutos la transacción será validada y aprobada por la red.`;
         }
       },
       error: (error) => {
@@ -155,7 +157,7 @@ export class NewCertificateComponent {
         })
       )
       .subscribe((certificates) => {
-        this.hasCertificate = certificates.some(
+        this.currentCertificate = certificates.find(
           (c) =>
             c.certificate?.student.id == student.blockchainId &&
             c.certificate.universityDegree.degreeProgramName ===
@@ -163,6 +165,7 @@ export class NewCertificateComponent {
             c.certificate.universityDegree.degreeProgramCurriculum ===
               student.degreeProgramCurriculum
         );
+        this.hasCertificate = !!this.currentCertificate;
       });
   }
 }

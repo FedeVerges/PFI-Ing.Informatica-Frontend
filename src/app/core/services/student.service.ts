@@ -58,6 +58,21 @@ export class StudentService {
                 name: 'Ingeniería Quimica',
                 type: 'GRADO',
                 plans: ['13/08']
+              },
+              {
+                name: 'Profesorado en ciencias de la computación',
+                type: 'PREGRADO',
+                plans: ['11/08']
+              },
+              {
+                name: 'Analista programador universitario',
+                type: 'PREGRADO',
+                plans: ['10/22']
+              },
+              {
+                name: 'Doctorado en ciencias de la computación',
+                type: 'POSGRADO',
+                plans: ['13/22']
               }
             ]
           },
@@ -83,6 +98,16 @@ export class StudentService {
                 name: 'Licenciatura en Biologia Molecular',
                 type: 'GRADO',
                 plans: ['11/19']
+              },
+              {
+                name: 'Doctorado en Bioquimica',
+                type: 'POSGRADO',
+                plans: ['13/22']
+              },
+              {
+                name: 'Doctorado en Biología',
+                type: 'POSGRADO',
+                plans: ['13/22']
               }
             ]
           }

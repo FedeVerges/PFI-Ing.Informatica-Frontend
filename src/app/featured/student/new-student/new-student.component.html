@@ -66,7 +66,7 @@
                           required>
                           <option selected value="">Tipo de documento</option>
                           <option value="DNI">DNI</option>
-                          <option value="CI">CI</option>
+                          <option value="LE">LE</option>
                           <option value="LC">LC</option>
                           <option value="Otro">Otro</option>
                         </select>
@@ -87,14 +87,14 @@
 
               <ng-container *ngIf="universities.length > 0">
                 <div class="row">
-                  <div class="mb-3">
+                  <!-- <div class="mb-3">
                     <select class="form-select" aria-label="university Name Select" id="universityNameSelect"
                       formControlName="university" required [disabled]="true">
                       <option [ngValue]="universities[0]">
                         {{ universities[0].name }}
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                   <div class="mb-3">
                     <select class="form-select" aria-label="Academic Unit Select" id="academicUnitNameSelect"
                       formControlName="academicUnit" required (change)="changeAcademicUnit()">
@@ -103,7 +103,7 @@
                       </option>
                       <ng-container *ngFor="let academicUnit of universities[0].academicUnits">
                         <option [ngValue]="academicUnit">
-                          {{ academicUnit.name }}
+                          {{ academicUnit.name | titlecase }}
                         </option>
                       </ng-container>
                     </select>
@@ -112,7 +112,7 @@
                 <div class="row">
                   <div class="mb-3">
                     <select class="form-select" aria-label="Degree type Select" id="degreeTypeSelect"
-                      formControlName="degreeType" required>
+                      formControlName="degreeType" (change)="setDegree($event)" required>
                       <option selected value="">Tipo de carrera</option>
                       <option value="PREGRADO">Pregrado</option>
                       <option value="GRADO">Grado</option>
@@ -126,8 +126,8 @@
                       formControlName="degreeProgramName" required
                       (change)="this.plans = this.degreeProgramName?.value.plans">
                       <option selected value="">Elija una carrera</option>
-                      <ng-container *ngFor="let career of careers">
-                        <option [ngValue]="career">{{ career.name }}</option>
+                      <ng-container *ngFor="let career of carrersToSelect">
+                        <option [ngValue]="career">{{ career.name | titlecase}}</option>
                       </ng-container>
                     </select>
                   </div>
@@ -167,18 +167,18 @@
 </div>
 
 <ng-template #success>
-  <div class="container mt-2 animate__animated animate__slideInDown">
+  <div class="container mt-5 animate__animated animate__slideInDown">
     <app-message [title]="successMessage" message="" type="SUCCESS">
-      <div class="mt-4">
-        <div class="row p-2">
-          <div class="col-4">
+      <div class="my-4">
+        <div class="row p-2 justify-content-center">
+          <div class="col-xs-12 col-md-6 col-lg-4  mb-3">
             <button type="button" class="btn btn-secondary btn-block" (click)="successMessage = ''; handleClean(true);">
-              Crear graduado
+              Crear otro graduado
             </button>
           </div>
-          <div class="col-8">
+          <div class="col-xs-12 col-md-6 col-lg-4  mb-3">
             <button type="button" class="btn btn-secondary btn-block" (click)="goToCreateCeritificate()">
-              Crea un nuevo t&iacute;tulo
+              Crear un nuevo t&iacute;tulo
             </button>
           </div>
         </div>

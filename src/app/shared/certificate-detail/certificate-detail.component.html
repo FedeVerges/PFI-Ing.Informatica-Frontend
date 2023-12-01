@@ -1,4 +1,4 @@
-<div class="card border border-3 rounded-8 border-primary shadow" *ngIf="certificate">
+<div class="card border border-2 rounded-7 border-primary shadow" *ngIf="certificate">
   <div class="card-body pb-1">
     <div class="container-fluid">
       <div class="row mb-4">
@@ -12,41 +12,38 @@
       <div class="row text-center">
         <div class="col p-0">
           <p>Se certifica que</p>
-          <div class="m-4">
-            <span class="p-2 px-5 background-grey rounded text-primary">
+          <div class="row justify-content-center">
+            <div class="p-2 col-10 col-sm-10 col-md-6 col-xl-4 background-grey rounded text-primary">
               <strong>
                 {{certificate.certificate?.student?.name}} {{certificate.certificate?.student?.lastname}} -
                 {{certificate.certificate?.student?.docType}} {{certificate.certificate?.student?.docNumber}}
               </strong>
-            </span>
+            </div>
           </div>
           <p>ha terminado los estudios correspondientes a la carrera</p>
-          <div class="m-4">
-            <span class="p-2 px-5 background-grey rounded text-primary">
+          <div class="row justify-content-center">
+            <div class="p-2 col-10 col-sm-10 col-md-6 col-xl-4 background-grey rounded text-primary">
               <strong>
                 {{certificate.certificate?.universityDegree?.degreeProgramName}}
               </strong>
-            </span>
+            </div>
           </div>
           <div class="row justify-content-center mt-2">
             <div class="col-sm-6 col-5">
               <p>Tipo de carrera</p>
-              <div class="m-3">
-                <span class="p-2 px-5 background-grey rounded text-primary">
-                  <strong>
-                    {{certificate.certificate?.universityDegree?.degreeType}}
-                  </strong>
-                </span>
+              <div class="background-grey rounded text-primary">
+                <strong>
+                  {{certificate.certificate?.universityDegree?.degreeType}}
+                </strong>
               </div>
             </div>
             <div class=" col-sm-6 col-5">
               <p>Plan de estudios</p>
-              <div class="m-3">
-                <span class="p-2 px-5 background-grey rounded text-primary">
-                  <strong>
-                    {{certificate.certificate?.universityDegree?.degreeProgramCurriculum}}
-                  </strong>
-                </span>
+              <div class="background-grey rounded text-primary">
+                <strong>
+                  {{certificate.certificate?.universityDegree?.degreeProgramCurriculum}}
+                </strong>
+
               </div>
             </div>
           </div>

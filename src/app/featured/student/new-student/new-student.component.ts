@@ -83,6 +83,8 @@ export class NewStudentComponent implements OnInit {
 
   careers: Career[] = [];
 
+  carrersToSelect: Career[] = [];
+
   plans: string[] = [];
 
   successMessage: string = '';
@@ -247,9 +249,15 @@ export class NewStudentComponent implements OnInit {
   changeAcademicUnit() {
     const academicUnitSelected = this.academicUnit?.value as AcademicUnit;
     if (academicUnitSelected) {
+      const degreeType = this.studentForm.get('degreeType')?.value || '';
+      if (degreeType) {
+        this.carrersToSelect = academicUnitSelected?.careers.filter(
+          (c) => c.type === degreeType
+        );
+      }
       this.careers = academicUnitSelected?.careers;
     } else {
-      this.careers = [];
+      this.carrersToSelect = [];
     }
   }
 
@@ -296,5 +304,15 @@ export class NewStudentComponent implements OnInit {
           st.degreeProgramCurriculum === st2.degreeProgramCurriculum)
     );
     return filtered.length === 0;
+  }
+  // Filtro las carreras por el grado.
+  setDegree($event: any) {
+    debugger;
+    const type = $event.target.value;
+    if (type) {
+      this.carrersToSelect = this.careers.filter((c) => c.type === type);
+    } else {
+      this.carrersToSelect = [];
+    }
   }
 }

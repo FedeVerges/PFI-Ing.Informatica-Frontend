@@ -44,6 +44,16 @@
             <app-student [student]="studentSelected"></app-student>
           </div>
         </div>
+        <div class="container">
+          <div class="row justify-content-center" *ngIf="currentCertificate">
+            <div class="col">
+              <p>
+                Certificado creado el d&iacute;a {{currentCertificate.dateCreated}}
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="row justify-content-center">
         <div class="col-md-12 col-lg-8">
@@ -78,7 +88,7 @@
 </div>
 
 <ng-template #certificateCreated>
-  <div class="container mt-2 animate__animated animate__slideInDown">
+  <div class="container mt-5 animate__animated animate__slideInDown">
     <app-message [title]="successMessage" [message]="detailMessage" type="TRANSACTION">
       <div class="mt-4">
         <button type="button" class="btn btn-secondary" (click)="goToTransactionList()">

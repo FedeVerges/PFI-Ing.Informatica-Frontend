@@ -20,6 +20,7 @@ export class StudentComponent implements OnInit {
   @Output() selectedStudent: EventEmitter<StudentDto> = new EventEmitter();
 
   @Input() disableButton = false;
+  @Input() hasTitles = false;
 
   constructor(private router: Router, public dialog: MatDialog) {}
 

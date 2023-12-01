@@ -68,8 +68,13 @@ export class HomeComponent implements OnDestroy {
   }
 
   handleSearch($event: PersonWithStudentsDto[]) {
-    this.persons = $event && $event.length > 0 ? $event : [];
-    this.currentStudent = undefined;
-    this.currentPerson = undefined;
+    if ($event && $event.length > 0) {
+      this.persons = $event;
+      this.currentStudent = undefined;
+      this.currentPerson = undefined;
+    } else {
+      this.alertService.showErrorMessage('No hay estudiantes para mostrar.');
+      this.persons = [];
+    }
   }
 }
