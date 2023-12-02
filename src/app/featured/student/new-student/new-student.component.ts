@@ -159,7 +159,9 @@ export class NewStudentComponent implements OnInit {
       degreeProgramCurriculum: this.studentForm.get('degreeProgramCurriculum')!
         .value,
       blockchainId: 0,
-      registrationNumber: this.studentForm.get('registrationNumber')!.value,
+      registrationNumber: Number(
+        this.studentForm.get('registrationNumber')!.value
+      ),
       degreeType: this.studentForm.get('degreeType')!.value
     };
     // Verificar si el estudiante fue buscado o es nuevo.
@@ -177,9 +179,7 @@ export class NewStudentComponent implements OnInit {
         this.createStudent(student);
       } else {
         this.studentForm.markAllAsTouched();
-        this.alertService.showErrorMessage(
-          'Verifique los datos del estudiante.'
-        );
+        this.alertService.showErrorMessage('El estudiante ya existe.');
       }
     } else {
       if (this.studentForm.valid) {
@@ -297,9 +297,10 @@ export class NewStudentComponent implements OnInit {
    * @returns
    */
   validateStudentsData(students: StudentDto[], st2: StudentDto): boolean {
+    debugger;
     const filtered = students.filter(
       (st) =>
-        st.registrationNumber === st2.registrationNumber ||
+        st.registrationNumber == st2.registrationNumber ||
         (st.degreeProgramName === st2.degreeProgramName &&
           st.degreeProgramCurriculum === st2.degreeProgramCurriculum)
     );
@@ -307,7 +308,6 @@ export class NewStudentComponent implements OnInit {
   }
   // Filtro las carreras por el grado.
   setDegree($event: any) {
-    debugger;
     const type = $event.target.value;
     if (type) {
       this.carrersToSelect = this.careers.filter((c) => c.type === type);
