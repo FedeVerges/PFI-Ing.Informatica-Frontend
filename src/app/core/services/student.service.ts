@@ -14,7 +14,7 @@ export class StudentService {
 
   getStudentByDni(docNumber: number) {
     return this.http.get<StudentDto[]>(
-      environment.serverURL + `/student/${docNumber}`
+      environment.serverURL + `/student/${docNumber}/hasCertificate/true`
     );
   }
 

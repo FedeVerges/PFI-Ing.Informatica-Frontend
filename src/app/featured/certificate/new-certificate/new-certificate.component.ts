@@ -61,7 +61,10 @@ export class NewCertificateComponent {
           lastname: this.studentSelected.person.lastname,
           sex: this.studentSelected.person.sex,
           registrationNumber: this.studentSelected.registrationNumber,
-          id: this.studentSelected.blockchainId
+          id: Number(
+            this.studentSelected.person.docNumber +
+              this.studentSelected.registrationNumber
+          )
         };
         const degree: UniversityDegreeEth = {
           academicUnit: this.studentSelected.academicUnit,
@@ -148,24 +151,29 @@ export class NewCertificateComponent {
   }
 
   getTitles(student: StudentDto) {
-    this.certificateService
-      .getCertificatesByStudentId(String(student.blockchainId))
-      .pipe(
-        catchError((error) => {
-          this.alertService.showErrorMessage(String(error));
-          return throwError(() => error);
-        })
-      )
-      .subscribe((certificates) => {
-        this.currentCertificate = certificates.find(
-          (c) =>
-            c.certificate?.student.id == student.blockchainId &&
-            c.certificate.universityDegree.degreeProgramName ===
-              student.degreeProgramName &&
-            c.certificate.universityDegree.degreeProgramCurriculum ===
-              student.degreeProgramCurriculum
-        );
-        this.hasCertificate = !!this.currentCertificate;
-      });
+    if (student.blockchainId) {
+      this.certificateService
+        .getCertificatesByStudentId(String(student.blockchainId))
+        .pipe(
+          catchError((error) => {
+            this.alertService.showErrorMessage(String(error));
+            return throwError(() => error);
+          })
+        )
+        .subscribe((certificates) => {
+          this.currentCertificate = certificates.find(
+            (c) =>
+              c.certificate?.student.id == student.blockchainId &&
+              c.certificate.universityDegree.degreeProgramName ===
+                student.degreeProgramName &&
+              c.certificate.universityDegree.degreeProgramCurriculum ===
+                student.degreeProgramCurriculum
+          );
+          this.hasCertificate = !!this.currentCertificate;
+        });
+    } else {
+      this.hasCertificate = false;
+      this.currentCertificate = undefined;
+    }
   }
 }

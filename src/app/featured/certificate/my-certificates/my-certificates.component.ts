@@ -32,7 +32,7 @@ export class MyCertificatesComponent implements OnInit {
       .getStudentSelected()
       .pipe(
         tap((st) => (this.student = st)),
-        filter((st) => st !== null),
+        filter((st) => st !== null && !!st.blockchainId),
         switchMap((st) =>
           this.certificateService.getCertificatesByStudentId(
             String(st?.blockchainId)

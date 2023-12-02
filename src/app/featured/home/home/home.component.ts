@@ -48,15 +48,19 @@ export class HomeComponent implements OnDestroy {
   }
 
   getTitles(student: StudentDto) {
-    this.certificateService
-      .getCertificatesByStudentId(String(student.blockchainId))
-      .pipe(
-        catchError((error) => {
-          this.alertService.showErrorMessage(String(error));
-          return throwError(() => error);
-        })
-      )
-      .subscribe((certificates) => (this.studentTitles = certificates || []));
+    if (student.blockchainId) {
+      this.certificateService
+        .getCertificatesByStudentId(String(student.blockchainId))
+        .pipe(
+          catchError((error) => {
+            this.alertService.showErrorMessage(String(error));
+            return throwError(() => error);
+          })
+        )
+        .subscribe((certificates) => (this.studentTitles = certificates || []));
+    } else {
+      this.studentTitles = [];
+    }
   }
 
   goToTransactionList() {

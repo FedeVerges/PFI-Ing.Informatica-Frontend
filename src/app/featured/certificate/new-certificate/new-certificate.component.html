@@ -19,18 +19,18 @@
         </div>
       </div>
       <div class="container-fluid my-2" *ngIf="studentList && studentList.length > 0 && !studentSelected">
-        <div class="row justify-content-center">
+        <div class="row">
           <div class="col-6">
             <h5 class="text-start">Graduados encontrados:</h5>
           </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row">
           <div class="col-6">
             <div class="list-group list-group-light">
-              <button type="button"
-                class="list-group-item list-group-item-action btn my-2 text-start bg-primary secondary"
+              <button type="button" class="list-group-item list-group-item-action btn my-2 text-start"
                 *ngFor="let student of studentList" aria-current="true" mdbRipple (click)="selectStudent(student)">
-                {{ student.person.fullname }} - {{ student.degreeProgramName }}
+                <span class="px-2">{{ student.person.fullname }} - {{ student.degreeProgramName }}</span>
+                <span class="badge rounded-pill badge-success" *ngIf="student.blockchainId">T&iacute;tulo creado</span>
               </button>
             </div>
           </div>
@@ -41,13 +41,13 @@
       <div *ngIf="studentSelected">
         <div class="row justify-content-center">
           <div class="col-md-12 col-lg-8">
-            <app-student [student]="studentSelected"></app-student>
+            <app-student [student]="studentSelected" [hasTitles]="!!studentSelected.blockchainId"></app-student>
           </div>
         </div>
         <div class="container">
           <div class="row justify-content-center" *ngIf="currentCertificate">
             <div class="col">
-              <p>
+              <p class="text-center">
                 Certificado creado el d&iacute;a {{currentCertificate.dateCreated}}
               </p>
             </div>

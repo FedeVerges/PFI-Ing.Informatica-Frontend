@@ -128,9 +128,21 @@
   <!-- <div class="navbar-nav me-auto mb-2 mb-lg-0">
     
   </div> -->
-  <div class="d-flex align-items-center justify-content-end">
-    <a [routerLink]="'/login'" routerLinkActive="active-link" class="btn px-3 me-2 text-primary bordered">
-      Iniciar Sesi&oacute;n
-    </a>
+
+  <div class="col-10">
+    <ul class="navbar-nav mx-4 mx-lg-0">
+      <li class="nav-item">
+        <a [routerLink]="'home'" routerLinkActive="active-link" class="nav-link" (click)="navBar.hide()">
+          Buscar t&iacute;tulo
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-2">
+    <div class="d-flex align-items-center justify-content-end">
+      <a [routerLink]="'/login'" routerLinkActive="active-link" class="btn px-3 me-2 text-primary">
+        Iniciar Sesi&oacute;n
+      </a>
+    </div>
   </div>
 </ng-template>
