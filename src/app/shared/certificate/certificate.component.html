@@ -16,25 +16,26 @@
             <p>certificado # {{ transaction?.certificate?.id }}</p>
           </div>
         </div>
-      </ng-container>
-      <div class="row justify-content-end">
-        <div class="col-sm-12 col-md-6 col-lg-4 pb-1">
-          <button type="button" type="submit" class="btn btn-secondary btn-block"
-            (click)="goDetail(transaction?.certificate?.id)">
-            Ver m&aacute;s
-          </button>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="
+        <div class="row justify-content-end">
+          <div class="col-sm-12 col-md-6 col-lg-4 pb-1">
+            <button type="button" type="submit" class="btn btn-secondary btn-block"
+              (click)="goDetail(transaction?.certificate?.id)">
+              Ver m&aacute;s
+            </button>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="
             (user$ | async)?.person?.docNumber ===
               transaction?.certificate?.student?.docNumber &&
             (role$ | async)?.name === 'STUDENT'
           ">
-          <button type="button" type="submit" class="btn btn-secondary btn-block"
-            (click)="exportPdf(transaction?.certificate?.id)">
-            Exportar
-          </button>
+            <button type="button" type="submit" class="btn btn-secondary btn-block"
+              (click)="exportPdf(transaction?.certificate?.id)">
+              Exportar
+            </button>
+          </div>
         </div>
-      </div>
+      </ng-container>
+
     </div>
   </div>
 </div>

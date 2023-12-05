@@ -14,7 +14,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
     ReactiveFormsModule,
     SharedModule,
     LoginRoutingModule,
-    MdbFormsModule,
+    MdbFormsModule
   ]
 })
 export class LoginModule {}

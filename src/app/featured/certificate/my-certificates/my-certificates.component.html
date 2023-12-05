@@ -1,13 +1,20 @@
 <div class="container pt-5">
-  <div
-    class="row row-cols-2 justify-content-center"
-    *ngIf="transactions && transactions.length > 0; else emptyData"
-  >
-    <div class="col" *ngFor="let transaction of transactions">
+  <div class="row justify-content-center" *ngIf="transactions && transactions.length > 0; else emptyData">
+    <div class="col-8 p-3" *ngFor="let transaction of transactions">
       <app-certificate [transaction]="transaction"></app-certificate>
     </div>
   </div>
 </div>
+
+<!-- <ng-container *ngIf="(user$ | async) as user">
+  <ng-container *ngFor="let st of user?.person?.students">
+    <option [ngValue]="st">
+      {{ st.degreeProgramName }}
+    </option>
+  </ng-container>
+</ng-container> -->
+
+
 
 <ng-template #emptyData>
   <div class="row">
