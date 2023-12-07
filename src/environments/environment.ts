@@ -5,6 +5,6 @@ export const environment = {
   serverURL: 'http://localhost:8080',
   websocketURL: 'ws://localhost:9090'
   /* 
-  serverURL: 'http://34.227.77.174:8080',
-  websocketURL: 'ws://34.227.77.174:9090' */
+  serverURL: 'http://3.89.156.36:8080',
+  websocketURL: 'ws://3.89.156.36:9090' */
 };
