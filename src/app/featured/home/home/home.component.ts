@@ -48,6 +48,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   getTitles(student: StudentDto) {
+    debugger;
     if (student.blockchainId) {
       this.certificateService
         .getCertificatesByStudentId(String(student.blockchainId))
@@ -77,7 +78,7 @@ export class HomeComponent implements OnDestroy {
       this.currentStudent = undefined;
       this.currentPerson = undefined;
     } else {
-      this.alertService.showErrorMessage('No hay estudiantes para mostrar.');
+      this.alertService.showErrorMessage('No hay graduados para mostrar.');
       this.persons = [];
     }
   }
