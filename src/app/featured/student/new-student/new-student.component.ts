@@ -24,6 +24,16 @@ const UNSL: University = {
           plans: ['26/12']
         },
         {
+          name: 'Tecnicatura en redes',
+          type: 'PREGRADO',
+          plans: ['19/23']
+        },
+        {
+          name: 'Tecnicatura en programacion web',
+          type: 'PREGRADO',
+          plans: ['18/22']
+        },
+        {
           name: 'Ingeniería en electrónica',
           type: 'GRADO',
           plans: ['13/08']
@@ -100,8 +110,20 @@ export class NewStudentComponent implements OnInit {
     private router: Router
   ) {
     this.studentForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
-      lastname: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z]+(?:\s[a-zA-Z]+(?:\s[a-zA-Z]+)?)?$/)
+        ]
+      ],
+      lastname: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z]+(?:\s[a-zA-Z]+(?:\s[a-zA-Z]+)?)?$/)
+        ]
+      ],
       docNumber: [
         '',
         [Validators.required, Validators.minLength(7), Validators.maxLength(8)]

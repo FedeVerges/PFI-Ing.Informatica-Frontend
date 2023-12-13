@@ -40,12 +40,12 @@ export class StudentService {
             name: 'Facultad de ciencias fisico matemáticas y naturales',
             careers: [
               {
-                name: 'Ingeniería en informática',
+                name: 'Ingeniería en Informática',
                 type: 'GRADO',
                 plans: ['26/12']
               },
               {
-                name: 'Ingeniería en electrónica',
+                name: 'Ingeniería en Electrónica',
                 type: 'GRADO',
                 plans: ['13/08']
               },
@@ -54,11 +54,7 @@ export class StudentService {
                 type: 'GRADO',
                 plans: ['11/08']
               },
-              {
-                name: 'Ingeniería Quimica',
-                type: 'GRADO',
-                plans: ['13/08']
-              },
+
               {
                 name: 'Profesorado en ciencias de la computación',
                 type: 'PREGRADO',
@@ -77,8 +73,23 @@ export class StudentService {
             ]
           },
           {
-            name: 'Facultad de ciencias química bioquímica y farmacia',
+            name: 'Facultad de química bioquímica y farmacia',
             careers: [
+              {
+                name: 'Profesorado en Química',
+                type: 'PREGRADO',
+                plans: ['10/21']
+              },
+              {
+                name: 'Tecnicatura Universitaria en Higiene y Seguridad del Trabajo',
+                type: 'PREGRADO',
+                plans: ['10/23']
+              },
+              {
+                name: 'Ingeniería Química',
+                type: 'GRADO',
+                plans: ['13/08']
+              },
               {
                 name: 'Licenciatura en Química',
                 type: 'GRADO',
@@ -90,17 +101,17 @@ export class StudentService {
                 plans: ['11/09']
               },
               {
-                name: 'Licenciatura en Bioquimica',
+                name: 'Licenciatura en Bioquímica',
                 type: 'GRADO',
                 plans: ['11/19']
               },
               {
-                name: 'Licenciatura en Biologia Molecular',
+                name: 'Licenciatura en Biología Molecular',
                 type: 'GRADO',
                 plans: ['11/19']
               },
               {
-                name: 'Doctorado en Bioquimica',
+                name: 'Doctorado en Bioquímica',
                 type: 'POSGRADO',
                 plans: ['13/22']
               },
