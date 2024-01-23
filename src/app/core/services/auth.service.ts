@@ -9,17 +9,12 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private _user: BehaviorSubject<UserDto | null> = new BehaviorSubject<UserDto | null>(null);
-  private _role: BehaviorSubject<RoleDto | null> = new BehaviorSubject<RoleDto | null>(null);
-  private _studentSelected: BehaviorSubject<StudentDto | null> = new BehaviorSubject<StudentDto | null>(null);
-
-  getStudentSelected(): Observable<StudentDto | null> {
-    return this._studentSelected.asObservable();
-  }
-
-  setStudentSelected(value: StudentDto | null) {
-    this._studentSelected.next(value);
-  }
+  private _role: BehaviorSubject<RoleDto | null> =
+    new BehaviorSubject<RoleDto | null>(null);
+  private _studentSelected: BehaviorSubject<StudentDto | null> =
+    new BehaviorSubject<StudentDto | null>(null);
+  private _user: BehaviorSubject<UserDto | null> =
+    new BehaviorSubject<UserDto | null>(null);
 
   getCurrentUser(): Observable<UserDto | null> {
     return this._user.asObservable();
@@ -27,6 +22,14 @@ export class AuthService {
 
   setCurrentUser(value: UserDto | null) {
     this._user.next(value);
+  }
+
+  getStudentSelected(): Observable<StudentDto | null> {
+    return this._studentSelected.asObservable();
+  }
+
+  setStudentSelected(value: StudentDto | null) {
+    this._studentSelected.next(value);
   }
 
   getRole(): Observable<RoleDto | null> {
@@ -43,7 +46,7 @@ export class AuthService {
     const user = this.hasToken();
     this.setCurrentUser(user);
     this.setRole(this.hasRole());
-    
+
     // No hay estudiante seleccionado.
     if (user?.person?.students) {
       this.setStudentSelected(user.person?.students[0]);
