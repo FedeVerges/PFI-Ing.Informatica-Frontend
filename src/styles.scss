@@ -142,7 +142,7 @@ $theme-colors: (
 
 
 .card {
-  background-color: white;
+  background-color: #FFF;
 }
 
 .green-snackbar {
@@ -192,7 +192,7 @@ body {
   margin: 0;
   font-family: "MyFont", Roboto, "Helvetica Neue", sans-serif;
   // background-image: url('assets/img/cool-background.png');
-  background-color: $light;
+  background-color: #F6F8FA;
   // background: linear-gradient(0deg, rgba(219, 241, 240, 1) 0%, rgba(187, 254, 232, 1) 0%);
   font-size: 18px !important;
 }
@@ -206,4 +206,8 @@ body {
 .form-outline .form-control {
   padding-top: 0.43em;
   padding-bottom: 0.43em;
+}
+
+.form-control {
+  background-color: #ffffff !important;
 }
