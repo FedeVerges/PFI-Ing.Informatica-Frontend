@@ -16,7 +16,7 @@ import { CertificateService } from 'src/app/core/services/certificate.service';
 export class HomeComponent implements OnDestroy {
   subscription!: Subscription;
 
-  title: string = 'Consultar títulos ingresando número de documento.';
+  title: string = 'Consultar títulos ingresando número de documento';
   persons: PersonWithStudentsDto[] = [];
   currentPerson?: PersonWithStudentsDto;
   currentStudent?: StudentDto;

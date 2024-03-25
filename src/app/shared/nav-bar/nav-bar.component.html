@@ -70,23 +70,33 @@
                     </button>
 
                     <div mdbDropdownMenu
-                      class="dropdown-menu m-2 p-2 dropdown-menu-end dropdown-menu-lg-start border border-2 border-secondary">
+                      class="dropdown-menu m-2 dropdown-menu-end dropdown-menu-lg-start border border-2 border-secondary drop-menu-size">
+                      <div *ngIf="netwotkStatus | async as status">
+                        <span class="badge bg-danger w-100 font-title" *ngIf="!status?.connected">
+                          No conectado</span>
+                        <span class="badge bg-success w-100 font-title" *ngIf="status?.connected">
+                          Conectado - Network:{{ status.networkId }}</span>
+                      </div>
                       <div class="p-2">
-                        <span class="p-2 fw-bold">{{
-                          user.person?.fullname | uppercase
-                          }}</span>
-                        <span class="badge bg-secondary" *ngIf="role.name === 'ADMIN'">Admin</span>
-                      </div>
-
-                      <div class="row" *ngIf="netwotkStatus | async as status">
-                        <div class="col">
-                          <span class="badge bg-danger w-100 font-title" *ngIf="!status?.connected">
-                            No conectado</span>
-                          <span class="badge bg-success w-100 font-title" *ngIf="status?.connected">
-                            Conectado - Network:{{ status.networkId }}</span>
+                        <div class="row">
+                          <div class="col-9">
+                            <span class="p-2 fw-bold">{{
+                              user.person?.fullname | uppercase
+                              }}</span>
+                          </div>
+                          <div class="col-3">
+                            <span class="badge bg-secondary" *ngIf="role.name === 'ADMIN'">Admin</span>
+                          </div>
                         </div>
-                      </div>
 
+                        <div class="row">
+                          <div class="col">
+                            <a class="dropdown-item" (click)="logout()">
+                              <i class="fas fa-sign-out-alt me-3"></i>Salir</a>
+                          </div>
+                        </div>
+
+                      </div>
 
                       <!-- <div class="row p-2">
                         <div class="col" *ngIf="role.name === 'STUDENT'">
@@ -109,12 +119,6 @@
                           >
                         </div>
                       </div> -->
-                      <div class="row">
-                        <div class="col">
-                          <a class="dropdown-item" (click)="logout()">
-                            <i class="fas fa-sign-out-alt me-3"></i>Salir</a>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

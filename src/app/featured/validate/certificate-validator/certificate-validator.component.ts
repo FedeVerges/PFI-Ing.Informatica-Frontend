@@ -11,7 +11,7 @@ import * as CryptoJS from 'crypto-js';
   templateUrl: './certificate-validator.component.html',
   styleUrls: ['./certificate-validator.component.scss']
 })
-export class CertificateValidatorComponent implements OnInit, OnDestroy {
+export class CertificateValidatorComponent {
   certificate?: BlockchainTransactionDto;
   subscription: Subscription;
 
@@ -38,12 +38,6 @@ export class CertificateValidatorComponent implements OnInit, OnDestroy {
       error: (e) => console.error(e)
     });
   }
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  ngOnInit(): void {}
 
   getCertificatesById(certificateId: number) {
     if (certificateId) {
